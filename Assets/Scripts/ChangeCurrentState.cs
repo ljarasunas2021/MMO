@@ -9,11 +9,11 @@ public class ChangeCurrentState : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onEnter) animator.SetInteger("CurrentState", value);
+        if (onEnter) animator.SetInteger(Parameters.currentState, value);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!onEnter) animator.SetInteger("CurrentState", value);
+        if (!onEnter) animator.SetInteger(Parameters.currentState, value);
     }
 }

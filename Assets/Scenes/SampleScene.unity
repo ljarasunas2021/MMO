@@ -500,8 +500,6 @@ MonoBehaviour:
   idleVal: 0
   walkVal: 1
   runVal: 2
-  minDistFromGroundToBeMidAir: 4
-  gravity: -12
   runSpeed: 1
   walkSpeed: 0.4
   rollSpeed: 4
@@ -510,6 +508,8 @@ MonoBehaviour:
   turnSmoothTime: 0.25
   locomotionAccelerationSmoothTime: 0.1
   locomotionDecelerationSmoothTime: 0.3
+  minDistFromGroundToBeMidAir: 4
+  gravity: -12
 --- !u!114 &71178355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,7 +834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561541693}
-  m_LocalRotation: {x: 0.057551928, y: 0.085249454, z: -0.0049324953, w: 0.99468386}
+  m_LocalRotation: {x: 0.057551924, y: 0.085249454, z: -0.004932486, w: 0.9946839}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1001,7 +1001,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704437970}
-  m_LocalRotation: {x: 0.0756352, y: 0.0851456, z: -0.0064821797, w: 0.99347246}
+  m_LocalRotation: {x: 0.0756352, y: 0.085145615, z: -0.00648218, w: 0.9934725}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1542,7 +1542,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115393863}
-  m_LocalRotation: {x: 0.039497446, y: 0.08532491, z: -0.0033850973, w: 0.9955643}
+  m_LocalRotation: {x: 0.039497443, y: 0.08532491, z: -0.0033850993, w: 0.9955643}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

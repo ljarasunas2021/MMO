@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ChangeCurrentState.cs" />
+    <Compile Include="Assets\Scripts\ChangeCurrentState.cs" />
     <Compile Include="Assets\Scripts\FootIK.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Reference Include="Cinemachine">
