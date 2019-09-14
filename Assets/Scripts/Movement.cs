@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
@@ -15,6 +16,13 @@ public class Movement : MonoBehaviour
     // run animation
     public float runVal;
 
+    [Header("Locomotion Blend Value Thresholds")]
+    // locomotion blend tree threshold in between ...
+    // idle and walk animation
+    public float idleToWalkThreshold;
+    // walk and run animation
+    public float walkToRunThreshold;
+
     [Header("Speed Values")]
     // speed at which the player moves when 
     // running
@@ -23,6 +31,12 @@ public class Movement : MonoBehaviour
     public float walkSpeed;
     // rolling
     public float rollSpeed;
+    // running Jump
+    public float runningJumpSpeed;
+    // walking Jump
+    public float walkingJumpSpeed;
+    // mid air
+    public float midAirSpeed;
 
     [Header("Smooth Time Values")]
     // time that it takes for the ____ value to go from its current value to its target value
@@ -37,11 +51,27 @@ public class Movement : MonoBehaviour
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
     public float locomotionDecelerationSmoothTime;
 
-    [HeaderAttribute("Mid Air Values")]
+    [Header("Mid Air Values")]
     // minimum distance from the ground the player needs to be in order to play the mid air animation
     public float minDistFromGroundToBeMidAir;
     // gravity that interacts with the player
     public float gravity;
+
+    [Header("Landing Velocity Y's")]
+    // for ___ landing, the velocityY must be less than that value
+    // soft
+    public float softLandingMaxVeloY;
+    // roll
+    public float rollLandingMaxVeloY;
+
+    [Header("Jump Maximum Distances From Ground")]
+    // max distance from ground before mid air animation plays for ____ animation
+    // boxJump
+    public float maxBoxJumpHeight;
+    // walking Jump
+    public float maxWalkingJumpHeight;
+    // running Jump
+    public float maxRunningJumpHeight;
 
     // amount that ____ has moved towards its target value 
     // speed
@@ -59,6 +89,8 @@ public class Movement : MonoBehaviour
     private float locomotionBlendVal;
     // current anim state - each anim state is assigned its own index and this is that index
     private States currentState;
+    // previous anim state
+    private States previousState;
     // transform of the camera
     private Transform camTransform;
     // player's character controller
@@ -115,6 +147,7 @@ public class Movement : MonoBehaviour
     /// <param name = "input"> input found in update function </param>
     private void SetLocomotionBlendValue(Vector2 input)
     {
+        if (currentState != States.locomotion) return;
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
 
@@ -153,11 +186,20 @@ public class Movement : MonoBehaviour
         switch (currentState)
         {
             case States.locomotion:
-                if (locomotionBlendVal == runVal) targetSpeed = runSpeed;
-                else if (locomotionBlendVal == walkVal) targetSpeed = walkSpeed;
+                if (locomotionBlendVal > walkToRunThreshold) targetSpeed = runSpeed;
+                else if (locomotionBlendVal < walkToRunThreshold && locomotionBlendVal > idleToWalkThreshold) targetSpeed = walkSpeed;
                 break;
             case States.fallToRoll:
                 targetSpeed = rollSpeed;
+                break;
+            case States.walkingJump:
+                targetSpeed = walkingJumpSpeed;
+                break;
+            case States.runningJump:
+                targetSpeed = runningJumpSpeed;
+                break;
+            case States.defInAir:
+                targetSpeed = midAirSpeed;
                 break;
         }
 
@@ -184,18 +226,47 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             /// base jump animation on the input
-            if (input == Vector2.zero) currentState = States.boxJump;
-            else currentState = States.runningJump;
+            if (locomotionBlendVal <= idleToWalkThreshold) SetCurrentState(States.boxJump);
+            else if (locomotionBlendVal >= walkToRunThreshold) SetCurrentState(States.runningJump);
+            else SetCurrentState(States.walkingJump);
         }
+
+        Debug.Log(locomotionBlendVal + " " + Input.GetKey(KeyCode.Space));
     }
 
     /// <summary> Set the correct values if the player is in the air </summary>
     private void SetValuesIfMidAir()
     {
         // check if hitting anything and if so set current state appropriately
+        float maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
+        RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        if (Physics.Raycast(ray, minDistFromGroundToBeMidAir, 9)) { if (currentState == States.defInAir) { currentState = States.fallToRoll; } }
-        else currentState = States.defInAir;
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, 9);
+        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
+        {
+            if (currentState == States.defInAir)
+            {
+                if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
+                else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
+                else SetCurrentState(States.hardLanding);
+            }
+        }
+        else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
+
+        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+
+        if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+
+        if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+    }
+
+    ///<summary> Set the current and previous state to their corresponding values </summary>
+    ///<param name = "stateIndex"> Index of state that the current state should be equal to </param>
+    private void SetCurrentState(States state)
+    {
+        Debug.Log(state);
+        previousState = currentState;
+        currentState = state;
     }
     #endregion
 }
@@ -210,7 +281,8 @@ public enum States
     defInAir = 3,
     hardLanding = 4,
     softLanding = 5,
-    fallToRoll = 6
+    fallToRoll = 6,
+    walkingJump = 7
 }
 #endregion
 
@@ -219,6 +291,7 @@ public enum States
 public static class Parameters
 {
     public static string currentState = "CurrentState";
+    public static string nextState = "NextState";
     public static string locomotionBlend = "LocomotionBlend";
 }
 #endregion
