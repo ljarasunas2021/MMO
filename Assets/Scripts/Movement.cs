@@ -85,6 +85,8 @@ public class Movement : MonoBehaviour
     private float currentSpeed;
     // y component of velocity of player
     private float velocityY;
+    // target y rotation of player
+    private float targetRotation;
     // value thats used as parameter in locomotion blend tree
     private float locomotionBlendVal;
     // current anim state - each anim state is assigned its own index and this is that index
@@ -171,8 +173,10 @@ public class Movement : MonoBehaviour
         // if the input doesn't equal zero, player can rotate
         if (inputDir != Vector2.zero)
         {
+            bool leftControl = Input.GetKey(KeyCode.LeftControl);
             // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         }
     }
 
@@ -230,8 +234,6 @@ public class Movement : MonoBehaviour
             else if (locomotionBlendVal >= walkToRunThreshold) SetCurrentState(States.runningJump);
             else SetCurrentState(States.walkingJump);
         }
-
-        Debug.Log(locomotionBlendVal + " " + Input.GetKey(KeyCode.Space));
     }
 
     /// <summary> Set the correct values if the player is in the air </summary>
