@@ -23,29 +23,10 @@ public class Movement : MonoBehaviour
     // walk and run animation
     public float walkToRunThreshold;
 
-    [Header("Speed Values")]
-    // speed at which the player moves when 
-    // running
-    public float runSpeed;
-    // walking
-    public float walkSpeed;
-    // rolling
-    public float rollSpeed;
-    // running Jump
-    public float runningJumpSpeed;
-    // walking Jump
-    public float walkingJumpSpeed;
-    // mid air
-    public float midAirSpeed;
-
     [Header("Smooth Time Values")]
     // time that it takes for the ____ value to go from its current value to its target value
     // turning 
     public float turnSmoothTime;
-    // speed (but only used if value is getting large (i.e. accelerating))
-    public float speedAccelerationSmoothTime;
-    // speed (but only used if value is getting smaller(i.e. decelerating))
-    public float speedDecelerationSmoothTime;
     // locomotion (but only used if value is getting large (i.e. accelerating))
     public float locomotionAccelerationSmoothTime;
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
@@ -74,15 +55,11 @@ public class Movement : MonoBehaviour
     public float maxRunningJumpHeight;
 
     // amount that ____ has moved towards its target value 
-    // speed
-    private float speedSmoothVelocity;
     // locomotion
     private float locomotionSmoothVelocity;
     // turning
     private float turnSmoothVelocity;
 
-    // current speed of player
-    private float currentSpeed;
     // y component of velocity of player
     private float velocityY;
     // target y rotation of player
@@ -183,43 +160,10 @@ public class Movement : MonoBehaviour
     ///<summary> Set the appropriate speed for the player </summary>
     private void SetSpeed()
     {
-        // speed that player is trying to reach
-        float targetSpeed = 0;
-
-        // set target speed appropriately
-        switch (currentState)
-        {
-            case States.locomotion:
-                if (locomotionBlendVal > walkToRunThreshold) targetSpeed = runSpeed;
-                else if (locomotionBlendVal < walkToRunThreshold && locomotionBlendVal > idleToWalkThreshold) targetSpeed = walkSpeed;
-                break;
-            case States.fallToRoll:
-                targetSpeed = rollSpeed;
-                break;
-            case States.walkingJump:
-                targetSpeed = walkingJumpSpeed;
-                break;
-            case States.runningJump:
-                targetSpeed = runningJumpSpeed;
-                break;
-            case States.defInAir:
-                targetSpeed = midAirSpeed;
-                break;
-        }
-
-        // set current speed appropriately based on target speed and if player is accelerating / decelerating
-        float speedSmoothTime = (targetSpeed - currentSpeed > 0) ? speedAccelerationSmoothTime : speedDecelerationSmoothTime;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
-
         // set the y component of the velocity based on the gravity
         if (characterController.isGrounded) velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
-
-        // move the character controller in the direction of the current speed and velocityY
-        characterController.Move((transform.forward * currentSpeed + Vector3.up * velocityY) * Time.deltaTime);
-
-        // set the current speed appropriately
-        currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
+        characterController.Move(Vector3.up * velocityY);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -251,6 +195,8 @@ public class Movement : MonoBehaviour
                 if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
                 else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
                 else SetCurrentState(States.hardLanding);
+
+                Debug.Log(velocityY);
             }
         }
         else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
