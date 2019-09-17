@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace Mirror.Weaver
         public Dictionary<FieldDefinition, MethodDefinition> replacementSetterProperties = new Dictionary<FieldDefinition, MethodDefinition>();
         // getter functions that replace [SyncVar] member variable references. dict<field, replacement>
         public Dictionary<FieldDefinition, MethodDefinition> replacementGetterProperties = new Dictionary<FieldDefinition, MethodDefinition>();
+
+        // [Command]/[ClientRpc] functions that should be replaced. dict<originalMethodFullName, replacement>
+        public Dictionary<string, MethodDefinition> replaceMethods = new Dictionary<string, MethodDefinition>();
 
         // [SyncEvent] invoke functions that should be replaced. dict<originalEventName, replacement>
         public Dictionary<string, MethodDefinition> replaceEvents = new Dictionary<string, MethodDefinition>();
@@ -53,15 +57,19 @@ namespace Mirror.Weaver
         public static TypeReference SyncDictionaryType;
 
         public static MethodReference NetworkBehaviourDirtyBitsReference;
-        public static MethodReference GetPooledWriterReference;
-        public static MethodReference RecycleWriterReference;
         public static TypeReference NetworkClientType;
         public static TypeReference NetworkServerType;
 
         public static TypeReference NetworkReaderType;
+        public static TypeDefinition NetworkReaderDef;
 
         public static TypeReference NetworkWriterType;
+        public static TypeDefinition NetworkWriterDef;
 
+        public static MethodReference NetworkWriterCtor;
+        public static MethodReference NetworkReaderCtor;
+        public static MethodReference getComponentReference;
+        public static MethodReference getNetIdReference;
         public static TypeReference NetworkIdentityType;
         public static TypeReference IEnumeratorType;
 
@@ -73,10 +81,20 @@ namespace Mirror.Weaver
         public static TypeReference CmdDelegateReference;
         public static MethodReference CmdDelegateConstructor;
 
+        public static MethodReference NetworkWriterWriteInt16;
+
         public static MethodReference NetworkServerGetActive;
         public static MethodReference NetworkServerGetLocalClientActive;
         public static MethodReference NetworkClientGetActive;
         public static MethodReference getBehaviourIsServer;
+        public static MethodReference NetworkReaderReadPackedInt32;
+        public static MethodReference NetworkReaderReadPackedUInt32;
+        public static MethodReference NetworkWriterWritePackedUInt64;
+        public static MethodReference NetworkWriterWritePackedInt32;
+        public static MethodReference NetworkReaderReadPackedUInt64;
+
+        public static MethodReference NetworkReadUInt16;
+        public static MethodReference NetworkWriteUInt16;
 
         // custom attribute types
         public static TypeReference SyncVarType;
@@ -87,26 +105,42 @@ namespace Mirror.Weaver
         public static TypeReference SyncObjectType;
         public static MethodReference InitSyncObjectReference;
 
-        // array segment
-        public static TypeReference ArraySegmentType;
-        public static MethodReference ArraySegmentConstructorReference;
-        public static MethodReference ArraySegmentArrayReference;
-        public static MethodReference ArraySegmentOffsetReference;
-        public static MethodReference ArraySegmentCountReference;
-
         // system types
         public static TypeReference voidType;
         public static TypeReference singleType;
         public static TypeReference doubleType;
+        public static TypeReference decimalType;
         public static TypeReference boolType;
+        public static TypeReference stringType;
         public static TypeReference int64Type;
         public static TypeReference uint64Type;
         public static TypeReference int32Type;
         public static TypeReference uint32Type;
+        public static TypeReference int16Type;
+        public static TypeReference uint16Type;
+        public static TypeReference byteType;
+        public static TypeReference sbyteType;
+        public static TypeReference charType;
         public static TypeReference objectType;
+        public static TypeReference valueTypeType;
+        public static TypeReference vector2Type;
+        public static TypeReference vector3Type;
+        public static TypeReference vector4Type;
+        public static TypeReference vector2IntType;
+        public static TypeReference vector3IntType;
+        public static TypeReference colorType;
+        public static TypeReference color32Type;
+        public static TypeReference quaternionType;
+        public static TypeReference rectType;
+        public static TypeReference rayType;
+        public static TypeReference planeType;
+        public static TypeReference matrixType;
+        public static TypeReference guidType;
         public static TypeReference typeType;
         public static TypeReference gameObjectType;
         public static TypeReference transformType;
+        public static TypeReference unityObjectType;
+        public static MethodReference gameObjectInequality;
 
         public static MethodReference setSyncVarReference;
         public static MethodReference setSyncVarHookGuard;
@@ -132,7 +166,7 @@ namespace Mirror.Weaver
             if (!DebugLogEnabled)
                 return;
 
-            Console.WriteLine("[" + td.Name + "] " + string.Format(fmt, args));
+            Console.WriteLine("[" + td.Name + "] " + String.Format(fmt, args));
         }
 
         // display weaver error
@@ -188,8 +222,21 @@ namespace Mirror.Weaver
 
         static void SetupUnityTypes()
         {
+            vector2Type = UnityAssembly.MainModule.GetType("UnityEngine.Vector2");
+            vector3Type = UnityAssembly.MainModule.GetType("UnityEngine.Vector3");
+            vector4Type = UnityAssembly.MainModule.GetType("UnityEngine.Vector4");
+            vector2IntType = UnityAssembly.MainModule.GetType("UnityEngine.Vector2Int");
+            vector3IntType = UnityAssembly.MainModule.GetType("UnityEngine.Vector3Int");
+            colorType = UnityAssembly.MainModule.GetType("UnityEngine.Color");
+            color32Type = UnityAssembly.MainModule.GetType("UnityEngine.Color32");
+            quaternionType = UnityAssembly.MainModule.GetType("UnityEngine.Quaternion");
+            rectType = UnityAssembly.MainModule.GetType("UnityEngine.Rect");
+            planeType = UnityAssembly.MainModule.GetType("UnityEngine.Plane");
+            rayType = UnityAssembly.MainModule.GetType("UnityEngine.Ray");
+            matrixType = UnityAssembly.MainModule.GetType("UnityEngine.Matrix4x4");
             gameObjectType = UnityAssembly.MainModule.GetType("UnityEngine.GameObject");
             transformType = UnityAssembly.MainModule.GetType("UnityEngine.Transform");
+            unityObjectType = UnityAssembly.MainModule.GetType("UnityEngine.Object");
 
             NetworkClientType = NetAssembly.MainModule.GetType("Mirror.NetworkClient");
             NetworkServerType = NetAssembly.MainModule.GetType("Mirror.NetworkServer");
@@ -207,7 +254,7 @@ namespace Mirror.Weaver
             AssemblyNameReference name = AssemblyNameReference.Parse("mscorlib");
             ReaderParameters parameters = new ReaderParameters
             {
-                AssemblyResolver = CurrentAssembly.MainModule.AssemblyResolver
+                AssemblyResolver = CurrentAssembly.MainModule.AssemblyResolver,
             };
             CorLibModule = CurrentAssembly.MainModule.AssemblyResolver.Resolve(name, parameters).MainModule;
         }
@@ -230,28 +277,50 @@ namespace Mirror.Weaver
             voidType = ImportCorLibType("System.Void");
             singleType = ImportCorLibType("System.Single");
             doubleType = ImportCorLibType("System.Double");
+            decimalType = ImportCorLibType("System.Decimal");
             boolType = ImportCorLibType("System.Boolean");
+            stringType = ImportCorLibType("System.String");
             int64Type = ImportCorLibType("System.Int64");
             uint64Type = ImportCorLibType("System.UInt64");
             int32Type = ImportCorLibType("System.Int32");
             uint32Type = ImportCorLibType("System.UInt32");
+            int16Type = ImportCorLibType("System.Int16");
+            uint16Type = ImportCorLibType("System.UInt16");
+            byteType = ImportCorLibType("System.Byte");
+            sbyteType = ImportCorLibType("System.SByte");
+            charType = ImportCorLibType("System.Char");
             objectType = ImportCorLibType("System.Object");
+            valueTypeType = ImportCorLibType("System.ValueType");
             typeType = ImportCorLibType("System.Type");
             IEnumeratorType = ImportCorLibType("System.Collections.IEnumerator");
-
-            ArraySegmentType = ImportCorLibType("System.ArraySegment`1");
-            ArraySegmentArrayReference = Resolvers.ResolveProperty(ArraySegmentType, CurrentAssembly, "Array");
-            ArraySegmentCountReference = Resolvers.ResolveProperty(ArraySegmentType, CurrentAssembly, "Count");
-            ArraySegmentOffsetReference = Resolvers.ResolveProperty(ArraySegmentType, CurrentAssembly, "Offset");
-            ArraySegmentConstructorReference = Resolvers.ResolveMethod(ArraySegmentType, CurrentAssembly, ".ctor");
-
+            guidType = ImportCorLibType("System.Guid");
 
             NetworkReaderType = NetAssembly.MainModule.GetType("Mirror.NetworkReader");
+            NetworkReaderDef = NetworkReaderType.Resolve();
+
+            NetworkReaderCtor = Resolvers.ResolveMethod(NetworkReaderDef, CurrentAssembly, ".ctor");
+
             NetworkWriterType = NetAssembly.MainModule.GetType("Mirror.NetworkWriter");
+            NetworkWriterDef  = NetworkWriterType.Resolve();
+
+            NetworkWriterCtor = Resolvers.ResolveMethod(NetworkWriterDef, CurrentAssembly, ".ctor");
 
             NetworkServerGetActive = Resolvers.ResolveMethod(NetworkServerType, CurrentAssembly, "get_active");
             NetworkServerGetLocalClientActive = Resolvers.ResolveMethod(NetworkServerType, CurrentAssembly, "get_localClientActive");
             NetworkClientGetActive = Resolvers.ResolveMethod(NetworkClientType, CurrentAssembly, "get_active");
+
+            NetworkWriterWriteInt16 = Resolvers.ResolveMethodWithArg(NetworkWriterType, CurrentAssembly, "Write", int16Type);
+
+            NetworkReaderReadPackedInt32 = Resolvers.ResolveMethod(NetworkReaderType, CurrentAssembly, "ReadPackedInt32");
+            NetworkReaderReadPackedUInt32 = Resolvers.ResolveMethod(NetworkReaderType, CurrentAssembly, "ReadPackedUInt32");
+            NetworkReaderReadPackedUInt64 = Resolvers.ResolveMethod(NetworkReaderType, CurrentAssembly, "ReadPackedUInt64");
+
+            NetworkWriterWritePackedInt32 = Resolvers.ResolveMethod(NetworkWriterType, CurrentAssembly, "WritePackedInt32");
+            NetworkWriterWritePackedUInt64 = Resolvers.ResolveMethod(NetworkWriterType, CurrentAssembly, "WritePackedUInt64");
+
+
+            NetworkReadUInt16 = Resolvers.ResolveMethod(NetworkReaderType, CurrentAssembly, "ReadUInt16");
+            NetworkWriteUInt16 = Resolvers.ResolveMethodWithArg(NetworkWriterType, CurrentAssembly, "Write", uint16Type);
 
             CmdDelegateReference = NetAssembly.MainModule.GetType("Mirror.NetworkBehaviour/CmdDelegate");
             CmdDelegateConstructor = Resolvers.ResolveMethod(CmdDelegateReference, CurrentAssembly, ".ctor");
@@ -277,18 +346,22 @@ namespace Mirror.Weaver
             SyncDictionaryType = NetAssembly.MainModule.GetType("Mirror.SyncDictionary`2");
 
             NetworkBehaviourDirtyBitsReference = Resolvers.ResolveProperty(NetworkBehaviourType, CurrentAssembly, "syncVarDirtyBits");
-            TypeDefinition NetworkWriterPoolType = NetAssembly.MainModule.GetType("Mirror.NetworkWriterPool");
-            GetPooledWriterReference = Resolvers.ResolveMethod(NetworkWriterPoolType, CurrentAssembly, "GetWriter");
-            RecycleWriterReference = Resolvers.ResolveMethod(NetworkWriterPoolType, CurrentAssembly, "Recycle");
 
             ComponentType = UnityAssembly.MainModule.GetType("UnityEngine.Component");
             ClientSceneType = NetAssembly.MainModule.GetType("Mirror.ClientScene");
             ReadyConnectionReference = Resolvers.ResolveMethod(ClientSceneType, CurrentAssembly, "get_readyConnection");
 
+            // get specialized GetComponent<NetworkIdentity>()
+            getComponentReference = Resolvers.ResolveMethodGeneric(ComponentType, CurrentAssembly, "GetComponent", NetworkIdentityType);
+
+            getNetIdReference = Resolvers.ResolveMethod(networkIdentityTmp, CurrentAssembly, "get_netId");
+
+            gameObjectInequality = Resolvers.ResolveMethod(unityObjectType, CurrentAssembly, "op_Inequality");
+
             getBehaviourIsServer = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "get_isServer");
             setSyncVarReference = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "SetSyncVar");
-            setSyncVarHookGuard = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "setSyncVarHookGuard");
-            getSyncVarHookGuard = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "getSyncVarHookGuard");
+            setSyncVarHookGuard = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "set_syncVarHookGuard");
+            getSyncVarHookGuard = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "get_syncVarHookGuard");
 
             setSyncVarGameObjectReference = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "SetSyncVarGameObject");
             getSyncVarGameObjectReference = Resolvers.ResolveMethod(NetworkBehaviourType, CurrentAssembly, "GetSyncVarGameObject");
@@ -430,13 +503,13 @@ namespace Mirror.Weaver
                     didWork = true;
                     break;
                 }
-                if (parent.FullName.StartsWith(SyncSetType.FullName, StringComparison.Ordinal))
+                else if (parent.FullName.StartsWith(SyncSetType.FullName, StringComparison.Ordinal))
                 {
                     SyncListProcessor.Process(td);
                     didWork = true;
                     break;
                 }
-                if (parent.FullName.StartsWith(SyncDictionaryType.FullName, StringComparison.Ordinal))
+                else if (parent.FullName.StartsWith(SyncDictionaryType.FullName, StringComparison.Ordinal))
                 {
                     SyncDictionaryProcessor.Process(td);
                     didWork = true;
@@ -481,10 +554,8 @@ namespace Mirror.Weaver
                 }
 
                 SetupTargetTypes();
-                System.Diagnostics.Stopwatch rwstopwatch = System.Diagnostics.Stopwatch.StartNew();
-                ReaderWriterProcessor.ProcessReadersAndWriters(CurrentAssembly);
-                rwstopwatch.Stop();
-                Console.WriteLine("Find all reader and writers took " + rwstopwatch.ElapsedMilliseconds + " milliseconds");
+                Readers.Init(CurrentAssembly);
+                Writers.Init(CurrentAssembly);
 
                 ModuleDefinition moduleDefinition = CurrentAssembly.MainModule;
                 Console.WriteLine("Script Module: {0}", moduleDefinition.Name);
@@ -514,7 +585,7 @@ namespace Mirror.Weaver
                             }
                             catch (Exception ex)
                             {
-                                Error(ex.ToString());
+                                Weaver.Error(ex.Message);
                                 throw ex;
                             }
                         }

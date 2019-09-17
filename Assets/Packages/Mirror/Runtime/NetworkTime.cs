@@ -4,20 +4,13 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
 namespace Mirror
 {
-    /// <summary>
-    /// Synchronize time between the server and the clients
-    /// </summary>
+    // calculates synchronized time and rtt
     public static class NetworkTime
     {
-        /// <summary>
-        /// how often are we sending ping messages
-        /// used to calculate network time and RTT
-        /// </summary>
+        // how often are we sending ping messages
+        // used to calculate network time and RTT
         public static float PingFrequency = 2.0f;
-
-        /// <summary>
-        /// average out the last few results from Ping
-        /// </summary>
+        // average out the last few results from Ping
         public static int PingWindowSize = 10;
 
         static double lastPingTime;
@@ -71,7 +64,7 @@ namespace Mirror
 
             NetworkPongMessage pongMsg = new NetworkPongMessage
             {
-                clientTime = msg.clientTime,
+                clientTime = msg.value,
                 serverTime = LocalTime()
             };
 
@@ -81,20 +74,20 @@ namespace Mirror
         // Executed at the client when we receive a Pong message
         // find out how long it took since we sent the Ping
         // and update time offset
-        internal static void OnClientPong(NetworkConnection _, NetworkPongMessage msg)
+        internal static void OnClientPong(NetworkConnection conn, NetworkPongMessage msg)
         {
             double now = LocalTime();
 
             // how long did this message take to come back
-            double newRtt = now - msg.clientTime;
-            _rtt.Add(newRtt);
+            double rtt = now - msg.clientTime;
+            _rtt.Add(rtt);
 
             // the difference in time between the client and the server
             // but subtract half of the rtt to compensate for latency
             // half of rtt is the best approximation we have
-            double newOffset = now - newRtt * 0.5f - msg.serverTime;
+            double offset = now - rtt * 0.5f - msg.serverTime;
 
-            double newOffsetMin = now - newRtt - msg.serverTime;
+            double newOffsetMin = now - rtt - msg.serverTime;
             double newOffsetMax = now - msg.serverTime;
             offsetMin = Math.Max(offsetMin, newOffsetMin);
             offsetMax = Math.Min(offsetMax, newOffsetMax);
@@ -103,82 +96,47 @@ namespace Mirror
             {
                 // the old offset was offrange,  throw it away and use new one
                 _offset = new ExponentialMovingAverage(PingWindowSize);
-                _offset.Add(newOffset);
+                _offset.Add(offset);
             }
-            else if (newOffset >= offsetMin || newOffset <= offsetMax)
+            else if (offset >= offsetMin || offset <= offsetMax)
             {
                 // new offset looks reasonable,  add to the average
-                _offset.Add(newOffset);
+                _offset.Add(offset);
             }
         }
 
-        /// <summary>
-        /// The time in seconds since the server started.
-        /// </summary>
-        /// <remarks>
-        /// <para>Note this value works in the client and the server
-        /// the value is synchronized accross the network with high accuracy</para>
-        /// <para>You should not cast this down to a float because the it loses too much accuracy
-        /// when the server is up for a while</para>
-        /// <para>I measured the accuracy of float and I got this:</para>
-        /// <list type="bullet">
-        ///     <item>
-        ///         <description>for the same day,  accuracy is better than 1 ms</description>
-        ///     </item>
-        ///     <item>
-        ///         <description>after 1 day,  accuracy goes down to 7 ms</description>
-        ///     </item>
-        ///     <item>
-        ///         <description>after 10 days, accuracy is 61 ms</description>
-        ///     </item>
-        ///     <item>
-        ///         <description>after 30 days , accuracy is 238 ms</description>
-        ///     </item>
-        ///     <item>
-        ///         <description>after 60 days, accuracy is 454 ms</description>
-        ///     </item>
-        /// </list>
-        /// <para>in other words,  if the server is running for 2 months,
-        /// and you cast down to float,  then the time will jump in 0.4s intervals.</para>
-        /// </remarks>
+        // returns the same time in both client and server
+        // time should be a double because after a while
+        // float loses too much accuracy if the server is up for more than
+        // a few days.  I measured the accuracy of float and I got this:
+        // for the same day,  accuracy is better than 1 ms
+        // after 1 day,  accuracy goes down to 7 ms
+        // after 10 days, accuracy is 61 ms
+        // after 30 days , accuracy is 238 ms
+        // after 60 days, accuracy is 454 ms
+        // in other words,  if the server is running for 2 months,
+        // and you cast down to float,  then the time will jump in 0.4s intervals.
+        // Notice _offset is 0 at the server
         public static double time => LocalTime() - _offset.Value;
 
-        /// <summary>
-        /// Measurement of the variance of time.
-        /// <para>The higher the variance, the less accurate the time is</para>
-        /// </summary>
+        // measure volatility of time.
+        // the higher the number,  the less accurate the time is
         public static double timeVar => _offset.Var;
 
-        /// <summary>
-        /// standard deviation of time.
-        /// <para>The higher the variance, the less accurate the time is</para>
-        /// </summary>
+        // standard deviation of time
         public static double timeSd => Math.Sqrt(timeVar);
 
-        /// <summary>
-        /// Clock difference in seconds between the client and the server
-        /// </summary>
-        /// <remarks>
-        /// Note this value is always 0 at the server
-        /// </remarks>
         public static double offset => _offset.Value;
 
-        /// <summary>
-        /// how long in seconds does it take for a message to go
-        /// to the server and come back
-        /// </summary>
+        // how long does it take for a message to go
+        // to the server and come back
         public static double rtt => _rtt.Value;
 
-        /// <summary>
-        /// measure variance of rtt
-        /// the higher the number,  the less accurate rtt is
-        /// </summary>
+        // measure volatility of rtt
+        // the higher the number,  the less accurate rtt is
         public static double rttVar => _rtt.Var;
 
-        /// <summary>
-        /// Measure the standard deviation of rtt
-        /// the higher the number,  the less accurate rtt is
-        /// </summary>
+        // standard deviation of rtt
         public static double rttSd => Math.Sqrt(rttVar);
     }
 }

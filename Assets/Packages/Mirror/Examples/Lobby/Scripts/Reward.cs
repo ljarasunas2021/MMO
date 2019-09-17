@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Mirror.Examples.NetworkRoom
+namespace Mirror.Examples.NetworkLobby
 {
     public class Reward : NetworkBehaviour
     {
@@ -17,7 +17,7 @@ namespace Mirror.Examples.NetworkRoom
 			materialClone.color = color;
 		}
 
-		void OnDestroy()
+		private void OnDestroy()
 		{
 			Destroy(materialClone);
 		}

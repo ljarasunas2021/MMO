@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
+using Mirror;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 ///<summary> Script used to control the movement of the player </summary>
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
     #region Variables
     [Header("Locomotion Blend Values")]
@@ -116,6 +117,7 @@ public class Movement : MonoBehaviour
     ///<summary> Takes care of things that should be called every frame </summary>
     void Update()
     {
+        if (!isLocalPlayer) return;
         Move();
     }
     #endregion

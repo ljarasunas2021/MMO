@@ -8,15 +8,19 @@ namespace Mirror
     // Binary stream Writer. Supports simple types, buffers, arrays, structs, and nested types
     public class NetworkWriter
     {
+        // cache encoding instead of creating it with BinaryWriter each time
+        // 1000 readers before:  1MB GC, 30ms
+        // 1000 readers after: 0.8MB GC, 18ms
+        static readonly UTF8Encoding encoding = new UTF8Encoding(false, true);
         public const int MaxStringLength = 1024 * 32;
+        static byte[] stringBuffer = new byte[MaxStringLength];
 
         // create writer immediately with it's own buffer so no one can mess with it and so that we can resize it.
-        // note: BinaryWriter allocates too much, so we only use a MemoryStream
-        readonly MemoryStream stream = new MemoryStream();
+        readonly BinaryWriter writer = new BinaryWriter(new MemoryStream(), encoding);
 
         // 'int' is the best type for .Position. 'short' is too small if we send >32kb which would result in negative .Position
         // -> converting long to int is fine until 2GB of data (MAX_INT), so we don't have to worry about overflows here
-        public int Position { get { return (int)stream.Position; } set { stream.Position = value; } }
+        public int Position { get { return (int)writer.BaseStream.Position; } set { writer.BaseStream.Position = value; } }
 
         // MemoryStream has 3 values: Position, Length and Capacity.
         // Position is used to indicate where we are writing
@@ -25,540 +29,365 @@ namespace Mirror
         // ToArray returns all the data we have written,  regardless of the current position
         public byte[] ToArray()
         {
-            stream.Flush();
-            return stream.ToArray();
-        }
-
-        // Gets the serialized data in an ArraySegment<byte>
-        // this is similar to ToArray(),  but it gets the data in O(1)
-        // and without allocations.
-        // Do not write anything else or modify the NetworkWriter
-        // while you are using the ArraySegment
-        public ArraySegment<byte> ToArraySegment()
-        {
-            stream.Flush();
-            if (stream.TryGetBuffer(out ArraySegment<byte> data))
-            {
-                return data;
-            }
-            throw new Exception("Cannot expose contents of memory stream. Make sure that MemoryStream buffer is publicly visible (see MemoryStream source code).");
+            writer.Flush();
+            return ((MemoryStream)writer.BaseStream).ToArray();
         }
 
         // reset both the position and length of the stream,  but leaves the capacity the same
         // so that we can reuse this writer without extra allocations
         public void SetLength(long value)
         {
-            stream.SetLength(value);
+            ((MemoryStream)writer.BaseStream).SetLength(value);
         }
 
-        public void WriteByte(byte value) => stream.WriteByte(value);
-
-        // for byte arrays with consistent size, where the reader knows how many to read
-        // (like a packet opcode that's always the same)
-        public void WriteBytes(byte[] buffer, int offset, int count)
-        {
-            // no null check because we would need to write size info for that too (hence WriteBytesAndSize)
-            stream.Write(buffer, offset, count);
-        }
-
-        public void WriteUInt32(uint value)
-        {
-            WriteByte((byte)(value & 0xFF));
-            WriteByte((byte)((value >> 8) & 0xFF));
-            WriteByte((byte)((value >> 16) & 0xFF));
-            WriteByte((byte)((value >> 24) & 0xFF));
-        }
-
-        public void WriteInt32(int value) => WriteUInt32((uint)value);
-
-        public void WriteUInt64(ulong value)
-        {
-            WriteByte((byte)(value & 0xFF));
-            WriteByte((byte)((value >> 8) & 0xFF));
-            WriteByte((byte)((value >> 16) & 0xFF));
-            WriteByte((byte)((value >> 24) & 0xFF));
-            WriteByte((byte)((value >> 32) & 0xFF));
-            WriteByte((byte)((value >> 40) & 0xFF));
-            WriteByte((byte)((value >> 48) & 0xFF));
-            WriteByte((byte)((value >> 56) & 0xFF));
-        }
-
-        public void WriteInt64(long value) => WriteUInt64((ulong)value);
-
-        #region Obsoletes
-        [Obsolete("Use WriteUInt16 instead")]
-        public void Write(ushort value) => this.WriteUInt16(value);
-
-        [Obsolete("Use WriteUInt32 instead")]
-        public void Write(uint value) => WriteUInt32(value);
-
-        [Obsolete("Use WriteUInt64 instead")]
-        public void Write(ulong value) => WriteUInt64(value);
-
-        [Obsolete("Use WriteByte instead")]
-        public void Write(byte value) => stream.WriteByte(value);
-
-        [Obsolete("Use WriteSByte instead")]
-        public void Write(sbyte value) => WriteByte((byte)value);
-
+        public void Write(byte value) => writer.Write(value);
+        public void Write(sbyte value) => writer.Write(value);
         // write char the same way that NetworkReader reads it (2 bytes)
-        [Obsolete("Use WriteChar instead")]
-        public void Write(char value) => this.WriteUInt16((ushort)value);
-
-        [Obsolete("Use WriteBoolean instead")]
-        public void Write(bool value) => WriteByte((byte)(value ? 1 : 0));
-
-        [Obsolete("Use WriteInt16 instead")]
-        public void Write(short value) => this.WriteUInt16((ushort)value);
-
-        [Obsolete("Use WriteInt32 instead")]
-        public void Write(int value) => WriteUInt32((uint)value);
-
-        [Obsolete("Use WriteInt64 instead")]
-        public void Write(long value) => WriteUInt64((ulong)value);
-
-        [Obsolete("Use WriteSingle instead")]
-        public void Write(float value) => this.WriteSingle(value);
-
-        [Obsolete("Use WriteDouble instead")]
-        public void Write(double value) => this.WriteDouble(value);
-
-        [Obsolete("Use WriteDecimal instead")]
-        public void Write(decimal value) => this.WriteDecimal(value);
-
-        [Obsolete("Use WriteString instead")]
-        public void Write(string value) => this.WriteString(value);
-
-        [Obsolete("Use WriteBytes instead")]
-        public void Write(byte[] buffer, int offset, int count) => WriteBytes(buffer, offset, count);
-
-        [Obsolete("Use WriteVector2 instead")]
-        public void Write(Vector2 value) => this.WriteVector2(value);
-
-        [Obsolete("Use WriteVector3 instead")]
-        public void Write(Vector3 value) => this.WriteVector3(value);
-
-        [Obsolete("Use WriteVector4 instead")]
-        public void Write(Vector4 value) => this.WriteVector4(value);
-
-        [Obsolete("Use WriteVector2Int instead")]
-        public void Write(Vector2Int value) => this.WriteVector2Int(value);
-
-        [Obsolete("Use WriteVector3Int instead")]
-        public void Write(Vector3Int value) => this.WriteVector3Int(value);
-
-        [Obsolete("Use WriteColor instead")]
-        public void Write(Color value) => this.WriteColor(value);
-
-        [Obsolete("Use WriteColor32 instead")]
-        public void Write(Color32 value) => this.WriteColor32(value);
-
-        [Obsolete("Use WriteQuaternion instead")]
-        public void Write(Quaternion value) => this.WriteQuaternion(value);
-
-        [Obsolete("Use WriteRect instead")]
-        public void Write(Rect value) => this.WriteRect(value);
-
-        [Obsolete("Use WritePlane instead")]
-        public void Write(Plane value) => this.WritePlane(value);
-
-        [Obsolete("Use WriteRay instead")]
-        public void Write(Ray value) => this.WriteRay(value);
-
-        [Obsolete("Use WriteMatrix4x4 instead")]
-        public void Write(Matrix4x4 value) => this.WriteMatrix4x4(value);
-
-        [Obsolete("Use WriteGuid instead")]
-        public void Write(Guid value) => this.WriteGuid(value);
-
-        [Obsolete("Use WriteNetworkIdentity instead")]
-        public void Write(NetworkIdentity value) => this.WriteNetworkIdentity(value);
-
-        [Obsolete("Use WriteTransform instead")]
-        public void Write(Transform value) => this.WriteTransform(value);
-
-        [Obsolete("Use WriteGameObject instead")]
-        public void Write(GameObject value) => this.WriteGameObject(value);
-
-        #endregion
-    }
-
-
-    // Mirror's Weaver automatically detects all NetworkWriter function types,
-    // but they do all need to be extensions.
-    public static class NetworkWriterExtensions
-    {
-        // cache encoding instead of creating it with BinaryWriter each time
-        // 1000 readers before:  1MB GC, 30ms
-        // 1000 readers after: 0.8MB GC, 18ms
-        static readonly UTF8Encoding encoding = new UTF8Encoding(false, true);
-        static readonly byte[] stringBuffer = new byte[NetworkWriter.MaxStringLength];
-
-        public static void WriteByte(this NetworkWriter writer, byte value) => writer.WriteByte(value);
-
-        public static void WriteSByte(this NetworkWriter writer, sbyte value) => writer.WriteByte((byte)value);
-
-        public static void WriteChar(this NetworkWriter writer, char value) => writer.WriteUInt16((ushort)value);
-
-        public static void WriteBoolean(this NetworkWriter writer, bool value) => writer.WriteByte((byte)(value ? 1 : 0));
-
-        public static void WriteUInt16(this NetworkWriter writer, ushort value)
-        {
-            writer.WriteByte((byte)(value & 0xFF));
-            writer.WriteByte((byte)(value >> 8));
-        }
-
-        public static void WriteInt16(this NetworkWriter writer, short value) => writer.WriteUInt16((ushort)value);
-
-        public static void WriteSingle(this NetworkWriter writer, float value)
-        {
-            UIntFloat converter = new UIntFloat
-            {
-                floatValue = value
-            };
-            writer.WriteUInt32(converter.intValue);
-        }
-
-        public static void WriteDouble(this NetworkWriter writer, double value)
-        {
-            UIntDouble converter = new UIntDouble
-            {
-                doubleValue = value
-            };
-            writer.WriteUInt64(converter.longValue);
-        }
-
-        public static void WriteDecimal(this NetworkWriter writer, decimal value)
+        public void Write(char value) => writer.Write((ushort)value);
+        public void Write(bool value) => writer.Write(value);
+        public void Write(short value) => writer.Write(value);
+        public void Write(ushort value) => writer.Write(value);
+        public void Write(int value) => writer.Write(value);
+        public void Write(uint value) => writer.Write(value);
+        public void Write(long value) => writer.Write(value);
+        public void Write(ulong value) => writer.Write(value);
+        public void Write(float value) => writer.Write(value);
+        public void Write(double value) => writer.Write(value);
+        public void Write(decimal value)
         {
             // the only way to read it without allocations is to both read and
             // write it with the FloatConverter (which is not binary compatible
             // to writer.Write(decimal), hence why we use it here too)
-            UIntDecimal converter = new UIntDecimal
-            {
-                decimalValue = value
-            };
-            writer.WriteUInt64(converter.longValue1);
-            writer.WriteUInt64(converter.longValue2);
+            UIntDecimal converter = new UIntDecimal();
+            converter.decimalValue = value;
+            Write(converter.longValue1);
+            Write(converter.longValue2);
         }
 
-        public static void WriteString(this NetworkWriter writer, string value)
+        public void Write(string value)
         {
-            // write 0 for null support, increment real size by 1
+            // write bool for null support first
             // (note: original HLAPI would write "" for null strings, but if a
             //        string is null on the server then it should also be null
             //        on the client)
-            if (value == null)
-            {
-                writer.WriteUInt16((ushort)0);
-                return;
-            }
+            writer.Write(value != null);
 
             // write string with same method as NetworkReader
-            // convert to byte[]
-            int size = encoding.GetBytes(value, 0, value.Length, stringBuffer, 0);
-
-            // check if within max size
-            if (size >= NetworkWriter.MaxStringLength)
+            if (value != null)
             {
-                throw new IndexOutOfRangeException("NetworkWriter.Write(string) too long: " + size + ". Limit: " + NetworkWriter.MaxStringLength);
-            }
+                // convert to byte[]
+                int size = encoding.GetBytes(value, 0, value.Length, stringBuffer, 0);
 
-            // write size and bytes
-            writer.WriteUInt16(checked((ushort)(size + 1)));
-            writer.WriteBytes(stringBuffer, 0, size);
+                // check if within max size
+                if (size >= MaxStringLength)
+                {
+                    throw new IndexOutOfRangeException("NetworkWriter.Write(string) too long: " + size + ". Limit: " + MaxStringLength);
+                }
+
+                // write size and bytes
+                Write((ushort)size);
+                Write(stringBuffer, 0, (ushort)size);
+            }
+        }
+
+        // for byte arrays with consistent size, where the reader knows how many to read
+        // (like a packet opcode that's always the same)
+        public void Write(byte[] buffer, int offset, int count)
+        {
+            // no null check because we would need to write size info for that too (hence WriteBytesAndSize)
+            writer.Write(buffer, offset, count);
         }
 
         // for byte arrays with dynamic size, where the reader doesn't know how many will come
         // (like an inventory with different items etc.)
-        public static void WriteBytesAndSize(this NetworkWriter writer, byte[] buffer, int offset, int count)
+        public void WriteBytesAndSize(byte[] buffer, int offset, int count)
         {
+            uint length = checked((uint)count);
             // null is supported because [SyncVar]s might be structs with null byte[] arrays
-            // write 0 for null array, increment normal size by 1 to save bandwith
+            // (writing a size=0 empty array is not the same, the server and client would be out of sync)
             // (using size=-1 for null would limit max size to 32kb instead of 64kb)
-            if (buffer == null)
+            writer.Write(buffer != null); // notNull?
+            if (buffer != null)
             {
-                writer.WritePackedUInt32(0u);
-                return;
+                WritePackedUInt32(length);
+                writer.Write(buffer, offset, count);
             }
-            writer.WritePackedUInt32(checked((uint)count) + 1u);
-            writer.WriteBytes(buffer, offset, count);
         }
 
         // Weaver needs a write function with just one byte[] parameter
         // (we don't name it .Write(byte[]) because it's really a WriteBytesAndSize since we write size / null info too)
-        public static void WriteBytesAndSize(this NetworkWriter writer, byte[] buffer)
+        public void WriteBytesAndSize(byte[] buffer)
         {
             // buffer might be null, so we can't use .Length in that case
-            writer.WriteBytesAndSize(buffer, 0, buffer != null ? buffer.Length : 0);
+            WriteBytesAndSize(buffer, 0, buffer != null ? buffer.Length : 0);
         }
 
-        public static void WriteBytesAndSizeSegment(this NetworkWriter writer, ArraySegment<byte> buffer)
+        public void WriteBytesAndSizeSegment(ArraySegment<byte> buffer)
         {
-            writer.WriteBytesAndSize(buffer.Array, buffer.Offset, buffer.Count);
+            WriteBytesAndSize(buffer.Array, buffer.Offset, buffer.Count);
         }
 
         // zigzag encoding https://gist.github.com/mfuerstenau/ba870a29e16536fdbaba
-        public static void WritePackedInt32(this NetworkWriter writer, int i)
+        public void WritePackedInt32(int i)
         {
             uint zigzagged = (uint)((i >> 31) ^ (i << 1));
-            writer.WritePackedUInt32(zigzagged);
+            WritePackedUInt32(zigzagged);
         }
 
         // http://sqlite.org/src4/doc/trunk/www/varint.wiki
-        public static void WritePackedUInt32(this NetworkWriter writer, uint value)
+        public void WritePackedUInt32(uint value)
         {
             // for 32 bit values WritePackedUInt64 writes the
             // same exact thing bit by bit
-            writer.WritePackedUInt64(value);
+            WritePackedUInt64(value);
         }
 
         // zigzag encoding https://gist.github.com/mfuerstenau/ba870a29e16536fdbaba
-        public static void WritePackedInt64(this NetworkWriter writer, long i)
+        public void WritePackedInt64(long i)
         {
             ulong zigzagged = (ulong)((i >> 63) ^ (i << 1));
-            writer.WritePackedUInt64(zigzagged);
+            WritePackedUInt64(zigzagged);
         }
 
-        public static void WritePackedUInt64(this NetworkWriter writer, ulong value)
+        public void WritePackedUInt64(ulong value)
         {
             if (value <= 240)
             {
-                writer.WriteByte((byte)value);
+                Write((byte)value);
                 return;
             }
             if (value <= 2287)
             {
-                writer.WriteByte((byte)(((value - 240) >> 8) + 241));
-                writer.WriteByte((byte)((value - 240) & 0xFF));
+                Write((byte)(((value - 240) >> 8) + 241));
+                Write((byte)((value - 240) & 0xFF));
                 return;
             }
             if (value <= 67823)
             {
-                writer.WriteByte((byte)249);
-                writer.WriteByte((byte)((value - 2288) >> 8));
-                writer.WriteByte((byte)((value - 2288) & 0xFF));
+                Write((byte)249);
+                Write((byte)((value - 2288) >> 8));
+                Write((byte)((value - 2288) & 0xFF));
                 return;
             }
             if (value <= 16777215)
             {
-                writer.WriteByte((byte)250);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
+                Write((byte)250);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
                 return;
             }
             if (value <= 4294967295)
             {
-                writer.WriteByte((byte)251);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
-                writer.WriteByte((byte)((value >> 24) & 0xFF));
+                Write((byte)251);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
+                Write((byte)((value >> 24) & 0xFF));
                 return;
             }
             if (value <= 1099511627775)
             {
-                writer.WriteByte((byte)252);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
-                writer.WriteByte((byte)((value >> 24) & 0xFF));
-                writer.WriteByte((byte)((value >> 32) & 0xFF));
+                Write((byte)252);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
+                Write((byte)((value >> 24) & 0xFF));
+                Write((byte)((value >> 32) & 0xFF));
                 return;
             }
             if (value <= 281474976710655)
             {
-                writer.WriteByte((byte)253);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
-                writer.WriteByte((byte)((value >> 24) & 0xFF));
-                writer.WriteByte((byte)((value >> 32) & 0xFF));
-                writer.WriteByte((byte)((value >> 40) & 0xFF));
+                Write((byte)253);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
+                Write((byte)((value >> 24) & 0xFF));
+                Write((byte)((value >> 32) & 0xFF));
+                Write((byte)((value >> 40) & 0xFF));
                 return;
             }
             if (value <= 72057594037927935)
             {
-                writer.WriteByte((byte)254);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
-                writer.WriteByte((byte)((value >> 24) & 0xFF));
-                writer.WriteByte((byte)((value >> 32) & 0xFF));
-                writer.WriteByte((byte)((value >> 40) & 0xFF));
-                writer.WriteByte((byte)((value >> 48) & 0xFF));
+                Write((byte)254);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
+                Write((byte)((value >> 24) & 0xFF));
+                Write((byte)((value >> 32) & 0xFF));
+                Write((byte)((value >> 40) & 0xFF));
+                Write((byte)((value >> 48) & 0xFF));
                 return;
             }
 
             // all others
             {
-                writer.WriteByte((byte)255);
-                writer.WriteByte((byte)(value & 0xFF));
-                writer.WriteByte((byte)((value >> 8) & 0xFF));
-                writer.WriteByte((byte)((value >> 16) & 0xFF));
-                writer.WriteByte((byte)((value >> 24) & 0xFF));
-                writer.WriteByte((byte)((value >> 32) & 0xFF));
-                writer.WriteByte((byte)((value >> 40) & 0xFF));
-                writer.WriteByte((byte)((value >> 48) & 0xFF));
-                writer.WriteByte((byte)((value >> 56) & 0xFF));
+                Write((byte)255);
+                Write((byte)(value & 0xFF));
+                Write((byte)((value >> 8) & 0xFF));
+                Write((byte)((value >> 16) & 0xFF));
+                Write((byte)((value >> 24) & 0xFF));
+                Write((byte)((value >> 32) & 0xFF));
+                Write((byte)((value >> 40) & 0xFF));
+                Write((byte)((value >> 48) & 0xFF));
+                Write((byte)((value >> 56) & 0xFF));
             }
         }
 
-        public static void WriteVector2(this NetworkWriter writer, Vector2 value)
+        public void Write(Vector2 value)
         {
-            writer.WriteSingle(value.x);
-            writer.WriteSingle(value.y);
+            Write(value.x);
+            Write(value.y);
         }
 
-        public static void WriteVector3(this NetworkWriter writer, Vector3 value)
+        public void Write(Vector3 value)
         {
-            writer.WriteSingle(value.x);
-            writer.WriteSingle(value.y);
-            writer.WriteSingle(value.z);
+            Write(value.x);
+            Write(value.y);
+            Write(value.z);
         }
 
-        public static void WriteVector4(this NetworkWriter writer, Vector4 value)
+        public void Write(Vector4 value)
         {
-            writer.WriteSingle(value.x);
-            writer.WriteSingle(value.y);
-            writer.WriteSingle(value.z);
-            writer.WriteSingle(value.w);
+            Write(value.x);
+            Write(value.y);
+            Write(value.z);
+            Write(value.w);
         }
 
-        public static void WriteVector2Int(this NetworkWriter writer, Vector2Int value)
+        public void Write(Vector2Int value)
         {
-            writer.WritePackedInt32(value.x);
-            writer.WritePackedInt32(value.y);
+            WritePackedInt32(value.x);
+            WritePackedInt32(value.y);
         }
 
-        public static void WriteVector3Int(this NetworkWriter writer, Vector3Int value)
+        public void Write(Vector3Int value)
         {
-            writer.WritePackedInt32(value.x);
-            writer.WritePackedInt32(value.y);
-            writer.WritePackedInt32(value.z);
+            WritePackedInt32(value.x);
+            WritePackedInt32(value.y);
+            WritePackedInt32(value.z);
         }
 
-        public static void WriteColor(this NetworkWriter writer, Color value)
+        public void Write(Color value)
         {
-            writer.WriteSingle(value.r);
-            writer.WriteSingle(value.g);
-            writer.WriteSingle(value.b);
-            writer.WriteSingle(value.a);
+            Write(value.r);
+            Write(value.g);
+            Write(value.b);
+            Write(value.a);
         }
 
-        public static void WriteColor32(this NetworkWriter writer, Color32 value)
+        public void Write(Color32 value)
         {
-            writer.WriteByte(value.r);
-            writer.WriteByte(value.g);
-            writer.WriteByte(value.b);
-            writer.WriteByte(value.a);
+            Write(value.r);
+            Write(value.g);
+            Write(value.b);
+            Write(value.a);
         }
 
-        public static void WriteQuaternion(this NetworkWriter writer, Quaternion value)
+        public void Write(Quaternion value)
         {
-            writer.WriteSingle(value.x);
-            writer.WriteSingle(value.y);
-            writer.WriteSingle(value.z);
-            writer.WriteSingle(value.w);
+            Write(value.x);
+            Write(value.y);
+            Write(value.z);
+            Write(value.w);
         }
 
-        public static void WriteRect(this NetworkWriter writer, Rect value)
+        public void Write(Rect value)
         {
-            writer.WriteSingle(value.xMin);
-            writer.WriteSingle(value.yMin);
-            writer.WriteSingle(value.width);
-            writer.WriteSingle(value.height);
+            Write(value.xMin);
+            Write(value.yMin);
+            Write(value.width);
+            Write(value.height);
         }
 
-        public static void WritePlane(this NetworkWriter writer, Plane value)
+        public void Write(Plane value)
         {
-            writer.WriteVector3(value.normal);
-            writer.WriteSingle(value.distance);
+            Write(value.normal);
+            Write(value.distance);
         }
 
-        public static void WriteRay(this NetworkWriter writer, Ray value)
+        public void Write(Ray value)
         {
-            writer.WriteVector3(value.origin);
-            writer.WriteVector3(value.direction);
+            Write(value.origin);
+            Write(value.direction);
         }
 
-        public static void WriteMatrix4x4(this NetworkWriter writer, Matrix4x4 value)
+        public void Write(Matrix4x4 value)
         {
-            writer.WriteSingle(value.m00);
-            writer.WriteSingle(value.m01);
-            writer.WriteSingle(value.m02);
-            writer.WriteSingle(value.m03);
-            writer.WriteSingle(value.m10);
-            writer.WriteSingle(value.m11);
-            writer.WriteSingle(value.m12);
-            writer.WriteSingle(value.m13);
-            writer.WriteSingle(value.m20);
-            writer.WriteSingle(value.m21);
-            writer.WriteSingle(value.m22);
-            writer.WriteSingle(value.m23);
-            writer.WriteSingle(value.m30);
-            writer.WriteSingle(value.m31);
-            writer.WriteSingle(value.m32);
-            writer.WriteSingle(value.m33);
+            Write(value.m00);
+            Write(value.m01);
+            Write(value.m02);
+            Write(value.m03);
+            Write(value.m10);
+            Write(value.m11);
+            Write(value.m12);
+            Write(value.m13);
+            Write(value.m20);
+            Write(value.m21);
+            Write(value.m22);
+            Write(value.m23);
+            Write(value.m30);
+            Write(value.m31);
+            Write(value.m32);
+            Write(value.m33);
         }
 
-        public static void WriteGuid(this NetworkWriter writer, Guid value)
+        public void Write(Guid value)
         {
-            byte[] data = value.ToByteArray();
-            writer.WriteBytes(data, 0, data.Length);
+            writer.Write(value.ToByteArray());
         }
 
-        public static void WriteNetworkIdentity(this NetworkWriter writer, NetworkIdentity value)
+        public void Write(NetworkIdentity value)
         {
             if (value == null)
             {
-                writer.WritePackedUInt32(0);
+                WritePackedUInt32(0);
                 return;
             }
-            writer.WritePackedUInt32(value.netId);
+            WritePackedUInt32(value.netId);
         }
 
-        public static void WriteTransform(this NetworkWriter writer, Transform value)
+        public void Write(Transform value)
         {
             if (value == null || value.gameObject == null)
             {
-                writer.WritePackedUInt32(0);
+                WritePackedUInt32(0);
                 return;
             }
             NetworkIdentity identity = value.GetComponent<NetworkIdentity>();
             if (identity != null)
             {
-                writer.WritePackedUInt32(identity.netId);
+                WritePackedUInt32(identity.netId);
             }
             else
             {
                 Debug.LogWarning("NetworkWriter " + value + " has no NetworkIdentity");
-                writer.WritePackedUInt32(0);
+                WritePackedUInt32(0);
             }
         }
 
-        public static void WriteGameObject(this NetworkWriter writer, GameObject value)
+        public void Write(GameObject value)
         {
             if (value == null)
             {
-                writer.WritePackedUInt32(0);
+                WritePackedUInt32(0);
                 return;
             }
             NetworkIdentity identity = value.GetComponent<NetworkIdentity>();
             if (identity != null)
             {
-                writer.WritePackedUInt32(identity.netId);
+                WritePackedUInt32(identity.netId);
             }
             else
             {
                 Debug.LogWarning("NetworkWriter " + value + " has no NetworkIdentity");
-                writer.WritePackedUInt32(0);
+                WritePackedUInt32(0);
             }
         }
 
-        public static void Write<T>(this NetworkWriter writer, T msg) where T : IMessageBase
+        public void Write<T>(T msg) where T : IMessageBase
         {
-            msg.Serialize(writer);
+            msg.Serialize(this);
         }
     }
 }

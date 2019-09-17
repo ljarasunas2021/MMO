@@ -60,9 +60,9 @@ namespace Mirror.Websocket
         }
 
         // send the data or throw exception
-        public void Send(ArraySegment<byte> segment)
+        public void Send(byte[] data)
         {
-            SocketSend(m_NativeRef, segment.Array, segment.Count);
+            SocketSend(m_NativeRef, data, data.Length);
         }
 
 

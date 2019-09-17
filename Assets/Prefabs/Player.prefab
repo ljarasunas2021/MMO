@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389760}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.018934011, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8830746061304626472}
@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389762}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.018934011, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8830746061304626472}
@@ -382,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389770}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.0156548, z: 0.0024705206}
+  m_LocalPosition: {x: -0, y: 0.9967206, z: 0.0024705206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8830746061304626406}
@@ -1831,8 +1831,8 @@ GameObject:
   - component: {fileID: 8830746061304489535}
   - component: {fileID: 8830746061304489534}
   - component: {fileID: 4519984466608668856}
+  - component: {fileID: 2326404854232461919}
   - component: {fileID: 8128741185999691864}
-  - component: {fileID: 3904217749696089712}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1848,7 +1848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8830746061304626338}
@@ -1870,7 +1870,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 57d2706e4335c46a68368c5838cfe804, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1885,15 +1885,15 @@ CharacterController:
   m_GameObject: {fileID: 8830746061304389896}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
+  m_Height: 1.7
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &8636195224515910345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,30 +1921,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncInterval: 0.1
   idleVal: 0
-  walkVal: 0.75
+  walkVal: 0.8
   runVal: 1.8
   idleToWalkThreshold: 0.2
   walkToRunThreshold: 1.35
-  idleSpeed: 0
-  walkSpeed: 2
-  runSpeed: 4.5
-  inAirSpeed: 3
-  runningJumpSpeed: 3
-  standingJumpSpeed: 0
-  rollSpeed: 5
-  hardLandingSpeed: 0
-  softLandingSpeed: 1
+  runSpeed: 1
+  walkSpeed: 0.4
+  rollSpeed: 4
+  runningJumpSpeed: 0.75
+  walkingJumpSpeed: 0.15
+  midAirSpeed: 0.5
   turnSmoothTime: 0.25
+  speedAccelerationSmoothTime: 0.1
+  speedDecelerationSmoothTime: 0.3
   locomotionAccelerationSmoothTime: 0.3
   locomotionDecelerationSmoothTime: 0.5
-  minDistFromGroundToBeMidAir: 2.5
-  gravity: -0.275
-  softLandingMaxVeloY: -0.15
-  rollLandingMaxVeloY: -0.25
+  minDistFromGroundToBeMidAir: 4
+  gravity: -12
+  softLandingMaxVeloY: -5
+  rollLandingMaxVeloY: -10
   maxBoxJumpHeight: 2.5
   maxWalkingJumpHeight: 2.5
   maxRunningJumpHeight: 2.5
-  characterController: {fileID: 8830746061304489532}
 --- !u!114 &8830746061304489534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1952,20 +1950,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389896}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca89a1329df644689f977a0e422da68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feetToIKPositionSpeed: 0.5
-  pelvisVerticalSpeed: 0
-  raycastDownDistance: 1.5
-  heightToStartRaycast: 2
-  ankleHeight: 0.2
-  pelvisHeight: 1
-  environment:
-    serializedVersion: 2
-    m_Bits: 1025
+  distanceToGround: 0.15
+  raycastStartHeight: 2
 --- !u!114 &4519984466608668856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,6 +1973,20 @@ MonoBehaviour:
   localPlayerAuthority: 1
   m_AssetId: 753b3eed5ab644a33b1ab0096ca5a9a9
   m_SceneId: 0
+--- !u!114 &2326404854232461919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830746061304389896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncInterval: 0.1
+  compressRotation: 1
 --- !u!114 &8128741185999691864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,20 +2001,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncInterval: 0.1
   animator: {fileID: 8830746061294998338}
---- !u!114 &3904217749696089712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8830746061304389896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncInterval: 0.1
-  compressRotation: 1
 --- !u!1 &8830746061304389898
 GameObject:
   m_ObjectHideFlags: 0

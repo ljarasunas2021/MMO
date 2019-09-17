@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mirror.Websocket
@@ -12,10 +11,6 @@ namespace Mirror.Websocket
 
         public int port = 7778;
 
-        public bool Secure;
-        public string CertificatePath;
-        public string CertificatePassword;
-
         [Tooltip("Nagle Algorithm can be disabled by enabling NoDelay")]
         public bool NoDelay = true;
 
@@ -24,18 +19,23 @@ namespace Mirror.Websocket
             // dispatch the events from the server
             server.Connected += (connectionId) => OnServerConnected.Invoke(connectionId);
             server.Disconnected += (connectionId) => OnServerDisconnected.Invoke(connectionId);
-            server.ReceivedData += (connectionId, data) => OnServerDataReceived.Invoke(connectionId, data, Channels.DefaultReliable);
+            server.ReceivedData += (connectionId, data) => OnServerDataReceived.Invoke(connectionId, data);
             server.ReceivedError += (connectionId, error) => OnServerError.Invoke(connectionId, error);
 
             // dispatch events from the client
             client.Connected += () => OnClientConnected.Invoke();
             client.Disconnected += () => OnClientDisconnected.Invoke();
-            client.ReceivedData += (data) => OnClientDataReceived.Invoke(data, Channels.DefaultReliable);
+            client.ReceivedData += (data) => OnClientDataReceived.Invoke(data);
             client.ReceivedError += (error) => OnClientError.Invoke(error);
 
             // configure
             client.NoDelay = NoDelay;
             server.NoDelay = NoDelay;
+
+            // HLAPI's local connection uses hard coded connectionId '0', so we
+            // need to make sure that external connections always start at '1'
+            // by simple eating the first one before the server starts
+            Server.NextConnectionId();
 
             Debug.Log("Websocket transport initialized!");
         }
@@ -51,21 +51,10 @@ namespace Mirror.Websocket
 
         public override void ClientConnect(string host)
         {
-            if (Secure)
-            {
-                client.Connect(new Uri($"wss://{host}:{port}"));
-            }
-            else
-            {
-                client.Connect(new Uri($"ws://{host}:{port}"));
-            }
+            client.Connect(new Uri($"ws://{host}:{port}"));
         }
 
-        public override bool ClientSend(int channelId, ArraySegment<byte> segment)
-        {
-            client.Send(segment);
-            return true;
-        }
+        public override bool ClientSend(int channelId, byte[] data) { client.Send(data); return true; }
 
         public override void ClientDisconnect() => client.Disconnect();
 
@@ -74,28 +63,12 @@ namespace Mirror.Websocket
 
         public override void ServerStart()
         {
-            server._secure = Secure;
-            if (Secure)
-            {
-                server._secure = Secure;
-                server._sslConfig = new Server.SslConfiguration
-                {
-                    Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(
-                        System.IO.Path.Combine(Application.dataPath, CertificatePath),
-                        CertificatePassword),
-                    ClientCertificateRequired = false,
-                    CheckCertificateRevocation = false,
-                    EnabledSslProtocols = System.Security.Authentication.SslProtocols.Default
-                };
-            }
-            _ = server.Listen(port);
+            server.Listen(port);
         }
 
-        public override bool ServerSend(List<int> connectionIds, int channelId, ArraySegment<byte> segment)
+        public override bool ServerSend(int connectionId, int channelId, byte[] data)
         {
-            // send to all
-            foreach (int connectionId in connectionIds)
-                server.Send(connectionId, segment);
+            server.Send(connectionId, data);
             return true;
         }
 

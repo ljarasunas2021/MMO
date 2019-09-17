@@ -1,8 +1,6 @@
 // wraps Telepathy for use as HLAPI TransportLayer
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -45,20 +43,18 @@ namespace Mirror
             server.NoDelay = NoDelay;
             server.MaxMessageSize = serverMaxMessageSize;
 
+            // HLAPI's local connection uses hard coded connectionId '0', so we
+            // need to make sure that external connections always start at '1'
+            // by simple eating the first one before the server starts
+            Telepathy.Server.NextConnectionId();
+
             Debug.Log("TelepathyTransport initialized!");
         }
 
         // client
         public override bool ClientConnected() => client.Connected;
         public override void ClientConnect(string address) => client.Connect(address, port);
-        public override bool ClientSend(int channelId, ArraySegment<byte> segment)
-        {
-            // telepathy doesn't support allocation-free sends yet.
-            // previously we allocated in Mirror. now we do it here.
-            byte[] data = new byte[segment.Count];
-            Array.Copy(segment.Array, segment.Offset, data, 0, segment.Count);
-            return client.Send(data);
-        }
+        public override bool ClientSend(int channelId, byte[] data) => client.Send(data);
 
         bool ProcessClientMessage()
         {
@@ -70,7 +66,7 @@ namespace Mirror
                         OnClientConnected.Invoke();
                         break;
                     case Telepathy.EventType.Data:
-                        OnClientDataReceived.Invoke(new ArraySegment<byte>(message.data), Channels.DefaultReliable);
+                        OnClientDataReceived.Invoke(new ArraySegment<byte>(message.data));
                         break;
                     case Telepathy.EventType.Disconnected:
                         OnClientDisconnected.Invoke();
@@ -104,19 +100,7 @@ namespace Mirror
         // server
         public override bool ServerActive() => server.Active;
         public override void ServerStart() => server.Start(port);
-        public override bool ServerSend(List<int> connectionIds, int channelId, ArraySegment<byte> segment)
-        {
-            // telepathy doesn't support allocation-free sends yet.
-            // previously we allocated in Mirror. now we do it here.
-            byte[] data = new byte[segment.Count];
-            Array.Copy(segment.Array, segment.Offset, data, 0, segment.Count);
-
-            // send to all
-            bool result = true;
-            foreach (int connectionId in connectionIds)
-                result &= server.Send(connectionId, data);
-            return result;
-        }
+        public override bool ServerSend(int connectionId, int channelId, byte[] data) => server.Send(connectionId, data);
         public bool ProcessServerMessage()
         {
             if (server.GetNextMessage(out Telepathy.Message message))
@@ -127,7 +111,7 @@ namespace Mirror
                         OnServerConnected.Invoke(message.connectionId);
                         break;
                     case Telepathy.EventType.Data:
-                        OnServerDataReceived.Invoke(message.connectionId, new ArraySegment<byte>(message.data), Channels.DefaultReliable);
+                        OnServerDataReceived.Invoke(message.connectionId, new ArraySegment<byte>(message.data));
                         break;
                     case Telepathy.EventType.Disconnected:
                         OnServerDisconnected.Invoke(message.connectionId);
@@ -142,25 +126,7 @@ namespace Mirror
             return false;
         }
         public override bool ServerDisconnect(int connectionId) => server.Disconnect(connectionId);
-        public override string ServerGetClientAddress(int connectionId)
-        {
-            try
-            {
-                return server.GetClientAddress(connectionId);
-            }
-            catch (SocketException)
-            {
-                // using server.listener.LocalEndpoint causes an Exception
-                // in UWP + Unity 2019:
-                //   Exception thrown at 0x00007FF9755DA388 in UWF.exe:
-                //   Microsoft C++ exception: Il2CppExceptionWrapper at memory
-                //   location 0x000000E15A0FCDD0. SocketException: An address
-                //   incompatible with the requested protocol was used at
-                //   System.Net.Sockets.Socket.get_LocalEndPoint ()
-                // so let's at least catch it and recover
-                return "unknown";
-            }
-        }
+        public override string ServerGetClientAddress(int connectionId) => server.GetClientAddress(connectionId);
         public override void ServerStop() => server.Stop();
 
         // common
@@ -180,15 +146,7 @@ namespace Mirror
         {
             if (server.Active && server.listener != null)
             {
-                // printing server.listener.LocalEndpoint causes an Exception
-                // in UWP + Unity 2019:
-                //   Exception thrown at 0x00007FF9755DA388 in UWF.exe:
-                //   Microsoft C++ exception: Il2CppExceptionWrapper at memory
-                //   location 0x000000E15A0FCDD0. SocketException: An address
-                //   incompatible with the requested protocol was used at
-                //   System.Net.Sockets.Socket.get_LocalEndPoint ()
-                // so let's use the regular port instead.
-                return "Telepathy Server port: " + port;
+                return "Telepathy Server port: " + server.listener.LocalEndpoint;
             }
             else if (client.Connecting || client.Connected)
             {

@@ -38,9 +38,7 @@ namespace Mirror
             // search for SyncObjects manually.
             // (look for 'Mirror.Sync'. not '.SyncObject' because we'd have to
             //  check base type for that again)
-            // => scan both public and non-public fields! SyncVars can be private
-            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            foreach (FieldInfo field in scriptClass.GetFields(flags))
+            foreach (FieldInfo field in scriptClass.GetFields())
             {
                 if (field.FieldType.BaseType != null &&
                     field.FieldType.BaseType.FullName != null &&
@@ -172,25 +170,18 @@ namespace Mirror
                 }
             }
 
-            // does it sync anything? then show extra properties
-            // (no need to show it if the class only has Cmds/Rpcs and no sync)
+            // only show SyncInterval if we have an OnSerialize function.
+            // No need to show it if the class only has Cmds/Rpcs and no sync.
             if (syncsAnything)
             {
                 NetworkBehaviour networkBehaviour = target as NetworkBehaviour;
                 if (networkBehaviour != null)
                 {
-                    // syncMode
-                    serializedObject.FindProperty("syncMode").enumValueIndex = (int)(SyncMode)
-                        EditorGUILayout.EnumPopup("Network Sync Mode", networkBehaviour.syncMode);
-
-                    // syncInterval
                     // [0,2] should be enough. anything >2s is too laggy anyway.
                     serializedObject.FindProperty("syncInterval").floatValue = EditorGUILayout.Slider(
                         new GUIContent("Network Sync Interval",
                                        "Time in seconds until next change is synchronized to the client. '0' means send immediately if changed. '0.5' means only send changes every 500ms.\n(This is for state synchronization like SyncVars, SyncLists, OnSerialize. Not for Cmds, Rpcs, etc.)"),
                         networkBehaviour.syncInterval, 0, 2);
-
-                    // apply
                     serializedObject.ApplyModifiedProperties();
                 }
             }

@@ -1,5 +1,4 @@
 using System.IO;
-using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +16,7 @@ namespace Ninja.WebSockets
         /// <param name="stream">The network stream</param>
         /// <param name="token">The optional cancellation token</param>
         /// <returns>Http data read from the stream</returns>
-        Task<WebSocketHttpContext> ReadHttpHeaderFromStreamAsync(TcpClient client, Stream stream, CancellationToken token = default(CancellationToken));
+        Task<WebSocketHttpContext> ReadHttpHeaderFromStreamAsync(Stream stream, CancellationToken token = default(CancellationToken));
 
         /// <summary>
         /// Accept web socket with default options

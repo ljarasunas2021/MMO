@@ -10,7 +10,7 @@ namespace Mirror.Weaver
 
         /*
             // generates code like:
-            public void CmdThrust(float thrusting, int spin)
+            public void CallCmdThrust(float thrusting, int spin)
             {
                 if (isServer)
                 {
@@ -24,19 +24,6 @@ namespace Mirror.Weaver
                 networkWriter.WritePackedUInt32((uint)spin);
                 base.SendCommandInternal(cmdName, networkWriter, cmdName);
             }
-
-            public void CallCmdThrust(float thrusting, int spin)
-            {
-                // whatever the user was doing before
-            }
-
-            Originally HLAPI put the send message code inside the Call function
-            and then proceeded to replace every call to CmdTrust with CallCmdTrust
-
-            This method moves all the user's code into the "Call" method
-            and replaces the body of the original method with the send message code.
-            This way we do not need to modify the code anywhere else,  and this works
-            correctly in dependent assemblies
         */
         public static MethodDefinition ProcessCommandCall(TypeDefinition td, MethodDefinition md, CustomAttribute ca)
         {
@@ -50,12 +37,7 @@ namespace Mirror.Weaver
                 cmd.Parameters.Add(new ParameterDefinition(pd.Name, ParameterAttributes.None, pd.ParameterType));
             }
 
-            // move the old body to the new function
-            MethodBody newBody = cmd.Body;
-            cmd.Body = md.Body;
-            md.Body = newBody;
-
-            ILProcessor cmdWorker = md.Body.GetILProcessor();
+            ILProcessor cmdWorker = cmd.Body.GetILProcessor();
 
             NetworkBehaviourProcessor.WriteSetupLocals(cmdWorker);
 
@@ -77,7 +59,7 @@ namespace Mirror.Weaver
             {
                 cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg, i + 1));
             }
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, cmd));
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, md));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ret));
             cmdWorker.Append(localClientLabel);
 
@@ -104,8 +86,6 @@ namespace Mirror.Weaver
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ldc_I4, NetworkBehaviourProcessor.GetChannelId(ca)));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.sendCommandInternal));
 
-            NetworkBehaviourProcessor.WriteRecycleWriter(cmdWorker);
-
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ret));
 
             return cmd;
@@ -122,7 +102,7 @@ namespace Mirror.Weaver
                 ((ShipControl)obj).CmdThrust(reader.ReadSingle(), (int)reader.ReadPackedUInt32());
             }
         */
-        public static MethodDefinition ProcessCommandInvoke(TypeDefinition td, MethodDefinition md, MethodDefinition cmdCallFunc)
+        public static MethodDefinition ProcessCommandInvoke(TypeDefinition td, MethodDefinition md)
         {
             MethodDefinition cmd = new MethodDefinition(CmdPrefix + md.Name,
                 MethodAttributes.Family | MethodAttributes.Static | MethodAttributes.HideBySig,
@@ -141,7 +121,7 @@ namespace Mirror.Weaver
                 return null;
 
             // invoke actual command function
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Callvirt, cmdCallFunc));
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Callvirt, md));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ret));
 
             NetworkBehaviourProcessor.AddInvokeParameters(cmd.Parameters);

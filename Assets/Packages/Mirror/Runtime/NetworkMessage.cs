@@ -5,15 +5,10 @@ namespace Mirror
         public int msgType;
         public NetworkConnection conn;
         public NetworkReader reader;
-        public int channelId;
 
         public TMsg ReadMessage<TMsg>() where TMsg : IMessageBase, new()
         {
-            // Normally I would just do:
-            // TMsg msg = new TMsg();
-            // but mono calls an expensive method Activator.CreateInstance
-            // For value types this is unnecesary,  just use the default value
-            TMsg msg = typeof(TMsg).IsValueType ? default(TMsg) : new TMsg();
+            TMsg msg = new TMsg();
             msg.Deserialize(reader);
             return msg;
         }

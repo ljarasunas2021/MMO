@@ -4,7 +4,7 @@ namespace Mirror
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("Network/NetworkTransform")]
-    [HelpURL("https://mirror-networking.com/docs/Components/NetworkTransform.html")]
+    [HelpURL("https://vis2k.github.io/Mirror/Components/NetworkTransform")]
     public class NetworkTransform : NetworkTransformBase
     {
         protected override Transform targetComponent => transform;
