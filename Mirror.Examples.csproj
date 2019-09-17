@@ -309,6 +309,21 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="Mono.CecilX.Mdb">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Pdb">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Rocks">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ </Reference>
+ <Reference Include="Telepathy">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -323,21 +338,6 @@
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
- </Reference>
- <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
