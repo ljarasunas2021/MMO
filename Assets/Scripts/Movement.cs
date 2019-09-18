@@ -118,28 +118,29 @@ public class Movement : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
-        Move();
+        CmdMove(new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y));
     }
     #endregion
 
     #region Movement
     /// <summary> All movement of the player is run through this void </summary>
-    private void Move()
+    [Command]
+    private void CmdMove(InputStruct input)
     {
         // get current state
         currentState = (States)animator.GetInteger("CurrentState");
 
         // find the input and a normalized input
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 inputDir = input.normalized;
+        Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
+        Vector2 inputDir = inputVector.normalized;
 
-        SetLocomotionBlendValue(input);
+        SetLocomotionBlendValue(inputVector, input.leftShift);
 
-        RotatePlayer(inputDir);
+        RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
-        SetSpeed();
+        SetSpeed(input.space);
 
-        CheckForJump(input);
+        CheckForJump(inputVector, input.space);
 
         SetValuesIfMidAir();
 
@@ -149,7 +150,7 @@ public class Movement : NetworkBehaviour
 
     /// <summary> Set the correct locomotion blend value </summary>
     /// <param name = "input"> input found in update function </param>
-    private void SetLocomotionBlendValue(Vector2 input)
+    private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
     {
         if (currentState != States.locomotion) return;
         // value that the locomotion blend value should be 
@@ -157,7 +158,7 @@ public class Movement : NetworkBehaviour
 
         // set the target locomotion blend value
         if (input.x == 0 && input.y == 0) targetLocomotionBlendVal = idleVal;
-        else if (Input.GetKey(KeyCode.LeftShift)) targetLocomotionBlendVal = runVal;
+        else if (leftShift) targetLocomotionBlendVal = runVal;
         else targetLocomotionBlendVal = walkVal;
 
         // set the locomotion bend value based on the locomotion smooth time - if that was in a phase of acceleration or deceleration
@@ -170,20 +171,19 @@ public class Movement : NetworkBehaviour
 
     ///<summary> Rotate the player accordingly </summary>
     ///<param name = "inputDir"> normalized input in the update function </param>
-    private void RotatePlayer(Vector2 inputDir)
+    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot)
     {
         // if the input doesn't equal zero, player can rotate
         if (inputDir != Vector2.zero)
         {
-            bool leftControl = Input.GetKey(KeyCode.LeftControl);
             // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         }
     }
 
     ///<summary> Set the appropriate speed for the player </summary>
-    private void SetSpeed()
+    private void SetSpeed(bool space)
     {
         // speed that player is trying to reach
         float targetSpeed = 0;
@@ -214,7 +214,7 @@ public class Movement : NetworkBehaviour
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
         // set the y component of the velocity based on the gravity
-        if (characterController.isGrounded) velocityY = 0;
+        if (characterController.isGrounded && !space) velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
 
         // move the character controller in the direction of the current speed and velocityY
@@ -226,10 +226,10 @@ public class Movement : NetworkBehaviour
 
     ///<summary> Check if jump should be called </summary>
     ///<param name = "input"> input in the update function </param>
-    private void CheckForJump(Vector2 input)
+    private void CheckForJump(Vector2 input, bool space)
     {
         /// if space has been pressed jump
-        if (Input.GetKey(KeyCode.Space))
+        if (space)
         {
             /// base jump animation on the input
             if (locomotionBlendVal <= idleToWalkThreshold) SetCurrentState(States.boxJump);
@@ -268,7 +268,6 @@ public class Movement : NetworkBehaviour
     ///<param name = "stateIndex"> Index of state that the current state should be equal to </param>
     private void SetCurrentState(States state)
     {
-        Debug.Log(state);
         previousState = currentState;
         currentState = state;
     }
@@ -297,6 +296,29 @@ public static class Parameters
     public static string currentState = "CurrentState";
     public static string nextState = "NextState";
     public static string locomotionBlend = "LocomotionBlend";
+}
+#endregion
+
+#region  InputStruct
+/// <summary> Struct where input is stored </summary>
+public struct InputStruct
+{
+    public float horAxis;
+    public float vertAxis;
+    public bool space;
+    public bool leftShift;
+    public bool leftControl;
+    public float camYRot;
+
+    public InputStruct(float horAxis, float vertAxis, bool space, bool leftShift, bool leftControl, float camYRot)
+    {
+        this.horAxis = horAxis;
+        this.vertAxis = vertAxis;
+        this.space = space;
+        this.leftShift = leftShift;
+        this.leftControl = leftControl;
+        this.camYRot = camYRot;
+    }
 }
 #endregion
 
