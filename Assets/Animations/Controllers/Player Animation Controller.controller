@@ -283,7 +283,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
+  m_TransitionOffset: 0.18903847
   m_ExitTime: 0.75
   m_HasExitTime: 1
   m_HasFixedDuration: 1
@@ -674,9 +674,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4279325
-  m_TransitionOffset: 0
-  m_ExitTime: 0.7236053
+  m_TransitionDuration: 0.64558613
+  m_TransitionOffset: 0.052174203
+  m_ExitTime: 0.6295942
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -832,7 +832,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3cf2d78cf8aa0774d967204dfa084986, type: 2}
+  m_Motion: {fileID: 7400000, guid: a121b93a66e19427eb63e4fec282d791, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
