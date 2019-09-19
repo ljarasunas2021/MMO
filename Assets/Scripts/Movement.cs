@@ -138,7 +138,11 @@ public class Movement : NetworkBehaviour
 
         RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
-        SetSpeed(input.space);
+        //SetSpeed(input.space);
+        if (characterController.isGrounded && !input.space) velocityY = 0;
+        else velocityY += Time.deltaTime * gravity;
+
+        characterController.SimpleMove(Vector3.up * velocityY);
 
         CheckForJump(inputVector, input.space);
 
@@ -238,6 +242,12 @@ public class Movement : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    private void RpcDebug(string name)
+    {
+        Debug.Log(name);
+    }
+
     /// <summary> Set the correct values if the player is in the air </summary>
     private void SetValuesIfMidAir()
     {
@@ -246,6 +256,7 @@ public class Movement : NetworkBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, 9);
+        RpcDebug(hit.collider.gameObject.name);
         if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
             if (currentState == States.defInAir)
