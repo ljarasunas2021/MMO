@@ -97,23 +97,29 @@ public class Movement : NetworkBehaviour
     // transform of the camera
     private Transform camTransform;
     // player's character controller
-    private CharacterController characterController;
+    public CharacterController characterController;
     // player's animator
     private Animator animator;
     #endregion
 
     #region Initialize
     ///<summary> Initialize variables </summary>
-    void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
+        characterController.enabled = true;
         animator = GetComponent<Animator>();
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
         camTransform = Camera.main.transform;
-        characterController = GetComponent<CharacterController>();
         currentState = 0;
     }
     #endregion
 
-    #region CalledEveryFrame
+    #region Update
     ///<summary> Takes care of things that should be called every frame </summary>
     void Update()
     {
@@ -142,7 +148,7 @@ public class Movement : NetworkBehaviour
         if (characterController.isGrounded && !input.space) velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
 
-        characterController.SimpleMove(Vector3.up * velocityY);
+        characterController.Move(Vector3.up * velocityY);
 
         CheckForJump(inputVector, input.space);
 
@@ -187,7 +193,7 @@ public class Movement : NetworkBehaviour
     }
 
     ///<summary> Set the appropriate speed for the player </summary>
-    private void SetSpeed(bool space)
+    private void SetSpeed(bool space, bool isGrounded)
     {
         // speed that player is trying to reach
         float targetSpeed = 0;
@@ -218,7 +224,7 @@ public class Movement : NetworkBehaviour
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
         // set the y component of the velocity based on the gravity
-        if (characterController.isGrounded && !space) velocityY = 0;
+        if (isGrounded && !space) velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
 
         // move the character controller in the direction of the current speed and velocityY
@@ -242,12 +248,6 @@ public class Movement : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    private void RpcDebug(string name)
-    {
-        Debug.Log(name);
-    }
-
     /// <summary> Set the correct values if the player is in the air </summary>
     private void SetValuesIfMidAir()
     {
@@ -256,7 +256,7 @@ public class Movement : NetworkBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, 9);
-        RpcDebug(hit.collider.gameObject.name);
+
         if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
             if (currentState == States.defInAir)
