@@ -261,6 +261,7 @@ public class Movement : NetworkBehaviour
         {
             if (currentState == States.defInAir)
             {
+                Debug.Log(velocityY);
                 if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
                 else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
                 else SetCurrentState(States.hardLanding);
