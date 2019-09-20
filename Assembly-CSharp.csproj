@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\ChangeCurrentState.cs" />
      <Compile Include="Assets\Scripts\FootIK.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
+     <None Include="Assets\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />
  <Reference Include="Cinemachine">
