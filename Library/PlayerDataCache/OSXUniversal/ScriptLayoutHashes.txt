@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/lukas/Desktop/test34.app
+/Users/lukas/Desktop/test35.app
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?

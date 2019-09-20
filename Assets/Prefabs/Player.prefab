@@ -1938,8 +1938,8 @@ MonoBehaviour:
   locomotionDecelerationSmoothTime: 0.5
   minDistFromGroundToBeMidAir: 4
   gravity: -0.25
-  softLandingMaxVeloY: -5
-  rollLandingMaxVeloY: -10
+  softLandingMaxVeloY: -0.15
+  rollLandingMaxVeloY: -0.25
   maxBoxJumpHeight: 2.5
   maxWalkingJumpHeight: 2.5
   maxRunningJumpHeight: 2.5
