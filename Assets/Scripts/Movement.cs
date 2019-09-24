@@ -23,30 +23,11 @@ public class Movement : NetworkBehaviour {
     // walk and run animation
     public float walkToRunThreshold;
 
-    [Header("Speed Values")]
-    // speed at which the player moves when 
-    // running
-    public float runSpeed;
-    // walking
-    public float walkSpeed;
-    // rolling
-    public float rollSpeed;
-    // running Jump
-    public float runningJumpSpeed;
-    // walking Jump
-    public float walkingJumpSpeed;
-    // mid air
-    public float midAirSpeed;
-
     [Header("Smooth Time Values")]
     // time that it takes for the ____ value to go from its current value to its target value
     // turning 
     public float turnSmoothTime;
     // speed (but only used if value is getting large (i.e. accelerating))
-    public float speedAccelerationSmoothTime;
-    // speed (but only used if value is getting smaller(i.e. decelerating))
-    public float speedDecelerationSmoothTime;
-    // locomotion (but only used if value is getting large (i.e. accelerating))
     public float locomotionAccelerationSmoothTime;
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
     public float locomotionDecelerationSmoothTime;
@@ -83,8 +64,6 @@ public class Movement : NetworkBehaviour {
 
     // distance raycast will go downwards
     private float maxRaycastDownDist;
-    // current speed of player
-    private float currentSpeed;
     // y component of velocity of player
     private float velocityY;
     // target y rotation of player
@@ -93,8 +72,6 @@ public class Movement : NetworkBehaviour {
     private float locomotionBlendVal;
     // current anim state - each anim state is assigned its own index and this is that index
     private States currentState;
-    // previous anim state
-    private States previousState;
     // transform of the camera
     private Transform camTransform;
     // player's character controller
@@ -104,26 +81,11 @@ public class Movement : NetworkBehaviour {
     #endregion
 
     #region Initialize
-    ///<summary> Initialize variables </summary>
-    /*public override void OnStartServer() {
-        base.OnStartServer();
-        characterController.enabled = true;
-        animator = GetComponent<Animator>();
-    }
-
-    public override void OnStartLocalPlayer() {
-        base.OnStartLocalPlayer();
-        characterController.enabled = true;
-        animator = GetComponent<Animator>();
-        camTransform = Camera.main.transform;
-        currentState = 0;
-    }*/
 
     private void Start() {
         characterController.enabled = true;
         animator = GetComponent<Animator>();
-        //camTransform = Camera.main.transform;
-        //Debug.Log(camTransform.gameObject.name);
+        camTransform = Camera.main.transform;
         currentState = 0;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
     }
@@ -133,7 +95,7 @@ public class Movement : NetworkBehaviour {
     ///<summary> Takes care of things that should be called every frame </summary>
     void Update() {
         if (!isLocalPlayer)return;
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), Camera.main.transform.eulerAngles.y);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
         Move(input);
     }
     #endregion
