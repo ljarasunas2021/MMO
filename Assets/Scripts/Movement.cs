@@ -105,7 +105,7 @@ public class Movement : NetworkBehaviour {
 
     #region Initialize
     ///<summary> Initialize variables </summary>
-    public override void OnStartServer() {
+    /*public override void OnStartServer() {
         base.OnStartServer();
         characterController.enabled = true;
         animator = GetComponent<Animator>();
@@ -113,11 +113,18 @@ public class Movement : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() {
         base.OnStartLocalPlayer();
+        characterController.enabled = true;
+        animator = GetComponent<Animator>();
         camTransform = Camera.main.transform;
         currentState = 0;
-    }
+    }*/
 
     private void Start() {
+        characterController.enabled = true;
+        animator = GetComponent<Animator>();
+        //camTransform = Camera.main.transform;
+        //Debug.Log(camTransform.gameObject.name);
+        currentState = 0;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
     }
     #endregion
@@ -126,25 +133,15 @@ public class Movement : NetworkBehaviour {
     ///<summary> Takes care of things that should be called every frame </summary>
     void Update() {
         if (!isLocalPlayer)return;
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
-        ClientPredictMovement(input);
-        CmdMove(input);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), Camera.main.transform.eulerAngles.y);
+        Move(input);
     }
     #endregion
 
     #region Movement
 
-    ///<summary> Move the player in the server </summary>
-    ///<param name = "input"> Input struct of all inputs</param>
-    private void ClientPredictMovement(InputStruct input) {
-        RotatePlayer(new Vector2(input.horAxis, input.vertAxis).normalized, input.leftControl, input.camYRot);
-
-        AddGravity(input.space);
-    }
-
     /// <summary> All movement of the player is run through this void </summary>
-    [Command]
-    private void CmdMove(InputStruct input) {
+    private void Move(InputStruct input) {
         // get current state
         currentState = (States)animator.GetInteger("CurrentState");
 
