@@ -1,12 +1,11 @@
 ﻿using System.Linq;
-using UnityEngine;
 using Mirror;
+using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 ///<summary> Script used to control the movement of the player </summary>
-public class Movement : NetworkBehaviour
-{
+public class Movement : NetworkBehaviour {
     #region Variables
     [Header("Locomotion Blend Values")]
     // locomotion blend tree value for a ...
@@ -82,6 +81,8 @@ public class Movement : NetworkBehaviour
     // turning
     private float turnSmoothVelocity;
 
+    // distance raycast will go downwards
+    private float maxRaycastDownDist;
     // current speed of player
     private float currentSpeed;
     // y component of velocity of player
@@ -104,35 +105,46 @@ public class Movement : NetworkBehaviour
 
     #region Initialize
     ///<summary> Initialize variables </summary>
-    public override void OnStartServer()
-    {
+    public override void OnStartServer() {
         base.OnStartServer();
         characterController.enabled = true;
         animator = GetComponent<Animator>();
     }
 
-    public override void OnStartLocalPlayer()
-    {
+    public override void OnStartLocalPlayer() {
         base.OnStartLocalPlayer();
         camTransform = Camera.main.transform;
         currentState = 0;
+    }
+
+    private void Start() {
+        maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
     }
     #endregion
 
     #region Update
     ///<summary> Takes care of things that should be called every frame </summary>
-    void Update()
-    {
-        if (!isLocalPlayer) return;
-        CmdMove(new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y));
+    void Update() {
+        if (!isLocalPlayer)return;
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
+        ClientPredictMovement(input);
+        CmdMove(input);
     }
     #endregion
 
     #region Movement
+
+    ///<summary> Move the player in the server </summary>
+    ///<param name = "input"> Input struct of all inputs</param>
+    private void ClientPredictMovement(InputStruct input) {
+        RotatePlayer(new Vector2(input.horAxis, input.vertAxis).normalized, input.leftControl, input.camYRot);
+
+        AddGravity(input.space);
+    }
+
     /// <summary> All movement of the player is run through this void </summary>
     [Command]
-    private void CmdMove(InputStruct input)
-    {
+    private void CmdMove(InputStruct input) {
         // get current state
         currentState = (States)animator.GetInteger("CurrentState");
 
@@ -144,11 +156,7 @@ public class Movement : NetworkBehaviour
 
         RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
-        //SetSpeed(input.space);
-        if (characterController.isGrounded && !input.space) velocityY = 0;
-        else velocityY += Time.deltaTime * gravity;
-
-        characterController.Move(Vector3.up * velocityY);
+        AddGravity(input.space);
 
         CheckForJump(inputVector, input.space);
 
@@ -160,15 +168,16 @@ public class Movement : NetworkBehaviour
 
     /// <summary> Set the correct locomotion blend value </summary>
     /// <param name = "input"> input found in update function </param>
-    private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
-    {
-        if (currentState != States.locomotion) return;
+    /// <param name = "leftShift"> was left shift pressed </param>
+    private void SetLocomotionBlendValue(Vector2 input, bool leftShift) {
+
+        if (currentState != States.locomotion)return;
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
 
         // set the target locomotion blend value
-        if (input.x == 0 && input.y == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift) targetLocomotionBlendVal = runVal;
+        if (input.x == 0 && input.y == 0)targetLocomotionBlendVal = idleVal;
+        else if (leftShift)targetLocomotionBlendVal = runVal;
         else targetLocomotionBlendVal = walkVal;
 
         // set the locomotion bend value based on the locomotion smooth time - if that was in a phase of acceleration or deceleration
@@ -181,106 +190,66 @@ public class Movement : NetworkBehaviour
 
     ///<summary> Rotate the player accordingly </summary>
     ///<param name = "inputDir"> normalized input in the update function </param>
-    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot)
-    {
+    /// <param name = "leftControl"> was left control pressed </param>
+    /// <param name = "camYRot"> what is the y rotation of the player </param>
+    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot) {
         // if the input doesn't equal zero, player can rotate
-        if (inputDir != Vector2.zero)
-        {
+        if (inputDir != Vector2.zero) {
             // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
+            if (!leftControl)targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         }
     }
 
-    ///<summary> Set the appropriate speed for the player </summary>
-    private void SetSpeed(bool space, bool isGrounded)
-    {
-        // speed that player is trying to reach
-        float targetSpeed = 0;
-
-        // set target speed appropriately
-        switch (currentState)
-        {
-            case States.locomotion:
-                if (locomotionBlendVal > walkToRunThreshold) targetSpeed = runSpeed;
-                else if (locomotionBlendVal < walkToRunThreshold && locomotionBlendVal > idleToWalkThreshold) targetSpeed = walkSpeed;
-                break;
-            case States.fallToRoll:
-                targetSpeed = rollSpeed;
-                break;
-            case States.walkingJump:
-                targetSpeed = walkingJumpSpeed;
-                break;
-            case States.runningJump:
-                targetSpeed = runningJumpSpeed;
-                break;
-            case States.defInAir:
-                targetSpeed = midAirSpeed;
-                break;
-        }
-
-        // set current speed appropriately based on target speed and if player is accelerating / decelerating
-        float speedSmoothTime = (targetSpeed - currentSpeed > 0) ? speedAccelerationSmoothTime : speedDecelerationSmoothTime;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
-
-        // set the y component of the velocity based on the gravity
-        if (isGrounded && !space) velocityY = 0;
+    /// <summary> Add appropriate gravity </summary>
+    /// <param name = "space"> if space was pressed </param>
+    private void AddGravity(bool space) {
+        if (characterController.isGrounded && !space)velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
 
-        // move the character controller in the direction of the current speed and velocityY
-        characterController.Move((transform.forward * currentSpeed + Vector3.up * velocityY) * Time.deltaTime);
-
-        // set the current speed appropriately
-        currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
+        characterController.Move(Vector3.up * velocityY);
     }
 
     ///<summary> Check if jump should be called </summary>
     ///<param name = "input"> input in the update function </param>
-    private void CheckForJump(Vector2 input, bool space)
-    {
+    /// <param name = "space"> was the space bar pressed </param>
+    private void CheckForJump(Vector2 input, bool space) {
+
         /// if space has been pressed jump
-        if (space)
-        {
+        if (space) {
             /// base jump animation on the input
-            if (locomotionBlendVal <= idleToWalkThreshold) SetCurrentState(States.boxJump);
-            else if (locomotionBlendVal >= walkToRunThreshold) SetCurrentState(States.runningJump);
+            if (locomotionBlendVal <= idleToWalkThreshold)SetCurrentState(States.boxJump);
+            else if (locomotionBlendVal >= walkToRunThreshold)SetCurrentState(States.runningJump);
             else SetCurrentState(States.walkingJump);
         }
     }
 
     /// <summary> Set the correct values if the player is in the air </summary>
-    private void SetValuesIfMidAir()
-    {
+    private void SetValuesIfMidAir() {
+
         // check if hitting anything and if so set current state appropriately
-        float maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out hit, maxRaycastDownDist, 9);
-
-        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
-        {
-            if (currentState == States.defInAir)
-            {
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, GetComponent<FootIK>().environment);
+        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0) {
+            if (currentState == States.defInAir) {
                 Debug.Log(velocityY);
-                if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
-                else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
+                if (velocityY > softLandingMaxVeloY)SetCurrentState(States.softLanding);
+                else if (velocityY > rollLandingMaxVeloY)SetCurrentState(States.fallToRoll);
                 else SetCurrentState(States.hardLanding);
             }
-        }
-        else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
+        } else if (currentState != States.defInAir)SetCurrentState(States.defInAir);
 
-        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0))SetCurrentState(States.defInAir);
 
-        if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0))SetCurrentState(States.defInAir);
 
-        if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0))SetCurrentState(States.defInAir);
     }
 
     ///<summary> Set the current and previous state to their corresponding values </summary>
     ///<param name = "stateIndex"> Index of state that the current state should be equal to </param>
-    private void SetCurrentState(States state)
-    {
-        previousState = currentState;
+    private void SetCurrentState(States state) {
         currentState = state;
     }
     #endregion
@@ -288,8 +257,7 @@ public class Movement : NetworkBehaviour
 
 #region States
 ///<summary> Animations and indexes associated with those animations </summary>
-public enum States
-{
+public enum States {
     locomotion = 0,
     boxJump = 1,
     runningJump = 2,
@@ -303,8 +271,7 @@ public enum States
 
 #region Parameters
 /// <summary> Names of parameters used in the animation controller </summary>
-public static class Parameters
-{
+public static class Parameters {
     public static string currentState = "CurrentState";
     public static string nextState = "NextState";
     public static string locomotionBlend = "LocomotionBlend";
@@ -313,8 +280,7 @@ public static class Parameters
 
 #region  InputStruct
 /// <summary> Struct where input is stored </summary>
-public struct InputStruct
-{
+public struct InputStruct {
     public float horAxis;
     public float vertAxis;
     public bool space;
@@ -322,8 +288,7 @@ public struct InputStruct
     public bool leftControl;
     public float camYRot;
 
-    public InputStruct(float horAxis, float vertAxis, bool space, bool leftShift, bool leftControl, float camYRot)
-    {
+    public InputStruct(float horAxis, float vertAxis, bool space, bool leftShift, bool leftControl, float camYRot) {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
         this.space = space;
@@ -333,4 +298,3 @@ public struct InputStruct
     }
 }
 #endregion
-

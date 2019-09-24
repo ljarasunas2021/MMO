@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389760}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.018934011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8830746061304626472}
@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389762}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.018934011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8830746061304626472}
@@ -382,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8830746061304389770}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.9967206, z: 0.0024705206}
+  m_LocalPosition: {x: 0, y: 1.0156548, z: 0.0024705206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8830746061304626406}
@@ -1887,13 +1887,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Height: 1.7
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.93, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8636195224515910345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,8 +1936,8 @@ MonoBehaviour:
   speedDecelerationSmoothTime: 0.3
   locomotionAccelerationSmoothTime: 0.3
   locomotionDecelerationSmoothTime: 0.5
-  minDistFromGroundToBeMidAir: 4
-  gravity: -0.25
+  minDistFromGroundToBeMidAir: 2.5
+  gravity: -0.35
   softLandingMaxVeloY: -0.15
   rollLandingMaxVeloY: -0.25
   maxBoxJumpHeight: 2.5
@@ -1956,8 +1956,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca89a1329df644689f977a0e422da68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToGround: 0.15
-  raycastStartHeight: 2
+  feetToIKPositionSpeed: 0.5
+  pelvisVerticalSpeed: 0
+  raycastDownDistance: 1.5
+  heightToStartRaycast: 2
+  ankleHeight: 0.2
+  pelvisHeight: 1
+  environment:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &4519984466608668856
 MonoBehaviour:
   m_ObjectHideFlags: 0
