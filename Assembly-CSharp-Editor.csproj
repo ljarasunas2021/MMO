@@ -57,6 +57,21 @@
  <Reference Include="Cinemachine">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.ProGrids">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.Editor">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProGrids.Editor">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -68,6 +83,9 @@
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.AddOns.Editor">
+ <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
