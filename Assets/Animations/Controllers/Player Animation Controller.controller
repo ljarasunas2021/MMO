@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnter: 0
   enterValue: 0
-  onExit: 1
+  onExit: 0
   exitValue: 0
 --- !u!114 &114077156393964090
 MonoBehaviour:
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnter: 0
   enterValue: 0
-  onExit: 1
+  onExit: 0
   exitValue: 0
 --- !u!114 &114259804786377016
 MonoBehaviour:
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnter: 0
   enterValue: 0
-  onExit: 1
+  onExit: 0
   exitValue: 0
 --- !u!114 &114983821712894978
 MonoBehaviour:
@@ -1128,7 +1128,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -12, y: 0, z: 0}
-  m_EntryPosition: {x: 48, y: 72, z: 0}
+  m_EntryPosition: {x: 48, y: 60, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102760467360343836}
