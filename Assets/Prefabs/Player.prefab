@@ -1832,7 +1832,7 @@ GameObject:
   - component: {fileID: 8830746061304489534}
   - component: {fileID: 4519984466608668856}
   - component: {fileID: 8128741185999691864}
-  - component: {fileID: 3117876222042362837}
+  - component: {fileID: 3904217749696089712}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1870,7 +1870,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 57d2706e4335c46a68368c5838cfe804, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1885,7 +1885,7 @@ CharacterController:
   m_GameObject: {fileID: 8830746061304389896}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.8
   m_Radius: 0.5
@@ -1925,15 +1925,16 @@ MonoBehaviour:
   runVal: 1.8
   idleToWalkThreshold: 0.2
   walkToRunThreshold: 1.35
-  runSpeed: 0
-  walkSpeed: 0
-  rollSpeed: 0
-  runningJumpSpeed: 0
-  walkingJumpSpeed: 0
-  midAirSpeed: 0
+  idleSpeed: 0
+  walkSpeed: 2
+  runSpeed: 4.5
+  inAirSpeed: 3
+  runningJumpSpeed: 3
+  standingJumpSpeed: 0
+  rollSpeed: 5
+  hardLandingSpeed: 0
+  softLandingSpeed: 1
   turnSmoothTime: 0.25
-  speedAccelerationSmoothTime: 0.1
-  speedDecelerationSmoothTime: 0.3
   locomotionAccelerationSmoothTime: 0.3
   locomotionDecelerationSmoothTime: 0.5
   minDistFromGroundToBeMidAir: 2.5
@@ -1995,7 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncInterval: 0.1
   animator: {fileID: 8830746061294998338}
---- !u!114 &3117876222042362837
+--- !u!114 &3904217749696089712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
