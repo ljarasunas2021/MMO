@@ -53,9 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\CameraManager.cs" />
+     <Compile Include="Assets\Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\ChangeCurrentState.cs" />
      <Compile Include="Assets\Scripts\FootIK.cs" />
+     <Compile Include="Assets\Scripts\LocomotionMomentum.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <None Include="Assets\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
