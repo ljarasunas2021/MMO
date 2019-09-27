@@ -27,6 +27,5 @@ public class ChangeCurrentState : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (onExit) animator.SetInteger(Parameters.currentState, exitValue);
-        Debug.Log("FINISH");
     }
 }

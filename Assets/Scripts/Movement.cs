@@ -182,7 +182,7 @@ public class Movement : NetworkBehaviour
     private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot)
     {
         // if the input doesn't equal zero, player can rotate
-        if (inputDir != Vector2.zero)
+        if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
         {
             // find target rotation of player based on camera's transform and rotate towards that angle smoothly
             if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
@@ -203,58 +203,7 @@ public class Movement : NetworkBehaviour
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        float speed = 0;
-        //int state = FindState();
-        switch (currentState)
-        {
-            case (States.locomotion):
-                {
-                    if (locomotionBlendVal < walkVal)
-                    {
-                        speed = ((walkSpeed - idleSpeed) / (walkVal - idleVal)) * (locomotionBlendVal - idleVal) + idleSpeed;
-                    }
-                    else
-                    {
-                        speed = ((runSpeed - walkSpeed) / (runVal - walkVal)) * (locomotionBlendVal - walkVal) + walkSpeed;
-                    }
-                    break;
-                }
-            case (States.boxJump):
-                {
-                    speed = standingJumpSpeed;
-                    break;
-                }
-            case (States.runningJump):
-                {
-                    speed = runningJumpSpeed;
-                    break;
-
-                }
-            case (States.defInAir):
-                {
-                    speed = inAirSpeed;
-                    break;
-                }
-            case (States.fallToRoll):
-                {
-                    speed = rollSpeed;
-                    break;
-                }
-            case (States.hardLanding):
-                {
-                    speed = hardLandingSpeed;
-                    break;
-                }
-            case (States.softLanding):
-                {
-                    speed = softLandingSpeed;
-                    break;
-                }
-        }
-
-        characterController.Move(transform.forward * speed * Time.deltaTime);
-        Vector3 speedVec = transform.forward * speed * Time.deltaTime;
-        Debug.Log(speedVec.x + " " + speedVec.y + " " + speedVec.z);
+        characterController.Move(transform.forward * animator.GetFloat(Parameters.currentSpeed) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -328,8 +277,9 @@ public enum States
 public static class Parameters
 {
     public static string currentState = "CurrentState";
-    public static string nextState = "NextState";
+    public static string currentSpeed = "CurrentSpeed";
     public static string locomotionBlend = "LocomotionBlend";
+    public static string canRotate = "CanRotate";
 }
 #endregion
 
