@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{170A75A0-31C6-3514-CFA4-B7249A645E5C}</ProjectGuid>
+    <ProjectGuid>{8192261E-49C1-5D1B-2642-3A3BC4092658}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -55,43 +55,43 @@
   <ItemGroup>
      <Compile Include="Assets\Packages\VSCode\Plugins\Editor\VSCode.cs" />
  <Reference Include="Cinemachine">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProGrids">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProGrids.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AddOns.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -325,34 +325,34 @@
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -711,17 +711,17 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{51F0D0DC-0E0A-C5C8-1B22-3AC86C2B321D}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{CAEB3896-DDD4-15A7-D54A-C105D91C147F}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Weaver.csproj">
-      <Project>{9C018225-AA81-7A7C-3095-D2483CB34C9E}</Project>      <Name>Mirror.Weaver</Name>    </ProjectReference>
+      <Project>{8B085A34-8C33-313A-4A0B-03A6E2E5B3FC}</Project>      <Name>Mirror.Weaver</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
-      <Project>{CB0B04BC-709D-0EB5-5899-B6A20A2AF875}</Project>      <Name>Mirror.Components</Name>    </ProjectReference>
+      <Project>{79CD47D1-A64F-D513-20C4-689CE71507E1}</Project>      <Name>Mirror.Components</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">
-      <Project>{7A9FEA2C-C536-423E-B887-1AE0EAC0CC13}</Project>      <Name>Mirror.Examples</Name>    </ProjectReference>
+      <Project>{52BC157E-F3F5-CF85-0B1E-879284FAB606}</Project>      <Name>Mirror.Examples</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.csproj">
-      <Project>{CB4C7E6F-239C-6FA1-C7FC-0B73F1458503}</Project>      <Name>Mirror</Name>    </ProjectReference>
+      <Project>{63011931-6F1F-98B8-ADC4-CA55B90B58CD}</Project>      <Name>Mirror</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{A62645DD-1091-BC30-6356-3A338866C305}</Project>      <Name>Mirror.Editor</Name>    </ProjectReference>
+      <Project>{AEEA74EB-4CA3-39A6-0DFB-DA0C39E9DBA5}</Project>      <Name>Mirror.Editor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
