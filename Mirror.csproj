@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CB4C7E6F-239C-6FA1-C7FC-0B73F1458503}</ProjectGuid>
+    <ProjectGuid>{63011931-6F1F-98B8-ADC4-CA55B90B58CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Mirror</AssemblyName>
@@ -350,34 +350,34 @@
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>/Users/lukas/version-control/mmo/mmo character controller/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

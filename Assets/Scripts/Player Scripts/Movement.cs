@@ -79,10 +79,7 @@ public class Movement : NetworkBehaviour
     public CharacterController characterController;
     // player's animator
     private Animator animator;
-    private UIManager UIScript;
     #endregion
-
-    // private bool togglePauseMenu;
 
     #region Initialize
 
@@ -90,9 +87,6 @@ public class Movement : NetworkBehaviour
     private void Start()
     {
         characterController.enabled = true;
-        UIScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         animator = GetComponent<Animator>();
         camTransform = Camera.main.transform;
         currentState = 0;
@@ -105,21 +99,8 @@ public class Movement : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
-        
-        if (Input.GetKeyDown("p")) {
-            UIScript.SendMessage("TogglePauseMenu");
-            if (UIScript.togglePauseMenu) {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            } else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-        }
-        if (UIScript.canMove) {
-            InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
-            Move(input);
-        }
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
+        Move(input);
     }
     #endregion
 
@@ -138,12 +119,7 @@ public class Movement : NetworkBehaviour
 
         SetSpeed();
 
-        if (UIScript.togglePauseMenu) {
-            Debug.Log("work");
-            SetLocomotionBlendValue(Vector2.zero, false);
-        } else { 
-            SetLocomotionBlendValue(inputVector, input.leftShift);
-        }
+        SetLocomotionBlendValue(inputVector, input.leftShift);
 
         RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
