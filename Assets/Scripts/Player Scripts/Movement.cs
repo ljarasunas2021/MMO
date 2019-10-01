@@ -79,6 +79,7 @@ public class Movement : NetworkBehaviour
     public CharacterController characterController;
     // player's animator
     private Animator animator;
+    private UIManager UIScript;
     #endregion
 
     // private bool togglePauseMenu;
@@ -89,6 +90,7 @@ public class Movement : NetworkBehaviour
     private void Start()
     {
         characterController.enabled = true;
+        UIScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         animator = GetComponent<Animator>();
@@ -104,22 +106,20 @@ public class Movement : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         
-        if (Input.GetKeyDown(KeyCode.P)) {
-            UIManager UIScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
-            // UIScript.togglePauseMenu = !UIScript.togglePauseMenu;
+        if (Input.GetKeyDown("p")) {
             UIScript.SendMessage("TogglePauseMenu");
             if (UIScript.togglePauseMenu) {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-            }
-            else {
+            } else {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
         }
-
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
-        Move(input);
+        if (!UIScript.togglePauseMenu) {
+            InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
+            Move(input);
+        }
     }
     #endregion
 

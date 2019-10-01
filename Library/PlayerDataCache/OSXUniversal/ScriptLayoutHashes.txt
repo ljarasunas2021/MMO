@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/slevy/Desktop/menu test 0.1.0.app
+/Users/slevy/Desktop/menu test 0.1.1.app
 SceneListBegin?
 Assets/Scenes/Test.unity
 SceneListEnd?
@@ -245,4 +245,4 @@ b25369fa5722ffe0321440b32b34d138 Mirror.Components.dll:Mirror.NetworkTransformCh
 94a6212bc97ed891bf46c9c21a0658cc Cinemachine.dll:Cinemachine.CinemachineBasicMultiChannelPerlin
 2792936179724025482dc04d68a47ca7 Cinemachine.dll:Cinemachine.CinemachineClearShot
 4a9999ee03b58c0063d35e69a1819c26 Assembly-CSharp.dll:.Movement
-528c5a1bb821d9d3932d1ff23275cae0 Assembly-CSharp.dll:.UIManager
+e39fdccbb79bc0687b4a7ea9514c0aa3 Assembly-CSharp.dll:.UIManager
