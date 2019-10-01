@@ -81,12 +81,16 @@ public class Movement : NetworkBehaviour
     private Animator animator;
     #endregion
 
+    // private bool togglePauseMenu;
+
     #region Initialize
 
     ///<summary> Initialize variables </summary>
     private void Start()
     {
         characterController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         animator = GetComponent<Animator>();
         camTransform = Camera.main.transform;
         currentState = 0;
@@ -99,6 +103,21 @@ public class Movement : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
+        
+        if (Input.GetKeyDown(KeyCode.P)) {
+            UIManager UIScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
+            // UIScript.togglePauseMenu = !UIScript.togglePauseMenu;
+            UIScript.SendMessage("TogglePauseMenu");
+            if (UIScript.togglePauseMenu) {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
         InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
         Move(input);
     }
