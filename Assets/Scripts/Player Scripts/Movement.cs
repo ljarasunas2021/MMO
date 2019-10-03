@@ -38,6 +38,8 @@ public class Movement : NetworkBehaviour
     public float minDistFromGroundToBeMidAir;
     // gravity that interacts with the player
     public float gravity;
+    // hieght of player
+    public float height;
 
     [Header("Landing Velocity Y's")]
     // for ___ landing, the velocityY must be less than that value
@@ -76,9 +78,15 @@ public class Movement : NetworkBehaviour
     // transform of the camera
     private Transform camTransform;
     // player's character controller
-    public CharacterController characterController;
+    private CharacterController characterController;
     // player's animator
     private Animator animator;
+    // player's ragdoll controller
+    private RagdollController ragdollController;
+    // player health script
+    private PlayerHealth playerHealth;
+    // if the player is dead
+    private bool isDead = false;
     #endregion
 
     #region Initialize
@@ -86,8 +94,11 @@ public class Movement : NetworkBehaviour
     ///<summary> Initialize variables </summary>
     private void Start()
     {
+        characterController = GetComponent<CharacterController>();
         characterController.enabled = true;
         animator = GetComponent<Animator>();
+        ragdollController = GetComponent<RagdollController>();
+        playerHealth = GetComponent<PlayerHealth>();
         camTransform = Camera.main.transform;
         currentState = 0;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
@@ -110,27 +121,32 @@ public class Movement : NetworkBehaviour
     /// <param name = "input"> input struct </summary>
     private void Move(InputStruct input)
     {
-        // get current state
-        currentState = (States)animator.GetInteger(Parameters.currentState);
+        if (!isDead)
+        {
+            // get current state
+            currentState = (States)animator.GetInteger(Parameters.currentState);
 
-        // find the input and a normalized input
-        Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
-        Vector2 inputDir = inputVector.normalized;
+            // find the input and a normalized input
+            Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
+            Vector2 inputDir = inputVector.normalized;
 
-        SetSpeed();
+            SetSpeed();
 
-        SetLocomotionBlendValue(inputVector, input.leftShift);
+            SetLocomotionBlendValue(inputVector, input.leftShift);
 
-        RotatePlayer(inputDir, input.leftControl, input.camYRot);
+            RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
-        AddGravity(input.space);
+            CheckForJump(inputVector, input.space);
 
-        CheckForJump(inputVector, input.space);
+            SetValuesIfMidAir(input.space);
 
-        SetValuesIfMidAir();
-
-        // set the current state to equal the appropriate currentState
-        animator.SetInteger(Parameters.currentState, (int)currentState);
+            // set the current state to equal the appropriate currentState
+            animator.SetInteger(Parameters.currentState, (int)currentState);
+        }
+        else
+        {
+            SetValuesIfMidAir(input.space);
+        }
     }
 
     /// <summary> Set the correct locomotion blend value </summary>
@@ -138,7 +154,6 @@ public class Movement : NetworkBehaviour
     /// <param name = "leftShift"> was left shift pressed </param>
     private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
     {
-
         if (currentState != States.locomotion) return;
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
@@ -171,16 +186,6 @@ public class Movement : NetworkBehaviour
         }
     }
 
-    /// <summary> Add appropriate gravity </summary>
-    /// <param name = "space"> if space was pressed </param>
-    private void AddGravity(bool space)
-    {
-        if (characterController.isGrounded && !space) velocityY = 0;
-        else velocityY += Time.deltaTime * gravity;
-
-        characterController.Move(Vector3.up * velocityY);
-    }
-
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
@@ -203,28 +208,47 @@ public class Movement : NetworkBehaviour
     }
 
     /// <summary> Set the correct values if the player is in the air </summary>
-    private void SetValuesIfMidAir()
+    /// <param name = "space"> if the player presses space </param>
+    private void SetValuesIfMidAir(bool space)
     {
         // check if hitting anything and if so set current state appropriately
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, GetComponent<FootIK>().environment);
-        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
+
+        if (!isDead)
         {
-            if (currentState == States.defInAir)
+            if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
             {
-                if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
-                else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
-                else SetCurrentState(States.hardLanding);
+                if (currentState == States.defInAir)
+                {
+                    if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
+                    else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
+                    else SetCurrentState(States.hardLanding);
+                }
             }
+            else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
         }
-        else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
 
-        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (velocityY < -0.4 && hit.distance < height && hit.distance != 0)
+        {
+            playerHealth.SubtractHealth(100);
+            ragdollController.CmdBecomeRagdoll();
+        }
 
-        if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (((hit.distance < height && hit.distance != 0) || (characterController.isGrounded)) && !space) velocityY = 0;
+        else velocityY += Time.deltaTime * gravity;
 
-        if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        characterController.Move(Vector3.up * velocityY);
+
+        if (!isDead)
+        {
+            if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+
+            if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+
+            if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        }
     }
 
     ///<summary> Set the current and previous state to their corresponding values </summary>
@@ -232,6 +256,13 @@ public class Movement : NetworkBehaviour
     private void SetCurrentState(States state)
     {
         currentState = state;
+    }
+    #endregion
+
+    #region SetDead
+    public void SetDead(bool dead)
+    {
+        isDead = dead;
     }
     #endregion
 }
