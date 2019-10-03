@@ -14,8 +14,8 @@ public class CameraManager : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         CinemachineFreeLook freeLook = Camera.main.transform.parent.GetChild(1).GetComponent<CinemachineFreeLook>();
-        freeLook.Follow = transform;
-        freeLook.LookAt = transform;
+        freeLook.Follow = transform.GetChild(2);
+        freeLook.LookAt = transform.GetChild(2);
     }
     #endregion
 }
