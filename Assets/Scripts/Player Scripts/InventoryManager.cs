@@ -29,8 +29,6 @@ public class InventoryManager : MonoBehaviour
         inventoryImageHeight = (Screen.height - slotsInVertical * spaceBetweenSlots - spaceBetweenSlots) / slotsInVertical;
         inventoryImageWidth = inventoryImageHeight;
         inventoryImage.GetComponent<RectTransform>().sizeDelta = new Vector2(inventoryImageWidth, inventoryImageHeight);
-
-        ShowInventory();
     }
 
     public void ChangeEnabled(bool enabled)
