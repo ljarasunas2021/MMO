@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
+     <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />
