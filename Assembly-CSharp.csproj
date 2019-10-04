@@ -60,7 +60,9 @@
      <Compile Include="Assets\Scripts\Controller Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\FootIK.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Interact.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Movement.cs" />
+     <Compile Include="Assets\Scripts\Target.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />

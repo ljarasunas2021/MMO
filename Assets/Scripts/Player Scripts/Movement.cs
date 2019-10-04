@@ -138,7 +138,12 @@ public class Movement : NetworkBehaviour
 
         SetSpeed();
 
-        SetLocomotionBlendValue(inputVector, input.leftShift);
+        if (UIScript.togglePauseMenu) {
+            Debug.Log("work");
+            SetLocomotionBlendValue(Vector2.zero, false);
+        } else { 
+            SetLocomotionBlendValue(inputVector, input.leftShift);
+        }
 
         RotatePlayer(inputDir, input.leftControl, input.camYRot);
 
