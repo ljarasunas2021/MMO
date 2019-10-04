@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
@@ -66,6 +67,9 @@
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />
+     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
+     <None Include="Assets\QuickOutline\Readme.txt" />
+     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
  <Reference Include="Cinemachine">
  <HintPath>/Users/slevy/version-control/MMO-clientAuth/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>

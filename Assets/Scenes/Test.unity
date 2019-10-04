@@ -4173,6 +4173,24 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &281586390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281586384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &391738169
 GameObject:
   m_ObjectHideFlags: 0
@@ -33221,6 +33239,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: outlineColor.r
+      value: 0.9831571
+      objectReference: {fileID: 0}
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: outlineColor.b
+      value: 0.21226418
+      objectReference: {fileID: 0}
     - target: {fileID: 1302328371263018863, guid: 5cbf858311958485f85af5f66a0a6edc,
         type: 3}
       propertyPath: m_Name
