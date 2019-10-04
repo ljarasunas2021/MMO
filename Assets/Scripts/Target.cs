@@ -11,7 +11,11 @@ public class Target : MonoBehaviour {
         outline.enabled = false;
     }
     public void Interact() {
-        gameObject.transform.Rotate(0, 90, 0);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 lookVector = player.transform.position - transform.position;
+        //lookVector.y = transform.position.y;
+        Quaternion rot = Quaternion.LookRotation(lookVector, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
     }
 
     void OnMouseEnter() {
