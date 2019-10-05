@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 48589266}
   - component: {fileID: 48589265}
   - component: {fileID: 48589264}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 276575204}
   - component: {fileID: 276575203}
   - component: {fileID: 276575202}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3983,7 +3983,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47110
+  m_Name: pb_Mesh6148
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4150,7 +4150,7 @@ GameObject:
   - component: {fileID: 419662969}
   - component: {fileID: 419662968}
   - component: {fileID: 419662967}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4957,7 +4957,7 @@ GameObject:
   - component: {fileID: 555678449}
   - component: {fileID: 555678448}
   - component: {fileID: 555678447}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7422,7 +7422,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46946
+  m_Name: pb_Mesh5974
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7621,7 +7621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908674523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -7663,7 +7663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b7c69ea10614a6d901d814855125dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryImage: {fileID: 3988797236499635200, guid: 23ff9a95b796f4e97861d7c3c60b136c,
+  inventoryImage: {fileID: 3988797236499635200, guid: 56d08181347bc45f5949794c11ca50d2,
     type: 3}
   slotsInVertical: 7
   spaceBetweenSlots: 5
@@ -8013,7 +8013,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46974
+  m_Name: pb_Mesh6002
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8180,7 +8180,7 @@ GameObject:
   - component: {fileID: 1081549050}
   - component: {fileID: 1081549049}
   - component: {fileID: 1081549048}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Torus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20020,7 +20020,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46932
+  m_Name: pb_Mesh5960
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -20394,7 +20394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47034
+  m_Name: pb_Mesh6072
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -20554,7 +20554,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46914
+  m_Name: pb_Mesh5942
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -20717,7 +20717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544773196}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20856,7 +20856,7 @@ MonoBehaviour:
   transport: {fileID: 1558204352}
   networkAddress: 10.11.133.18
   maxConnections: 10
-  playerPrefab: {fileID: 7996416254279132292, guid: 82430b20cbbd540e5938fb86c9ac3ee1,
+  playerPrefab: {fileID: 7996416254279132292, guid: 286542b503bfe421d8c4d269b4043bf4,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -20960,7 +20960,7 @@ GameObject:
   - component: {fileID: 1724971790}
   - component: {fileID: 1724971789}
   - component: {fileID: 1724971788}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26541,7 +26541,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47164
+  m_Name: pb_Mesh6202
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -26701,7 +26701,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47134
+  m_Name: pb_Mesh6172
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -26934,7 +26934,7 @@ GameObject:
   - component: {fileID: 2024608104}
   - component: {fileID: 2024608103}
   - component: {fileID: 2024608102}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28072,7 +28072,7 @@ GameObject:
   - component: {fileID: 2133377048}
   - component: {fileID: 2133377047}
   - component: {fileID: 2133377046}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

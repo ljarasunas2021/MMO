@@ -105,21 +105,11 @@ public class Movement : NetworkBehaviour
     }
     #endregion
 
-    #region Update
-    ///<summary> Takes care of things that should be called every frame </summary>
-    void Update()
-    {
-        if (!isLocalPlayer) return;
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
-        Move(input);
-    }
-    #endregion
-
     #region Movement
 
     /// <summary> All movement of the player is run through this void </summary>
     /// <param name = "input"> input struct </summary>
-    private void Move(InputStruct input)
+    public void Move(InputStruct input)
     {
         if (!isDead)
         {
@@ -214,7 +204,7 @@ public class Movement : NetworkBehaviour
         // check if hitting anything and if so set current state appropriately
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out hit, maxRaycastDownDist, GetComponent<FootIK>().environment);
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.environment);
 
         if (!isDead)
         {
@@ -290,28 +280,5 @@ public static class Parameters
     public static string currentSpeed = "CurrentSpeed";
     public static string locomotionBlend = "LocomotionBlend";
     public static string canRotate = "CanRotate";
-}
-#endregion
-
-#region  InputStruct
-/// <summary> Struct where input is stored </summary>
-public struct InputStruct
-{
-    public float horAxis;
-    public float vertAxis;
-    public bool space;
-    public bool leftShift;
-    public bool leftControl;
-    public float camYRot;
-
-    public InputStruct(float horAxis, float vertAxis, bool space, bool leftShift, bool leftControl, float camYRot)
-    {
-        this.horAxis = horAxis;
-        this.vertAxis = vertAxis;
-        this.space = space;
-        this.leftShift = leftShift;
-        this.leftControl = leftControl;
-        this.camYRot = camYRot;
-    }
 }
 #endregion
