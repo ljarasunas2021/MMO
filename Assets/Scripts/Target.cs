@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class Target : MonoBehaviour {
     
@@ -11,11 +12,12 @@ public class Target : MonoBehaviour {
         outline.enabled = false;
     }
     public void Interact() {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Vector3 lookVector = player.transform.position - transform.position;
-        //lookVector.y = transform.position.y;
-        Quaternion rot = Quaternion.LookRotation(lookVector, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // Vector3 lookVector = player.transform.position - transform.position;
+        // //lookVector.y = transform.position.y;
+        // Quaternion rot = Quaternion.LookRotation(lookVector, Vector3.up);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+        transform.LookAt(NetworkClient.connection.identity.transform);
     }
 
     void OnMouseEnter() {

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Components", "Mirror.Components.csproj", "{A6594454-EAA6-7CC9-2FEB-0DAFD360CC34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Authenticators", "Mirror.Authenticators.csproj", "{E8F2C31B-A016-70C8-D28C-971C787171B8}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Weaver", "Mirror.Weaver.csproj", "{A4B0955D-2604-59D0-3FD1-7BDAEB59FFD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Editor", "Mirror.Editor.csproj", "{8ED85073-3F38-10A9-B814-0DFB47D0FC97}"
@@ -39,6 +41,10 @@ Global
 		{A6594454-EAA6-7CC9-2FEB-0DAFD360CC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6594454-EAA6-7CC9-2FEB-0DAFD360CC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6594454-EAA6-7CC9-2FEB-0DAFD360CC34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F2C31B-A016-70C8-D28C-971C787171B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F2C31B-A016-70C8-D28C-971C787171B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F2C31B-A016-70C8-D28C-971C787171B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F2C31B-A016-70C8-D28C-971C787171B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4B0955D-2604-59D0-3FD1-7BDAEB59FFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4B0955D-2604-59D0-3FD1-7BDAEB59FFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B0955D-2604-59D0-3FD1-7BDAEB59FFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
