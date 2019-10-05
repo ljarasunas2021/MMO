@@ -6,7 +6,6 @@
 public class FootIK : MonoBehaviour
 {
     public float feetToIKPositionSpeed, pelvisVerticalSpeed, raycastDownDistance, heightToStartRaycast, ankleHeight, pelvisHeight;
-    public LayerMask environment;
     private Animator anim;
     private Vector3 leftFootPosition, rightFootPosition, leftFootIKPosition, rightFootIKPosition;
     private Quaternion rightFootIKRotation, leftFootIKRotation;
@@ -86,7 +85,7 @@ public class FootIK : MonoBehaviour
     {
         RaycastHit feetOutHit;
 
-        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, environment))
+        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, LayerMaskController.environment))
         {
             feetIKPositions = fromSkyPosition;
             feetIKPositions.y = feetOutHit.point.y + ankleHeight;
