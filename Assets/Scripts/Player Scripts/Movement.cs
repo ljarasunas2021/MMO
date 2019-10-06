@@ -40,6 +40,8 @@ public class Movement : NetworkBehaviour
     public float gravity;
     // hieght of player
     public float height;
+    // sphere overlap radius
+    public float sphereOverlapRadius;
 
     [Header("Landing Velocity Y's")]
     // for ___ landing, the velocityY must be less than that value
@@ -217,7 +219,13 @@ public class Movement : NetworkBehaviour
                     else SetCurrentState(States.hardLanding);
                 }
             }
-            else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
+            else if (currentState != States.defInAir)
+            {
+                if (Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0)
+                {
+                    SetCurrentState(States.defInAir);
+                }
+            }
         }
 
         if (velocityY < -0.4 && hit.distance < height && hit.distance != 0)

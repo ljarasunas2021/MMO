@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GrabItem : MonoBehaviour
+public class PlayerEquip : MonoBehaviour
 {
     public int maxGrabDistance;
 
@@ -19,7 +19,6 @@ public class GrabItem : MonoBehaviour
 
     public void Grab()
     {
-        Debug.Log("HIIII");
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -34,4 +33,28 @@ public class GrabItem : MonoBehaviour
             inputHandler.ChangeItemHolding(new ItemHolding(weapon, HoldingItemType.ranged));
         }
     }
+}
+
+public class ItemHolding
+{
+    public GameObject item;
+    public HoldingItemType type;
+    public Weapon weaponScript;
+
+    public ItemHolding(GameObject item, HoldingItemType type)
+    {
+        this.item = item;
+        this.type = type;
+
+        if (type == HoldingItemType.ranged) weaponScript = item.GetComponent<Weapon>();
+        else weaponScript = null;
+    }
+}
+
+public enum HoldingItemType
+{
+    melee,
+    ranged,
+    collectable,
+    none
 }

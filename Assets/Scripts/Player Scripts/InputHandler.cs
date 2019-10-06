@@ -8,14 +8,14 @@ public class InputHandler : NetworkBehaviour
     private ItemHolding itemHolding;
 
     private Movement movement;
-    private GrabItem grabItem;
+    private PlayerEquip playerEquip;
     private InventoryManager inventoryManager;
     private Transform camTransform;
 
     void Start()
     {
         movement = GetComponent<Movement>();
-        grabItem = GetComponent<GrabItem>();
+        playerEquip = GetComponent<PlayerEquip>();
         inventoryManager = GetComponent<InventoryManager>();
         camTransform = Camera.main.transform;
         itemHolding = new ItemHolding(null, HoldingItemType.none);
@@ -36,7 +36,7 @@ public class InputHandler : NetworkBehaviour
 
     private void TestGrab(InputStruct input)
     {
-        if (input.pickupDown) grabItem.Grab();
+        if (input.pickupDown) playerEquip.Grab();
     }
 
     private void TestUI(InputStruct input)
@@ -92,27 +92,3 @@ public struct InputStruct
     }
 }
 #endregion
-
-public class ItemHolding
-{
-    public GameObject item;
-    public HoldingItemType type;
-    public Weapon weaponScript;
-
-    public ItemHolding(GameObject item, HoldingItemType type)
-    {
-        this.item = item;
-        this.type = type;
-
-        if (type == HoldingItemType.ranged) weaponScript = item.GetComponent<Weapon>();
-        else weaponScript = null;
-    }
-}
-
-public enum HoldingItemType
-{
-    melee,
-    ranged,
-    collectable,
-    none
-}
