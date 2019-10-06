@@ -5,28 +5,29 @@ public class GrabItem : MonoBehaviour
     public int maxGrabDistance;
 
     private BodyParts bodyParts;
+    private InventoryManager inventoryManager;
     private GameObject handR;
 
     private void Start()
     {
         bodyParts = GetComponent<BodyParts>();
+        inventoryManager = GetComponent<InventoryManager>();
         handR = bodyParts.handR;
     }
 
-    public void Grab(InputStruct input)
+    public void Grab()
     {
-        if (input.eDown)
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-            if (Physics.Raycast(ray, out hit, maxGrabDistance, LayerMaskController.weapon) && hit.collider.gameObject.GetComponent<Weapon>() != null)
-            {
-                GameObject weapon = hit.collider.gameObject;
-                weapon.GetComponent<Rigidbody>().isKinematic = true;
-                weapon.transform.SetParent(handR.transform);
-                weapon.transform.localPosition = Vector3.zero;
-            }
+        if (Physics.Raycast(ray, out hit, maxGrabDistance, LayerMaskController.weapon) && hit.collider.gameObject.GetComponent<Weapon>() != null)
+        {
+            GameObject weapon = hit.collider.gameObject;
+            weapon.GetComponent<Rigidbody>().isKinematic = true;
+            weapon.transform.SetParent(handR.transform);
+            weapon.transform.localPosition = Vector3.zero;
+            weapon.transform.rotation = Quaternion.identity;
+            inventoryManager.AddInventoryItem(weapon, null);
         }
     }
 }

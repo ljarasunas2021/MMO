@@ -7,6 +7,7 @@ public class InputHandler : NetworkBehaviour
 {
     private Movement movement;
     private GrabItem grabItem;
+    private InventoryManager inventoryManager;
 
     // transform of the camera
     private Transform camTransform;
@@ -15,6 +16,7 @@ public class InputHandler : NetworkBehaviour
     {
         movement = GetComponent<Movement>();
         grabItem = GetComponent<GrabItem>();
+        inventoryManager = GetComponent<InventoryManager>();
         camTransform = Camera.main.transform;
     }
 
@@ -23,11 +25,21 @@ public class InputHandler : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), Input.GetKeyDown(KeyCode.E), camTransform.eulerAngles.y);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Switch Inventory"), camTransform.eulerAngles.y);
 
         movement.Move(input);
-        grabItem.Grab(input);
+        TestGrab(input);
+        TestUI(input);
+    }
 
+    private void TestGrab(InputStruct input)
+    {
+        if (input.pickup) grabItem.Grab();
+    }
+
+    private void TestUI(InputStruct input)
+    {
+        if (input.switchInventory) inventoryManager.ChangeEnabled();
     }
 }
 
@@ -37,20 +49,22 @@ public struct InputStruct
 {
     public float horAxis;
     public float vertAxis;
-    public bool space;
-    public bool leftShift;
-    public bool leftControl;
-    public bool eDown;
+    public bool jump;
+    public bool sprint;
+    public bool freeRotateCamera;
+    public bool pickup;
+    public bool switchInventory;
     public float camYRot;
 
-    public InputStruct(float horAxis, float vertAxis, bool space, bool leftShift, bool leftControl, bool eDown, float camYRot)
+    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUp, bool switchInventory, float camYRot)
     {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
-        this.space = space;
-        this.leftShift = leftShift;
-        this.leftControl = leftControl;
-        this.eDown = eDown;
+        this.jump = jump;
+        this.sprint = sprint;
+        this.freeRotateCamera = freeRotateCamera;
+        this.pickup = pickUp;
+        this.switchInventory = switchInventory;
         this.camYRot = camYRot;
     }
 }
