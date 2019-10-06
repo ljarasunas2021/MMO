@@ -2,5 +2,5 @@
 
 public static class LayerMaskController
 {
-    public static LayerMask environment = 9, player = 8, weapon = 31;
+    public static LayerMask environment = 10, player = 9, item = 11;
 }
