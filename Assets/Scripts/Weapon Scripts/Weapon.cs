@@ -46,6 +46,7 @@ public class SmartBulletHoleGroup
         physicMaterial = null;
         bulletHole = null;
     }
+
     public SmartBulletHoleGroup(string t, Material m, PhysicMaterial pm, BulletHolePool bh)
     {
         tag = t;
@@ -415,6 +416,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeFire);
         Fire();
     }
+
     IEnumerator DelayLaunch()
     {
         // Reset the fire timer to 0 (for ROF)

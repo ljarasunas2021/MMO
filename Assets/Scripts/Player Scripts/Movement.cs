@@ -122,20 +122,20 @@ public class Movement : NetworkBehaviour
 
             SetSpeed();
 
-            SetLocomotionBlendValue(inputVector, input.leftShift);
+            SetLocomotionBlendValue(inputVector, input.sprint);
 
-            RotatePlayer(inputDir, input.leftControl, input.camYRot);
+            RotatePlayer(inputDir, input.freeRotateCamera, input.camYRot);
 
-            CheckForJump(inputVector, input.space);
+            CheckForJump(inputVector, input.jump);
 
-            SetValuesIfMidAir(input.space);
+            SetValuesIfMidAir(input.jump);
 
             // set the current state to equal the appropriate currentState
             animator.SetInteger(Parameters.currentState, (int)currentState);
         }
         else
         {
-            SetValuesIfMidAir(input.space);
+            SetValuesIfMidAir(input.jump);
         }
     }
 

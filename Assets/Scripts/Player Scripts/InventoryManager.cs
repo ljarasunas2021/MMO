@@ -17,24 +17,30 @@ public class InventoryManager : MonoBehaviour
 
     private Image imageScript;
 
+    private GameObject canvas, inventory;
+
     private RectTransform rT;
 
     private List<InventoryItemAndIcon> inventoryItems = new List<InventoryItemAndIcon>();
 
     private void Start()
     {
-        imageScript = GetComponent<Image>();
-        rT = GetComponent<RectTransform>();
+        canvas = GameObject.Find("Canvas").gameObject;
+        inventory = canvas.GetComponent<CanvasManager>().inventory;
+
+        imageScript = inventory.GetComponent<Image>();
+        rT = inventory.GetComponent<RectTransform>();
 
         inventoryImageHeight = (Screen.height - slotsInVertical * spaceBetweenSlots - spaceBetweenSlots) / slotsInVertical;
         inventoryImageWidth = inventoryImageHeight;
         inventoryImage.GetComponent<RectTransform>().sizeDelta = new Vector2(inventoryImageWidth, inventoryImageHeight);
     }
 
-    public void ChangeEnabled(bool enabled)
+    public void ChangeEnabled()
     {
-        this.inventoryEnabled = enabled;
-        if (enabled) ShowInventory();
+        inventoryEnabled = !inventoryEnabled;
+
+        if (inventoryEnabled) ShowInventory();
         else RemoveInventory();
     }
 
@@ -44,7 +50,7 @@ public class InventoryManager : MonoBehaviour
 
         float rows = Mathf.Ceil((float)inventoryItems.Count / (float)slotsInVertical);
         float futureWidth = spaceBetweenSlots * rows + rows * inventoryImageWidth + spaceBetweenSlots;
-        transform.position = new Vector3(Screen.width - futureWidth / 2, Screen.height / 2, 0);
+        inventory.transform.position = new Vector3(Screen.width - futureWidth / 2, Screen.height / 2, 0);
 
         float currentWidth = Screen.width - (inventoryImageWidth + 2 * spaceBetweenSlots);
         float currentHeight = Screen.height - spaceBetweenSlots;
@@ -54,7 +60,7 @@ public class InventoryManager : MonoBehaviour
             float xPos = currentWidth + spaceBetweenSlots + inventoryImageWidth / 2;
             float yPos = currentHeight - inventoryImageHeight / 2;
             Vector3 localPosition = new Vector3(xPos, yPos, 0);
-            Image image = Instantiate(inventoryImage, localPosition, Quaternion.Euler(Vector3.zero), transform);
+            Image image = Instantiate(inventoryImage, localPosition, Quaternion.Euler(Vector3.zero), inventory.transform);
             image.sprite = inventoryItems[i].icon;
             if ((i + 1) % slotsInVertical != 0)
             {
@@ -74,9 +80,10 @@ public class InventoryManager : MonoBehaviour
     {
         imageScript.enabled = false;
 
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < inventory.transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i));
+            Debug.Log("HI");
+            Destroy(inventory.transform.GetChild(i));
         }
     }
 
