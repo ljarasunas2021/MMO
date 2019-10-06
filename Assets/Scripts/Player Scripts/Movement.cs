@@ -204,7 +204,7 @@ public class Movement : NetworkBehaviour
         // check if hitting anything and if so set current state appropriately
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.environment);
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.player);
 
         if (!isDead)
         {

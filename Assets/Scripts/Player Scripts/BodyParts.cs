@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BodyParts : MonoBehaviour
 {
-    public GameObject handR;
+    public GameObject handR, head;
 }

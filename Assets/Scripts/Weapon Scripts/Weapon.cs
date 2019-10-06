@@ -262,9 +262,6 @@ public class Weapon : MonoBehaviour
         // Update the fireTimer
         fireTimer += Time.deltaTime;
 
-        // CheckForUserInput() handles the firing based on user input
-        CheckForUserInput();
-
         // Reload if the weapon is out of ammo
         if (reloadAutomatically && currentAmmo <= 0)
             Reload();
@@ -278,15 +275,14 @@ public class Weapon : MonoBehaviour
     }
 
     // Checks for user input to use the weapons - only if this weapon is player-controlled
-    void CheckForUserInput()
+    public void CheckForUserInput(InputStruct input)
     {
-
         // Fire if this is a raycast type weapon and the user presses the fire button
         if (type == WeaponType.Raycast)
         {
             if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
             {
-                if (Input.GetButton("Fire1"))
+                if (input.fire1)
                 {
                     if (!warmup) // Normal firing when the user holds down the fire button
                     {
@@ -297,9 +293,9 @@ public class Weapon : MonoBehaviour
                         heat += Time.deltaTime;
                     }
                 }
-                if (warmup && Input.GetButtonUp("Fire1"))
+                if (warmup && input.fire1)
                 {
-                    if (allowCancel && Input.GetButton("Cancel"))
+                    if (allowCancel && input.cancel)
                     {
                         heat = 0.0f;
                     }
@@ -315,7 +311,7 @@ public class Weapon : MonoBehaviour
         {
             if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
             {
-                if (Input.GetButton("Fire1"))
+                if (input.fire1)
                 {
                     if (!warmup) // Normal firing when the user holds down the fire button
                     {
@@ -326,9 +322,9 @@ public class Weapon : MonoBehaviour
                         heat += Time.deltaTime;
                     }
                 }
-                if (warmup && Input.GetButtonUp("Fire1"))
+                if (warmup && input.fire1Up)
                 {
-                    if (allowCancel && Input.GetButton("Cancel"))
+                    if (allowCancel && input.cancel)
                     {
                         heat = 0.0f;
                     }
@@ -352,11 +348,11 @@ public class Weapon : MonoBehaviour
         }
 
         // Reload if the "Reload" button is pressed
-        if (Input.GetButtonDown("Reload"))
+        if (input.reloadDown)
             Reload();
 
         // If the weapon is semi-auto and the user lets up on the button, set canFire to true
-        if (Input.GetButtonUp("Fire1"))
+        if (input.fire1Up)
             canFire = true;
     }
 
