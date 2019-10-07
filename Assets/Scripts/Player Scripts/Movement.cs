@@ -116,7 +116,7 @@ public class Movement : NetworkBehaviour
                 Cursor.visible = false;
             }
         }
-        if (!UIScript.togglePauseMenu) {
+        if (UIScript.canMove) {
             InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetKey(KeyCode.Space), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl), camTransform.eulerAngles.y);
             Move(input);
         }
