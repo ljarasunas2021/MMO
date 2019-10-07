@@ -295,5 +295,6 @@ public static class Parameters
     public static string currentSpeed = "CurrentSpeed";
     public static string locomotionBlend = "LocomotionBlend";
     public static string canRotate = "CanRotate";
+    public static string upperBodyState = "UpperBodyState";
 }
 #endregion

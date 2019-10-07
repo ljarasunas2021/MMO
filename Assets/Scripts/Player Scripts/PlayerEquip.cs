@@ -8,9 +8,11 @@ public class PlayerEquip : MonoBehaviour
     private InventoryManager inventoryManager;
     private InputHandler inputHandler;
     private GameObject handR;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         bodyParts = GetComponent<BodyParts>();
         inventoryManager = GetComponent<InventoryManager>();
         inputHandler = GetComponent<InputHandler>();
@@ -31,6 +33,7 @@ public class PlayerEquip : MonoBehaviour
             weapon.transform.rotation = Quaternion.identity;
             inventoryManager.AddInventoryItem(weapon, null);
             inputHandler.ChangeItemHolding(new ItemHolding(weapon, HoldingItemType.ranged));
+            animator.SetInteger(Parameters.upperBodyState, 1);
         }
     }
 }
