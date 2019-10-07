@@ -30,10 +30,11 @@ public class PlayerEquip : MonoBehaviour
             weapon.GetComponent<Rigidbody>().isKinematic = true;
             weapon.transform.SetParent(handR.transform);
             weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.rotation = Quaternion.identity;
+            weapon.transform.rotation = Quaternion.Euler(Vector3.zero);
             inventoryManager.AddInventoryItem(weapon, null);
             inputHandler.ChangeItemHolding(new ItemHolding(weapon, HoldingItemType.ranged));
             animator.SetInteger(Parameters.upperBodyState, 1);
+            //weapon.transform.LookAt(Camera.main.WorldToScreenPoint(new Vector3(Screen.width / 2, Screen.height / 2)));
         }
     }
 }
