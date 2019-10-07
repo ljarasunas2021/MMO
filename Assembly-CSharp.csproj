@@ -87,6 +87,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerCameraManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerEquip.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerWallTraversal.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />

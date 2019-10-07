@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1250489976620337803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 513007230240111206}
+  m_Layer: 9
+  m_Name: front edge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &513007230240111206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250489976620337803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.37, z: 0.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7996416254278645924}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7996416254279132292
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +45,7 @@ GameObject:
   - component: {fileID: 7996416254279033779}
   - component: {fileID: 7945273699990122659}
   - component: {fileID: 1474338397937292526}
+  - component: {fileID: 5345345564540083739}
   - component: {fileID: 601910573191370545}
   - component: {fileID: 3028937304452106830}
   - component: {fileID: 1962536972688663456}
@@ -44,6 +75,7 @@ Transform:
   - {fileID: 7996416254278646062}
   - {fileID: 7996416254278646060}
   - {fileID: 7996416254278646054}
+  - {fileID: 513007230240111206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,7 +151,7 @@ MonoBehaviour:
   turnSmoothTime: 0.25
   locomotionAccelerationSmoothTime: 0.3
   locomotionDecelerationSmoothTime: 0.5
-  minDistFromGroundToBeMidAir: 2.5
+  minDistFromGroundToBeMidAir: 4
   gravity: -0.275
   height: 2
   sphereOverlapRadius: 0.35
@@ -167,6 +199,18 @@ MonoBehaviour:
   - {fileID: 8879658743249391606}
   - {fileID: 4394642728460618317}
   - {fileID: 448903954616595184}
+--- !u!114 &5345345564540083739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996416254279132292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2299d6225ef4f4aad99e4a9c44283290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &601910573191370545
 MonoBehaviour:
   m_ObjectHideFlags: 0
