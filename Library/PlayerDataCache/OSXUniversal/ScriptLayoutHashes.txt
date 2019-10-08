@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/slevy/Desktop/npc test 2.0.app
+/Users/slevy/Desktop/npc test 2.1.app
 SceneListBegin?
 Assets/Scenes/Test.unity
 SceneListEnd?
@@ -155,6 +155,7 @@ e9389e944eb81a3a9df56fcdb09ce6a9 Unity.ProBuilder.dll:UnityEngine.ProBuilder.Tri
 e9389e944eb81a3a9df56fcdb09ce6a9 Unity.ProBuilder.dll:UnityEngine.ProBuilder.ColliderBehaviour
 bd543bad7f9f6262f10595aadb130d22 Cinemachine.dll:Cinemachine.CinemachineComposer
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
+c3f50d4af56263cd729aceaf1500aa8c Mirror.Authenticators.dll:Mirror.Authenticators.BasicAuthenticator
 15882a52798c275361cd0a3ada984ec5 Cinemachine.dll:Cinemachine.CinemachineDollyCart
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 204ea02909ea3f738dafe3ff633d2a93 Cinemachine.dll:Cinemachine.CinemachineTrackedDolly
@@ -191,6 +192,7 @@ e6d75f1a9bc0c6f7085df0baa077e688 Cinemachine.dll:Cinemachine.CinemachineGroupCom
 4a639215e29265dd99e4fed19e3fa9f4 Cinemachine.dll:Cinemachine.CinemachineBlendListCamera
 603c8b8304cc29c03b2725254a87efa8 Mirror.Examples.dll:Mirror.Examples.Additive.AdditiveNetworkManager
 b639d97cb780d0d99a2bfb3ad1935732 Cinemachine.dll:Cinemachine.CinemachineMixingCamera
+2980c0df7b3778bf189b83de420df5b7 Mirror.Examples.dll:Mirror.Examples.Basic.Player
 35a9693c388776aaf487636491a20f11 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 c4117cf32d2e7797e9e05272a419cd6e Cinemachine.dll:Cinemachine.Timeline.CinemachineShot
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
@@ -226,7 +228,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 14079b0afbb5e6763947dc924e87b1bd Mirror.Examples.dll:.UIServerStatusSlot
 71bb6a6b6c8f052f948db64c7dd3ca4f Cinemachine.dll:Cinemachine.CinemachineHardLookAt
 47017c71c23739c1424029577f495445 Mirror.dll:Mirror.NetworkIdentity
-34f66302e3ed79e42ce5caa8d47fde02 Assembly-CSharp.dll:.Target
+8e90e16b89fcbb8497c06e5e9b5e36f8 Assembly-CSharp.dll:.Target
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 edec34fa37ceb4e15d29a1e2697f1b00 Mirror.Components.dll:Mirror.NetworkTransform
 e87f50864f8a979f1228e8c69bd62658 Mirror.Examples.dll:Mirror.Examples.Pong.Player
@@ -244,5 +246,3 @@ e4fb2671f4e7782c0481d74d32ad6df2 Mirror.Examples.dll:Mirror.Examples.Tanks.Proje
 94a6212bc97ed891bf46c9c21a0658cc Cinemachine.dll:Cinemachine.CinemachineBasicMultiChannelPerlin
 2792936179724025482dc04d68a47ca7 Cinemachine.dll:Cinemachine.CinemachineClearShot
 1de8747bbebf51727e8d89bc85167f70 Assembly-CSharp.dll:.Movement
-c3f50d4af56263cd729aceaf1500aa8c Mirror.Authenticators.dll:Mirror.Authenticators.BasicAuthenticator
-2980c0df7b3778bf189b83de420df5b7 Mirror.Examples.dll:Mirror.Examples.Basic.Player

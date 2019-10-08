@@ -686,6 +686,8 @@
   <ItemGroup>
     <ProjectReference Include="Mirror.Weaver.csproj">
       <Project>{A4B0955D-2604-59D0-3FD1-7BDAEB59FFD1}</Project>      <Name>Mirror.Weaver</Name>    </ProjectReference>
+    <ProjectReference Include="Mirror.Authenticators.csproj">
+      <Project>{E8F2C31B-A016-70C8-D28C-971C787171B8}</Project>      <Name>Mirror.Authenticators</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
       <Project>{A6594454-EAA6-7CC9-2FEB-0DAFD360CC34}</Project>      <Name>Mirror.Components</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">
@@ -694,8 +696,6 @@
       <Project>{B16C2CCC-0F3D-4EEB-4078-B8A54275BB28}</Project>      <Name>Mirror</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Editor.csproj">
       <Project>{8ED85073-3F38-10A9-B814-0DFB47D0FC97}</Project>      <Name>Mirror.Editor</Name>    </ProjectReference>
-    <ProjectReference Include="Mirror.Authenticators.csproj">
-      <Project>{E8F2C31B-A016-70C8-D28C-971C787171B8}</Project>      <Name>Mirror.Authenticators</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
