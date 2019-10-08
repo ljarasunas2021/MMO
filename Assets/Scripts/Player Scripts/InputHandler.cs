@@ -26,7 +26,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), camTransform.eulerAngles.y);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.mousePosition, camTransform.eulerAngles.y);
 
         movement.Move(input);
         TestGrab(input);
@@ -74,8 +74,9 @@ public struct InputStruct
 {
     public float horAxis, vertAxis, camYRot;
     public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel;
+    public Vector2 mousePos;
 
-    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, float camYRot)
+    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, Vector2 mousePos, float camYRot)
     {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
@@ -89,6 +90,7 @@ public struct InputStruct
         this.reloadDown = reloadDown;
         this.cancel = cancel;
         this.camYRot = camYRot;
+        this.mousePos = mousePos;
     }
 }
 #endregion
