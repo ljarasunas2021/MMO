@@ -62,6 +62,9 @@ public class Weapon : MonoBehaviour
     // Weapon Type
     public WeaponType type = WeaponType.Projectile; // Which weapon system should be used
 
+    public Vector3 startPos;
+    public Vector3 startRot;
+
     // External Tools
     public bool shooterAIEnabled = false; // Enable features compatible with Shooter AI by Gateway Games
     public bool bloodyMessEnabled = false; // Enable features compatible with Bloody Mess by Heavy Diesel Softworks
