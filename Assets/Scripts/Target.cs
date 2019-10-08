@@ -24,9 +24,11 @@ public class Target : MonoBehaviour {
             switch (interactKey){
                 case "npc":
                     if (UIScript.canMove) {
-                    transform.LookAt(NetworkClient.connection.identity.transform);
+                        // Vector3 playerPos = Vector3.Slerp(gameObject.transform.position, NetworkClient.connection.identity.transform.position, .05f);
+                        // transform.LookAt(playerPos);
+                        StartCoroutine(RotateNPC());
 
-                    UIScript.ToggleDialogueBox(dialogue, inputSounds);
+                        UIScript.ToggleDialogueBox(dialogue, inputSounds);
                     }
                     break;
                 case "device":
@@ -54,6 +56,18 @@ public class Target : MonoBehaviour {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private IEnumerator RotateNPC() {
+        float i = 0;
+        while (i<=20) {
+            // Vector3 playerPos = Vector3.Slerp(gameObject.transform.position, NetworkClient.connection.identity.transform.position, .05f);
+            // gameObject.transform.LookAt(playerPos);
+            Quaternion playerPos = Quaternion.LookRotation(NetworkClient.connection.identity.transform.position - gameObject.transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, playerPos, i);
+            i += .05f;
+            yield return 0;
         }
     }
 }

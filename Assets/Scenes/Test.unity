@@ -1217,6 +1217,11 @@ PrefabInstance:
       propertyPath: inputSounds.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 47daaa6ca0d80431b930de8b1606dc72, type: 3}
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: interactKey
+      value: npc
+      objectReference: {fileID: 0}
     - target: {fileID: 1302328371263048527, guid: 5cbf858311958485f85af5f66a0a6edc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24038,6 +24043,11 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[3]
       value: adios!
       objectReference: {fileID: 0}
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: interactKey
+      value: npc
+      objectReference: {fileID: 0}
     - target: {fileID: 1302328371263048527, guid: 5cbf858311958485f85af5f66a0a6edc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34122,6 +34132,11 @@ PrefabInstance:
       propertyPath: inputSounds.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 360e8a75df15949b9b7e35db5b6ce91b, type: 3}
+    - target: {fileID: 114973164533808770, guid: 5cbf858311958485f85af5f66a0a6edc,
+        type: 3}
+      propertyPath: interactKey
+      value: npc
+      objectReference: {fileID: 0}
     - target: {fileID: 1302328371263048527, guid: 5cbf858311958485f85af5f66a0a6edc,
         type: 3}
       propertyPath: m_LocalPosition.x
