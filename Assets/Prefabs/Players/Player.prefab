@@ -113,8 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncInterval: 0.1
   idleVal: 0
-  walkVal: 0.75
-  runVal: 1.8
+  walkVal: 0.35
+  runVal: 0.9
   idleToWalkThreshold: 0.2
   walkToRunThreshold: 1.35
   turnSmoothTime: 0.25
