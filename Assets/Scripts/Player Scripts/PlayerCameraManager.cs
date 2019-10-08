@@ -10,6 +10,7 @@ public class PlayerCameraManager : NetworkBehaviour
 
     private CameraController cameraController;
     private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
+    private CinemachineVirtualCamera lockedVirtual;
 
     #region SetCameraAtStart
     ///<summary> Set the camera to follow you </summary>
@@ -30,9 +31,9 @@ public class PlayerCameraManager : NetworkBehaviour
         closeUpFreeLook.Follow = head.transform;
         closeUpFreeLook.LookAt = head.transform;
 
-        lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
-        lockedFreeLook.Follow = head.transform;
-        lockedFreeLook.LookAt = head.transform;
+        lockedVirtual = cameraController.lockedCam.GetComponent<CinemachineVirtualCamera>();
+        lockedVirtual.Follow = head.transform;
+        lockedVirtual.LookAt = head.transform;
 
         currentCam = CameraModes.cinematic;
     }
@@ -46,19 +47,22 @@ public class PlayerCameraManager : NetworkBehaviour
             {
                 cinematicFreeLook.Priority = 1;
                 closeUpFreeLook.Priority = 0;
-                lockedFreeLook.Priority = 0;
+                //lockedFreeLook.Priority = 0;
+                lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 1;
-                lockedFreeLook.Priority = 0;
+                //lockedFreeLook.Priority = 0;
+                lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
-                lockedFreeLook.Priority = 1;
+                //lockedFreeLook.Priority = 0;
+                lockedVirtual.Priority = 1;
             }
 
             currentCam = mode;

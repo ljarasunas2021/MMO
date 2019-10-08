@@ -32,6 +32,8 @@ public class Movement : NetworkBehaviour
     public float locomotionAccelerationSmoothTime;
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
     public float locomotionDecelerationSmoothTime;
+    // speed that the locked cam moves at
+    public float lockedCamRotSpeed;
 
     [Header("Mid Air Values")]
     // minimum distance from the ground the player needs to be in order to play the mid air animation
@@ -89,6 +91,8 @@ public class Movement : NetworkBehaviour
     private PlayerHealth playerHealth;
     // if the player is dead
     private bool isDead = false;
+    // player camera manager script
+    private PlayerCameraManager playerCameraManager;
     #endregion
 
     #region Initialize
@@ -101,6 +105,7 @@ public class Movement : NetworkBehaviour
         animator = GetComponent<Animator>();
         ragdollController = GetComponent<RagdollController>();
         playerHealth = GetComponent<PlayerHealth>();
+        playerCameraManager = GetComponent<PlayerCameraManager>();
         camTransform = Camera.main.transform;
         currentState = 0;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
@@ -126,7 +131,7 @@ public class Movement : NetworkBehaviour
 
             SetLocomotionBlendValue(inputVector, input.sprint);
 
-            RotatePlayer(inputDir, input.freeRotateCamera, input.camYRot);
+            RotatePlayer(inputDir, input.freeRotateCamera, input.camYRot, input.mousePos);
 
             CheckForJump(inputVector, input.jump);
 
@@ -167,16 +172,28 @@ public class Movement : NetworkBehaviour
     ///<param name = "inputDir"> normalized input in the update function </param>
     /// <param name = "leftControl"> was left control pressed </param>
     /// <param name = "camYRot"> what is the y rotation of the player </param>
-    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot)
+    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot, Vector2 mousePos)
     {
-        // if the input doesn't equal zero, player can rotate
-        if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+        if (playerCameraManager.ReturnCameraMode() != CameraModes.locked)
         {
-            // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            // if the input doesn't equal zero, player can rotate
+            if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+            {
+                // find target rotation of player based on camera's transform and rotate towards that angle smoothly
+                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            }
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            float xMousePos = Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1);
+            transform.Rotate(Vector3.zero + (Vector3)(Vector3.up * xMousePos * lockedCamRotSpeed));
+            Debug.Log(xMousePos);
         }
     }
+
 
     ///<summary> Add speed to player </summary>
     private void SetSpeed()

@@ -120,12 +120,13 @@ MonoBehaviour:
   turnSmoothTime: 0.25
   locomotionAccelerationSmoothTime: 0.3
   locomotionDecelerationSmoothTime: 0.5
+  lockedCamRotSpeed: 6
   minDistFromGroundToBeMidAir: 3.25
   gravity: -0.275
   height: 2
   sphereOverlapRadius: 0.35
   softLandingMaxVeloY: -0.15
-  rollLandingMaxVeloY: -0.3
+  rollLandingMaxVeloY: -100
   maxBoxJumpHeight: 2.5
   maxWalkingJumpHeight: 2.5
   maxRunningJumpHeight: 2.5
