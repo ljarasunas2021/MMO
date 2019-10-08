@@ -64,6 +64,11 @@ public class PlayerCameraManager : NetworkBehaviour
             currentCam = mode;
         }
     }
+
+    public CameraModes ReturnCameraMode()
+    {
+        return currentCam;
+    }
 }
 
 public enum CameraModes

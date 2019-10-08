@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PlayerEquip : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerEquip : MonoBehaviour
     private InputHandler inputHandler;
     private GameObject handR;
     private Animator animator;
+    private PlayerCameraManager playerCameraManager;
 
     private void Start()
     {
@@ -16,6 +18,7 @@ public class PlayerEquip : MonoBehaviour
         bodyParts = GetComponent<BodyParts>();
         inventoryManager = GetComponent<InventoryManager>();
         inputHandler = GetComponent<InputHandler>();
+        playerCameraManager = GetComponent<PlayerCameraManager>();
         handR = bodyParts.handR;
     }
 
@@ -29,12 +32,12 @@ public class PlayerEquip : MonoBehaviour
             GameObject weapon = hit.collider.gameObject;
             weapon.GetComponent<Rigidbody>().isKinematic = true;
             weapon.transform.SetParent(handR.transform);
-            weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.rotation = Quaternion.Euler(Vector3.zero);
+            weapon.transform.localPosition = weapon.GetComponent<Weapon>().startPos;
+            weapon.transform.localRotation = Quaternion.Euler(weapon.GetComponent<Weapon>().startRot);
             inventoryManager.AddInventoryItem(weapon, null);
             inputHandler.ChangeItemHolding(new ItemHolding(weapon, HoldingItemType.ranged));
-            animator.SetInteger(Parameters.upperBodyState, 1);
-            //weapon.transform.LookAt(Camera.main.WorldToScreenPoint(new Vector3(Screen.width / 2, Screen.height / 2)));
+            animator.SetInteger(Parameters.upperBodyState, 2);
+            playerCameraManager.ChangeCam(CameraModes.locked);
         }
     }
 }
