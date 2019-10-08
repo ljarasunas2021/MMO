@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour {
     private bool talking = false;
     private bool firstLine = false;
     private string[] dialogue;
+    private AudioClip[] sounds;
+    private AudioSource audioData;
+    private bool soundPlaying;
 
     public bool togglePauseMenu;
     public bool toggleDialogueBox;
@@ -19,36 +22,34 @@ public class UIManager : MonoBehaviour {
 
     void Start() {
         dialogueText = dialogueText.GetComponent<Text>();
+        audioData = GetComponent<AudioSource>();
         pauseMenu.enabled = false;
         dialogueBox.enabled = false;
     }
 
     void Update() {
-        // if (!isLocalPlayer) {
-        //     return;
-        // }
         if (talking && (boxes >= 0)) {
             if (!firstLine) {
                 Debug.Log("First line, starting with " + boxes + " boxes");
                 dialogueText.text = dialogue[dialogue.Length-boxes];
+                audioData.Stop();
+                audioData.clip = sounds[dialogue.Length-boxes];
+                audioData.Play();
                 firstLine = true;
                 boxes--;
                 Debug.Log("boxes after: " + boxes);
-                // if (boxes == 0) {
-                //     canMove = true;
-                //     toggleDialogueBox = !toggleDialogueBox;
-                //     dialogueBox.enabled = !dialogueBox.enabled;
-                //     talking = false;
-                //     firstLine = false;
-                // }
             } else {
                 if (Input.GetKeyDown(KeyCode.Return)) {
                     if (boxes != 0) {
                         Debug.Log("Hit return, boxes remaining: " + boxes + " boxes");
+                        audioData.Stop();
                         dialogueText.text = dialogue[dialogue.Length-boxes];
+                        audioData.clip = sounds[dialogue.Length-boxes];
+                        audioData.Play();
                         boxes--;
                         Debug.Log("boxes after: " + boxes);
                     } else {
+                        audioData.Stop();
                         canMove = true;
                         toggleDialogueBox = !toggleDialogueBox;
                         dialogueBox.enabled = !dialogueBox.enabled;
@@ -66,12 +67,13 @@ public class UIManager : MonoBehaviour {
         pauseMenu.enabled = !pauseMenu.enabled;
     }
 
-    public void ToggleDialogueBox(string[] d) {
+    public void ToggleDialogueBox(string[] d, AudioClip[] a) {
         canMove = false;
         toggleDialogueBox = !toggleDialogueBox;
         dialogueBox.enabled = !dialogueBox.enabled;
         dialogue = d;
         boxes = d.Length;
+        sounds = a;
         talking = true;
     }
 

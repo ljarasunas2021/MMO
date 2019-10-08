@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/slevy/Desktop/npc test 1.3.app
+/Users/slevy/Desktop/npc test 2.0.app
 SceneListBegin?
 Assets/Scenes/Test.unity
 SceneListEnd?
@@ -226,11 +226,11 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 14079b0afbb5e6763947dc924e87b1bd Mirror.Examples.dll:.UIServerStatusSlot
 71bb6a6b6c8f052f948db64c7dd3ca4f Cinemachine.dll:Cinemachine.CinemachineHardLookAt
 47017c71c23739c1424029577f495445 Mirror.dll:Mirror.NetworkIdentity
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Target
+34f66302e3ed79e42ce5caa8d47fde02 Assembly-CSharp.dll:.Target
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 edec34fa37ceb4e15d29a1e2697f1b00 Mirror.Components.dll:Mirror.NetworkTransform
 e87f50864f8a979f1228e8c69bd62658 Mirror.Examples.dll:Mirror.Examples.Pong.Player
-e39fdccbb79bc0687b4a7ea9514c0aa3 Assembly-CSharp.dll:.UIManager
+265ddab088aa32266f0d8ec923efb844 Assembly-CSharp.dll:.UIManager
 a0806da19f178c0be530921ca3a0a11d Mirror.Examples.dll:Mirror.Examples.NetworkRoom.OfflineGUI
 5372ed2ce39229b1ac910757999a8be2 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient

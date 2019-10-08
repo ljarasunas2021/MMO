@@ -8,6 +8,7 @@ public class Target : MonoBehaviour {
     private Outline outline;
     private UIManager UIScript;
     public string[] dialogue;
+    public AudioClip[] inputSounds;
 
     void Start() {
         UIScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
@@ -18,7 +19,7 @@ public class Target : MonoBehaviour {
         if (UIScript.canMove) {
             transform.LookAt(NetworkClient.connection.identity.transform);
 
-            UIScript.ToggleDialogueBox(dialogue);
+            UIScript.ToggleDialogueBox(dialogue, inputSounds);
         }
     }
 
