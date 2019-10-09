@@ -82,8 +82,7 @@ public class InventoryManager : MonoBehaviour
 
         for (int i = 0; i < inventory.transform.childCount; i++)
         {
-            Debug.Log("HI");
-            Destroy(inventory.transform.GetChild(i));
+            Destroy(inventory.transform.GetChild(i).gameObject);
         }
     }
 

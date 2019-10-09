@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 48589266}
   - component: {fileID: 48589265}
   - component: {fileID: 48589264}
-  - component: {fileID: 48589269}
   m_Layer: 10
   m_Name: Arch
   m_TagString: bulletHole
@@ -1141,19 +1140,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &48589269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48589263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1333,6 @@ GameObject:
   - component: {fileID: 276575204}
   - component: {fileID: 276575203}
   - component: {fileID: 276575202}
-  - component: {fileID: 276575207}
   m_Layer: 10
   m_Name: Cube
   m_TagString: bulletHole
@@ -4103,19 +4088,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &276575207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276575201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: eea4fa9e05a5afb4c9335e144f8961f1, type: 3}
 --- !u!43 &418065780
 Mesh:
   m_ObjectHideFlags: 0
@@ -4289,7 +4261,6 @@ GameObject:
   - component: {fileID: 419662969}
   - component: {fileID: 419662968}
   - component: {fileID: 419662967}
-  - component: {fileID: 419662971}
   m_Layer: 10
   m_Name: Ground
   m_TagString: bulletHole
@@ -4892,19 +4863,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419662965}
   m_Mesh: {fileID: 831992282}
---- !u!114 &419662971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419662965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5054,7 +5012,6 @@ GameObject:
   - component: {fileID: 555678449}
   - component: {fileID: 555678448}
   - component: {fileID: 555678447}
-  - component: {fileID: 555678452}
   m_Layer: 10
   m_Name: Icosphere
   m_TagString: bulletHole
@@ -7290,19 +7247,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &555678452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 555678446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &561541693
 GameObject:
   m_ObjectHideFlags: 3
@@ -8449,7 +8393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8884,7 +8828,6 @@ GameObject:
   - component: {fileID: 1081549050}
   - component: {fileID: 1081549049}
   - component: {fileID: 1081549048}
-  - component: {fileID: 1081549053}
   m_Layer: 10
   m_Name: Torus
   m_TagString: bulletHole
@@ -20518,19 +20461,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081549053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081549047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: d9f28cf20af3a5346b4213274e54aa74, type: 3}
 --- !u!1 &1107062008
 GameObject:
   m_ObjectHideFlags: 3
@@ -20604,7 +20534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20806,7 +20736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21609,7 +21539,6 @@ GameObject:
   - component: {fileID: 1724971790}
   - component: {fileID: 1724971789}
   - component: {fileID: 1724971788}
-  - component: {fileID: 1724971793}
   m_Layer: 10
   m_Name: Stairs
   m_TagString: bulletHole
@@ -27185,19 +27114,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1724971793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724971787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: 92062f2e3e723254db326e0b31028d43, type: 3}
 --- !u!43 &1733977314
 Mesh:
   m_ObjectHideFlags: 0
@@ -27597,7 +27513,6 @@ GameObject:
   - component: {fileID: 2024608104}
   - component: {fileID: 2024608103}
   - component: {fileID: 2024608102}
-  - component: {fileID: 2024608107}
   m_Layer: 10
   m_Name: Pipe
   m_TagString: bulletHole
@@ -28551,19 +28466,6 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2024608107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024608101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: b70d6fd18250bb8499464c3434311310, type: 3}
 --- !u!1 &2062105279
 GameObject:
   m_ObjectHideFlags: 3
@@ -28795,6 +28697,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsUntilDestroy: 3
+  materialsAndBulletHoles:
+  - material: {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+    bulletHole: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!4 &2099857706
 Transform:
   m_ObjectHideFlags: 0
@@ -29153,7 +29058,6 @@ GameObject:
   - component: {fileID: 2133377048}
   - component: {fileID: 2133377047}
   - component: {fileID: 2133377046}
-  - component: {fileID: 2133377051}
   m_Layer: 10
   m_Name: Stairs
   m_TagString: bulletHole
@@ -31856,16 +31760,3 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2133377051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133377045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
