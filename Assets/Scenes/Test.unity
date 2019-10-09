@@ -125,9 +125,10 @@ GameObject:
   - component: {fileID: 48589266}
   - component: {fileID: 48589265}
   - component: {fileID: 48589264}
+  - component: {fileID: 48589269}
   m_Layer: 0
   m_Name: Arch
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1140,6 +1141,23 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48589269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48589263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 48589263}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,9 +1351,10 @@ GameObject:
   - component: {fileID: 276575204}
   - component: {fileID: 276575203}
   - component: {fileID: 276575202}
+  - component: {fileID: 276575207}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4088,13 +4107,30 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276575207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276575201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 276575201}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!43 &418065780
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14346
+  m_Name: pb_Mesh7054
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4261,9 +4297,10 @@ GameObject:
   - component: {fileID: 419662969}
   - component: {fileID: 419662968}
   - component: {fileID: 419662967}
+  - component: {fileID: 419662971}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4863,6 +4900,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419662965}
   m_Mesh: {fileID: 831992282}
+--- !u!114 &419662971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419662965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 419662965}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,9 +5066,10 @@ GameObject:
   - component: {fileID: 555678449}
   - component: {fileID: 555678448}
   - component: {fileID: 555678447}
+  - component: {fileID: 555678452}
   m_Layer: 0
   m_Name: Icosphere
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7247,6 +7302,23 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &555678452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555678446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 555678446}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!1 &561541693
 GameObject:
   m_ObjectHideFlags: 3
@@ -7392,7 +7464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403036, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 403036, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7420,23 +7492,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: defaultBulletHolePoolNames.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: defaultBulletHoles.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHolePoolNames.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHoleGroups.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: defaultBulletHolePoolNames.Array.data[0]
-      value: Default
+      value: concrete_pool_2
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: crosshairTexture
@@ -7472,7 +7544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHolePoolNames.Array.data[0]
-      value: Default
+      value: concrete_pool_2
       objectReference: {fileID: 0}
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHoleGroups.Array.data[9].tag
@@ -7497,6 +7569,74 @@ PrefabInstance:
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHoleGroups.Array.data[8].tag
       value: Everything
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: shellSpitForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: shellForceRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: shellTorqueRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: shootFromMiddleOfScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: raycastStartSpot
+      value: 
+      objectReference: {fileID: 534669905}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: bulletHoleGroups.Array.data[0].tag
+      value: ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: bloodyMessEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: weaponType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: shooterAIEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: auto
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: bulletHolesEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 403026, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.953
+      objectReference: {fileID: 0}
+    - target: {fileID: 403026, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.058
+      objectReference: {fileID: 0}
+    - target: {fileID: 403034, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.091
+      objectReference: {fileID: 0}
+    - target: {fileID: 403034, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 403034, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.956
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c656de207260bf54883c10f990df79db, type: 3}
@@ -7618,7 +7758,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14160
+  m_Name: pb_Mesh6868
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8321,7 +8461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.04005975, z: -4.192147}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8429,7 +8569,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14184
+  m_Name: pb_Mesh6892
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8589,7 +8729,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14118
+  m_Name: pb_Mesh6854
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8756,9 +8896,10 @@ GameObject:
   - component: {fileID: 1081549050}
   - component: {fileID: 1081549049}
   - component: {fileID: 1081549048}
+  - component: {fileID: 1081549053}
   m_Layer: 0
   m_Name: Torus
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20389,6 +20530,23 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1081549053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081549047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 1081549047}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!1 &1107062008
 GameObject:
   m_ObjectHideFlags: 3
@@ -20462,7 +20620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.04005975, z: -4.192147}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20664,7 +20822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.04005975, z: -4.192147}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20904,7 +21062,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14280
+  m_Name: pb_Mesh6982
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -21064,7 +21222,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14086
+  m_Name: pb_Mesh6824
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -21467,9 +21625,10 @@ GameObject:
   - component: {fileID: 1724971790}
   - component: {fileID: 1724971789}
   - component: {fileID: 1724971788}
+  - component: {fileID: 1724971793}
   m_Layer: 0
   m_Name: Stairs
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27042,13 +27201,30 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1724971793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724971787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 1724971787}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!43 &1733977314
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14428
+  m_Name: pb_Mesh7136
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -27208,7 +27384,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14370
+  m_Name: pb_Mesh7078
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -27426,7 +27602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2024608101
 GameObject:
@@ -27441,9 +27617,10 @@ GameObject:
   - component: {fileID: 2024608104}
   - component: {fileID: 2024608103}
   - component: {fileID: 2024608102}
+  - component: {fileID: 2024608107}
   m_Layer: 0
   m_Name: Pipe
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28394,6 +28571,23 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2024608107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024608101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 2024608101}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001
 --- !u!1 &2062105279
 GameObject:
   m_ObjectHideFlags: 3
@@ -28595,6 +28789,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2099857704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2099857706}
+  - component: {fileID: 2099857705}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2099857705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099857704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183df845f89f4498f97503f5173cd56e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHole: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
+  maxBullets: 50
+  secondsUntilDestroy: 3
+  bulletHoles: []
+--- !u!4 &2099857706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099857704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3849006, y: 2.2872617, z: 0.80194634}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2124331032
 GameObject:
   m_ObjectHideFlags: 3
@@ -28939,9 +29180,10 @@ GameObject:
   - component: {fileID: 2133377048}
   - component: {fileID: 2133377047}
   - component: {fileID: 2133377046}
+  - component: {fileID: 2133377051}
   m_Layer: 0
   m_Name: Stairs
-  m_TagString: Untagged
+  m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31641,3 +31883,20 @@ Transform:
   m_Father: {fileID: 1544773196}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &2133377051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133377045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHoleMesh: {fileID: 2133377045}
+  usePooling: 1
+  lifetime: 28
+  startFadeTime: 10
+  fadeRate: 0.001

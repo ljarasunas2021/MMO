@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeLayerWeight.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\LocomotionMomentum.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\BulletHoleController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CanvasManager.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\LayerMaskController.cs" />
