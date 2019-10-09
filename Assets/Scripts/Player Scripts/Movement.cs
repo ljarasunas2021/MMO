@@ -68,6 +68,7 @@ public class Movement : NetworkBehaviour
     private float locomotionSmoothVelocity;
     // turning
     private float turnSmoothVelocity;
+    private float locomotionDirSmoothVelocity;
 
     // distance raycast will go downwards
     private float maxRaycastDownDist;
@@ -151,11 +152,15 @@ public class Movement : NetworkBehaviour
         if (currentState != States.locomotion) return;
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
+        float targetLocomotionDirection = 0;
 
-        if (playerCameraManager.ReturnCameraMode() == CameraModes.locked)
+        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+        if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
+        else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
+        else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
+
+        if (lockedCameraMode)
         {
-            float targetLocomotionDirection = 0;
-
             if (input.x != 0)
             {
                 int dir = (input.x < 0) ? -1 : 1;
@@ -163,17 +168,11 @@ public class Movement : NetworkBehaviour
                 else targetLocomotionDirection = dir * walkVal;
             }
 
-            float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
-            locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionSmoothVelocity, locomotionDirSmoothTime);
-
-            animator.SetFloat(Parameters.locomotionDir, targetLocomotionDirection);
+            if (input.y < 0) targetLocomotionBlendVal = -walkVal;
         }
 
-        // set the target locomotion blend value
-        if (input.x == 0 && input.y == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift) targetLocomotionBlendVal = runVal;
-        else if (input.y < 0 && playerCameraManager.ReturnCameraMode() == CameraModes.locked) targetLocomotionBlendVal = -runVal;
-        else targetLocomotionBlendVal = walkVal;
+        float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
+        locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionDirSmoothVelocity, locomotionDirSmoothTime);
 
         // set the locomotion bend value based on the locomotion smooth time - if that was in a phase of acceleration or deceleration
         float locomotionSmoothTime = (targetLocomotionBlendVal - locomotionBlendVal > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
@@ -181,6 +180,7 @@ public class Movement : NetworkBehaviour
 
         // set the locomotion blend parameter
         animator.SetFloat(Parameters.locomotionBlend, locomotionBlendVal);
+        animator.SetFloat(Parameters.locomotionDir, locomotionDirection);
     }
 
     ///<summary> Rotate the player accordingly </summary>
@@ -212,8 +212,10 @@ public class Movement : NetworkBehaviour
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        characterController.Move(transform.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
-        characterController.Move(transform.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
+        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+        Transform transformToUse = (lockedCameraMode) ? Camera.main.transform : transform;
+        characterController.Move(transformToUse.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
+        characterController.Move(transformToUse.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -267,6 +269,8 @@ public class Movement : NetworkBehaviour
         else velocityY += Time.deltaTime * gravity;
 
         characterController.Move(Vector3.up * velocityY);
+
+        Debug.Log(velocityY);
 
         if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
         else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);

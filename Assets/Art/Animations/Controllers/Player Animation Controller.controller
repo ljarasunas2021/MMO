@@ -461,11 +461,11 @@ MonoBehaviour:
     speed: {x: 0, y: 0}
   - name: left strife
     locomotionBlendValue: 0
-    locomotionDirValue: -1
+    locomotionDirValue: -0.9
     speed: {x: -5, y: 0}
   - name: right strife
     locomotionBlendValue: 0
-    locomotionDirValue: 1
+    locomotionDirValue: 0.9
     speed: {x: 5, y: 0}
   - name: left walk
     locomotionBlendValue: 0
