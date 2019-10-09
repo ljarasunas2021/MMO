@@ -1,10 +1,4 @@
-﻿/// <summary>
-/// WeaponEditor.cs
-/// Author: MutantGopher
-/// This script creates a custom inspector for the weapon system in Weapon.cs.
-/// </summary>
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -41,21 +35,6 @@ public class WeaponEditor : Editor
             weapon.startRot = EditorGUILayout.Vector3Field("Start Rotation", weapon.startRot);
         }
 
-        // External tools support
-        showPluginSupport = EditorGUILayout.Foldout(showPluginSupport, "3rd Party Plugin Support");
-        if (showPluginSupport)
-        {
-            // Shooter AI support
-            weapon.shooterAIEnabled = EditorGUILayout.Toggle(new GUIContent("Shooter AI", "Support for Shooter AI by Gateway Games"), weapon.shooterAIEnabled);
-
-            // Bloody Mess support
-            weapon.bloodyMessEnabled = EditorGUILayout.Toggle(new GUIContent("Bloody Mess"), weapon.bloodyMessEnabled);
-            if (weapon.bloodyMessEnabled)
-            {
-                weapon.weaponType = EditorGUILayout.IntField("Weapon Type", weapon.weaponType);
-            }
-        }
-
         // General
         showGeneral = EditorGUILayout.Foldout(showGeneral, "General");
         if (showGeneral)
@@ -65,7 +44,18 @@ public class WeaponEditor : Editor
             weapon.weaponModel = (GameObject)EditorGUILayout.ObjectField("Weapon Model", weapon.weaponModel, typeof(GameObject), true);
 
             if (weapon.type == WeaponType.Raycast)
-                weapon.raycastStartSpot = (Transform)EditorGUILayout.ObjectField("Raycasting Point", weapon.raycastStartSpot, typeof(Transform), true);
+            {
+                weapon.shootFromMiddleOfScreen = EditorGUILayout.Toggle(new GUIContent("Raycast From Middle Of Screen"), weapon.shootFromMiddleOfScreen);
+                if (weapon.shootFromMiddleOfScreen)
+                {
+                    weapon.raycastStartSpot = Camera.main.transform;
+                }
+                else
+                {
+                    weapon.raycastStartSpot = (Transform)EditorGUILayout.ObjectField("Raycasting Point", weapon.raycastStartSpot, typeof(Transform), true);
+                }
+            }
+
 
             // Projectile
             if (weapon.type == WeaponType.Projectile)
@@ -150,7 +140,7 @@ public class WeaponEditor : Editor
                         if (weapon.multiplyPower)
                             weapon.powerMultiplier = EditorGUILayout.FloatField("Power Multiplier", weapon.powerMultiplier);
                     }
-                    else    // If this is a raycast weapon
+                    else
                     {
                         weapon.powerMultiplier = EditorGUILayout.FloatField("Power Multiplier", weapon.powerMultiplier);
                     }
@@ -254,133 +244,11 @@ public class WeaponEditor : Editor
             }
         }
 
-
-        // Bullet Holes
-        if (weapon.type == WeaponType.Raycast)
+        showBulletHoles = EditorGUILayout.Foldout(showBulletHoles, "Bullet Holes");
+        if (showBulletHoles)
         {
-            showBulletHoles = EditorGUILayout.Foldout(showBulletHoles, "Bullet Holes");
-            if (showBulletHoles)
-            {
-
-                weapon.makeBulletHoles = EditorGUILayout.Toggle("Bullet Holes", weapon.makeBulletHoles);
-
-                if (weapon.makeBulletHoles)
-                {
-                    weapon.bhSystem = (BulletHoleSystem)EditorGUILayout.EnumPopup("Determined By", weapon.bhSystem);
-
-                    if (GUILayout.Button("Add"))
-                    {
-                        weapon.bulletHoleGroups.Add(new SmartBulletHoleGroup());
-                        weapon.bulletHolePoolNames.Add("Default");
-                    }
-
-                    EditorGUILayout.BeginVertical();
-
-                    for (int i = 0; i < weapon.bulletHolePoolNames.Count; i++)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-
-                        // The tag, material, or physic material by which the bullet hole is determined
-                        if (weapon.bhSystem == BulletHoleSystem.Tag)
-                        {
-                            weapon.bulletHoleGroups[i].tag = EditorGUILayout.TextField(weapon.bulletHoleGroups[i].tag);
-                        }
-                        else if (weapon.bhSystem == BulletHoleSystem.Material)
-                        {
-                            weapon.bulletHoleGroups[i].material = (Material)EditorGUILayout.ObjectField(weapon.bulletHoleGroups[i].material, typeof(Material), false);
-                        }
-                        else if (weapon.bhSystem == BulletHoleSystem.Physic_Material)
-                        {
-                            weapon.bulletHoleGroups[i].physicMaterial = (PhysicMaterial)EditorGUILayout.ObjectField(weapon.bulletHoleGroups[i].physicMaterial, typeof(PhysicMaterial), false);
-                        }
-
-                        // The bullet hole to be instantiated for this type
-                        weapon.bulletHolePoolNames[i] = EditorGUILayout.TextField(weapon.bulletHolePoolNames[i]);
-
-                        if (GUILayout.Button("Remove"))
-                        {
-                            weapon.bulletHoleGroups.Remove(weapon.bulletHoleGroups[i]);
-                            weapon.bulletHolePoolNames.Remove(weapon.bulletHolePoolNames[i]);
-                        }
-
-                        EditorGUILayout.EndHorizontal();
-                    }
-
-                    // The default bullet holes to be instantiated when other specifications (above) are not met
-                    EditorGUILayout.Separator();
-                    EditorGUILayout.LabelField("Default Bullet Holes");
-
-                    if (GUILayout.Button("Add"))
-                    {
-                        weapon.defaultBulletHoles.Add(null);
-                        weapon.defaultBulletHolePoolNames.Add("Default");
-                    }
-
-                    for (int i = 0; i < weapon.defaultBulletHolePoolNames.Count; i++)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-
-                        weapon.defaultBulletHolePoolNames[i] = EditorGUILayout.TextField(weapon.defaultBulletHolePoolNames[i]);
-
-                        if (GUILayout.Button("Remove"))
-                        {
-                            weapon.defaultBulletHoles.Remove(weapon.defaultBulletHoles[i]);
-                            weapon.defaultBulletHolePoolNames.Remove(weapon.defaultBulletHolePoolNames[i]);
-
-                        }
-
-                        EditorGUILayout.EndHorizontal();
-                    }
-
-
-                    // The exceptions to the bullet hole rules defined in the default bullet holes
-                    EditorGUILayout.Separator();
-                    EditorGUILayout.LabelField("Exceptions");
-
-                    if (GUILayout.Button("Add"))
-                    {
-                        weapon.bulletHoleExceptions.Add(new SmartBulletHoleGroup());
-                    }
-
-                    for (int i = 0; i < weapon.bulletHoleExceptions.Count; i++)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-
-                        // The tag, material, or physic material by which the bullet hole is determined
-                        if (weapon.bhSystem == BulletHoleSystem.Tag)
-                        {
-                            weapon.bulletHoleExceptions[i].tag = EditorGUILayout.TextField(weapon.bulletHoleExceptions[i].tag);
-                        }
-                        else if (weapon.bhSystem == BulletHoleSystem.Material)
-                        {
-                            weapon.bulletHoleExceptions[i].material = (Material)EditorGUILayout.ObjectField(weapon.bulletHoleExceptions[i].material, typeof(Material), false);
-                        }
-                        else if (weapon.bhSystem == BulletHoleSystem.Physic_Material)
-                        {
-                            weapon.bulletHoleExceptions[i].physicMaterial = (PhysicMaterial)EditorGUILayout.ObjectField(weapon.bulletHoleExceptions[i].physicMaterial, typeof(PhysicMaterial), false);
-                        }
-
-
-                        if (GUILayout.Button("Remove"))
-                        {
-                            weapon.bulletHoleExceptions.Remove(weapon.bulletHoleExceptions[i]);
-                        }
-
-                        EditorGUILayout.EndHorizontal();
-                    }
-
-
-                    EditorGUILayout.EndVertical();
-
-                    if (weapon.bulletHoleGroups.Count > 0)
-                    {
-                        EditorGUILayout.HelpBox("Assign bullet hole prefabs corresponding with tags, materials, or physic materials.  If you assign multiple bullet holes to the same parameter, one of them will be chosen at random.  The default bullet hole will be used when something is hit that doesn't match any of the other parameters.  The exceptions define parameters for which no bullet holes will be instantiated.", MessageType.None);
-                    }
-                }
-
-            }
+            weapon.bulletHolesEnabled = EditorGUILayout.Toggle("Enable Bullet Holes", weapon.bulletHolesEnabled);
         }
-
 
         // Crosshairs
         showCrosshairs = EditorGUILayout.Foldout(showCrosshairs, "Crosshairs");
@@ -396,7 +264,6 @@ public class WeaponEditor : Editor
             }
         }
 
-
         // Audio
         showAudio = EditorGUILayout.Foldout(showAudio, "Audio");
         if (showAudio)
@@ -406,10 +273,8 @@ public class WeaponEditor : Editor
             weapon.dryFireSound = (AudioClip)EditorGUILayout.ObjectField("Out of Ammo", weapon.dryFireSound, typeof(AudioClip), false);
         }
 
-
         // This makes the editor gui re-draw the inspector if values have changed
-        if (GUI.changed)
-            EditorUtility.SetDirty(target);
+        if (GUI.changed) EditorUtility.SetDirty(target);
     }
 }
 

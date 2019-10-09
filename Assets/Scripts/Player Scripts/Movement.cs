@@ -205,7 +205,6 @@ public class Movement : NetworkBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             float xMousePos = Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1);
             transform.Rotate(Vector3.zero + (Vector3)(Vector3.up * xMousePos * lockedCamRotSpeed));
-            Debug.Log(xMousePos);
         }
     }
 
@@ -271,8 +270,6 @@ public class Movement : NetworkBehaviour
         else velocityY += Time.deltaTime * gravity;
 
         characterController.Move(Vector3.up * velocityY);
-
-        Debug.Log(velocityY + " " + hit.distance);
 
         if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
         else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);

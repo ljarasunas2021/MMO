@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEnter: 1
-  enterLayerWeight: 1
+  enterLayerWeight: 0.95
   onExit: 0
   exitLayerWeight: 0
 --- !u!114 &114501089245896698
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEnter: 1
-  enterLayerWeight: 1
+  enterLayerWeight: 0.95
   onExit: 0
   exitLayerWeight: 0
 --- !u!114 &114620073047260150
