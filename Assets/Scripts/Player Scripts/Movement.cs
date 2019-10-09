@@ -77,6 +77,7 @@ public class Movement : NetworkBehaviour
     private float targetRotation;
     // value thats used as parameter in locomotion blend tree
     private float locomotionBlendVal;
+    private float locomotionDirection;
     // current anim state - each anim state is assigned its own index and this is that index
     private States currentState;
     // transform of the camera
@@ -140,10 +141,6 @@ public class Movement : NetworkBehaviour
             // set the current state to equal the appropriate currentState
             animator.SetInteger(Parameters.currentState, (int)currentState);
         }
-        else
-        {
-            SetValuesIfMidAir(input.jump);
-        }
     }
 
     /// <summary> Set the correct locomotion blend value </summary>
@@ -155,9 +152,27 @@ public class Movement : NetworkBehaviour
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
 
+        if (playerCameraManager.ReturnCameraMode() == CameraModes.locked)
+        {
+            float targetLocomotionDirection = 0;
+
+            if (input.x != 0)
+            {
+                int dir = (input.x < 0) ? -1 : 1;
+                if (leftShift) targetLocomotionDirection = dir * runVal;
+                else targetLocomotionDirection = dir * walkVal;
+            }
+
+            float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
+            locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionSmoothVelocity, locomotionDirSmoothTime);
+
+            animator.SetFloat(Parameters.locomotionDir, targetLocomotionDirection);
+        }
+
         // set the target locomotion blend value
         if (input.x == 0 && input.y == 0) targetLocomotionBlendVal = idleVal;
         else if (leftShift) targetLocomotionBlendVal = runVal;
+        else if (input.y < 0 && playerCameraManager.ReturnCameraMode() == CameraModes.locked) targetLocomotionBlendVal = -runVal;
         else targetLocomotionBlendVal = walkVal;
 
         // set the locomotion bend value based on the locomotion smooth time - if that was in a phase of acceleration or deceleration
@@ -194,11 +209,11 @@ public class Movement : NetworkBehaviour
         }
     }
 
-
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        characterController.Move(transform.forward * animator.GetFloat(Parameters.currentSpeed) * Time.deltaTime);
+        characterController.Move(transform.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
+        characterController.Move(transform.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -225,23 +240,20 @@ public class Movement : NetworkBehaviour
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.player);
 
-        if (!isDead)
+        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
-            if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
+            if (currentState == States.defInAir)
             {
-                if (currentState == States.defInAir)
-                {
-                    if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
-                    else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
-                    else SetCurrentState(States.hardLanding);
-                }
+                if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
+                else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
+                else SetCurrentState(States.hardLanding);
             }
-            else if (currentState != States.defInAir)
+        }
+        else if (currentState != States.defInAir)
+        {
+            if (Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0)
             {
-                if (Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0)
-                {
-                    SetCurrentState(States.defInAir);
-                }
+                SetCurrentState(States.defInAir);
             }
         }
 
@@ -256,14 +268,9 @@ public class Movement : NetworkBehaviour
 
         characterController.Move(Vector3.up * velocityY);
 
-        if (!isDead)
-        {
-            if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
-
-            if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
-
-            if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
-        }
+        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        else if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
     }
 
     ///<summary> Set the current and previous state to their corresponding values </summary>
@@ -309,9 +316,11 @@ public enum States
 public static class Parameters
 {
     public static string currentState = "CurrentState";
-    public static string currentSpeed = "CurrentSpeed";
+    public static string currentSpeedX = "CurrentSpeedX";
+    public static string currentSpeedZ = "CurrentSpeedZ";
     public static string locomotionBlend = "LocomotionBlend";
     public static string canRotate = "CanRotate";
     public static string upperBodyState = "UpperBodyState";
+    public static string locomotionDir = "LocomotionDir";
 }
 #endregion

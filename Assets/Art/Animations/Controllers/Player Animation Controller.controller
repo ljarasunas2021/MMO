@@ -21,7 +21,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: CurrentSpeed
+  - m_Name: CurrentSpeedX
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: CurrentSpeedZ
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -440,12 +446,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c3eef51605949ecac34c20e17f3934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleVal: 0
-  walkVal: 0.35
-  runVal: 0.9
-  idleSpeed: 0
-  walkSpeed: 2
-  runSpeed: 4.5
+  motions:
+  - name: run
+    locomotionBlendValue: 0.9
+    locomotionDirValue: 0
+    speed: {x: 0, y: 5}
+  - name: walk
+    locomotionBlendValue: 0.3
+    locomotionDirValue: 0
+    speed: {x: 0, y: 2}
+  - name: idle
+    locomotionBlendValue: 0
+    locomotionDirValue: 0
+    speed: {x: 0, y: 0}
+  - name: left strife
+    locomotionBlendValue: 0
+    locomotionDirValue: -1
+    speed: {x: -5, y: 0}
+  - name: right strife
+    locomotionBlendValue: 0
+    locomotionDirValue: 1
+    speed: {x: 5, y: 0}
+  - name: left walk
+    locomotionBlendValue: 0
+    locomotionDirValue: -0.3
+    speed: {x: -2, y: 0}
+  - name: right walk
+    locomotionBlendValue: 0
+    locomotionDirValue: 0.3
+    speed: {x: 2, y: 0}
+  - name: backwards walk
+    locomotionBlendValue: -0.3
+    locomotionDirValue: 0
+    speed: {x: 0, y: -2}
   accelerationSmoothTime: 0.1
   decelerationSmoothTime: 0.3
 --- !u!114 &114983821712894978
@@ -547,7 +580,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 1fab80834562945eebb77fe495d75281, type: 3}
     m_Threshold: 8.25
-    m_Position: {x: 0, y: -1}
+    m_Position: {x: 0, y: -0.3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: LocomotionBlend
