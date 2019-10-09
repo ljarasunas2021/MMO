@@ -123,7 +123,7 @@ MonoBehaviour:
   lockedCamRotSpeed: 6
   minDistFromGroundToBeMidAir: 3.25
   gravity: -0.275
-  height: 2
+  height: 2.1
   sphereOverlapRadius: 0.35
   softLandingMaxVeloY: -0.15
   rollLandingMaxVeloY: -100
