@@ -43,25 +43,20 @@ public class WeaponEditor : Editor
 
             weapon.weaponModel = (GameObject)EditorGUILayout.ObjectField("Weapon Model", weapon.weaponModel, typeof(GameObject), true);
 
-            if (weapon.type == WeaponType.Raycast)
-            {
-                weapon.shootFromMiddleOfScreen = EditorGUILayout.Toggle(new GUIContent("Raycast From Middle Of Screen"), weapon.shootFromMiddleOfScreen);
-                if (weapon.shootFromMiddleOfScreen)
-                {
-                    weapon.raycastStartSpot = Camera.main.transform;
-                }
-                else
-                {
-                    weapon.raycastStartSpot = (Transform)EditorGUILayout.ObjectField("Raycasting Point", weapon.raycastStartSpot, typeof(Transform), true);
-                }
-            }
-
-
             // Projectile
             if (weapon.type == WeaponType.Projectile)
             {
                 weapon.projectile = (GameObject)EditorGUILayout.ObjectField("Projectile", weapon.projectile, typeof(GameObject), false);
-                weapon.projectileSpawnSpot = (Transform)EditorGUILayout.ObjectField("Projectile Spawn Point", weapon.projectileSpawnSpot, typeof(Transform), true);
+            }
+
+            weapon.shootFromMiddleOfScreen = EditorGUILayout.Toggle(new GUIContent("Raycast From Middle Of Screen"), weapon.shootFromMiddleOfScreen);
+            if (weapon.shootFromMiddleOfScreen)
+            {
+                weapon.raycastStartSpot = Camera.main.transform;
+            }
+            else
+            {
+                weapon.raycastStartSpot = (Transform)EditorGUILayout.ObjectField("Raycasting Point", weapon.raycastStartSpot, typeof(Transform), true);
             }
         }
 
@@ -244,10 +239,13 @@ public class WeaponEditor : Editor
             }
         }
 
-        showBulletHoles = EditorGUILayout.Foldout(showBulletHoles, "Bullet Holes");
-        if (showBulletHoles)
+        if (weapon.type == WeaponType.Raycast)
         {
-            weapon.bulletHolesEnabled = EditorGUILayout.Toggle("Enable Bullet Holes", weapon.bulletHolesEnabled);
+            showBulletHoles = EditorGUILayout.Foldout(showBulletHoles, "Bullet Holes");
+            if (showBulletHoles)
+            {
+                weapon.bulletHolesEnabled = EditorGUILayout.Toggle("Enable Bullet Holes", weapon.bulletHolesEnabled);
+            }
         }
 
         // Crosshairs
