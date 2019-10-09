@@ -5,12 +5,29 @@ using UnityEngine;
 public class BulletHoleController : MonoBehaviour
 {
     public int secondsUntilDestroy;
-    public Dictionary<GameObject, BulletHolesAndIndex> bulletHoles = new Dictionary<GameObject, BulletHolesAndIndex>();
+    public List<MaterialAndBulletHole> materialsAndBulletHoles = new List<MaterialAndBulletHole>();
+
+    private Dictionary<Material, GameObject> materialAndBulletHolesDict = new Dictionary<Material, GameObject>();
+    private Dictionary<GameObject, BulletHolesAndIndex> bulletHoles = new Dictionary<GameObject, BulletHolesAndIndex>();
 
     private int inactiveHoleIndex = 0;
 
-    public void CreateBulletHole(RaycastHit hit, GameObject bulletHoleType)
+    private void Start()
     {
+        foreach (MaterialAndBulletHole materialAndBulletHole in materialsAndBulletHoles)
+        {
+            materialAndBulletHolesDict[materialAndBulletHole.material] = materialAndBulletHole.bulletHole;
+        }
+    }
+
+    public void CreateBulletHole(RaycastHit hit, Material material)
+    {
+        Debug.Log(material);
+
+        if (!materialAndBulletHolesDict.ContainsKey(material)) return;
+
+        GameObject bulletHoleType = materialAndBulletHolesDict[material];
+
         GameObject hole;
         BulletHolesAndIndex bulletHolesAndIndex;
         if (bulletHoles.ContainsKey(bulletHoleType))
@@ -71,4 +88,11 @@ public class BulletHolesAndIndex
         bulletHoles = new List<GameObject>();
         inactiveHoleIndex = 0;
     }
+}
+
+[System.Serializable]
+public class MaterialAndBulletHole
+{
+    public Material material;
+    public GameObject bulletHole;
 }

@@ -248,8 +248,8 @@ public class Weapon : MonoBehaviour
 
                 if (bulletHolesEnabled)
                 {
-                    AllowBulletHoles allowBulletHoles = hit.collider.gameObject.GetComponent<AllowBulletHoles>();
-                    if (allowBulletHoles != null) bulletHoleController.CreateBulletHole(hit, allowBulletHoles.bulletHoleType);
+                    MeshRenderer colliderMR = hit.collider.gameObject.GetComponent<MeshRenderer>();
+                    if (colliderMR != null) bulletHoleController.CreateBulletHole(hit, hit.collider.gameObject.GetComponent<MeshRenderer>().sharedMaterial);
                 }
 
                 if (makeHitEffects) CreateHitEffects(hit);

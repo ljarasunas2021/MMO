@@ -85,7 +85,7 @@ public class FootIK : MonoBehaviour
     {
         RaycastHit feetOutHit;
 
-        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, LayerMaskController.environment))
+        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, 1 << LayerMaskController.environment))
         {
             feetIKPositions = fromSkyPosition;
             feetIKPositions.y = feetOutHit.point.y + ankleHeight;
