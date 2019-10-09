@@ -53,7 +53,6 @@ public class LocomotionMomentum : StateMachineBehaviour
             }
             i = ConvertToDouble((float)i);
             locomotionBlendDict.Add((double)i, new BoundsAndSpeed(lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed));
-            Debug.Log((double)i);
         }
 
         for (double i = -1; i < 1; i += 0.1)
@@ -86,7 +85,6 @@ public class LocomotionMomentum : StateMachineBehaviour
             }
             i = ConvertToDouble((float)i);
             locomotionDirDict.Add((double)i, new BoundsAndSpeed(lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed));
-            Debug.Log((double)i);
         }
     }
 

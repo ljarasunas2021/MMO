@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 48589264}
   m_Layer: 0
   m_Name: Arch
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1335,7 +1335,7 @@ GameObject:
   - component: {fileID: 276575202}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4263,7 +4263,7 @@ GameObject:
   - component: {fileID: 419662967}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5014,7 +5014,7 @@ GameObject:
   - component: {fileID: 555678447}
   m_Layer: 0
   m_Name: Icosphere
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8758,7 +8758,7 @@ GameObject:
   - component: {fileID: 1081549048}
   m_Layer: 0
   m_Name: Torus
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21469,7 +21469,7 @@ GameObject:
   - component: {fileID: 1724971788}
   m_Layer: 0
   m_Name: Stairs
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27443,7 +27443,7 @@ GameObject:
   - component: {fileID: 2024608102}
   m_Layer: 0
   m_Name: Pipe
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28941,7 +28941,7 @@ GameObject:
   - component: {fileID: 2133377046}
   m_Layer: 0
   m_Name: Stairs
-  m_TagString: bulletHole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
