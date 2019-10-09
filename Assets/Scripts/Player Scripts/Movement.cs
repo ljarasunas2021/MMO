@@ -237,11 +237,11 @@ public class Movement : NetworkBehaviour
     private void SetValuesIfMidAir(bool space)
     {
         // check if hitting anything and if so set current state appropriately
-        bool touchingGround = !(Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0);
+        bool touchingGround = !(Physics.OverlapSphere(transform.position, sphereOverlapRadius, 1 << LayerMaskController.environment).Length == 0);
 
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.player);
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, 1 << LayerMaskController.environment);
 
         if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {

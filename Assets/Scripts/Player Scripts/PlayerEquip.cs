@@ -27,7 +27,7 @@ public class PlayerEquip : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-        if (Physics.Raycast(ray, out hit, maxGrabDistance, LayerMaskController.item) && hit.collider.gameObject.GetComponent<Weapon>() != null)
+        if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item) && hit.collider.gameObject.GetComponent<Weapon>() != null)
         {
             GameObject weapon = hit.collider.gameObject;
             weapon.GetComponent<Rigidbody>().isKinematic = true;

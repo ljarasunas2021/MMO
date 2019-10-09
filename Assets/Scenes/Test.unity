@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 48589265}
   - component: {fileID: 48589264}
   - component: {fileID: 48589269}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arch
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -1348,7 +1348,7 @@ GameObject:
   - component: {fileID: 276575203}
   - component: {fileID: 276575202}
   - component: {fileID: 276575207}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -4290,7 +4290,7 @@ GameObject:
   - component: {fileID: 419662968}
   - component: {fileID: 419662967}
   - component: {fileID: 419662971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -5055,7 +5055,7 @@ GameObject:
   - component: {fileID: 555678448}
   - component: {fileID: 555678447}
   - component: {fileID: 555678452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Icosphere
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -7392,31 +7392,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103036, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103026, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103028, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103030, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103032, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 103034, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 403036, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8449,7 +8449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8885,7 +8885,7 @@ GameObject:
   - component: {fileID: 1081549049}
   - component: {fileID: 1081549048}
   - component: {fileID: 1081549053}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Torus
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -20604,7 +20604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20806,7 +20806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: -0.5943789, z: -3.202057}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21610,7 +21610,7 @@ GameObject:
   - component: {fileID: 1724971789}
   - component: {fileID: 1724971788}
   - component: {fileID: 1724971793}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -27598,7 +27598,7 @@ GameObject:
   - component: {fileID: 2024608103}
   - component: {fileID: 2024608102}
   - component: {fileID: 2024608107}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pipe
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
@@ -29154,7 +29154,7 @@ GameObject:
   - component: {fileID: 2133377047}
   - component: {fileID: 2133377046}
   - component: {fileID: 2133377051}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
