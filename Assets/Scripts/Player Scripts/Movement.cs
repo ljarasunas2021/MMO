@@ -238,6 +238,8 @@ public class Movement : NetworkBehaviour
     private void SetValuesIfMidAir(bool space)
     {
         // check if hitting anything and if so set current state appropriately
+        bool touchingGround = !(Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0);
+
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.player);
@@ -253,7 +255,7 @@ public class Movement : NetworkBehaviour
         }
         else if (currentState != States.defInAir)
         {
-            if (Physics.OverlapSphere(transform.position, sphereOverlapRadius, LayerMaskController.player).Length == 0)
+            if (!touchingGround)
             {
                 SetCurrentState(States.defInAir);
             }
@@ -270,7 +272,7 @@ public class Movement : NetworkBehaviour
 
         characterController.Move(Vector3.up * velocityY);
 
-        Debug.Log(velocityY);
+        Debug.Log(velocityY + " " + hit.distance);
 
         if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
         else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
@@ -291,6 +293,11 @@ public class Movement : NetworkBehaviour
         isDead = dead;
     }
     #endregion
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, sphereOverlapRadius);
+    }
 }
 
 #region States
