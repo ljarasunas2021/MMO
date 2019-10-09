@@ -244,10 +244,13 @@ public class Weapon : MonoBehaviour
                 }
 
                 PlayerHealth health = hit.collider.GetComponent<PlayerHealth>();
-
-                if (bulletHolesEnabled) bulletHoleController.CreateBulletHole(hit);
-
                 if (health != null) health.SubtractHealth(damage);
+
+                if (bulletHolesEnabled)
+                {
+                    AllowBulletHoles allowBulletHoles = hit.collider.gameObject.GetComponent<AllowBulletHoles>();
+                    if (allowBulletHoles != null) bulletHoleController.CreateBulletHole(hit, allowBulletHoles.bulletHoleType);
+                }
 
                 if (makeHitEffects) CreateHitEffects(hit);
 

@@ -1150,14 +1150,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 48589263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 48589263}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,14 +4112,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 276575201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 276575201}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: eea4fa9e05a5afb4c9335e144f8961f1, type: 3}
 --- !u!43 &418065780
 Mesh:
   m_ObjectHideFlags: 0
@@ -4909,14 +4901,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 419662965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 419662965}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -7311,14 +7299,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 555678446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 555678446}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
 --- !u!1 &561541693
 GameObject:
   m_ObjectHideFlags: 3
@@ -7613,6 +7597,10 @@ PrefabInstance:
     - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: bulletHolesEnabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403024, guid: c656de207260bf54883c10f990df79db, type: 3}
+      propertyPath: spitShells
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403026, guid: c656de207260bf54883c10f990df79db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20539,14 +20527,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081549047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 1081549047}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: d9f28cf20af3a5346b4213274e54aa74, type: 3}
 --- !u!1 &1107062008
 GameObject:
   m_ObjectHideFlags: 3
@@ -27210,14 +27194,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1724971787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 1724971787}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: 92062f2e3e723254db326e0b31028d43, type: 3}
 --- !u!43 &1733977314
 Mesh:
   m_ObjectHideFlags: 0
@@ -28580,14 +28560,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2024608101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 2024608101}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: b70d6fd18250bb8499464c3434311310, type: 3}
 --- !u!1 &2062105279
 GameObject:
   m_ObjectHideFlags: 3
@@ -28818,10 +28794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183df845f89f4498f97503f5173cd56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHole: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}
-  maxBullets: 50
   secondsUntilDestroy: 3
-  bulletHoles: []
 --- !u!4 &2099857706
 Transform:
   m_ObjectHideFlags: 0
@@ -31892,11 +31865,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133377045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fddcd6a4f47c2248b6405c17e1e60ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 14798e8a9e7dd420a8bd434eb21866cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHoleMesh: {fileID: 2133377045}
-  usePooling: 1
-  lifetime: 28
-  startFadeTime: 10
-  fadeRate: 0.001
+  bulletHoleType: {fileID: 100000, guid: aaa65fa1bf6b0944ba2bc797604a8bfb, type: 3}

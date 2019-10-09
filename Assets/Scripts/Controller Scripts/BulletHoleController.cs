@@ -4,40 +4,71 @@ using UnityEngine;
 
 public class BulletHoleController : MonoBehaviour
 {
-    public GameObject bulletHole;
-    public int maxBullets;
     public int secondsUntilDestroy;
-    public List<GameObject> bulletHoles;
+    public Dictionary<GameObject, BulletHolesAndIndex> bulletHoles = new Dictionary<GameObject, BulletHolesAndIndex>();
 
     private int inactiveHoleIndex = 0;
 
-    private void Start()
+    public void CreateBulletHole(RaycastHit hit, GameObject bulletHoleType)
     {
-        for (int i = 0; i < maxBullets; i++)
+        GameObject hole;
+        BulletHolesAndIndex bulletHolesAndIndex;
+        if (bulletHoles.ContainsKey(bulletHoleType))
         {
-            GameObject hole = Instantiate(bulletHole, transform);
-            bulletHoles.Add(hole);
-            hole.SetActive(false);
-        }
-    }
+            bulletHolesAndIndex = bulletHoles[bulletHoleType];
 
-    public void CreateBulletHole(RaycastHit hit)
-    {
-        Debug.Log(hit.normal);
-        GameObject hole = bulletHoles[inactiveHoleIndex];
-        hole.transform.position = hit.point + hit.normal * 0.2f;
+            if (bulletHolesAndIndex.bulletHoles.Count < bulletHolesAndIndex.inactiveHoleIndex)
+            {
+                hole = bulletHolesAndIndex.bulletHoles[bulletHolesAndIndex.inactiveHoleIndex];
+            }
+            else
+            {
+                hole = SpawnBulletHole(bulletHoleType);
+                bulletHolesAndIndex.bulletHoles.Add(hole);
+            }
+        }
+        else
+        {
+            bulletHoles[bulletHoleType] = new BulletHolesAndIndex();
+            bulletHolesAndIndex = bulletHoles[bulletHoleType];
+            hole = SpawnBulletHole(bulletHoleType);
+            bulletHolesAndIndex.bulletHoles.Add(hole);
+        }
+        hole.transform.position = hit.point + hit.normal * 0.01f;
         hole.transform.rotation = Quaternion.LookRotation(hit.normal);
         hole.SetActive(true);
-        inactiveHoleIndex++;
-        StartCoroutine(DestroyBulletHole(hole));
+        Debug.Log(bulletHolesAndIndex.inactiveHoleIndex);
+        bulletHolesAndIndex.inactiveHoleIndex += 1;
+        StartCoroutine(DestroyBulletHole(hole, bulletHoleType));
     }
 
-    private IEnumerator DestroyBulletHole(GameObject hole)
+    private IEnumerator DestroyBulletHole(GameObject hole, GameObject bulletHoleType)
     {
         yield return new WaitForSeconds(secondsUntilDestroy);
         hole.SetActive(false);
-        bulletHoles.Remove(hole);
-        bulletHoles.Add(hole);
-        inactiveHoleIndex--;
+        BulletHolesAndIndex bulletHolesAndIndex = bulletHoles[bulletHoleType];
+        bulletHolesAndIndex.bulletHoles.Remove(hole);
+        bulletHolesAndIndex.bulletHoles.Add(hole);
+        bulletHolesAndIndex.inactiveHoleIndex--;
+    }
+
+    private GameObject SpawnBulletHole(GameObject bulletHoleType)
+    {
+        GameObject hole = Instantiate(bulletHoleType, transform);
+        hole.SetActive(false);
+        return hole;
+    }
+}
+
+[System.Serializable]
+public class BulletHolesAndIndex
+{
+    public List<GameObject> bulletHoles;
+    public int inactiveHoleIndex;
+
+    public BulletHolesAndIndex()
+    {
+        bulletHoles = new List<GameObject>();
+        inactiveHoleIndex = 0;
     }
 }
