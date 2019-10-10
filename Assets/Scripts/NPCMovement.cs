@@ -12,23 +12,28 @@ public class NPCMovement : MonoBehaviour {
     private CharacterController cc;
     private Vector3 toMove;
     private float speed = 5f;
+    private Animator animator;
 
     void Start() {
         GetRange();
        // cc = gameObject.GetComponent<CharacterController>();
+       animator = GetComponent<Animator>();
+       animator.SetBool("walking", false);
         toMove = transform.position;
     }
 
     void Update() {
-        int random = Random.Range(1, 1000);
+        int random = Random.Range(1, 100);
         if (random <= 2 && !moving) {
             toMove = new Vector3(Random.Range(minX, maxX), transform.position.y, Random.Range(minZ, maxZ));
             Debug.Log("toMove = " + toMove);
             // cc.Move(toMove);
             //transform.Translate(toMove);
             moving = true;
-            Vector3 facing = Vector3.RotateTowards(transform.forward, toMove, 0.0f, 0.0f);
-            transform.rotation = Quaternion.LookRotation(facing);
+            animator.SetBool("walking", true);
+            // Vector3 facing = Vector3.RotateTowards(transform.forward, toMove, 0.0f, 0.0f);
+            // transform.rotation = Quaternion.LookRotation(facing);
+            transform.LookAt(toMove);
             transform.position = Vector3.Slerp(transform.position, toMove, .1f);
             StartCoroutine(MoveNPC());
         }
@@ -64,5 +69,7 @@ public class NPCMovement : MonoBehaviour {
             yield return 0;
         }
         moving = false;
+        animator.SetBool("walking", false);
+        Debug.Log("moving set to false");
     }
 }
