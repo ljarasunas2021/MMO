@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BodyParts : MonoBehaviour
 {
-    public GameObject handR, head;
+    public GameObject handR, head, lockedCamFollow;
 }

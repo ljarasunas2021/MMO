@@ -5,12 +5,14 @@ using UnityEngine;
 ///<summary> Preform all actions related to player and the camera </summary>
 public class PlayerCameraManager : NetworkBehaviour
 {
-    private GameObject head;
+    private GameObject head, lockedCamFollow;
     private CameraModes currentCam;
 
     private CameraController cameraController;
     private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
     private CinemachineVirtualCamera lockedVirtual;
+    private Movement movement;
+    private BodyParts bodyParts;
 
     #region SetCameraAtStart
     ///<summary> Set the camera to follow you </summary>
@@ -20,8 +22,11 @@ public class PlayerCameraManager : NetworkBehaviour
 
         if (!isLocalPlayer) return;
 
-        head = GetComponent<BodyParts>().head;
+        bodyParts = GetComponent<BodyParts>();
+        head = bodyParts.head;
+        lockedCamFollow = bodyParts.lockedCamFollow;
         cameraController = Camera.main.GetComponent<CameraController>();
+        movement = GetComponent<Movement>();
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
         cinematicFreeLook.Follow = head.transform;
@@ -31,11 +36,11 @@ public class PlayerCameraManager : NetworkBehaviour
         closeUpFreeLook.Follow = head.transform;
         closeUpFreeLook.LookAt = head.transform;
 
-        lockedVirtual = cameraController.lockedCam.GetComponent<CinemachineVirtualCamera>();
-        lockedVirtual.Follow = head.transform;
-        lockedVirtual.LookAt = head.transform;
+        lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
+        lockedFreeLook.Follow = lockedCamFollow.transform;
+        lockedFreeLook.LookAt = lockedCamFollow.transform;
 
-        currentCam = CameraModes.cinematic;
+        ChangeCam(CameraModes.cinematic);
     }
     #endregion
 
@@ -47,25 +52,27 @@ public class PlayerCameraManager : NetworkBehaviour
             {
                 cinematicFreeLook.Priority = 1;
                 closeUpFreeLook.Priority = 0;
-                //lockedFreeLook.Priority = 0;
-                lockedVirtual.Priority = 0;
+                lockedFreeLook.Priority = 0;
+                //lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 1;
-                //lockedFreeLook.Priority = 0;
-                lockedVirtual.Priority = 0;
+                lockedFreeLook.Priority = 0;
+                //lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
-                //lockedFreeLook.Priority = 0;
-                lockedVirtual.Priority = 1;
+                lockedFreeLook.Priority = 1;
+                //lockedVirtual.Priority = 1;
             }
 
             currentCam = mode;
+
+            movement.SetCurrentCam(currentCam);
         }
     }
 
