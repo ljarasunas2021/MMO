@@ -61,6 +61,9 @@ public class Movement : NetworkBehaviour
     // running Jump
     public float maxRunningJumpHeight;
 
+    [Header("Camera Values")]
+    public float camRotOffset;
+
     // amount that ____ has moved towards its target value 
     // speed
     private float speedSmoothVelocity;
@@ -95,6 +98,7 @@ public class Movement : NetworkBehaviour
     private bool isDead = false;
     // player camera manager script
     private PlayerCameraManager playerCameraManager;
+    private CameraModes currentCam = CameraModes.cinematic;
     #endregion
 
     #region Initialize
@@ -189,7 +193,7 @@ public class Movement : NetworkBehaviour
     /// <param name = "camYRot"> what is the y rotation of the player </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot, Vector2 mousePos)
     {
-        if (playerCameraManager.ReturnCameraMode() != CameraModes.locked)
+        if (currentCam != CameraModes.locked)
         {
             // if the input doesn't equal zero, player can rotate
             if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
@@ -203,8 +207,7 @@ public class Movement : NetworkBehaviour
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            float xMousePos = Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1);
-            transform.Rotate(Vector3.zero + (Vector3)(Vector3.up * xMousePos * lockedCamRotSpeed));
+            transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.eulerAngles.y - camRotOffset, 0));
         }
     }
 
@@ -294,6 +297,11 @@ public class Movement : NetworkBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position, sphereOverlapRadius);
+    }
+
+    public void SetCurrentCam(CameraModes currentCam)
+    {
+        this.currentCam = currentCam;
     }
 }
 
