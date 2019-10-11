@@ -5,14 +5,31 @@ using UnityEngine;
 ///<summary> Preform all actions related to player and the camera </summary>
 public class PlayerCameraManager : NetworkBehaviour
 {
-    private GameObject head, lockedCamFollow;
+    #region Variables
+    // ____ body part
+    // head
+    private GameObject head;
+    // locked camera empty gameObject
+    private GameObject lockedCamFollow;
+
+    // current camera
     private CameraModes currentCam;
+    // camera controller script
 
     private CameraController cameraController;
-    private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
-    private CinemachineVirtualCamera lockedVirtual;
+    // ___ Free Look camera
+    // cinematic
+    private CinemachineFreeLook cinematicFreeLook;
+    // closeup
+    private CinemachineFreeLook closeUpFreeLook;
+    // locked
+    private CinemachineFreeLook lockedFreeLook;
+
+    // movement script
     private Movement movement;
+    // body parts script
     private BodyParts bodyParts;
+    #endregion
 
     #region SetCameraAtStart
     ///<summary> Set the camera to follow you </summary>
@@ -44,6 +61,9 @@ public class PlayerCameraManager : NetworkBehaviour
     }
     #endregion
 
+    #region ChangeCurrentCamera
+    ///<summary> Change current camera </summary>
+    ///<param name = "mode"> mode to switch to </param>
     public void ChangeCam(CameraModes mode)
     {
         if (mode != currentCam)
@@ -53,21 +73,18 @@ public class PlayerCameraManager : NetworkBehaviour
                 cinematicFreeLook.Priority = 1;
                 closeUpFreeLook.Priority = 0;
                 lockedFreeLook.Priority = 0;
-                //lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 1;
                 lockedFreeLook.Priority = 0;
-                //lockedVirtual.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
                 lockedFreeLook.Priority = 1;
-                //lockedVirtual.Priority = 1;
             }
 
             currentCam = mode;
@@ -75,16 +92,20 @@ public class PlayerCameraManager : NetworkBehaviour
             movement.SetCurrentCam(currentCam);
         }
     }
+    #endregion
 
-    public CameraModes ReturnCameraMode()
-    {
-        return currentCam;
-    }
+    #region ReturnCameraMode
+    ///<summary> return current camera </summary>
+    public CameraModes ReturnCameraMode() { return currentCam; }
+    #endregion
 }
 
+#region CameraModes
+///<summary> DIfferent camera modes</summary>
 public enum CameraModes
 {
     cinematic,
     closeUp,
     locked
 }
+#endregion

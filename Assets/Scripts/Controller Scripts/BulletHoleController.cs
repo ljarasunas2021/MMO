@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+///<summary> Control bullet holes </summary>
 public class BulletHoleController : MonoBehaviour
 {
+    #region Variables
+    // seconds until bullet hole is destroyed
     public int secondsUntilDestroy;
+    // list of materials and corresponding bullet holes
     public List<MaterialAndBulletHole> materialsAndBulletHoles = new List<MaterialAndBulletHole>();
 
+    // dictionary of corresponding material and bullet holes
     private Dictionary<Material, GameObject> materialAndBulletHolesDict = new Dictionary<Material, GameObject>();
+    // dictionary of bullet hole prefab and list of bullet holes
     private Dictionary<GameObject, BulletHolesAndIndex> bulletHoles = new Dictionary<GameObject, BulletHolesAndIndex>();
+    #endregion
 
-    private int inactiveHoleIndex = 0;
-
+    #region  Initialize
+    /// <summary> Create dictionary materialAndBulletHolesDict </summary>
     private void Start()
     {
         foreach (MaterialAndBulletHole materialAndBulletHole in materialsAndBulletHoles)
@@ -19,17 +26,20 @@ public class BulletHoleController : MonoBehaviour
             materialAndBulletHolesDict[materialAndBulletHole.material] = materialAndBulletHole.bulletHole;
         }
     }
+    #endregion
 
+    #region BulletHoleVoids
+    ///<summary> Create a bullet hole using object pooling (disabling/enabling gameObjects rather than instantiating destroying them<summary>
+    ///<param name = "hit"> hit of raycast which will determine where it is placed </param>
+    ///<param name = "material"> material that raycast hit </param>
     public void CreateBulletHole(RaycastHit hit, Material material)
     {
-        Debug.Log(material);
-
         if (!materialAndBulletHolesDict.ContainsKey(material)) return;
 
         GameObject bulletHoleType = materialAndBulletHolesDict[material];
-
         GameObject hole;
         BulletHolesAndIndex bulletHolesAndIndex;
+
         if (bulletHoles.ContainsKey(bulletHoleType))
         {
             bulletHolesAndIndex = bulletHoles[bulletHoleType];
@@ -54,11 +64,13 @@ public class BulletHoleController : MonoBehaviour
         hole.transform.position = hit.point + hit.normal * 0.01f;
         hole.transform.rotation = Quaternion.LookRotation(hit.normal);
         hole.SetActive(true);
-        Debug.Log(bulletHolesAndIndex.inactiveHoleIndex);
         bulletHolesAndIndex.inactiveHoleIndex += 1;
         StartCoroutine(DestroyBulletHole(hole, bulletHoleType));
     }
 
+    ///<summary> Destroy a bullet hole </summary>
+    ///<param name = "hole"> bullet hole to destroy </param>
+    ///<param name = "bulletHoleType"> bullet hole prefab that corresponds to type of bullet hole </param>
     private IEnumerator DestroyBulletHole(GameObject hole, GameObject bulletHoleType)
     {
         yield return new WaitForSeconds(secondsUntilDestroy);
@@ -69,15 +81,20 @@ public class BulletHoleController : MonoBehaviour
         bulletHolesAndIndex.inactiveHoleIndex--;
     }
 
+    ///<summary> Spawn a new bullet hole </summary>
+    ///<param name = "bulletHoleType"> type of bullet hole that will be spawned </param>
     private GameObject SpawnBulletHole(GameObject bulletHoleType)
     {
         GameObject hole = Instantiate(bulletHoleType, transform);
         hole.SetActive(false);
         return hole;
     }
+    #endregion
 }
 
+#region BulletHolesAndIndex
 [System.Serializable]
+/// <summary> Contains a list of bullet holes and the inactive hole index </summary>
 public class BulletHolesAndIndex
 {
     public List<GameObject> bulletHoles;
@@ -89,10 +106,14 @@ public class BulletHolesAndIndex
         inactiveHoleIndex = 0;
     }
 }
+#endregion
 
+#region MaterialAndBulletHole
 [System.Serializable]
+///<summary> Contains a material and the corresponding bullet hole prefab<summary>
 public class MaterialAndBulletHole
 {
     public Material material;
     public GameObject bulletHole;
 }
+#endregion

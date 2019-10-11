@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 ///<summary> Set speed according to animation being played </summary>
 public class AnimationMomentum : StateMachineBehaviour

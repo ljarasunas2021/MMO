@@ -81,6 +81,7 @@ public class Movement : NetworkBehaviour
     private float targetRotation;
     // value thats used as parameter in locomotion blend tree
     private float locomotionBlendVal;
+    // value that used as direction parameter in locomotion blend tree
     private float locomotionDirection;
     // current anim state - each anim state is assigned its own index and this is that index
     private States currentState;
@@ -94,10 +95,9 @@ public class Movement : NetworkBehaviour
     private RagdollController ragdollController;
     // player health script
     private PlayerHealth playerHealth;
-    // if the player is dead
-    private bool isDead = false;
     // player camera manager script
     private PlayerCameraManager playerCameraManager;
+    // current camera
     private CameraModes currentCam = CameraModes.cinematic;
     #endregion
 
@@ -124,28 +124,25 @@ public class Movement : NetworkBehaviour
     /// <param name = "input"> input struct </summary>
     public void Move(InputStruct input)
     {
-        if (!isDead)
-        {
-            // get current state
-            currentState = (States)animator.GetInteger(Parameters.currentState);
+        // get current state
+        currentState = (States)animator.GetInteger(Parameters.currentState);
 
-            // find the input and a normalized input
-            Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
-            Vector2 inputDir = inputVector.normalized;
+        // find the input and a normalized input
+        Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
+        Vector2 inputDir = inputVector.normalized;
 
-            SetSpeed();
+        SetSpeed();
 
-            SetLocomotionBlendValue(inputVector, input.sprint);
+        SetLocomotionBlendValue(inputVector, input.sprint);
 
-            RotatePlayer(inputDir, input.freeRotateCamera, input.camYRot, input.mousePos);
+        RotatePlayer(inputDir, input.freeRotateCamera, input.mousePos);
 
-            CheckForJump(inputVector, input.jump);
+        CheckForJump(inputVector, input.jump);
 
-            SetValuesIfMidAir(input.jump);
+        SetValuesIfMidAir(input.jump);
 
-            // set the current state to equal the appropriate currentState
-            animator.SetInteger(Parameters.currentState, (int)currentState);
-        }
+        // set the current state to equal the appropriate currentState
+        animator.SetInteger(Parameters.currentState, (int)currentState);
     }
 
     /// <summary> Set the correct locomotion blend value </summary>
@@ -190,8 +187,7 @@ public class Movement : NetworkBehaviour
     ///<summary> Rotate the player accordingly </summary>
     ///<param name = "inputDir"> normalized input in the update function </param>
     /// <param name = "leftControl"> was left control pressed </param>
-    /// <param name = "camYRot"> what is the y rotation of the player </param>
-    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot, Vector2 mousePos)
+    private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
         if (currentCam != CameraModes.locked)
         {
@@ -199,7 +195,7 @@ public class Movement : NetworkBehaviour
             if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
             {
                 // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
+                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
             }
         }
@@ -281,28 +277,19 @@ public class Movement : NetworkBehaviour
 
     ///<summary> Set the current and previous state to their corresponding values </summary>
     ///<param name = "stateIndex"> Index of state that the current state should be equal to </param>
-    private void SetCurrentState(States state)
-    {
-        currentState = state;
-    }
+    private void SetCurrentState(States state) { currentState = state; }
     #endregion
 
-    #region SetDead
-    public void SetDead(bool dead)
-    {
-        isDead = dead;
-    }
+    #region DrawGizmos
+    ///<summary> draw gizmos to show overlapping sphere </summary>
+    private void OnDrawGizmos() { Gizmos.DrawSphere(transform.position, sphereOverlapRadius); }
     #endregion
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position, sphereOverlapRadius);
-    }
-
-    public void SetCurrentCam(CameraModes currentCam)
-    {
-        this.currentCam = currentCam;
-    }
+    #region SetCurrentCam
+    ///<summary> set the current camera </summary>
+    ///<param name = "currentCam"> current camera </param>
+    public void SetCurrentCam(CameraModes currentCam) { this.currentCam = currentCam; }
+    #endregion
 }
 
 #region States
