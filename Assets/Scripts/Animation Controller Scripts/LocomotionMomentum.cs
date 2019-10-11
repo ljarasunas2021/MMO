@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LocomotionMomentum : StateMachineBehaviour
 {
     #region Variables
+    // list of motions with their speed
     public LocomotionMotion[] motions;
 
     [Header("Smooth Times")]
@@ -16,11 +17,14 @@ public class LocomotionMomentum : StateMachineBehaviour
     // target speed velocity should reach
     private float targetSpeed;
 
+    // a dictionary that every double from -1 to 1 and gives an upper and lower bound for locomotion blend values with the corresponding speeds to the bounds
     private Dictionary<double, BoundsAndSpeed> locomotionBlendDict = new Dictionary<double, BoundsAndSpeed>();
+    // a dictionary that every double from -1 to 1 and gives an upper and lower bound for locomotion direction values with the corresponding speeds to the bounds
     private Dictionary<double, BoundsAndSpeed> locomotionDirDict = new Dictionary<double, BoundsAndSpeed>();
-
     #endregion
 
+    #region Initialize
+    /// <summary> Set up dictionaries above </summary>
     private void Awake()
     {
         for (double i = -1; i < 1; i += 0.1)
@@ -87,9 +91,11 @@ public class LocomotionMomentum : StateMachineBehaviour
             locomotionDirDict.Add((double)i, new BoundsAndSpeed(lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed));
         }
     }
+    #endregion
 
     #region SetSpeed
-    ///<summary> Set speed of player based on locomotion blend value
+    ///<summary> Set speed of player based on locomotion blend and dir values </summary>
+    // idea is that you find the target locomotion blend and dir value, find most nearby motions and linearly find target speed based on those nearby motions and the speeds of those motions
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
@@ -108,13 +114,19 @@ public class LocomotionMomentum : StateMachineBehaviour
     }
     #endregion
 
+    #region ConvertToDouble
+    ///<summary> Convert float to double </summary>
+    ///<param name = "i"> float to be converted </param>
     private double ConvertToDouble(float i)
     {
         return Mathf.Round(i * 10) / 10;
     }
+    #endregion
 }
 
+#region LocomotionMomentum
 [System.Serializable]
+///<summary> motion with corresponding speed </summary>
 public class LocomotionMotion
 {
     public string name;
@@ -122,7 +134,10 @@ public class LocomotionMotion
     public float locomotionDirValue;
     public Vector2 speed;
 }
+#endregion
 
+#region BoundsAndSpeed
+/// <summary> used to find upper and lower bound around a double from -1 to 1 </summary>
 public class BoundsAndSpeed
 {
     public float lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed;
@@ -135,3 +150,4 @@ public class BoundsAndSpeed
         this.upperBoundSpeed = upperBoundSpeed;
     }
 }
+#endregion

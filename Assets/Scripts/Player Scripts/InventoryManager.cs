@@ -1,28 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+///<summary> Manage the player's inventory</summary>
 public class InventoryManager : MonoBehaviour
 {
+    #region Variables
+    // deafult inventory image
     public Image inventoryImage;
-
+    // vertical slots in inventory count
     public int slotsInVertical;
-
+    // space between each slot
     public float spaceBetweenSlots;
-
+    // if the inventory is showing
     private bool inventoryEnabled = false;
-
+    // width / height of the inventory image
     private float inventoryImageWidth, inventoryImageHeight;
-
+    // image script of the inventory
     private Image imageScript;
-
-    private GameObject canvas, inventory;
-
+    // the canvas gameobject 
+    private GameObject canvas;
+    // the inventory gameObject
+    private GameObject inventory;
+    // the rect transform component of the inventory
     private RectTransform rT;
-
+    // a list of all of the current inventory items
     private List<InventoryItemAndIcon> inventoryItems = new List<InventoryItemAndIcon>();
+    #endregion
 
+    #region Initialize
+    ///<summary> Set components </summary>
     private void Start()
     {
         canvas = GameObject.Find("Canvas").gameObject;
@@ -35,7 +42,10 @@ public class InventoryManager : MonoBehaviour
         inventoryImageWidth = inventoryImageHeight;
         inventoryImage.GetComponent<RectTransform>().sizeDelta = new Vector2(inventoryImageWidth, inventoryImageHeight);
     }
+    #endregion
 
+    #region InventoryVoids
+    ///<summary> Change if the inventory is shown or not shown</summary>
     public void ChangeEnabled()
     {
         inventoryEnabled = !inventoryEnabled;
@@ -44,6 +54,7 @@ public class InventoryManager : MonoBehaviour
         else RemoveInventory();
     }
 
+    ///<summary> Show the inventory</summary>
     private void ShowInventory()
     {
         imageScript.enabled = true;
@@ -62,10 +73,7 @@ public class InventoryManager : MonoBehaviour
             Vector3 localPosition = new Vector3(xPos, yPos, 0);
             Image image = Instantiate(inventoryImage, localPosition, Quaternion.Euler(Vector3.zero), inventory.transform);
             image.sprite = inventoryItems[i].icon;
-            if ((i + 1) % slotsInVertical != 0)
-            {
-                currentHeight -= spaceBetweenSlots + inventoryImageHeight;
-            }
+            if ((i + 1) % slotsInVertical != 0) { currentHeight -= spaceBetweenSlots + inventoryImageHeight; }
             else
             {
                 currentWidth -= inventoryImageWidth + spaceBetweenSlots;
@@ -76,23 +84,22 @@ public class InventoryManager : MonoBehaviour
         rT.sizeDelta = new Vector3(Screen.width - currentWidth, Screen.height, 0);
     }
 
+    ///<summary> Hide the inventory</summary>
     private void RemoveInventory()
     {
         imageScript.enabled = false;
 
-        for (int i = 0; i < inventory.transform.childCount; i++)
-        {
-            Destroy(inventory.transform.GetChild(i).gameObject);
-        }
+        for (int i = 0; i < inventory.transform.childCount; i++) { Destroy(inventory.transform.GetChild(i).gameObject); }
     }
 
-    public void AddInventoryItem(GameObject item, Sprite icon)
-    {
-        inventoryItems.Add(new InventoryItemAndIcon(item, icon));
-    }
+    ///<summary> Add item to inventory</summary>
+    public void AddInventoryItem(GameObject item, Sprite icon) { inventoryItems.Add(new InventoryItemAndIcon(item, icon)); }
+    #endregion
 }
 
+#region InventoryItemAndIcon
 [System.Serializable]
+///<summary> The inventory item and its icon </summary>
 public class InventoryItemAndIcon
 {
     public GameObject item;
@@ -104,3 +111,4 @@ public class InventoryItemAndIcon
         this.icon = icon;
     }
 }
+#endregion

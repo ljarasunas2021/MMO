@@ -1,8 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+///<summary> Contains references to important body parts </summary>
 public class BodyParts : MonoBehaviour
 {
-    public GameObject handR, head, lockedCamFollow;
+    //Gameobject reference to the 
+    // handR
+    public GameObject handR;
+    // head
+    public GameObject head;
+    // locked Camera Empty Gameobject (used for positioning the locked cam)
+    public GameObject lockedCamFollow;
 }
