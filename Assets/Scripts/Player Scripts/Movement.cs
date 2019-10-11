@@ -235,9 +235,6 @@ public class Movement : NetworkBehaviour
     /// <param name = "space"> if the player presses space </param>
     private void SetValuesIfMidAir(bool space)
     {
-        // check if hitting anything and if so set current state appropriately
-        bool touchingGround = !(Physics.OverlapSphere(transform.position, sphereOverlapRadius, 1 << LayerMaskController.environment).Length == 0);
-
         RaycastHit hit;
         Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, 1 << LayerMaskController.environment);
@@ -251,24 +248,20 @@ public class Movement : NetworkBehaviour
                 else SetCurrentState(States.hardLanding);
             }
         }
-        else if (currentState != States.defInAir)
-        {
-            if (!touchingGround)
-            {
-                SetCurrentState(States.defInAir);
-            }
-        }
+        else if (currentState != States.defInAir && velocityY != 0) { SetCurrentState(States.defInAir); }
 
-        if (velocityY < -0.4 && hit.distance < height && hit.distance != 0)
+        if (velocityY < -0.4 && hit.distance != 0)
         {
             playerHealth.SubtractHealth(100);
             ragdollController.CmdBecomeRagdoll();
         }
 
-        if (((hit.distance < height && hit.distance != 0) || (characterController.isGrounded)) && !space) velocityY = 0;
+        if (characterController.isGrounded) velocityY = 0;
         else velocityY += Time.deltaTime * gravity;
 
         characterController.Move(Vector3.up * velocityY);
+
+        if (characterController.isGrounded) velocityY = 0;
 
         if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
         else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
