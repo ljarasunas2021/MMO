@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     public Auto auto = Auto.Full; // How does this weapon fire - semi-auto or full-auto
 
     public GameObject weaponModel; // The actual mesh for this weapon
-    public bool shootFromMiddleOfScreen;
+    public bool shootFromMiddleOfScreen = true;
     public Transform raycastStartSpot; // The spot that the raycasting weapon system should use as an origin for rays
     public float delayBeforeFire = 0.0f; // An optional delay that causes the weapon to fire a specified amount of time after it normally would (0 for no delay)
 
@@ -107,6 +107,8 @@ public class Weapon : MonoBehaviour
         fireTimer = 0.0f;
 
         currentAmmo = ammoCapacity;
+
+        if (shootFromMiddleOfScreen) raycastStartSpot = Camera.main.transform;
     }
 
     void Update()
@@ -124,6 +126,8 @@ public class Weapon : MonoBehaviour
             weaponModel.transform.position = Vector3.Lerp(weaponModel.transform.position, transform.position, recoilRecoveryRate * Time.deltaTime);
             weaponModel.transform.rotation = Quaternion.Lerp(weaponModel.transform.rotation, transform.rotation, recoilRecoveryRate * Time.deltaTime);
         }
+
+        Debug.Log(shootFromMiddleOfScreen);
     }
 
     // Checks for user input to use the weapons - only if this weapon is player-controlled

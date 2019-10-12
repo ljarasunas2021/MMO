@@ -50,11 +50,7 @@ public class WeaponEditor : Editor
             }
 
             weapon.shootFromMiddleOfScreen = EditorGUILayout.Toggle(new GUIContent("Raycast From Middle Of Screen"), weapon.shootFromMiddleOfScreen);
-            if (weapon.shootFromMiddleOfScreen)
-            {
-                weapon.raycastStartSpot = Camera.main.transform;
-            }
-            else
+            if (!weapon.shootFromMiddleOfScreen)
             {
                 weapon.raycastStartSpot = (Transform)EditorGUILayout.ObjectField("Raycasting Point", weapon.raycastStartSpot, typeof(Transform), true);
             }
