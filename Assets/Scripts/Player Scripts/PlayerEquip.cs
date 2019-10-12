@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
 ///<summary> Allow the player to equip items </summary>
-public class PlayerEquip : MonoBehaviour
+public class PlayerEquip : NetworkBehaviour
 {
     #region initialize
+    public GameObject sceneObjectPrefab;
+
+    [SyncVar(hook = nameof(ChangeItem))]
+    private int equippedItem = -1;
+    private GameObject equippedItemGO;
     // max grab distance
     public int maxGrabDistance;
     // body parts script
@@ -18,6 +24,7 @@ public class PlayerEquip : MonoBehaviour
     private Animator animator;
     // player camera manager script
     private PlayerCameraManager playerCameraManager;
+    private GameObject[] itemPrefabs;
     #endregion
 
     #region Initialize
@@ -29,9 +36,36 @@ public class PlayerEquip : MonoBehaviour
         inventoryManager = GetComponent<InventoryManager>();
         inputHandler = GetComponent<InputHandler>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
+        itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
         handR = bodyParts.handR;
     }
     #endregion
+
+    private void ChangeItem(int itemIndex)
+    {
+        //while (handR.transform.childCount > 0) DestroyImmediate(handR.transform.GetChild(0).gameObject);
+
+        if (itemIndex != -1)
+        {
+            equippedItemGO = Instantiate(itemPrefabs[itemIndex], handR.transform);
+            Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
+            equippedItemGO.transform.localPosition = weaponScript.startPos;
+            equippedItemGO.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
+        }
+    }
+
+    [Command]
+    void CmdChangeEquippedItem(GameObject selectedItem)
+    {
+        equippedItem = FindIndex(selectedItem);
+    }
+
+    private int FindIndex(GameObject item)
+    {
+        int index = -1;
+        for (int i = 0; i < itemPrefabs.Length; i++) if (item.name.Contains(itemPrefabs[i].name)) index = i;
+        return index;
+    }
 
     #region Grab
     ///<summary> Attempt a grab <summary>
@@ -42,19 +76,23 @@ public class PlayerEquip : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item) && hit.collider.gameObject.GetComponent<Weapon>() != null)
         {
-            GameObject weapon = hit.collider.gameObject;
-            weapon.GetComponent<Rigidbody>().isKinematic = true;
-            weapon.transform.SetParent(handR.transform);
-            Weapon weaponScript = weapon.GetComponent<Weapon>();
-            weaponScript.enabled = true;
-            weapon.transform.localPosition = weaponScript.startPos;
-            weapon.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
-            inventoryManager.AddInventoryItem(weapon, null);
-            inputHandler.ChangeItemHolding(new ItemHolding(weapon, ItemType.ranged));
+            GameObject item = hit.collider.gameObject;
+            CmdChangeEquippedItem(item);
+            //)
+            equippedItemGO.GetComponent<Weapon>().enabled = true;
+            inventoryManager.AddInventoryItem(equippedItemGO, null);
+            inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, ItemType.ranged));
             animator.SetInteger(Parameters.upperBodyState, 2);
             playerCameraManager.ChangeCam(CameraModes.locked);
+            //CmdSetWeaponRigidBody(item, true);
         }
     }
+
+    [Command]
+    ///<summary> Used to set rigidbody </summary>
+    ///<param name = "weapon"> rigidbody's gameObject </param>
+    ///<param name = "isKinematic"> value to set is kinematic to </param>
+    private void CmdSetWeaponRigidBody(GameObject weapon, bool isKinematic) { weapon.transform.GetComponent<Rigidbody>().isKinematic = isKinematic; }
     #endregion
 }
 

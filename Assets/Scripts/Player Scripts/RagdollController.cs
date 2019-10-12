@@ -27,12 +27,18 @@ public class RagdollController : NetworkBehaviour
     ///<summary> Become ragdoll </summary>
     public void CmdBecomeRagdoll()
     {
+        RpcBecomeRagdoll();
         animator.enabled = false;
         characterController.detectCollisions = false;
-        foreach (Rigidbody bodyPart in bodyParts)
-        {
-            bodyPart.isKinematic = false;
-        }
+        foreach (Rigidbody bodyPart in bodyParts) bodyPart.isKinematic = false;
+    }
+
+    [ClientRpc]
+    ///<summary> Make sure there is no anim on the player </summary>
+    private void RpcBecomeRagdoll()
+    {
+        animator.enabled = false;
+        characterController.detectCollisions = false;
     }
     #endregion
 }
