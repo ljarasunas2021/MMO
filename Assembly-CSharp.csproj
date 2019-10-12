@@ -77,9 +77,9 @@
      <Compile Include="Assets\Scripts\Controller Scripts\BulletHoleController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CanvasManager.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\EffectsPrefabsController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\ItemPrefabsController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\LayerMaskController.cs" />
-     <Compile Include="Assets\Scripts\Other\AllowBulletHoles.cs" />
      <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\FootIK.cs" />
@@ -92,7 +92,6 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerWallTraversal.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerWeapon.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
-     <Compile Include="Assets\Scripts\Weapon Scripts\SceneObject.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />

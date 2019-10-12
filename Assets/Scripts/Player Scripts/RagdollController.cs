@@ -11,6 +11,7 @@ public class RagdollController : NetworkBehaviour
     private Animator animator;
     // character controller of player
     private CharacterController characterController;
+    // array of the network children on the player go
     private NetworkTransformChild[] ntChildren;
     #endregion
 

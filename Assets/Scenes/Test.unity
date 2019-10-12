@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1830042, z: -1.301913}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7693,7 +7693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1830042, z: -1.301913}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7987,7 +7987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1830042, z: -1.301913}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8765,7 +8765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.689846, z: -4.763122}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20983,7 +20983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.689846, z: -4.763122}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21185,7 +21185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 4.689846, z: -4.763122}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -29258,6 +29258,7 @@ GameObject:
   - component: {fileID: 2099857705}
   - component: {fileID: 2099857707}
   - component: {fileID: 2099857708}
+  - component: {fileID: 2099857709}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -29334,6 +29335,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6970fb2a8d13ac942aba001469e49f5e, type: 3}
   - {fileID: 8300000, guid: e5c3dd3dda2747c498244d938aff0d00, type: 3}
   - {fileID: 8300000, guid: 513b2b54a739b4243af56f6fd1419b69, type: 3}
+--- !u!114 &2099857709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099857704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7619307fcf324573af7b7b544d01795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefabs:
+  - {fileID: 100002, guid: e840492206edf364baccc15150e2cc63, type: 3}
+  - {fileID: 100002, guid: c109a314fe7c44240a4b14cc569cb261, type: 3}
+  - {fileID: 100002, guid: 0c631565793959f47a2464ec266aca7c, type: 3}
 --- !u!1 &2124331032
 GameObject:
   m_ObjectHideFlags: 3

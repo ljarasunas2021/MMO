@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerEquip : NetworkBehaviour
 {
     #region initialize
+    // scene object
     public GameObject sceneObjectPrefab;
-
     [SyncVar(hook = nameof(ChangeItem))]
+    // equipped item index
     private int equippedItem = -1;
+    // equipped item gameObject
     private GameObject equippedItemGO;
     // max grab distance
     public int maxGrabDistance;
@@ -24,6 +26,7 @@ public class PlayerEquip : NetworkBehaviour
     private Animator animator;
     // player camera manager script
     private PlayerCameraManager playerCameraManager;
+    // array of item prefabs
     private GameObject[] itemPrefabs;
     #endregion
 
@@ -41,6 +44,9 @@ public class PlayerEquip : NetworkBehaviour
     }
     #endregion
 
+    #region ChangingItemBehaviour
+    ///<summary> Make it so that the current item is visible based on that item's index </summary>
+    ///<param name = "itemIndex"> Index of item that will be made visible </param>
     private void ChangeItem(int itemIndex)
     {
         //while (handR.transform.childCount > 0) DestroyImmediate(handR.transform.GetChild(0).gameObject);
@@ -55,17 +61,19 @@ public class PlayerEquip : NetworkBehaviour
     }
 
     [Command]
-    void CmdChangeEquippedItem(GameObject selectedItem)
-    {
-        equippedItem = FindIndex(selectedItem);
-    }
+    ///<summary> Change the equipped item </summary>
+    ///<param name = "selectedItem"> Item to make the index of </param>
+    void CmdChangeEquippedItem(GameObject selectedItem) { equippedItem = FindIndex(selectedItem); }
 
+    ///<summary> Find the index of the gameObject in the prefab array </summary>
+    ///<param name = "item"> item to get the index of </param>
     private int FindIndex(GameObject item)
     {
         int index = -1;
         for (int i = 0; i < itemPrefabs.Length; i++) if (item.name.Contains(itemPrefabs[i].name)) index = i;
         return index;
     }
+    #endregion
 
     #region Grab
     ///<summary> Attempt a grab <summary>
