@@ -31,6 +31,7 @@ public class RagdollController : NetworkBehaviour
         animator.enabled = false;
         characterController.detectCollisions = false;
         foreach (Rigidbody bodyPart in bodyParts) bodyPart.isKinematic = false;
+        EnableNTS();
     }
 
     [ClientRpc]
@@ -39,6 +40,15 @@ public class RagdollController : NetworkBehaviour
     {
         animator.enabled = false;
         characterController.detectCollisions = false;
+        EnableNTS();
+    }
+
+    private void EnableNTS()
+    {
+        foreach (NetworkTransformChild child in transform.GetComponents<NetworkTransformChild>())
+        {
+            child.enabled = true;
+        }
     }
     #endregion
 }

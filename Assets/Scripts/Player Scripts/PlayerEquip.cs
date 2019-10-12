@@ -78,13 +78,12 @@ public class PlayerEquip : NetworkBehaviour
         {
             GameObject item = hit.collider.gameObject;
             CmdChangeEquippedItem(item);
-            //)
+            Destroy(item.transform.parent.gameObject);
             equippedItemGO.GetComponent<Weapon>().enabled = true;
             inventoryManager.AddInventoryItem(equippedItemGO, null);
             inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, ItemType.ranged));
             animator.SetInteger(Parameters.upperBodyState, 2);
             playerCameraManager.ChangeCam(CameraModes.locked);
-            //CmdSetWeaponRigidBody(item, true);
         }
     }
 
