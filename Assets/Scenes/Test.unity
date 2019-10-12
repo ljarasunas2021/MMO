@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: 1, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -260,7 +260,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh99356
+  m_Name: pb_Mesh134838
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7693,7 +7693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: 1, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7987,7 +7987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: 1, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8765,7 +8765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20983,7 +20983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21185,7 +21185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -29259,6 +29259,7 @@ GameObject:
   - component: {fileID: 2099857707}
   - component: {fileID: 2099857708}
   - component: {fileID: 2099857709}
+  - component: {fileID: 2099857710}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -29278,6 +29279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183df845f89f4498f97503f5173cd56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncInterval: 0.1
   secondsUntilDestroy: 3
   materialsAndBulletHoles:
   - material: {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
@@ -29351,6 +29353,22 @@ MonoBehaviour:
   - {fileID: 100002, guid: e840492206edf364baccc15150e2cc63, type: 3}
   - {fileID: 100002, guid: c109a314fe7c44240a4b14cc569cb261, type: 3}
   - {fileID: 100002, guid: 0c631565793959f47a2464ec266aca7c, type: 3}
+--- !u!114 &2099857710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099857704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 
+  m_SceneId: 2131830260
 --- !u!1 &2124331032
 GameObject:
   m_ObjectHideFlags: 3

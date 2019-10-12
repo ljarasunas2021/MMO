@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/lukas/Desktop/test80.app
+/Users/lukas/Desktop/test81.app
 SceneListBegin?
 Assets/Scenes/Test.unity
 SceneListEnd?
@@ -155,7 +155,7 @@ dbcfe217bfdf723bce52095db771915e Assembly-CSharp.dll:.VibrationDemo
 e1bbf0ab858085e38fae6b12ebbdcd35 Cinemachine.dll:Cinemachine.Timeline.CinemachineTrack
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 1cdde0c3d8008dfe81d27e4c955d4fe7 Cinemachine.dll:Cinemachine.CinemachineFramingTransposer
-2e0efcba1300f795b47c3b49a973ab13 Assembly-CSharp.dll:.BulletHoleController
+e21d66769624b6e07dd87979e6dbcab2 Assembly-CSharp.dll:.BulletHoleController
 435291bc132b7d588fcc76da0ca53bda Mirror.Examples.dll:Mirror.Examples.Additive.ZoneHandler
 215812ee6bd65fb24ad3e43e5a6d5586 Mirror.Components.dll:Mirror.NetworkLobbyManager
 4fb904d97f9fca2abadcabc1420b12f8 Assembly-CSharp.dll:.ChangeCanRotate
