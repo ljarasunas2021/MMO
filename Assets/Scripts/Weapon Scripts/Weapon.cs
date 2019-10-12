@@ -94,6 +94,7 @@ public class Weapon : MonoBehaviour
     private AudioSource audioSource;
     private BulletHoleController bulletHoleController;
     private AudioClip[] audioClipPrefabs;
+    private GameObject[] effectPrefabs;
     private GameObject user;
     private PlayerWeapon playerWeapon;
 
@@ -102,6 +103,7 @@ public class Weapon : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bulletHoleController = GameObject.FindObjectOfType<BulletHoleController>();
         audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
+        effectPrefabs = GameObject.FindObjectOfType<EffectsPrefabsController>().effectPrefabs;
 
         if (rateOfFire != 0) actualROF = 1.0f / rateOfFire;
         else actualROF = 0.01f;
@@ -305,18 +307,11 @@ public class Weapon : MonoBehaviour
         PlaySound(fireSound);
     }
 
-    private void CreateHitEffects(RaycastHit hit) { foreach (GameObject hitEffect in hitEffects) if (hitEffect != null) Instantiate(hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)); }
+    private void CreateHitEffects(RaycastHit hit) { foreach (GameObject hitEffect in hitEffects) if (hitEffect != null) playerWeapon.RpcCreateHitEffect(FindIndexEffect(hitEffect), hit.point, hit.normal); }
 
-    private void MakeMuzzleEffects()
-    {
-        GameObject muzfx = muzzleEffects[Random.Range(0, muzzleEffects.Length)];
-        if (muzfx != null) Instantiate(muzfx, muzzleEffectsPosition.position, muzzleEffectsPosition.rotation);
-    }
+    private void MakeMuzzleEffects() { playerWeapon.RpcMakeMuzzleEffect(FindIndexEffect(muzzleEffects[Random.Range(0, muzzleEffects.Length)]), muzzleEffectsPosition.position, muzzleEffectsPosition.eulerAngles); }
 
-    private void SplitShells()
-    {
-        playerWeapon.CmdSplitShells(shell, shellSpitPosition.position, shellSpitPosition.eulerAngles, shellSpitForce, shellForceRandom, shellSpitTorqueX, shellTorqueRandom, shellSpitTorqueY);
-    }
+    private void SplitShells() { playerWeapon.CmdSplitShells(shell, shellSpitPosition.position, shellSpitPosition.eulerAngles, shellSpitForce, shellForceRandom, shellSpitTorqueX, shellTorqueRandom, shellSpitTorqueY); }
 
     private void Reload()
     {
@@ -336,12 +331,19 @@ public class Weapon : MonoBehaviour
         weaponModel.transform.Rotate(new Vector3(-kickRot, 0, 0), Space.Self);
     }
 
-    private void PlaySound(AudioClip clip) { playerWeapon.RpcPlaySound(gameObject, FindIndex(clip)); }
+    private void PlaySound(AudioClip clip) { playerWeapon.RpcPlaySound(FindIndexAudioClip(clip)); }
 
-    public int FindIndex(AudioClip clip)
+    public int FindIndexAudioClip(AudioClip clip)
     {
         int index = -1;
         for (int i = 0; i < audioClipPrefabs.Length; i++) if (clip.name.Contains(audioClipPrefabs[i].name)) index = i;
+        return index;
+    }
+
+    public int FindIndexEffect(GameObject effect)
+    {
+        int index = -1;
+        for (int i = 0; i < effectPrefabs.Length; i++) if (effect.name.Contains(effectPrefabs[i].name)) index = i;
         return index;
     }
 

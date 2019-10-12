@@ -21,10 +21,7 @@ public class BulletHoleController : MonoBehaviour
     /// <summary> Create dictionary materialAndBulletHolesDict </summary>
     private void Start()
     {
-        foreach (MaterialAndBulletHole materialAndBulletHole in materialsAndBulletHoles)
-        {
-            materialAndBulletHolesDict[materialAndBulletHole.material] = materialAndBulletHole.bulletHole;
-        }
+        foreach (MaterialAndBulletHole materialAndBulletHole in materialsAndBulletHoles) materialAndBulletHolesDict[materialAndBulletHole.material] = materialAndBulletHole.bulletHole;
     }
     #endregion
 
