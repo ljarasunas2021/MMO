@@ -95,6 +95,7 @@ public class Weapon : MonoBehaviour
     private BulletHoleController bulletHoleController;
     private AudioClip[] audioClipPrefabs;
     private GameObject[] effectPrefabs;
+    private Material[] materialPrefabs;
     private GameObject user;
     private PlayerWeapon playerWeapon;
 
@@ -104,6 +105,7 @@ public class Weapon : MonoBehaviour
         bulletHoleController = GameObject.FindObjectOfType<BulletHoleController>();
         audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
         effectPrefabs = GameObject.FindObjectOfType<EffectsPrefabsController>().effectPrefabs;
+        materialPrefabs = bulletHoleController.ReturnMaterialPrefabs();
 
         if (rateOfFire != 0) actualROF = 1.0f / rateOfFire;
         else actualROF = 0.01f;
@@ -257,7 +259,7 @@ public class Weapon : MonoBehaviour
                 if (bulletHolesEnabled)
                 {
                     MeshRenderer colliderMR = hit.collider.gameObject.GetComponent<MeshRenderer>();
-                    if (colliderMR != null) bulletHoleController.CreateBulletHole(hit, hit.collider.gameObject.GetComponent<MeshRenderer>().sharedMaterial);
+                    if (colliderMR != null) bulletHoleController.RpcCreateBulletHole(FindIndexMaterial(colliderMR.sharedMaterial), hit.point, hit.normal);
                 }
 
                 if (makeHitEffects) CreateHitEffects(hit);
@@ -344,6 +346,13 @@ public class Weapon : MonoBehaviour
     {
         int index = -1;
         for (int i = 0; i < effectPrefabs.Length; i++) if (effect.name.Contains(effectPrefabs[i].name)) index = i;
+        return index;
+    }
+
+    public int FindIndexMaterial(Material material)
+    {
+        int index = -1;
+        for (int i = 0; i < materialPrefabs.Length; i++) if (material.name.Contains(materialPrefabs[i].name)) index = i;
         return index;
     }
 
