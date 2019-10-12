@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeLayerWeight.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\LocomotionMomentum.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\AudioPrefabsController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\BulletHoleController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CanvasManager.cs" />
@@ -89,6 +90,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerEquip.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerWallTraversal.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerWeapon.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\SceneObject.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />

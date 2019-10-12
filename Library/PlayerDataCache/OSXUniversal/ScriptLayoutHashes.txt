@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/lukas/Desktop/test77.app
+/Users/lukas/Desktop/test79.app
 SceneListBegin?
 Assets/Scenes/Test.unity
 SceneListEnd?
@@ -276,3 +276,5 @@ bb672c1a1f48aec4e5b72317cb89c191 Assembly-CSharp.dll:.Movement
 e20064639d73a8a299ec608a83a750aa Assembly-CSharp.dll:.RigidBodySpawn
 1c2a1931809bb3b1fe8e795e771b7f44 Assembly-CSharp.dll:.SceneObject
 4484d49e8891a99690bafe3ec7f3056a Assembly-CSharp.dll:.ItemPrefabsController
+e20064639d73a8a299ec608a83a750aa Assembly-CSharp.dll:.PlayerWeapon
+4a237dd56c5398fa19124a8f69b182f9 Assembly-CSharp.dll:.AudioPrefabsController

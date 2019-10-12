@@ -93,11 +93,15 @@ public class Weapon : MonoBehaviour
     private bool canFire = true; // Whether or not the weapon can currently fire (used for semi-auto weapons)
     private AudioSource audioSource;
     private BulletHoleController bulletHoleController;
+    private AudioClip[] audioClipPrefabs;
+    private GameObject user;
+    private PlayerWeapon playerWeapon;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         bulletHoleController = GameObject.FindObjectOfType<BulletHoleController>();
+        audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
 
         if (rateOfFire != 0) actualROF = 1.0f / rateOfFire;
         else actualROF = 0.01f;
@@ -126,8 +130,6 @@ public class Weapon : MonoBehaviour
             weaponModel.transform.position = Vector3.Lerp(weaponModel.transform.position, transform.position, recoilRecoveryRate * Time.deltaTime);
             weaponModel.transform.rotation = Quaternion.Lerp(weaponModel.transform.rotation, transform.rotation, recoilRecoveryRate * Time.deltaTime);
         }
-
-        Debug.Log(shootFromMiddleOfScreen);
     }
 
     // Checks for user input to use the weapons - only if this weapon is player-controlled
@@ -258,7 +260,7 @@ public class Weapon : MonoBehaviour
 
                 if (makeHitEffects) CreateHitEffects(hit);
 
-                if (hit.rigidbody) hit.rigidbody.AddForce(ray.direction * power * forceMultiplier);
+                if (hit.rigidbody) playerWeapon.CmdAddForce(hit.collider.gameObject, ray.direction * power * forceMultiplier);
             }
         }
 
@@ -313,10 +315,7 @@ public class Weapon : MonoBehaviour
 
     private void SplitShells()
     {
-        GameObject shellGO = Instantiate(shell, shellSpitPosition.position, shellSpitPosition.rotation) as GameObject;
-        Rigidbody shellRG = shellGO.GetComponent<Rigidbody>();
-        shellRG.AddForce(new Vector3(shellSpitForce + Random.Range(0, shellForceRandom), 0, 0), ForceMode.Impulse);
-        shellRG.AddTorque(new Vector3(shellSpitTorqueX + Random.Range(-shellTorqueRandom, shellTorqueRandom), shellSpitTorqueY + Random.Range(-shellTorqueRandom, shellTorqueRandom), 0), ForceMode.Impulse);
+        playerWeapon.CmdSplitShells(shell, shellSpitPosition.position, shellSpitPosition.eulerAngles, shellSpitForce, shellForceRandom, shellSpitTorqueX, shellTorqueRandom, shellSpitTorqueY);
     }
 
     private void Reload()
@@ -326,7 +325,7 @@ public class Weapon : MonoBehaviour
         PlaySound(reloadSound);
     }
 
-    private void DryFire() { audioSource.PlayOneShot(dryFireSound); }
+    private void DryFire() { PlaySound(dryFireSound); }
 
     private void Recoil()
     {
@@ -337,7 +336,20 @@ public class Weapon : MonoBehaviour
         weaponModel.transform.Rotate(new Vector3(-kickRot, 0, 0), Space.Self);
     }
 
-    private void PlaySound(AudioClip clip) { audioSource.PlayOneShot(clip); }
+    private void PlaySound(AudioClip clip) { playerWeapon.RpcPlaySound(gameObject, FindIndex(clip)); }
+
+    public int FindIndex(AudioClip clip)
+    {
+        int index = -1;
+        for (int i = 0; i < audioClipPrefabs.Length; i++) if (clip.name.Contains(audioClipPrefabs[i].name)) index = i;
+        return index;
+    }
+
+    public void SetUser(GameObject user)
+    {
+        this.user = user;
+        playerWeapon = user.GetComponent<PlayerWeapon>();
+    }
 }
 
 public enum WeaponType
