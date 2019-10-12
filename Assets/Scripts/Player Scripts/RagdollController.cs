@@ -11,6 +11,7 @@ public class RagdollController : NetworkBehaviour
     private Animator animator;
     // character controller of player
     private CharacterController characterController;
+    private NetworkTransformChild[] ntChildren;
     #endregion
 
     #region Initialize
@@ -19,6 +20,7 @@ public class RagdollController : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        ntChildren = transform.GetComponents<NetworkTransformChild>();
     }
     #endregion
 
@@ -43,12 +45,6 @@ public class RagdollController : NetworkBehaviour
         EnableNTS();
     }
 
-    private void EnableNTS()
-    {
-        foreach (NetworkTransformChild child in transform.GetComponents<NetworkTransformChild>())
-        {
-            child.enabled = true;
-        }
-    }
+    private void EnableNTS() { foreach (NetworkTransformChild child in ntChildren) child.enabled = true; }
     #endregion
 }
