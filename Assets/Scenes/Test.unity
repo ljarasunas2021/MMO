@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 22300179}
   - component: {fileID: 22300178}
   - component: {fileID: 22300177}
+  - component: {fileID: 22300180}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
-  m_CenterOnActivate: 0
+  m_CenterOnActivate: 1
 --- !u!114 &22300178
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: -0.2390663, z: -1.303119}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -237,6 +238,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &22300180
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22300175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_AmplitudeGain: 0.75
+  m_FrequencyGain: 0.75
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!43 &23622242
 Mesh:
   m_ObjectHideFlags: 0
@@ -7614,6 +7631,7 @@ GameObject:
   - component: {fileID: 558699802}
   - component: {fileID: 558699801}
   - component: {fileID: 558699800}
+  - component: {fileID: 558699803}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -7661,7 +7679,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
-  m_CenterOnActivate: 0
+  m_CenterOnActivate: 1
 --- !u!114 &558699801
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -7675,7 +7693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: -0.2390663, z: -1.303119}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7727,6 +7745,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &558699803
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558699798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_AmplitudeGain: 0.75
+  m_FrequencyGain: 0.75
+  mNoiseOffsets: {x: -572.24866, y: -412.72293, z: -834.8672}
 --- !u!1 &561541693
 GameObject:
   m_ObjectHideFlags: 3
@@ -7891,6 +7925,7 @@ GameObject:
   - component: {fileID: 772057515}
   - component: {fileID: 772057514}
   - component: {fileID: 772057513}
+  - component: {fileID: 772057516}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -7938,7 +7973,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
-  m_CenterOnActivate: 0
+  m_CenterOnActivate: 1
 --- !u!114 &772057514
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -7952,7 +7987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0, z: -1.3}
+  m_FollowOffset: {x: 0, y: -0.2390663, z: -1.303119}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8004,6 +8039,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &772057516
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772057511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_AmplitudeGain: 0.75
+  m_FrequencyGain: 0.75
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &845176896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8714,7 +8765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 1.997428, z: -5.075225}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20932,7 +20983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 1.997428, z: -5.075225}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21134,7 +21185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 1.997428, z: -5.075225}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
