@@ -103,6 +103,7 @@ public class BulletHoleController : NetworkBehaviour
     }
     #endregion
 
+    ///<summary> Return the material prefabs </summary>
     public Material[] ReturnMaterialPrefabs()
     {
         return materialPrefabs;
