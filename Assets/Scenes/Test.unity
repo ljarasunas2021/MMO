@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -1.3}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7693,7 +7693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -1.3}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7987,7 +7987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -1.3}
+  m_FollowOffset: {x: 0, y: 0, z: -1.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8066,6 +8066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneObject (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729793933798309162, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5729793933798309166, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
@@ -8765,7 +8770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20983,7 +20988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21185,7 +21190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 5.485354, z: -4.440549}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
