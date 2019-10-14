@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 598}
+  m_MinSize: {x: 950, y: 498}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -110,10 +110,10 @@ MonoBehaviour:
     y: 30
     width: 1280
     height: 706
-  m_MinSize: {x: 583, y: 548}
+  m_MinSize: {x: 583, y: 448}
   m_MaxSize: {x: 12008, y: 8048}
   vertical: 1
-  controlID: 160
+  controlID: 52
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,10 +135,10 @@ MonoBehaviour:
     y: 0
     width: 1280
     height: 706
-  m_MinSize: {x: 583, y: 548}
+  m_MinSize: {x: 583, y: 448}
   m_MaxSize: {x: 12008, y: 8048}
   vertical: 0
-  controlID: 161
+  controlID: 53
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,10 +160,10 @@ MonoBehaviour:
     y: 0
     width: 964
     height: 706
-  m_MinSize: {x: 306, y: 548}
+  m_MinSize: {x: 306, y: 448}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 162
+  controlID: 54
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,17 +183,17 @@ MonoBehaviour:
     y: 0
     width: 964
     height: 425
-  m_MinSize: {x: 302, y: 324}
+  m_MinSize: {x: 202, y: 224}
   m_MaxSize: {x: 4002, y: 4024}
-  m_ActualView: {fileID: 20}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 14}
   - {fileID: 13}
   - {fileID: 15}
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 3
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 3
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 90
+  controlID: 20
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -348,7 +348,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -412,9 +412,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -59.924683, y: 2.0209875, z: -55.12548}
+    m_Target: {x: 0, y: 2.23, z: 0}
     speed: 2
-    m_Value: {x: -59.924683, y: 2.0209875, z: -55.12548}
+    m_Value: {x: 0, y: 2.23, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -444,11 +444,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.18198854, y: -0.74735224, z: 0.22773142, w: -0.5970621}
     speed: 2
-    m_Value: {x: -0.18198854, y: -0.74735224, z: 0.22773142, w: -0.5970621}
+    m_Value: {x: 0.18198852, y: 0.7473522, z: -0.2277314, w: 0.59706205}
   m_Size:
-    m_Target: 35.44689
+    m_Target: 5.4174857
     speed: 2
-    m_Value: 35.44689
+    m_Value: 5.4174857
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -667,7 +667,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 501.99957}
     m_SelectedIDs: 92110000
     m_LastClickedID: 4498
-    m_ExpandedIDs: 00000000d60f0000c41000000c120000461200009c12000094130000c01300007e140000c8140000421500007e150000a8150000fc150000941600009c160000e01600008e180000a03c0000a23c0000a43c0000a63c0000a83c0000aa3c0000ac3c0000ae3c0000b03c0000b23c000000ca9a3b
+    m_ExpandedIDs: 00000000e40f0000d21000001a12000054120000aa120000a2130000ce1300008e140000d8140000521500008e150000b81500000c160000a4160000ac160000f01600009e180000023d0000043d0000063d0000083d00000a3d00000c3d00000e3d0000103d0000123d0000143d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -695,7 +695,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d60f0000c41000000c120000461200009c12000094130000c01300007e140000c8140000421500007e150000a8150000fc150000941600009c160000e01600008e180000a03c0000a23c0000a43c0000a63c0000a83c0000aa3c0000ac3c0000ae3c0000b03c0000b23c0000
+    m_ExpandedIDs: 00000000e40f0000d21000001a12000054120000aa120000a2130000ce1300008e140000d8140000521500008e150000b81500000c160000a4160000ac160000f01600009e180000023d0000043d0000063d0000083d00000a3d00000c3d00000e3d0000103d0000123d0000143d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c262c1329a02fa49b5cb4c297106f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 134, y: 29}
+  m_MinSize: {x: 129, y: 28}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: ProBuilder
