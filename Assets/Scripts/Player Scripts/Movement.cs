@@ -305,6 +305,14 @@ public enum States
     hangingFall = 13,
     hangToMuscleUp = 14
 }
+
+public enum UpperBodyStates
+{
+    none = 0,
+    pistolHold = 1,
+    shotgunHold = 2,
+    swordHold = 3
+}
 #endregion
 
 #region Parameters

@@ -5,7 +5,9 @@ using UnityEngine;
 // The Weapon class itself handles the weapon mechanics
 public class Weapon : MonoBehaviour
 {
-    public WeaponType type = WeaponType.Projectile;
+    public WeaponType type = WeaponType.Ranged;
+    public RangedWeaponType rangedType = RangedWeaponType.Projectile;
+    public RangedHoldType rangedHold = RangedHoldType.shotgun;
 
     public Vector3 startPos;
     public Vector3 startRot;
@@ -107,110 +109,122 @@ public class Weapon : MonoBehaviour
         effectPrefabs = GameObject.FindObjectOfType<EffectsPrefabsController>().effectPrefabs;
         materialPrefabs = bulletHoleController.ReturnMaterialPrefabs();
 
-        if (rateOfFire != 0) actualROF = 1.0f / rateOfFire;
-        else actualROF = 0.01f;
+        if (type == WeaponType.Ranged)
+        {
+            if (rateOfFire != 0) actualROF = 1.0f / rateOfFire;
+            else actualROF = 0.01f;
 
-        currentCrosshairSize = startingCrosshairSize;
+            currentCrosshairSize = startingCrosshairSize;
 
-        fireTimer = 0.0f;
+            fireTimer = 0.0f;
 
-        currentAmmo = ammoCapacity;
+            currentAmmo = ammoCapacity;
 
-        if (shootFromMiddleOfScreen) raycastStartSpot = Camera.main.transform;
+            if (shootFromMiddleOfScreen) raycastStartSpot = Camera.main.transform;
+        }
     }
 
     void Update()
     {
-        currentAccuracy = Mathf.Lerp(currentAccuracy, accuracy, accuracyRecoverRate * Time.deltaTime);
-
-        currentCrosshairSize = startingCrosshairSize + (accuracy - currentAccuracy) * 0.8f;
-
-        fireTimer += Time.deltaTime;
-
-        if (reloadAutomatically && currentAmmo <= 0) Reload();
-
-        if (recoil)
+        if (type == WeaponType.Ranged)
         {
-            weaponModel.transform.position = Vector3.Lerp(weaponModel.transform.position, transform.position, recoilRecoveryRate * Time.deltaTime);
-            weaponModel.transform.rotation = Quaternion.Lerp(weaponModel.transform.rotation, transform.rotation, recoilRecoveryRate * Time.deltaTime);
+            currentAccuracy = Mathf.Lerp(currentAccuracy, accuracy, accuracyRecoverRate * Time.deltaTime);
+
+            currentCrosshairSize = startingCrosshairSize + (accuracy - currentAccuracy) * 0.8f;
+
+            fireTimer += Time.deltaTime;
+
+            if (reloadAutomatically && currentAmmo <= 0) Reload();
+
+            if (recoil)
+            {
+                weaponModel.transform.position = Vector3.Lerp(weaponModel.transform.position, transform.position, recoilRecoveryRate * Time.deltaTime);
+                weaponModel.transform.rotation = Quaternion.Lerp(weaponModel.transform.rotation, transform.rotation, recoilRecoveryRate * Time.deltaTime);
+            }
         }
     }
 
     // Checks for user input to use the weapons - only if this weapon is player-controlled
     public void CheckForUserInput(InputStruct input)
     {
-        if (type == WeaponType.Raycast)
+        if (type == WeaponType.Ranged)
         {
-            if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
+            if (rangedType == RangedWeaponType.Raycast)
             {
-                if (input.fire1)
+                if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
                 {
-                    if (!warmup) Fire();
-                    else if (heat < maxWarmup) heat += Time.deltaTime;
-                }
-                if (warmup && input.fire1)
-                {
-                    if (allowCancel && input.cancel) heat = 0.0f;
-                    else Fire();
-                }
-            }
-        }
-
-        if (type == WeaponType.Projectile)
-        {
-            if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
-            {
-                if (input.fire1)
-                {
-                    if (!warmup) Launch();
-                    else if (heat < maxWarmup) heat += Time.deltaTime;
-                }
-                if (warmup && input.fire1Up)
-                {
-                    if (allowCancel && input.cancel) heat = 0.0f;
-                    else Launch();
+                    if (input.fire1)
+                    {
+                        if (!warmup) Fire();
+                        else if (heat < maxWarmup) heat += Time.deltaTime;
+                    }
+                    if (warmup && input.fire1)
+                    {
+                        if (allowCancel && input.cancel) heat = 0.0f;
+                        else Fire();
+                    }
                 }
             }
 
-        }
-
-        if (burstCounter >= burstRate)
-        {
-            burstTimer += Time.deltaTime;
-            if (burstTimer >= burstPause)
+            if (rangedType == RangedWeaponType.Projectile)
             {
-                burstCounter = 0;
-                burstTimer = 0.0f;
+                if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
+                {
+                    if (input.fire1)
+                    {
+                        if (!warmup) Launch();
+                        else if (heat < maxWarmup) heat += Time.deltaTime;
+                    }
+                    if (warmup && input.fire1Up)
+                    {
+                        if (allowCancel && input.cancel) heat = 0.0f;
+                        else Launch();
+                    }
+                }
+
             }
+
+            if (burstCounter >= burstRate)
+            {
+                burstTimer += Time.deltaTime;
+                if (burstTimer >= burstPause)
+                {
+                    burstCounter = 0;
+                    burstTimer = 0.0f;
+                }
+            }
+
+            if (input.reloadDown) Reload();
+
+            if (input.fire1Up) canFire = true;
         }
-
-        if (input.reloadDown) Reload();
-
-        if (input.fire1Up) canFire = true;
     }
 
     void OnGUI()
     {
-        if (type == WeaponType.Projectile) currentAccuracy = accuracy;
-
-        if (showCrosshair)
+        if (type == WeaponType.Ranged)
         {
-            Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
+            if (rangedType == RangedWeaponType.Projectile) currentAccuracy = accuracy;
 
-            Rect leftRect = new Rect(center.x - crosshairLength - currentCrosshairSize, center.y - (crosshairWidth / 2), crosshairLength, crosshairWidth);
-            GUI.DrawTexture(leftRect, crosshairTexture, ScaleMode.StretchToFill);
+            if (showCrosshair)
+            {
+                Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
 
-            Rect rightRect = new Rect(center.x + currentCrosshairSize, center.y - (crosshairWidth / 2), crosshairLength, crosshairWidth);
-            GUI.DrawTexture(rightRect, crosshairTexture, ScaleMode.StretchToFill);
+                Rect leftRect = new Rect(center.x - crosshairLength - currentCrosshairSize, center.y - (crosshairWidth / 2), crosshairLength, crosshairWidth);
+                GUI.DrawTexture(leftRect, crosshairTexture, ScaleMode.StretchToFill);
 
-            Rect topRect = new Rect(center.x - (crosshairWidth / 2), center.y - crosshairLength - currentCrosshairSize, crosshairWidth, crosshairLength);
-            GUI.DrawTexture(topRect, crosshairTexture, ScaleMode.StretchToFill);
+                Rect rightRect = new Rect(center.x + currentCrosshairSize, center.y - (crosshairWidth / 2), crosshairLength, crosshairWidth);
+                GUI.DrawTexture(rightRect, crosshairTexture, ScaleMode.StretchToFill);
 
-            Rect bottomRect = new Rect(center.x - (crosshairWidth / 2), center.y + currentCrosshairSize, crosshairWidth, crosshairLength);
-            GUI.DrawTexture(bottomRect, crosshairTexture, ScaleMode.StretchToFill);
+                Rect topRect = new Rect(center.x - (crosshairWidth / 2), center.y - crosshairLength - currentCrosshairSize, crosshairWidth, crosshairLength);
+                GUI.DrawTexture(topRect, crosshairTexture, ScaleMode.StretchToFill);
+
+                Rect bottomRect = new Rect(center.x - (crosshairWidth / 2), center.y + currentCrosshairSize, crosshairWidth, crosshairLength);
+                GUI.DrawTexture(bottomRect, crosshairTexture, ScaleMode.StretchToFill);
+            }
+
+            if (showCurrentAmmo) GUI.Label(new Rect(10, Screen.height - 30, 100, 20), "Ammo: " + currentAmmo);
         }
-
-        if (showCurrentAmmo) GUI.Label(new Rect(10, Screen.height - 30, 100, 20), "Ammo: " + currentAmmo);
     }
 
     // Raycasting system
@@ -363,14 +377,26 @@ public class Weapon : MonoBehaviour
     }
 }
 
-public enum WeaponType
+public enum RangedWeaponType
 {
     Projectile,
     Raycast
+}
+
+public enum WeaponType
+{
+    Ranged,
+    Melee
 }
 
 public enum Auto
 {
     Full,
     Semi
+}
+
+public enum RangedHoldType
+{
+    shotgun,
+    pistol
 }

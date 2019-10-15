@@ -87,14 +87,38 @@ public class PlayerEquip : NetworkBehaviour
             GameObject item = hit.collider.gameObject;
             CmdChangeEquippedItem(item);
             Destroy(item.transform.parent.gameObject);
-            Weapon weapon = equippedItemGO.GetComponent<Weapon>();
-            weapon.enabled = true;
-            weapon.SetUser(gameObject);
+            EnableWeaponScript();
             inventoryManager.AddInventoryItem(equippedItemGO, null);
-            inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, ItemType.ranged));
-            animator.SetInteger(Parameters.upperBodyState, 2);
-            playerCameraManager.ChangeCam(CameraModes.locked);
         }
+    }
+
+    private void EnableWeaponScript()
+    {
+        Weapon weapon = equippedItemGO.GetComponent<Weapon>();
+        weapon.enabled = true;
+        weapon.SetUser(gameObject);
+        inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, ItemType.ranged));
+
+        int upperBodyState = 0;
+        CameraModes cameraMode = 0;
+
+        if (weapon.type == WeaponType.Ranged)
+        {
+            if (weapon.rangedHold == RangedHoldType.pistol) upperBodyState = (int)UpperBodyStates.pistolHold;
+            else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)UpperBodyStates.shotgunHold;
+
+            cameraMode = CameraModes.locked;
+        }
+        else
+        {
+            upperBodyState = (int)UpperBodyStates.swordHold;
+
+            cameraMode = CameraModes.closeUp;
+        }
+
+        animator.SetInteger(Parameters.upperBodyState, upperBodyState);
+
+        playerCameraManager.ChangeCam(cameraMode);
     }
 
     [Command]
