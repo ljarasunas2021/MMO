@@ -8594,7 +8594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5177804, z: -3.031569}
+  m_FollowOffset: {x: 0, y: 0.67976, z: -3.17903}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8886,7 +8886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 2.243886, z: -5.091613}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21208,7 +21208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 2.243886, z: -5.091613}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21410,7 +21410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
+  m_FollowOffset: {x: 0, y: 2.243886, z: -5.091613}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21885,6 +21885,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 446146, guid: e87b5f07bd538f748a5556a6fee08887, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 446146, guid: e87b5f07bd538f748a5556a6fee08887, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 446146, guid: e87b5f07bd538f748a5556a6fee08887, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e87b5f07bd538f748a5556a6fee08887, type: 3}
 --- !u!1 &1404084232 stripped
@@ -21914,7 +21926,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404084232}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfdbd9104e186642943082e0cd11378, type: 3}
   m_Name: 
@@ -21922,8 +21934,8 @@ MonoBehaviour:
   type: 1
   rangedType: 0
   rangedHold: 0
-  startPos: {x: 0, y: 0, z: 0}
-  startRot: {x: 0, y: 0, z: 0}
+  startPos: {x: -0.04, y: -0.153, z: -0.255}
+  startRot: {x: -22.96, y: 27.765, z: 39.923}
   auto: 0
   weaponModel: {fileID: 0}
   shootFromMiddleOfScreen: 1
@@ -29739,7 +29751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5177804, z: -3.031569}
+  m_FollowOffset: {x: 0, y: 0.67976, z: -3.17903}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -30006,7 +30018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5177804, z: -3.031569}
+  m_FollowOffset: {x: 0, y: 0.67976, z: -3.17903}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
