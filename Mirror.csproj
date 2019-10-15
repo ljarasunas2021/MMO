@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-</PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,8 +16,7 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
-	<LangVersion>default</LangVersion>
-</PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -28,8 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-	<LangVersion>default</LangVersion>
-</PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -38,16 +36,14 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-	<LangVersion>default</LangVersion>
-</PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
     <NoStdLib>true</NoStdLib>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
-	<LangVersion>default</LangVersion>
-</PropertyGroup>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -57,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Packages\Mirror\Runtime\AssemblyInfo.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\ClientScene.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\CustomAttributes.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\DotNetCompatibility.cs" />
@@ -67,9 +64,11 @@
      <Compile Include="Assets\Packages\Mirror\Runtime\LogFilter.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\MessagePacker.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Messages.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\NetworkAuthenticator.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkBehaviour.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkClient.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkConnection.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\NetworkDiagnostics.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkIdentity.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkManager.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkManagerHUD.cs" />
@@ -79,6 +78,7 @@
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkStartPosition.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkTime.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\NetworkWriter.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\NetworkWriterPool.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\StringHash.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\SyncDictionary.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\SyncList.cs" />
@@ -86,6 +86,15 @@
      <Compile Include="Assets\Packages\Mirror\Runtime\SyncSet.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Transport\LLAPITransport.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Transport\MultiplexTransport.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Client.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Common.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\EventType.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Logger.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Message.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\NetworkStreamExtensions.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\SafeQueue.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Server.cs" />
+     <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Telepathy\Utils.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Transport\TelepathyTransport.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Transport.cs" />
      <Compile Include="Assets\Packages\Mirror\Runtime\Transport\Websocket\Client.cs" />
@@ -737,4 +746,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
