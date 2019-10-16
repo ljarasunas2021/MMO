@@ -35910,7 +35910,7 @@ MonoBehaviour:
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 0, a: 1}
   outlineWidth: 2
-  precomputeOutline: 0
+  precomputeOutline: 1
   bakeKeys: []
   bakeValues: []
 --- !u!65 &2863845650716934606
@@ -39090,6 +39090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0950be1045e4ec2811c5199b227db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.025
+  minFramesTillMove: 30
+  maxFramesTillMove: 90
+  moveRadius: 10
 --- !u!1 &7106979275929836755
 GameObject:
   m_ObjectHideFlags: 0
@@ -39184,7 +39188,7 @@ MonoBehaviour:
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 0, a: 1}
   outlineWidth: 2
-  precomputeOutline: 0
+  precomputeOutline: 1
   bakeKeys: []
   bakeValues: []
 --- !u!1 &7106979275929836761

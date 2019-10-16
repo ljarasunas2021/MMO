@@ -1,55 +1,61 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour {
-    private float maxX;
-    private float minX;
-    private float maxZ;
-    private float minZ;
-    private float radius = 5;
-    private bool moving = false;
-    private CharacterController cc;
-    private Vector3 toMove;
-    private float speed = 5f;
-    private Animator animator;
+public class NPCMovement : MonoBehaviour
+{
+    [Range(0, 1)]
+    public float speed;
 
-    void Start() {
-        GetRange();
+    public float minFramesTillMove, maxFramesTillMove;
+
+    public float moveRadius = 5;
+
+    private Animator animator;
+    private int framesTillMove;
+
+    void Start()
+    {
         animator = GetComponent<Animator>();
         animator.SetBool("walking", false);
-        toMove = transform.position;
+        SetFramesToMove();
     }
 
-    void Update() {
-        int random = Random.Range(1, 1000);
-        if (random <= 2 && !moving) {
-            toMove = new Vector3(Random.Range(minX, maxX), transform.position.y, Random.Range(minZ, maxZ));
-            Debug.Log("toMove = " + toMove);
-            moving = true;
-            animator.SetBool("walking", true);
-            transform.LookAt(toMove);
-            transform.position = Vector3.Slerp(transform.position, toMove, .1f);
-            StartCoroutine(MoveNPC());
+    void Update()
+    {
+        if (framesTillMove == 0)
+        {
+            float[] ranges = GetRange();
+            Vector3 toMove = new Vector3(Random.Range(ranges[0], ranges[1]), transform.position.y, Random.Range(ranges[2], ranges[3]));
+            StartCoroutine(MoveNPC(toMove));
         }
+
+        framesTillMove--;
     }
 
-    private void GetRange() {
-        maxX = transform.position.x + radius;
-        minX = transform.position.x - radius;
-        maxZ = transform.position.z + radius;
-        minZ = transform.position.z - radius;
+    private float[] GetRange()
+    {
+        return new float[] { transform.position.x + moveRadius, transform.position.x - moveRadius, transform.position.z + moveRadius, transform.position.z - moveRadius };
     }
 
-    private IEnumerator MoveNPC() {
+    private void SetFramesToMove()
+    {
+        framesTillMove = (int)Random.Range(minFramesTillMove, maxFramesTillMove);
+    }
+
+    private IEnumerator MoveNPC(Vector3 toMove)
+    {
+        animator.SetBool("walking", true);
+        transform.LookAt(toMove);
+
         float i = 0;
-        while (i<=1) {
-            transform.position = Vector3.Lerp(transform.position, toMove, i*Time.deltaTime);
-            i += .01f;
+        while (i <= 1)
+        {
+            transform.position = Vector3.Lerp(transform.position, toMove, i * Time.deltaTime);
+            i += speed;
             yield return 0;
         }
-        moving = false;
+
         animator.SetBool("walking", false);
-        Debug.Log("moving set to false");
+        SetFramesToMove();
     }
 }
