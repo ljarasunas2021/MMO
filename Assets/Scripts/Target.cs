@@ -5,13 +5,15 @@ using Mirror;
 
 public class Target : MonoBehaviour
 {
-    private Outline outline;
-    private UIManager UIScript;
-    public string[] dialogue;
-    public AudioClip[] inputSounds;
+    public Dialogue[] dialogue;
+
+    [Range(0, 1)]
+    public float rotateSpeed;
 
     public string interactKey;
 
+    private Outline outline;
+    private UIManager UIScript;
     private float radius = 6f;
 
     void Start()
@@ -30,16 +32,10 @@ public class Target : MonoBehaviour
                 case "npc":
                     if (UIScript.canMove)
                     {
-                        //{
-                        // Vector3 playerPos = Vector3.Slerp(gameObject.transform.position, NetworkClient.connection.identity.transform.position, .05f);
-                        // transform.LookAt(playerPos);
                         StartCoroutine(RotateNPC());
 
-                        UIScript.ToggleDialogueBox(dialogue, inputSounds);
-
+                        UIScript.ToggleDialogue(dialogue);
                     }
-                    break;
-                case "device":
                     break;
             }
         }
@@ -68,27 +64,25 @@ public class Target : MonoBehaviour
     private bool PlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
-        if (playerDist < radius)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (playerDist < radius);
     }
 
     private IEnumerator RotateNPC()
     {
         float i = 0;
-        while (i <= 20)
+        while (i <= 1)
         {
-            // Vector3 playerPos = Vector3.Slerp(gameObject.transform.position, NetworkClient.connection.identity.transform.position, .05f);
-            // gameObject.transform.LookAt(playerPos);
             Quaternion playerPos = Quaternion.LookRotation(NetworkClient.connection.identity.transform.position - gameObject.transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, playerPos, i);
-            i += .05f;
+            i += rotateSpeed * Time.deltaTime;
             yield return 0;
         }
     }
+}
+
+[System.Serializable]
+public class Dialogue
+{
+    public string text;
+    public AudioClip audio;
 }

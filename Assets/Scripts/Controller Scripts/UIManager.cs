@@ -10,13 +10,10 @@ public class UIManager : MonoBehaviour
     public Canvas dialogueBox;
     public Canvas inventory;
     public Text dialogueText;
-    private int boxes = 0;
-    private bool talking = false;
-    private bool firstLine = false;
-    private string[] dialogue;
-    private AudioClip[] sounds;
-    private AudioSource audioData;
-    private bool soundPlaying;
+
+    private AudioSource audioSource;
+    private Dialogue[] dialogue;
+    private int currentDialogueIndex = 0;
 
     public bool togglePauseMenu;
     public bool toggleDialogueBox;
@@ -25,52 +22,37 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         dialogueText = dialogueText.GetComponent<Text>();
-        audioData = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         pauseMenu.enabled = false;
         dialogueBox.enabled = false;
     }
 
-    void Update()
+    public void ToggleDialogue(Dialogue[] dialogue)
     {
-        if (talking && (boxes >= 0))
+        canMove = toggleDialogueBox;
+        currentDialogueIndex = -1;
+        toggleDialogueBox = !toggleDialogueBox;
+        dialogueBox.enabled = !dialogueBox.enabled;
+        this.dialogue = dialogue;
+
+        if (dialogueBox.enabled) PlayDialogue();
+    }
+
+    public void PlayDialogue()
+    {
+        Debug.Log("PLAY");
+
+        currentDialogueIndex++;
+        audioSource.Stop();
+
+        if (currentDialogueIndex > dialogue.Length - 1)
         {
-            if (!firstLine)
-            {
-                Debug.Log("First line, starting with " + boxes + " boxes");
-                dialogueText.text = dialogue[dialogue.Length - boxes];
-                audioData.Stop();
-                audioData.clip = sounds[dialogue.Length - boxes];
-                audioData.Play();
-                firstLine = true;
-                boxes--;
-                Debug.Log("boxes after: " + boxes);
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    if (boxes != 0)
-                    {
-                        Debug.Log("Hit return, boxes remaining: " + boxes + " boxes");
-                        audioData.Stop();
-                        dialogueText.text = dialogue[dialogue.Length - boxes];
-                        audioData.clip = sounds[dialogue.Length - boxes];
-                        audioData.Play();
-                        boxes--;
-                        Debug.Log("boxes after: " + boxes);
-                    }
-                    else
-                    {
-                        audioData.Stop();
-                        canMove = true;
-                        toggleDialogueBox = !toggleDialogueBox;
-                        dialogueBox.enabled = !dialogueBox.enabled;
-                        talking = false;
-                        firstLine = false;
-                    }
-                }
-            }
+            ToggleDialogue(dialogue);
+            return;
         }
+
+        dialogueText.text = dialogue[currentDialogueIndex].text;
+        audioSource.PlayOneShot(dialogue[currentDialogueIndex].audio);
     }
 
     public void TogglePauseMenu()
@@ -78,17 +60,6 @@ public class UIManager : MonoBehaviour
         canMove = !canMove;
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
-    }
-
-    public void ToggleDialogueBox(string[] d, AudioClip[] a)
-    {
-        canMove = false;
-        toggleDialogueBox = !toggleDialogueBox;
-        dialogueBox.enabled = !dialogueBox.enabled;
-        dialogue = d;
-        boxes = d.Length;
-        sounds = a;
-        talking = true;
     }
 
     public void LockCursor()

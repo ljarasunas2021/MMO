@@ -37,7 +37,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.mousePosition);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.GetButtonDown("Dialogue Skip"), Input.mousePosition);
 
         TestMove(input);
         TestGrab(input);
@@ -56,7 +56,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (input.switchInventoryDown && !isDead) inventoryManager.ChangeEnabled();
 
-        if (Input.GetKeyDown("p"))
+        if (input.pauseDown)
         {
             uIScript.TogglePauseMenu();
             if (uIScript.togglePauseMenu)
@@ -69,6 +69,11 @@ public class InputHandler : NetworkBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+        }
+
+        if (input.dialogueSkipDown && uIScript.toggleDialogueBox)
+        {
+            uIScript.PlayDialogue();
         }
     }
 
@@ -98,10 +103,10 @@ public class InputHandler : NetworkBehaviour
 public struct InputStruct
 {
     public float horAxis, vertAxis;
-    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown;
+    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown, dialogueSkipDown;
     public Vector2 mousePos;
 
-    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, Vector2 mousePos)
+    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, bool dialogueSkipDown, Vector2 mousePos)
     {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
@@ -115,6 +120,7 @@ public struct InputStruct
         this.reloadDown = reloadDown;
         this.cancel = cancel;
         this.pauseDown = pauseDown;
+        this.dialogueSkipDown = dialogueSkipDown;
         this.mousePos = mousePos;
     }
 }
