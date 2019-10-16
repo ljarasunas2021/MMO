@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Mirror.Examples.NetworkLobby
+namespace Mirror.Examples.NetworkRoom
 {
     public class Spawner : NetworkBehaviour
     {
@@ -8,6 +8,7 @@ namespace Mirror.Examples.NetworkLobby
 
         float x;
         float z;
+
         GameObject newPrize;
         Reward reward;
 

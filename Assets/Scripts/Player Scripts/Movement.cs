@@ -99,6 +99,7 @@ public class Movement : NetworkBehaviour
     private PlayerCameraManager playerCameraManager;
     // current camera
     private CameraModes currentCam = CameraModes.cinematic;
+    private UIManager uIScript;
     #endregion
 
     #region Initialize
@@ -112,6 +113,9 @@ public class Movement : NetworkBehaviour
         ragdollController = GetComponent<RagdollController>();
         playerHealth = GetComponent<PlayerHealth>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
+        uIScript = GameObject.FindObjectOfType<UIManager>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         camTransform = Camera.main.transform;
         currentState = 0;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
@@ -201,8 +205,6 @@ public class Movement : NetworkBehaviour
         }
         else
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
             transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.eulerAngles.y - camRotOffset, 0));
         }
     }

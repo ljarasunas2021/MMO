@@ -13,6 +13,8 @@ public class InputHandler : NetworkBehaviour
     private PlayerEquip playerEquip;
     // inventory manager script of player
     private InventoryManager inventoryManager;
+
+    private UIManager uIScript;
     // if player is dead
     private bool isDead;
     #endregion
@@ -24,6 +26,7 @@ public class InputHandler : NetworkBehaviour
         movement = GetComponent<Movement>();
         playerEquip = GetComponent<PlayerEquip>();
         inventoryManager = GetComponent<InventoryManager>();
+        uIScript = GameObject.FindObjectOfType<UIManager>();
         itemHolding = new ItemHolding(null, ItemType.none);
     }
     #endregion
@@ -34,7 +37,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.mousePosition);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.mousePosition);
 
         TestMove(input);
         TestGrab(input);
@@ -49,7 +52,25 @@ public class InputHandler : NetworkBehaviour
     private void TestGrab(InputStruct input) { if (input.pickupDown && !isDead) playerEquip.Grab(); }
 
     ///<summary> Test if ui should be changed </summary>
-    private void TestUI(InputStruct input) { if (input.switchInventoryDown && !isDead) inventoryManager.ChangeEnabled(); }
+    private void TestUI(InputStruct input)
+    {
+        if (input.switchInventoryDown && !isDead) inventoryManager.ChangeEnabled();
+
+        if (Input.GetKeyDown("p"))
+        {
+            uIScript.TogglePauseMenu();
+            if (uIScript.togglePauseMenu)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+    }
 
     ///<summary> Check if input related to item holding should be called </summary>
     private void CheckItemHolding(InputStruct input)
@@ -77,10 +98,10 @@ public class InputHandler : NetworkBehaviour
 public struct InputStruct
 {
     public float horAxis, vertAxis;
-    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel;
+    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown;
     public Vector2 mousePos;
 
-    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, Vector2 mousePos)
+    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, Vector2 mousePos)
     {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
@@ -93,6 +114,7 @@ public struct InputStruct
         this.fire1Up = fire1Up;
         this.reloadDown = reloadDown;
         this.cancel = cancel;
+        this.pauseDown = pauseDown;
         this.mousePos = mousePos;
     }
 }
