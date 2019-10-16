@@ -10,15 +10,8 @@ public class Interact : MonoBehaviour
     void Start()
     {
         UIScript = GameObject.FindObjectOfType<UIManager>();
-        _camera = GetComponent<Camera>();
+        _camera = Camera.main;
     }
-
-    // void OnGUI() {
-    //     int size = 12;
-    // 	float posX = _camera.pixelWidth/2 - size/4;
-    // 	float posY = _camera.pixelHeight/2 - size/2;
-    // 	GUI.Label(new Rect(posX, posY, size, size), "*");
-    // }
 
     void Update()
     {
@@ -29,14 +22,8 @@ public class Interact : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject hitObject = hit.transform.gameObject;
-                Debug.Log("hit " + hitObject.name);
-                Target target = hitObject.GetComponent<Target>();
-                if (target != null)
-                {
-                    target.Interact();
-                    Debug.Log("hit");
-                }
+                Target target = hit.transform.gameObject.GetComponent<Target>();
+                if (target != null) target.Interact();
             }
         }
     }

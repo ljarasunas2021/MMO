@@ -202,6 +202,8 @@ public class Movement : NetworkBehaviour
     /// <param name = "leftControl"> was left control pressed </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
+        if (!uIScript.canMove) return;
+
         if (currentCam != CameraModes.locked)
         {
             // if the input doesn't equal zero, player can rotate
@@ -232,6 +234,8 @@ public class Movement : NetworkBehaviour
     /// <param name = "space"> was the space bar pressed </param>
     private void CheckForJump(Vector2 input, bool space)
     {
+        if (!uIScript.canMove) return;
+
         /// if space has been pressed jump
         if (space)
         {

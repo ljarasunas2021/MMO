@@ -5360,7 +5360,6 @@ GameObject:
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
   - component: {fileID: 534669907}
-  - component: {fileID: 534669908}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5484,18 +5483,6 @@ MonoBehaviour:
   cinematicCam: {fileID: 955165676}
   closeUpCam: {fileID: 1360974938}
   lockedCam: {fileID: 208052079}
---- !u!114 &534669908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9880366bdfad47c697b8a53434e147d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &555678446
 GameObject:
   m_ObjectHideFlags: 0
@@ -30197,7 +30184,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 2131830260
+  m_SceneId: 1448436362
 --- !u!1 &2124331032
 GameObject:
   m_ObjectHideFlags: 3
@@ -36752,19 +36739,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1132105275}
         m_MethodName: TogglePauseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: LockCursor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

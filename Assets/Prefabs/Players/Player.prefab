@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 1962536972688663456}
   - component: {fileID: 7182127853075423045}
   - component: {fileID: 7996416254279033778}
+  - component: {fileID: 710555429289384931}
   - component: {fileID: 3084916381208249652}
   - component: {fileID: 7258379815761520084}
   - component: {fileID: 2475704007996525564}
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54dcaa91e724d46f0b356990f8f2f6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   health: 10
 --- !u!114 &7996416254279033779
@@ -156,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6568edf76ef948f4a3a7f7bf07bf864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   idleVal: 0
   walkVal: 0.35
@@ -203,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884f831c8970a41c999f5a82d12498f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   bodyParts:
   - {fileID: 117569424489959028}
@@ -240,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe7a3614f0dc4b5c9e55aa0979df95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   sceneObjectPrefab: {fileID: 0}
   maxGrabDistance: 10
@@ -271,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d706462ca99472cb54e914c0ae24de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
 --- !u!114 &1962536972688663456
 MonoBehaviour:
@@ -284,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8a9385f947146ae9598f37df610268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
 --- !u!114 &7182127853075423045
 MonoBehaviour:
@@ -297,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6ebf5974f124ec4844968e6f0b3047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
 --- !u!114 &7996416254279033778
 MonoBehaviour:
@@ -316,6 +324,18 @@ MonoBehaviour:
   heightToStartRaycast: 2
   ankleHeight: 0.2
   pelvisHeight: 1
+--- !u!114 &710555429289384931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996416254279132292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9880366bdfad47c697b8a53434e147d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3084916381208249652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   animator: {fileID: 7996416254286419662}
 --- !u!114 &2475704007996525564
@@ -358,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
 --- !u!114 &1247496763715832885
@@ -372,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646142}
@@ -387,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646054}
@@ -402,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646122}
@@ -417,6 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646034}
@@ -432,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278645932}
@@ -447,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646100}
@@ -462,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278645926}
@@ -477,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646052}
@@ -492,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646078}
@@ -507,6 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646058}
@@ -522,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646118}
@@ -537,6 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
   syncInterval: 0.1
   compressRotation: 1
   target: {fileID: 7996416254278646112}
@@ -712,7 +746,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000004685966, y: 0.34928966, z: -0.042761356}
+  m_ConnectedAnchor: {x: 0.0000004685966, y: 0.3492911, z: -0.042761356}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -883,7 +917,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.09124453, y: -0.06656575, z: -0.0005537793}
+  m_ConnectedAnchor: {x: 0.09124453, y: -0.066563845, z: -0.0005537793}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1653,7 +1687,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.1876086, y: 0.088446215, z: -0.018953709}
+  m_ConnectedAnchor: {x: -0.1876086, y: 0.088444784, z: -0.018953709}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1857,7 +1891,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000027572827, y: 0.2535463, z: 0.039353333}
+  m_ConnectedAnchor: {x: -0.00000027572827, y: 0.25354344, z: 0.039353333}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2450,7 +2484,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.27404684, y: 0.0000013203826, z: 0.00000006519258}
+  m_ConnectedAnchor: {x: -0.27404684, y: 0.00000036670826, z: 0.00000006519258}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2559,7 +2593,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.27404684, y: 0.0000013324898, z: 0.00000005401671}
+  m_ConnectedAnchor: {x: 0.27404684, y: 0.00000037881546, z: 0.00000005401671}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2729,7 +2763,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.18760736, y: 0.088446215, z: -0.018953322}
+  m_ConnectedAnchor: {x: 0.18760736, y: 0.088444784, z: -0.018953322}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2869,7 +2903,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.091244526, y: -0.06656575, z: -0.0005537793}
+  m_ConnectedAnchor: {x: -0.091244526, y: -0.066563845, z: -0.0005537793}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
