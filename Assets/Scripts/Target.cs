@@ -10,17 +10,40 @@ public class Target : MonoBehaviour
     [Range(0, 1)]
     public float rotateSpeed;
 
+    public float radius;
+
     public string interactKey;
+
+    public float gravity;
 
     private Outline outline;
     private UIManager UIScript;
-    private float radius = 6f;
+    private CharacterController cc;
+    private float veloY = 0;
 
     void Start()
     {
         UIScript = GameObject.FindObjectOfType<UIManager>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
+        cc = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        AddGravity();
+    }
+
+    private void AddGravity()
+    {
+        if (cc.isGrounded) veloY = 0;
+        else veloY += gravity;
+
+        cc.Move(new Vector3(0, -veloY, 0));
+
+        if (cc.isGrounded) veloY = 0;
+
+        Debug.Log(cc.isGrounded + " " + veloY);
     }
 
     public void Interact()
