@@ -18,22 +18,21 @@ public class InventoryManager : MonoBehaviour
     private float inventoryImageWidth, inventoryImageHeight;
     // image script of the inventory
     private Image imageScript;
-    // the canvas gameobject 
-    private GameObject canvas;
     // the inventory gameObject
-    private GameObject inventory;
+    private Canvas inventory;
     // the rect transform component of the inventory
     private RectTransform rT;
     // a list of all of the current inventory items
     private List<InventoryItemAndIcon> inventoryItems = new List<InventoryItemAndIcon>();
+    private UIManager uIScript;
     #endregion
 
     #region Initialize
     ///<summary> Set components </summary>
     private void Start()
     {
-        canvas = GameObject.Find("Canvas").gameObject;
-        inventory = canvas.GetComponent<CanvasManager>().inventory;
+        uIScript = GameObject.FindObjectOfType<UIManager>();
+        inventory = uIScript.inventory;
 
         imageScript = inventory.GetComponent<Image>();
         rT = inventory.GetComponent<RectTransform>();

@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Canvas pauseMenu;
-    [SerializeField] private Canvas dialogueBox;
-    [SerializeField] private Text dialogueText;
+    public Canvas pauseMenu;
+    public Canvas dialogueBox;
+    public Canvas inventory;
+    public Text dialogueText;
     private int boxes = 0;
     private bool talking = false;
     private bool firstLine = false;

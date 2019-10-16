@@ -100,6 +100,7 @@ public class Movement : NetworkBehaviour
     // current camera
     private CameraModes currentCam = CameraModes.cinematic;
     private UIManager uIScript;
+    private bool canMove = true;
     #endregion
 
     #region Initialize
@@ -128,6 +129,7 @@ public class Movement : NetworkBehaviour
     /// <param name = "input"> input struct </summary>
     public void Move(InputStruct input)
     {
+
         // get current state
         currentState = (States)animator.GetInteger(Parameters.currentState);
 
@@ -155,6 +157,13 @@ public class Movement : NetworkBehaviour
     private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
     {
         if (currentState != States.locomotion) return;
+
+        if (!uIScript.canMove)
+        {
+            input = Vector2.zero;
+            leftShift = false;
+        }
+
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
         float targetLocomotionDirection = 0;
@@ -285,6 +294,11 @@ public class Movement : NetworkBehaviour
     ///<param name = "currentCam"> current camera </param>
     public void SetCurrentCam(CameraModes currentCam) { this.currentCam = currentCam; }
     #endregion
+
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
+    }
 }
 
 #region States

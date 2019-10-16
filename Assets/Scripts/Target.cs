@@ -19,7 +19,6 @@ public class Target : MonoBehaviour
         UIScript = GameObject.FindObjectOfType<UIManager>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
-        Debug.Log(outline);
     }
 
     public void Interact()
