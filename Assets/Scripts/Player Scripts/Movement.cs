@@ -324,7 +324,11 @@ public enum UpperBodyStates
     none = 0,
     pistolHold = 1,
     shotgunHold = 2,
-    swordHold = 3
+    swordHold = 3,
+    midSlashRight = 4,
+    midInwardSlashRight = 5,
+    midInwardSlashLeft = 6,
+    midSlashLeft = 7
 }
 #endregion
 
