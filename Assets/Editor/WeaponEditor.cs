@@ -7,6 +7,7 @@ using UnityEditor;
 public class WeaponEditor : Editor
 {
     private bool showPluginSupport = false;
+    private bool showCombos = false;
     private bool showGrab = false;
     private bool showGeneral = false;
     private bool showAmmo = false;
@@ -43,6 +44,16 @@ public class WeaponEditor : Editor
 
             weapon.startPos = EditorGUILayout.Vector3Field("Start Position", weapon.startPos);
             weapon.startRot = EditorGUILayout.Vector3Field("Start Rotation", weapon.startRot);
+        }
+
+        if (weapon.type == WeaponType.Melee)
+        {
+            showCombos = EditorGUILayout.Foldout(showCombos, "Combos");
+
+            if (showCombos)
+            {
+                //weapon.meleeCombos = EditorGUILayout.
+            }
         }
 
         if (weapon.type == WeaponType.Ranged)

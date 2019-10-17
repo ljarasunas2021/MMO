@@ -8695,7 +8695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5, z: -3}
+  m_FollowOffset: {x: 0, y: 0.6606925, z: -3.17067}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8987,7 +8987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1298553, z: -4.281929}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21310,7 +21310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1298553, z: -4.281929}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -21663,7 +21663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.1298553, z: -4.281929}
+  m_FollowOffset: {x: 0, y: 1.5956169, z: -5.0196524}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -22182,6 +22182,7 @@ MonoBehaviour:
   startPos: {x: -0.002, y: -0.126, z: -0.166}
   startRot: {x: -24.4, y: 33.82, z: 0}
   auto: 0
+  meleeCombos: []
   weaponModel: {fileID: 0}
   shootFromMiddleOfScreen: 1
   raycastStartSpot: {fileID: 0}
@@ -22351,6 +22352,7 @@ MonoBehaviour:
   startPos: {x: -0.04, y: -0.153, z: -0.255}
   startRot: {x: -22.96, y: 27.765, z: 39.923}
   auto: 0
+  meleeCombos: []
   weaponModel: {fileID: 0}
   shootFromMiddleOfScreen: 1
   raycastStartSpot: {fileID: 0}
@@ -30007,7 +30009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5, z: -3}
+  m_FollowOffset: {x: 0, y: 0.6606925, z: -3.17067}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -30275,7 +30277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.5, z: -3}
+  m_FollowOffset: {x: 0, y: 0.6606925, z: -3.17067}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

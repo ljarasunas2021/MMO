@@ -37,7 +37,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.GetButtonDown("Dialogue Skip"), Input.mousePosition);
+        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.GetButtonDown("Dialogue Skip"), Input.GetButtonDown("Melee Attack"), Input.mousePosition);
 
         TestMove(input);
         TestGrab(input);
@@ -103,10 +103,10 @@ public class InputHandler : NetworkBehaviour
 public struct InputStruct
 {
     public float horAxis, vertAxis;
-    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown, dialogueSkipDown;
+    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown, dialogueSkipDown, meleeAttackDown;
     public Vector2 mousePos;
 
-    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, bool dialogueSkipDown, Vector2 mousePos)
+    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, bool dialogueSkipDown, bool meleeAttackDown, Vector2 mousePos)
     {
         this.horAxis = horAxis;
         this.vertAxis = vertAxis;
@@ -121,6 +121,7 @@ public struct InputStruct
         this.cancel = cancel;
         this.pauseDown = pauseDown;
         this.dialogueSkipDown = dialogueSkipDown;
+        this.meleeAttackDown = meleeAttackDown;
         this.mousePos = mousePos;
     }
 }

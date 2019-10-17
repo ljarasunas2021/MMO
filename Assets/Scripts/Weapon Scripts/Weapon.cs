@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
 
     public Auto auto = Auto.Full; // How does this weapon fire - semi-auto or full-auto
 
+    public MeleeCombo[] meleeCombos;
+
     public GameObject weaponModel; // The actual mesh for this weapon
     public bool shootFromMiddleOfScreen = true;
     public Transform raycastStartSpot; // The spot that the raycasting weapon system should use as an origin for rays
@@ -100,6 +102,8 @@ public class Weapon : MonoBehaviour
     private Material[] materialPrefabs;
     private GameObject user;
     private PlayerWeapon playerWeapon;
+    private Animator userAnim;
+    private Dictionary<UpperBodyStates, UpperBodyStates[]> meleeCombosDict = new Dictionary<UpperBodyStates, UpperBodyStates[]>();
 
     void Start()
     {
@@ -121,6 +125,11 @@ public class Weapon : MonoBehaviour
             currentAmmo = ammoCapacity;
 
             if (shootFromMiddleOfScreen) raycastStartSpot = Camera.main.transform;
+        }
+        else
+        {
+            meleeCombos = new MeleeCombo[] { new MeleeCombo(UpperBodyStates.midInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.midSlashLeft }), new MeleeCombo(UpperBodyStates.midSlashLeft, new UpperBodyStates[] { UpperBodyStates.midInwardSlashRight }), };
+            foreach (MeleeCombo combo in meleeCombos) meleeCombosDict.Add(combo.attack, combo.combos);
         }
     }
 
@@ -197,6 +206,32 @@ public class Weapon : MonoBehaviour
             if (input.reloadDown) Reload();
 
             if (input.fire1Up) canFire = true;
+        }
+        else
+        {
+            if (input.meleeAttackDown)
+            {
+
+                UpperBodyStates currentUpperBodyState = (UpperBodyStates)userAnim.GetInteger(Parameters.upperBodyState);
+                int targetState = 0;
+
+                Debug.Log(currentUpperBodyState);
+
+                if (currentUpperBodyState == UpperBodyStates.swordHold)
+                {
+                    List<UpperBodyStates> possibleStates = new List<UpperBodyStates>(meleeCombosDict.Keys);
+
+                    targetState = (int)possibleStates[Random.Range(0, possibleStates.Count)];
+                }
+                else
+                {
+                    UpperBodyStates[] possibleStates = meleeCombosDict[currentUpperBodyState];
+
+                    targetState = (int)possibleStates[Random.Range(0, possibleStates.Length)];
+                }
+
+                userAnim.SetInteger(Parameters.upperBodyState, (int)targetState);
+            }
         }
     }
 
@@ -374,6 +409,7 @@ public class Weapon : MonoBehaviour
     {
         this.user = user;
         playerWeapon = user.GetComponent<PlayerWeapon>();
+        if (type == WeaponType.Melee) userAnim = user.GetComponent<Animator>();
     }
 }
 
@@ -399,4 +435,17 @@ public enum RangedHoldType
 {
     shotgun,
     pistol
+}
+
+[System.Serializable]
+public class MeleeCombo
+{
+    public UpperBodyStates attack;
+    public UpperBodyStates[] combos;
+
+    public MeleeCombo(UpperBodyStates attack, UpperBodyStates[] combos)
+    {
+        this.attack = attack;
+        this.combos = combos;
+    }
 }

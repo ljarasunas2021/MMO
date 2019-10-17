@@ -42,8 +42,6 @@ public class Target : MonoBehaviour
         cc.Move(new Vector3(0, -veloY, 0));
 
         if (cc.isGrounded) veloY = 0;
-
-        Debug.Log(cc.isGrounded + " " + veloY);
     }
 
     public void Interact()
