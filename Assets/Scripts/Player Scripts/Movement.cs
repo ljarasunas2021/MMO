@@ -316,14 +316,7 @@ public enum States
     hardLanding = 4,
     softLanding = 5,
     fallToRoll = 6,
-    walkingJump = 7,
-    climb = 8,
-    jumpToHang = 9,
-    dropToHang = 10,
-    hangHopUp = 11,
-    hangHopDown = 12,
-    hangingFall = 13,
-    hangToMuscleUp = 14
+    walkingJump = 7
 }
 
 public enum UpperBodyStates
