@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+</PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,7 +16,8 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
-  </PropertyGroup>
+	<LangVersion>default</LangVersion>
+</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -27,7 +28,8 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<LangVersion>default</LangVersion>
+</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -36,14 +38,16 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<LangVersion>default</LangVersion>
+</PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
     <NoStdLib>true</NoStdLib>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
-  </PropertyGroup>
+	<LangVersion>default</LangVersion>
+</PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -53,22 +57,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BombFragment.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BulletHole.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BulletHolePool.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Easy Camera Shake\Demo\VibrationDemo.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Easy Camera Shake\Vibration.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Explosion.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Health.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Projectile.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\FirstPersonCharacter.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\FirstPersonHeadBob.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\MouseRotator.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\SlowMotion.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Spawner.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
-     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BombFragment.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHole.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHolePool.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Easy Camera Shake\Demo\VibrationDemo.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Easy Camera Shake\Vibration.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Explosion.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Health.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\FirstPersonCharacter.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\FirstPersonHeadBob.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\MouseRotator.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\SlowMotion.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
+     <Compile Include="Assets\Imports\QuickOutline\Scripts\Outline.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
@@ -101,8 +105,8 @@
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />
-     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
-     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
+     <None Include="Assets\Imports\QuickOutline\Resources\Shaders\OutlineFill.shader" />
+     <None Include="Assets\Imports\QuickOutline\Resources\Shaders\OutlineMask.shader" />
  <Reference Include="Cinemachine">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
@@ -738,5 +742,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>
