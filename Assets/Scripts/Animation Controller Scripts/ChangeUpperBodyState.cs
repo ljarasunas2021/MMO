@@ -9,6 +9,7 @@ public class ChangeUpperBodyState : StateMachineBehaviour
     public bool onEnter;
     // value that the current state should change to when entering
     public int enterValue;
+    //public bool changeTargetValueToo;
 
     [Header("Exit")]
     // should the variable be changed on state exit

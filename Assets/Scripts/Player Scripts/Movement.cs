@@ -340,6 +340,7 @@ public static class Parameters
     public static string locomotionBlend = "LocomotionBlend";
     public static string canRotate = "CanRotate";
     public static string upperBodyState = "UpperBodyState";
+    public static string targetUpperBodyState = "TargetUpperBodyState";
     public static string locomotionDir = "LocomotionDir";
 }
 #endregion

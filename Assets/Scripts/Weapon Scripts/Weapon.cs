@@ -215,8 +215,6 @@ public class Weapon : MonoBehaviour
                 UpperBodyStates currentUpperBodyState = (UpperBodyStates)userAnim.GetInteger(Parameters.upperBodyState);
                 int targetState = 0;
 
-                Debug.Log(currentUpperBodyState);
-
                 if (currentUpperBodyState == UpperBodyStates.swordHold)
                 {
                     List<UpperBodyStates> possibleStates = new List<UpperBodyStates>(meleeCombosDict.Keys);
@@ -230,7 +228,7 @@ public class Weapon : MonoBehaviour
                     targetState = (int)possibleStates[Random.Range(0, possibleStates.Length)];
                 }
 
-                userAnim.SetInteger(Parameters.upperBodyState, (int)targetState);
+                userAnim.SetInteger(Parameters.targetUpperBodyState, (int)targetState);
             }
         }
     }
