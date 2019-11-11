@@ -52,7 +52,8 @@ public class WeaponEditor : Editor
 
             if (showCombos)
             {
-                //weapon.meleeCombos = EditorGUILayout.
+                SerializedProperty property = serializedObject.FindProperty("meleeCombos");
+                EditorGUILayout.PropertyField(property, new GUIContent("Melee Combos"), true);
             }
         }
 

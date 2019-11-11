@@ -2,7 +2,7 @@
 using Mirror;
 
 ///<summary> Used to manage all of the player input </summary>
-public class InputHandler : NetworkBehaviour
+public class InputHandler : MonoBehaviour
 {
     #region Variables
     // current item the player is holding
@@ -17,6 +17,10 @@ public class InputHandler : NetworkBehaviour
     private UIManager uIScript;
     // if player is dead
     private bool isDead;
+
+    private bool isLocalPlayer;
+
+    private BodyParts bodyParts;
     #endregion
 
     #region Initialize
@@ -27,7 +31,10 @@ public class InputHandler : NetworkBehaviour
         playerEquip = GetComponent<PlayerEquip>();
         inventoryManager = GetComponent<InventoryManager>();
         uIScript = GameObject.FindObjectOfType<UIManager>();
+        bodyParts = transform.parent.GetComponent<BodyParts>();
         itemHolding = new ItemHolding(null, ItemType.none);
+
+        isLocalPlayer = bodyParts.IsLocalPlayer();
     }
     #endregion
 
@@ -40,9 +47,9 @@ public class InputHandler : NetworkBehaviour
         InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.GetButtonDown("Dialogue Skip"), Input.GetButtonDown("Melee Attack"), Input.mousePosition);
 
         TestMove(input);
-        TestGrab(input);
-        TestUI(input);
-        CheckItemHolding(input);
+        //TestGrab(input);
+        //TestUI(input);
+        //CheckItemHolding(input);
     }
 
     ///<summary> Test if player should move</summary>

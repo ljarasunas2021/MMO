@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public Canvas pauseMenu;
     public Canvas dialogueBox;
-    public Canvas inventory;
+    public GameObject inventory;
     public Text dialogueText;
 
     private AudioSource audioSource;

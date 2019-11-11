@@ -57,6 +57,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\MasterScripts\HashIDs_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\MasterScripts\PlayerMovement_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\AnimFollow_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\Limb_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\RagdollControl_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\ReplaceJoints_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\ResizeProfiles_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_PositionFeet_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Properties_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Setup_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_ShootRays_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\SimpleFootIK_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BallTest_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BoxHitByBullet_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\BombFragment.cs" />
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHole.cs" />
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHolePool.cs" />
@@ -73,9 +92,11 @@
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
      <Compile Include="Assets\Imports\QuickOutline\Scripts\Outline.cs" />
+     <Compile Include="Assets\OutlineObject.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
+     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeKnockedOut.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeLayerWeight.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeTargetUpperBodyState.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeUpperBodyState.cs" />
@@ -91,6 +112,8 @@
      <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
      <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
      <Compile Include="Assets\Scripts\Other\Target.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\AnimatorFollow.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\AnimLimb.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\FootIK.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\InputHandler.cs" />
@@ -102,6 +125,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerWallTraversal.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerWeapon.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\RagdollControl.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />

@@ -1,68 +1,62 @@
 ﻿using System.Linq;
-using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CharacterController))]
 ///<summary> Script used to control the movement of the player </summary>
-public class Movement : NetworkBehaviour
+public class Movement : MonoBehaviour
 {
     #region Variables
+
+    public GameObject ragdoll;
+    public GameObject ragdollHips;
+    public GameObject nonRagdollHips;
+
     [Header("Locomotion Blend Values")]
     // locomotion blend tree value for a ...
     // idle animation
-    public float idleVal;
+    [SerializeField] private float idleVal;
     // walk animation
-    public float walkVal;
+    [SerializeField] private float walkVal;
     // run animation
-    public float runVal;
+    [SerializeField] private float runVal;
 
     [Header("Locomotion Blend Value Thresholds")]
     // locomotion blend tree threshold in between ...
     // idle and walk animation
-    public float idleToWalkThreshold;
+    [SerializeField] private float idleToWalkThreshold;
     // walk and run animation
-    public float walkToRunThreshold;
+    [SerializeField] private float walkToRunThreshold;
 
     [Header("Smooth Time Values")]
     // time that it takes for the ____ value to go from its current value to its target value
     // turning 
-    public float turnSmoothTime;
+    [SerializeField] private float turnSmoothTime;
     // speed (but only used if value is getting large (i.e. accelerating))
-    public float locomotionAccelerationSmoothTime;
+    [SerializeField] private float locomotionAccelerationSmoothTime;
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
-    public float locomotionDecelerationSmoothTime;
-    // speed that the locked cam moves at
-    public float lockedCamRotSpeed;
+    [SerializeField] private float locomotionDecelerationSmoothTime;
 
     [Header("Mid Air Values")]
     // minimum distance from the ground the player needs to be in order to play the mid air animation
-    public float minDistFromGroundToBeMidAir;
+    [SerializeField] private float minDistFromGroundToBeMidAir;
     // gravity that interacts with the player
-    public float gravity;
-    // hieght of player
-    public float height;
-    // sphere overlap radius
-    public float sphereOverlapRadius;
+    [SerializeField] private float gravity;
 
     [Header("Landing Velocity Y's")]
     // for ___ landing, the velocityY must be less than that value
     // soft
-    public float softLandingMaxVeloY;
+    [SerializeField] private float softLandingMaxTimeInAir;
     // roll
-    public float rollLandingMaxVeloY;
+    [SerializeField] private float rollLandingMaxTimeInAir;
 
     [Header("Jump Maximum Distances From Ground")]
     // max distance from ground before mid air animation plays for ____ animation
     // boxJump
-    public float maxBoxJumpHeight;
+    [SerializeField] private float maxBoxJumpHeight;
     // walking Jump
-    public float maxWalkingJumpHeight;
+    [SerializeField] private float maxWalkingJumpHeight;
     // running Jump
-    public float maxRunningJumpHeight;
-
-    [Header("Camera Values")]
-    public float camRotOffset;
+    [SerializeField] private float maxRunningJumpHeight;
 
     // amount that ____ has moved towards its target value 
     // speed
@@ -77,30 +71,23 @@ public class Movement : NetworkBehaviour
     private float maxRaycastDownDist;
     // y component of velocity of player
     private float velocityY;
-    // target y rotation of player
-    private float targetRotation;
     // value thats used as parameter in locomotion blend tree
     private float locomotionBlendVal;
     // value that used as direction parameter in locomotion blend tree
     private float locomotionDirection;
     // current anim state - each anim state is assigned its own index and this is that index
-    private States currentState;
+    [HideInInspector] public States currentState;
     // transform of the camera
     private Transform camTransform;
-    // player's character controller
-    private CharacterController characterController;
     // player's animator
     private Animator animator;
-    // player's ragdoll controller
-    private RagdollController ragdollController;
-    // player health script
-    private PlayerHealth playerHealth;
-    // player camera manager script
-    private PlayerCameraManager playerCameraManager;
-    // current camera
-    private CameraModes currentCam = CameraModes.cinematic;
-    private UIManager uIScript;
-    private bool canMove = true;
+    // character controller
+    private CharacterController cc;
+
+    private CameraModes currentCam;
+    private AnimatorFollow animatorFollow;
+    private Vector3 nonRagdollToHipsPos;
+    private float timeInAir;
     #endregion
 
     #region Initialize
@@ -108,18 +95,14 @@ public class Movement : NetworkBehaviour
     ///<summary> Initialize variables </summary>
     private void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        characterController.enabled = true;
         animator = GetComponent<Animator>();
-        ragdollController = GetComponent<RagdollController>();
-        playerHealth = GetComponent<PlayerHealth>();
-        playerCameraManager = GetComponent<PlayerCameraManager>();
-        uIScript = GameObject.FindObjectOfType<UIManager>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         camTransform = Camera.main.transform;
         currentState = 0;
+        cc = GetComponent<CharacterController>();
+        cc.enabled = true;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
+        animatorFollow = ragdoll.GetComponent<AnimatorFollow>();
+        nonRagdollToHipsPos = transform.position - nonRagdollHips.transform.position;
     }
     #endregion
 
@@ -129,7 +112,6 @@ public class Movement : NetworkBehaviour
     /// <param name = "input"> input struct </summary>
     public void Move(InputStruct input)
     {
-
         // get current state
         currentState = (States)animator.GetInteger(Parameters.currentState);
 
@@ -158,32 +140,13 @@ public class Movement : NetworkBehaviour
     {
         if (currentState != States.locomotion) return;
 
-        if (!uIScript.canMove)
-        {
-            input = Vector2.zero;
-            leftShift = false;
-        }
-
         // value that the locomotion blend value should be 
         float targetLocomotionBlendVal = 0;
         float targetLocomotionDirection = 0;
 
-        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
         if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
-        else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
-
-        if (lockedCameraMode)
-        {
-            if (input.x != 0)
-            {
-                int dir = (input.x < 0) ? -1 : 1;
-                if (leftShift) targetLocomotionDirection = dir * runVal;
-                else targetLocomotionDirection = dir * walkVal;
-            }
-
-            if (input.y < 0) targetLocomotionBlendVal = -walkVal;
-        }
+        else if (leftShift) targetLocomotionBlendVal = runVal;
+        else targetLocomotionBlendVal = walkVal;
 
         float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
         locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionDirSmoothVelocity, locomotionDirSmoothTime);
@@ -202,31 +165,19 @@ public class Movement : NetworkBehaviour
     /// <param name = "leftControl"> was left control pressed </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
-        if (!uIScript.canMove) return;
-
-        if (currentCam != CameraModes.locked)
+        // if the input doesn't equal zero, player can rotate
+        if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
         {
-            // if the input doesn't equal zero, player can rotate
-            if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
-            {
-                // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
-            }
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.eulerAngles.y - camRotOffset, 0));
+            // find target rotation of player based on camera's transform and rotate towards that angle smoothly
+            float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         }
     }
 
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
-        Transform transformToUse = (lockedCameraMode) ? Camera.main.transform : transform;
-        characterController.Move(transformToUse.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
-        characterController.Move(transformToUse.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
+        cc.Move(ragdollHips.transform.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime + ragdollHips.transform.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -234,8 +185,6 @@ public class Movement : NetworkBehaviour
     /// <param name = "space"> was the space bar pressed </param>
     private void CheckForJump(Vector2 input, bool space)
     {
-        if (!uIScript.canMove) return;
-
         /// if space has been pressed jump
         if (space)
         {
@@ -251,32 +200,37 @@ public class Movement : NetworkBehaviour
     private void SetValuesIfMidAir(bool space)
     {
         RaycastHit hit;
-        Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
+        Ray ray = new Ray(ragdollHips.transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, 1 << LayerMaskController.environment);
 
         if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
             if (currentState == States.defInAir)
             {
-                if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
-                else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
+                animatorFollow.ChangeCurrentAnim(animatorFollow.locomotionAnim);
+                cc.Move(ragdollHips.transform.position + nonRagdollToHipsPos - transform.position);
+                if (timeInAir < softLandingMaxTimeInAir) SetCurrentState(States.softLanding);
+                else if (timeInAir < rollLandingMaxTimeInAir) SetCurrentState(States.fallToRoll);
                 else SetCurrentState(States.hardLanding);
             }
+            timeInAir = 0;
         }
-        else if (currentState != States.defInAir && velocityY != 0) { SetCurrentState(States.defInAir); }
-
-        if (velocityY < -0.4 && hit.distance != 0)
+        else
         {
-            playerHealth.SubtractHealth(100);
-            ragdollController.CmdBecomeRagdoll();
+            if (currentState != States.defInAir)
+            {
+                animatorFollow.ChangeCurrentAnim(animatorFollow.fallingAnim);
+                SetCurrentState(States.defInAir);
+            }
+            timeInAir += Time.deltaTime;
         }
 
-        if (characterController.isGrounded) velocityY = 0;
-        else velocityY += Time.deltaTime * gravity;
+        if (cc.isGrounded) velocityY = 0;
+        else velocityY += gravity * Time.deltaTime;
 
-        characterController.Move(Vector3.up * velocityY);
+        cc.Move(Vector3.up * velocityY);
 
-        if (characterController.isGrounded) velocityY = 0;
+        if (cc.isGrounded) velocityY = 0;
 
         if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
         else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
@@ -288,21 +242,11 @@ public class Movement : NetworkBehaviour
     private void SetCurrentState(States state) { currentState = state; }
     #endregion
 
-    #region DrawGizmos
-    ///<summary> draw gizmos to show overlapping sphere </summary>
-    private void OnDrawGizmos() { Gizmos.DrawSphere(transform.position, sphereOverlapRadius); }
-    #endregion
-
     #region SetCurrentCam
     ///<summary> set the current camera </summary>
     ///<param name = "currentCam"> current camera </param>
     public void SetCurrentCam(CameraModes currentCam) { this.currentCam = currentCam; }
     #endregion
-
-    public void SetCanMove(bool canMove)
-    {
-        this.canMove = canMove;
-    }
 }
 
 #region States
@@ -316,7 +260,12 @@ public enum States
     hardLanding = 4,
     softLanding = 5,
     fallToRoll = 6,
-    walkingJump = 7
+    walkingJump = 7,
+    getUpFront = 8,
+    getUpFrontMirror = 9,
+    getUpBack = 10,
+    getUpBackMirror = 11,
+    knockedOut = 12
 }
 
 public enum UpperBodyStates
@@ -326,7 +275,11 @@ public enum UpperBodyStates
     shotgunHold = 2,
     swordHold = 3,
     midInwardSlashRight = 4,
-    midSlashLeft = 5
+    midSlashLeft = 5,
+    highToLowInwardSlashRight = 6,
+    lowToHighSlashLeft = 7,
+    highToLowSlashLeft = 8,
+    lowToHighInwardSlashRight = 9
 }
 #endregion
 
@@ -342,5 +295,6 @@ public static class Parameters
     public static string upperBodyState = "UpperBodyState";
     public static string targetUpperBodyState = "TargetUpperBodyState";
     public static string locomotionDir = "LocomotionDir";
+    public static string knockedOut = "KnockedOut";
 }
 #endregion

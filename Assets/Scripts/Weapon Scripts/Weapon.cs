@@ -128,7 +128,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            meleeCombos = new MeleeCombo[] { new MeleeCombo(UpperBodyStates.midInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.midSlashLeft }), new MeleeCombo(UpperBodyStates.midSlashLeft, new UpperBodyStates[] { UpperBodyStates.midInwardSlashRight }), };
+            meleeCombos = new MeleeCombo[] { new MeleeCombo(UpperBodyStates.midInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.midSlashLeft }), new MeleeCombo(UpperBodyStates.midSlashLeft, new UpperBodyStates[] { UpperBodyStates.midInwardSlashRight }), new MeleeCombo(UpperBodyStates.highToLowInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.lowToHighSlashLeft }), new MeleeCombo(UpperBodyStates.lowToHighSlashLeft, new UpperBodyStates[] { UpperBodyStates.highToLowInwardSlashRight }), new MeleeCombo(UpperBodyStates.highToLowSlashLeft, new UpperBodyStates[] { UpperBodyStates.lowToHighInwardSlashRight }), new MeleeCombo(UpperBodyStates.lowToHighInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.highToLowSlashLeft }) };
             foreach (MeleeCombo combo in meleeCombos) meleeCombosDict.Add(combo.attack, combo.combos);
         }
     }

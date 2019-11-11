@@ -22,12 +22,7 @@ public class NPCMovement : MonoBehaviour
 
     void Update()
     {
-        if (framesTillMove == 0)
-        {
-            float[] ranges = GetRange();
-            Vector3 toMove = new Vector3(Random.Range(ranges[0], ranges[1]), transform.position.y, Random.Range(ranges[2], ranges[3]));
-            StartCoroutine(MoveNPC(toMove));
-        }
+        if (framesTillMove < 0) StartCoroutine(MoveNPC());
 
         framesTillMove--;
     }
@@ -42,8 +37,12 @@ public class NPCMovement : MonoBehaviour
         framesTillMove = (int)Random.Range(minFramesTillMove, maxFramesTillMove);
     }
 
-    private IEnumerator MoveNPC(Vector3 toMove)
+    private IEnumerator MoveNPC()
     {
+        float[] ranges = GetRange();
+        Vector3 toMove = new Vector3(Random.Range(ranges[0], ranges[1]), transform.position.y, Random.Range(ranges[2], ranges[3]));
+        framesTillMove = int.MaxValue;
+
         animator.SetBool("walking", true);
         transform.LookAt(toMove);
 

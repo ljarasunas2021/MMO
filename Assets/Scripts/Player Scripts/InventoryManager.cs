@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     // image script of the inventory
     private Image imageScript;
     // the inventory gameObject
-    private Canvas inventory;
+    private GameObject inventory;
     // the rect transform component of the inventory
     private RectTransform rT;
     // a list of all of the current inventory items
@@ -39,6 +39,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryImageHeight = (Screen.height - slotsInVertical * spaceBetweenSlots - spaceBetweenSlots) / slotsInVertical;
         inventoryImageWidth = inventoryImageHeight;
+
         inventoryImage.GetComponent<RectTransform>().sizeDelta = new Vector2(inventoryImageWidth, inventoryImageHeight);
     }
     #endregion

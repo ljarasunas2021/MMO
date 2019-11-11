@@ -329,6 +329,12 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="AssetStoreToolsExtra">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Imports/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
+ </Reference>
+ <Reference Include="AssetStoreTools">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Imports/AssetStoreTools/Editor/AssetStoreTools.dll</HintPath>
+ </Reference>
  <Reference Include="Mono.CecilX.Mdb">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
  </Reference>
