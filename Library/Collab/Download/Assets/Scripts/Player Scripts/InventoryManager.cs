@@ -97,19 +97,3 @@ public class InventoryManager : MonoBehaviour
     public void AddInventoryItem(GameObject item, Sprite icon) { inventoryItems.Add(new InventoryItemAndIcon(item, icon)); }
     #endregion
 }
-
-#region InventoryItemAndIcon
-[System.Serializable]
-///<summary> The inventory item and its icon </summary>
-public class InventoryItemAndIcon
-{
-    public GameObject item;
-    public Sprite icon;
-
-    public InventoryItemAndIcon(GameObject item, Sprite icon)
-    {
-        this.item = item;
-        this.icon = icon;
-    }
-}
-#endregion

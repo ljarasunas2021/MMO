@@ -15,12 +15,17 @@ public class AnimatorFollow : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] [Tooltip("Should the animated non ragdoll be hidden?")] private bool hideNonRagdoll;
+    [SerializeField] private bool hideRagdoll;
 
     [HideInInspector] [Tooltip("Current animation that's being played")] public Anim currentAnim;
+    private bool isLocalPlayer;
+    private Movement movement;
 
     private void Awake()
     {
         Anim[] anims = new Anim[] { locomotionAnim, fallingAnim };
+        movement = nonRagdoll.GetComponent<Movement>();
+
         // set certain variables for each limb
         foreach (Limb limb in limbs)
         {
@@ -37,19 +42,29 @@ public class AnimatorFollow : MonoBehaviour
 
     private void Start()
     {
+        isLocalPlayer = transform.root.GetComponent<BodyParts>().IsLocalPlayer();
+
         // Set the current anim to locomotion
         ChangeCurrentAnim(locomotionAnim);
 
         // hide non ragdoll by disabling renderers
-        if (hideNonRagdoll)
+        if (movement.physicsBasedMovement && hideNonRagdoll)
         {
             foreach (SkinnedMeshRenderer renderer in nonRagdoll.GetComponentsInChildren<SkinnedMeshRenderer>()) renderer.enabled = false;
             foreach (MeshRenderer renderer in nonRagdoll.GetComponentsInChildren<MeshRenderer>()) renderer.enabled = false;
+        }
+
+        if (!movement.physicsBasedMovement && hideRagdoll)
+        {
+            foreach (SkinnedMeshRenderer renderer in GetComponentsInChildren<SkinnedMeshRenderer>()) renderer.enabled = false;
+            foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) renderer.enabled = false;
         }
     }
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+
         AnimFollow();
     }
 

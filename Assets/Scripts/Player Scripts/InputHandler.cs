@@ -2,9 +2,10 @@
 using Mirror;
 
 ///<summary> Used to manage all of the player input </summary>
-public class InputHandler : MonoBehaviour
+public class InputHandler : NetworkBehaviour
 {
     #region Variables
+    public GameObject nonRagdoll;
     // current item the player is holding
     private ItemHolding itemHolding;
     // the movement script of the player
@@ -12,13 +13,11 @@ public class InputHandler : MonoBehaviour
     // player equip script of player
     private PlayerEquip playerEquip;
     // inventory manager script of player
-    private InventoryManager inventoryManager;
+    private InventoryManager2 inventoryManager;
 
     private UIManager uIScript;
     // if player is dead
     private bool isDead;
-
-    private bool isLocalPlayer;
 
     private BodyParts bodyParts;
     #endregion
@@ -27,14 +26,12 @@ public class InputHandler : MonoBehaviour
     ///<summary> Initialize components </summary>
     void Start()
     {
-        movement = GetComponent<Movement>();
+        movement = nonRagdoll.GetComponent<Movement>();
         playerEquip = GetComponent<PlayerEquip>();
-        inventoryManager = GetComponent<InventoryManager>();
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager2>();
         uIScript = GameObject.FindObjectOfType<UIManager>();
-        bodyParts = transform.parent.GetComponent<BodyParts>();
+        bodyParts = GetComponent<BodyParts>();
         itemHolding = new ItemHolding(null, ItemType.none);
-
-        isLocalPlayer = bodyParts.IsLocalPlayer();
     }
     #endregion
 
@@ -44,26 +41,24 @@ public class InputHandler : MonoBehaviour
     {
         if (!isLocalPlayer) return;
 
-        InputStruct input = new InputStruct(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetButton("Jump"), Input.GetButton("Sprint"), Input.GetButton("Free Rotate Camera"), Input.GetButtonDown("Pickup"), Input.GetButtonDown("Inventory"), Input.GetButton("Fire1"), Input.GetButtonUp("Fire1"), Input.GetButtonDown("Reload"), Input.GetButton("Cancel"), Input.GetButtonDown("Pause"), Input.GetButtonDown("Dialogue Skip"), Input.GetButtonDown("Melee Attack"), Input.mousePosition);
-
-        TestMove(input);
-        //TestGrab(input);
-        //TestUI(input);
-        //CheckItemHolding(input);
+        TestMove();
+        TestGrab();
+        TestUI();
+        CheckItemHolding();
     }
 
     ///<summary> Test if player should move</summary>
-    private void TestMove(InputStruct input) { if (!isDead) movement.Move(input); }
+    private void TestMove() { if (!isDead) movement.Move(); }
 
     ///<summary> Test if player should grab</summary>
-    private void TestGrab(InputStruct input) { if (input.pickupDown && !isDead) playerEquip.Grab(); }
+    private void TestGrab() { if (Input.GetButtonDown("Pickup") && !isDead) playerEquip.Grab(); }
 
     ///<summary> Test if ui should be changed </summary>
-    private void TestUI(InputStruct input)
+    private void TestUI()
     {
-        if (input.switchInventoryDown && !isDead) inventoryManager.ChangeEnabled();
+        if (Input.GetButtonDown("Inventory") && !isDead) inventoryManager.ChangeEnabled();
 
-        if (input.pauseDown)
+        if (Input.GetButtonDown("Pause"))
         {
             uIScript.TogglePauseMenu();
             if (uIScript.togglePauseMenu)
@@ -78,16 +73,16 @@ public class InputHandler : MonoBehaviour
             }
         }
 
-        if (input.dialogueSkipDown && uIScript.toggleDialogueBox)
+        if (Input.GetButtonDown("Dialogue Skip") && uIScript.toggleDialogueBox)
         {
             uIScript.PlayDialogue();
         }
     }
 
     ///<summary> Check if input related to item holding should be called </summary>
-    private void CheckItemHolding(InputStruct input)
+    private void CheckItemHolding()
     {
-        if (itemHolding.type == ItemType.ranged) { itemHolding.weaponScript.CheckForUserInput(input); }
+        if (itemHolding.type == ItemType.ranged) { itemHolding.weaponScript.CheckForUserInput(); }
 
         //if (itemHolding.type == HoldingItemType.melee) { }
 
@@ -104,32 +99,3 @@ public class InputHandler : MonoBehaviour
     public void SetDead(bool dead) { isDead = dead; }
     #endregion
 }
-
-#region  InputStruct
-/// <summary> Struct where input is stored </summary>
-public struct InputStruct
-{
-    public float horAxis, vertAxis;
-    public bool jump, sprint, freeRotateCamera, pickupDown, switchInventoryDown, fire1, fire1Up, reloadDown, cancel, pauseDown, dialogueSkipDown, meleeAttackDown;
-    public Vector2 mousePos;
-
-    public InputStruct(float horAxis, float vertAxis, bool jump, bool sprint, bool freeRotateCamera, bool pickUpDown, bool switchInventoryDown, bool fire1, bool fire1Up, bool reloadDown, bool cancel, bool pauseDown, bool dialogueSkipDown, bool meleeAttackDown, Vector2 mousePos)
-    {
-        this.horAxis = horAxis;
-        this.vertAxis = vertAxis;
-        this.jump = jump;
-        this.sprint = sprint;
-        this.freeRotateCamera = freeRotateCamera;
-        this.pickupDown = pickUpDown;
-        this.switchInventoryDown = switchInventoryDown;
-        this.fire1 = fire1;
-        this.fire1Up = fire1Up;
-        this.reloadDown = reloadDown;
-        this.cancel = cancel;
-        this.pauseDown = pauseDown;
-        this.dialogueSkipDown = dialogueSkipDown;
-        this.meleeAttackDown = meleeAttackDown;
-        this.mousePos = mousePos;
-    }
-}
-#endregion

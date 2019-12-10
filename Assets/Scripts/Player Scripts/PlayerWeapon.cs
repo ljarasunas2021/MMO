@@ -5,6 +5,7 @@ using Mirror;
 public class PlayerWeapon : NetworkBehaviour
 {
     #region Variables
+    public GameObject nonRagdoll;
     // array of audio clip prefabs
     private AudioClip[] audioClipPrefabs;
     // audio source on gameObject
@@ -19,7 +20,7 @@ public class PlayerWeapon : NetworkBehaviour
     {
         audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
         effectPrefabs = GameObject.FindObjectOfType<EffectsPrefabsController>().effectPrefabs;
-        audioSource = GetComponent<AudioSource>();
+        audioSource = nonRagdoll.GetComponent<AudioSource>();
     }
     #endregion
 

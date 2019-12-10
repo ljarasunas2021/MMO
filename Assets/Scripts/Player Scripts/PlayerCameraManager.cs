@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerCameraManager : NetworkBehaviour
 {
     #region Variables
+    public GameObject nonRagdoll;
     // ____ body part
     // head
     private GameObject head;
@@ -43,7 +44,7 @@ public class PlayerCameraManager : NetworkBehaviour
         head = bodyParts.head;
         lockedCamFollow = bodyParts.lockedCamFollow;
         cameraController = Camera.main.GetComponent<CameraController>();
-        movement = GetComponent<Movement>();
+        movement = nonRagdoll.GetComponent<Movement>();
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
         cinematicFreeLook.Follow = head.transform;

@@ -104,6 +104,7 @@ public class Weapon : MonoBehaviour
     private PlayerWeapon playerWeapon;
     private Animator userAnim;
     private Dictionary<UpperBodyStates, UpperBodyStates[]> meleeCombosDict = new Dictionary<UpperBodyStates, UpperBodyStates[]>();
+    private int hotBarIndex;
 
     void Start()
     {
@@ -154,7 +155,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Checks for user input to use the weapons - only if this weapon is player-controlled
-    public void CheckForUserInput(InputStruct input)
+    public void CheckForUserInput()
     {
         if (type == WeaponType.Ranged)
         {
@@ -162,14 +163,15 @@ public class Weapon : MonoBehaviour
             {
                 if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
                 {
-                    if (input.fire1)
+                    if (Input.GetMouseButton(hotBarIndex))
                     {
                         if (!warmup) Fire();
                         else if (heat < maxWarmup) heat += Time.deltaTime;
                     }
-                    if (warmup && input.fire1)
+
+                    if (warmup && Input.GetMouseButtonDown(hotBarIndex))
                     {
-                        if (allowCancel && input.cancel) heat = 0.0f;
+                        if (allowCancel && Input.GetButton("Cancel")) heat = 0.0f;
                         else Fire();
                     }
                 }
@@ -179,14 +181,14 @@ public class Weapon : MonoBehaviour
             {
                 if (fireTimer >= actualROF && burstCounter < burstRate && canFire)
                 {
-                    if (input.fire1)
+                    if (Input.GetMouseButton(hotBarIndex))
                     {
                         if (!warmup) Launch();
                         else if (heat < maxWarmup) heat += Time.deltaTime;
                     }
-                    if (warmup && input.fire1Up)
+                    if (warmup && Input.GetMouseButtonUp(hotBarIndex))
                     {
-                        if (allowCancel && input.cancel) heat = 0.0f;
+                        if (allowCancel && Input.GetButton("Cancel")) heat = 0.0f;
                         else Launch();
                     }
                 }
@@ -203,13 +205,13 @@ public class Weapon : MonoBehaviour
                 }
             }
 
-            if (input.reloadDown) Reload();
+            if (Input.GetButton("Reload")) Reload();
 
-            if (input.fire1Up) canFire = true;
+            if (Input.GetMouseButtonUp(hotBarIndex)) canFire = true;
         }
         else
         {
-            if (input.meleeAttackDown)
+            if (Input.GetMouseButtonUp(hotBarIndex))
             {
 
                 UpperBodyStates currentUpperBodyState = (UpperBodyStates)userAnim.GetInteger(Parameters.upperBodyState);
@@ -380,7 +382,10 @@ public class Weapon : MonoBehaviour
         weaponModel.transform.Rotate(new Vector3(-kickRot, 0, 0), Space.Self);
     }
 
-    private void PlaySound(AudioClip clip) { playerWeapon.RpcPlaySound(FindIndexAudioClip(clip)); }
+    private void PlaySound(AudioClip clip)
+    {
+        playerWeapon.RpcPlaySound(FindIndexAudioClip(clip));
+    }
 
     public int FindIndexAudioClip(AudioClip clip)
     {
@@ -408,6 +413,11 @@ public class Weapon : MonoBehaviour
         this.user = user;
         playerWeapon = user.GetComponent<PlayerWeapon>();
         if (type == WeaponType.Melee) userAnim = user.GetComponent<Animator>();
+    }
+
+    public void SetHotBarIndex(int hotBarIndex)
+    {
+        this.hotBarIndex = hotBarIndex;
     }
 }
 

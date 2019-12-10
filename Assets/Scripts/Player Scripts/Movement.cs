@@ -6,7 +6,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     #region Variables
+    [Header("Physics Based Movement")]
+    public bool physicsBasedMovement;
 
+    [Header("GameObjects")]
     public GameObject ragdoll;
     public GameObject ragdollHips;
     public GameObject nonRagdollHips;
@@ -40,7 +43,8 @@ public class Movement : MonoBehaviour
     // minimum distance from the ground the player needs to be in order to play the mid air animation
     [SerializeField] private float minDistFromGroundToBeMidAir;
     // gravity that interacts with the player
-    [SerializeField] private float gravity;
+    [SerializeField] private float physicsGravity;
+    [SerializeField] private float nonphysicsGravity;
 
     [Header("Landing Velocity Y's")]
     // for ___ landing, the velocityY must be less than that value
@@ -88,6 +92,9 @@ public class Movement : MonoBehaviour
     private AnimatorFollow animatorFollow;
     private Vector3 nonRagdollToHipsPos;
     private float timeInAir;
+    private bool isLocalPlayer;
+    private float gravity;
+    private GameObject hips;
     #endregion
 
     #region Initialize
@@ -103,6 +110,9 @@ public class Movement : MonoBehaviour
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
         animatorFollow = ragdoll.GetComponent<AnimatorFollow>();
         nonRagdollToHipsPos = transform.position - nonRagdollHips.transform.position;
+        isLocalPlayer = transform.root.GetComponent<BodyParts>().IsLocalPlayer();
+        gravity = (physicsBasedMovement) ? physicsGravity : nonphysicsGravity;
+        hips = (physicsBasedMovement) ? ragdollHips : nonRagdollHips;
     }
     #endregion
 
@@ -110,24 +120,24 @@ public class Movement : MonoBehaviour
 
     /// <summary> All movement of the player is run through this void </summary>
     /// <param name = "input"> input struct </summary>
-    public void Move(InputStruct input)
+    public void Move()
     {
         // get current state
         currentState = (States)animator.GetInteger(Parameters.currentState);
 
         // find the input and a normalized input
-        Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
+        Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = inputVector.normalized;
 
         SetSpeed();
 
-        SetLocomotionBlendValue(inputVector, input.sprint);
+        SetLocomotionBlendValue(inputVector, Input.GetButton("Sprint"));
 
-        RotatePlayer(inputDir, input.freeRotateCamera, input.mousePos);
+        RotatePlayer(inputDir, Input.GetButton("Free Rotate Camera"), Input.mousePosition);
 
-        CheckForJump(inputVector, input.jump);
+        CheckForJump(inputVector, Input.GetButton("Jump"));
 
-        SetValuesIfMidAir(input.jump);
+        SetValuesIfMidAir(Input.GetButton("Jump"));
 
         // set the current state to equal the appropriate currentState
         animator.SetInteger(Parameters.currentState, (int)currentState);
@@ -200,15 +210,19 @@ public class Movement : MonoBehaviour
     private void SetValuesIfMidAir(bool space)
     {
         RaycastHit hit;
-        Ray ray = new Ray(ragdollHips.transform.position, Vector3.down);
+        Ray ray = new Ray(hips.transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, maxRaycastDownDist, 1 << LayerMaskController.environment);
 
         if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
             if (currentState == States.defInAir)
             {
-                animatorFollow.ChangeCurrentAnim(animatorFollow.locomotionAnim);
-                cc.Move(ragdollHips.transform.position + nonRagdollToHipsPos - transform.position);
+                if (physicsBasedMovement)
+                {
+                    animatorFollow.ChangeCurrentAnim(animatorFollow.locomotionAnim);
+                    cc.Move(ragdollHips.transform.position + nonRagdollToHipsPos - transform.position);
+                }
+
                 if (timeInAir < softLandingMaxTimeInAir) SetCurrentState(States.softLanding);
                 else if (timeInAir < rollLandingMaxTimeInAir) SetCurrentState(States.fallToRoll);
                 else SetCurrentState(States.hardLanding);
@@ -219,7 +233,7 @@ public class Movement : MonoBehaviour
         {
             if (currentState != States.defInAir)
             {
-                animatorFollow.ChangeCurrentAnim(animatorFollow.fallingAnim);
+                if (physicsBasedMovement) animatorFollow.ChangeCurrentAnim(animatorFollow.fallingAnim);
                 SetCurrentState(States.defInAir);
             }
             timeInAir += Time.deltaTime;
