@@ -6,19 +6,28 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    // pause menu canvas
     public Canvas pauseMenu;
+    // dialogue box canvax
     public Canvas dialogueBox;
-    public GameObject inventory;
+    // dialogue text box
     public Text dialogueText;
 
+    // source to play audio from
     private AudioSource audioSource;
+    // dialogue strings
     private Dialogue[] dialogue;
+    // current place in dialogue
     private int currentDialogueIndex = 0;
 
+    // if pause menu is enabled
     public bool togglePauseMenu;
+    // if dialogue box is enabled
     public bool toggleDialogueBox;
+    // if player can move
     public bool canMove = true;
 
+    // instantiate variables
     void Start()
     {
         dialogueText = dialogueText.GetComponent<Text>();
@@ -27,6 +36,7 @@ public class UIManager : MonoBehaviour
         dialogueBox.enabled = false;
     }
 
+    // turn dialogue box on and off
     public void ToggleDialogue(Dialogue[] dialogue)
     {
         canMove = toggleDialogueBox;
@@ -38,6 +48,7 @@ public class UIManager : MonoBehaviour
         if (dialogueBox.enabled) PlayDialogue();
     }
 
+    // play a new line of audio
     public void PlayDialogue()
     {
         Debug.Log("PLAY");
@@ -55,6 +66,7 @@ public class UIManager : MonoBehaviour
         audioSource.PlayOneShot(dialogue[currentDialogueIndex].audio);
     }
 
+    // turn on / off the pause menu
     public void TogglePauseMenu()
     {
         canMove = !canMove;
@@ -62,9 +74,21 @@ public class UIManager : MonoBehaviour
         pauseMenu.enabled = !pauseMenu.enabled;
     }
 
-    public void LockCursor()
+    // lock the cursor
+    public static void LockCursor(bool locked)
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
+
+
+

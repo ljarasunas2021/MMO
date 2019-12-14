@@ -153,6 +153,36 @@ Transform:
   m_Father: {fileID: 2460237549439615161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &632032528786710476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4711641929101318491}
+  m_Layer: 13
+  m_Name: LockedCamFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4711641929101318491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632032528786710476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.454, y: 0.315, z: 0.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7124408300903522692}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &817788726394305903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,6 +2242,7 @@ MonoBehaviour:
   maxBoxJumpHeight: 2.5
   maxWalkingJumpHeight: 2.5
   maxRunningJumpHeight: 2.5
+  camRotOffset: -25
   currentState: 0
 --- !u!143 &5507360011771365501
 CharacterController:
@@ -2611,9 +2642,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  handR: {fileID: 7996416254279132510}
+  ragdollHandR: {fileID: 7996416254279132510}
+  nonragdollHandR: {fileID: 9151022083933076068}
   head: {fileID: 7996416254279132426}
-  lockedCamFollow: {fileID: 5926500496716824469}
+  ragdollLockedCamFollow: {fileID: 5926500496716824469}
+  nonRagdollLockedCamFollow: {fileID: 632032528786710476}
 --- !u!114 &5445640903548761391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2884,6 +2917,7 @@ MonoBehaviour:
   nonRagdoll: {fileID: 7155055279979313472}
   sceneObjectPrefab: {fileID: 5729793933798309162, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
     type: 3}
+  disableWeaponCollider: 1
   maxGrabDistance: 100000
 --- !u!114 &2778053771784444608
 MonoBehaviour:
@@ -7192,6 +7226,7 @@ Transform:
   - {fileID: 6923490447669488165}
   - {fileID: 8582436256832886899}
   - {fileID: 8888625077167771662}
+  - {fileID: 4711641929101318491}
   m_Father: {fileID: 1141395300826397921}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

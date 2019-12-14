@@ -62,6 +62,10 @@ public class Movement : MonoBehaviour
     // running Jump
     [SerializeField] private float maxRunningJumpHeight;
 
+    [Header("Camera Values")]
+    public float camRotOffset;
+
+
     // amount that ____ has moved towards its target value 
     // speed
     private float speedSmoothVelocity;
@@ -87,14 +91,24 @@ public class Movement : MonoBehaviour
     private Animator animator;
     // character controller
     private CharacterController cc;
-
+    // current camera mode
     private CameraModes currentCam;
+    // animator follow script
     private AnimatorFollow animatorFollow;
+    // difference between non ragdoll and hips in pos
     private Vector3 nonRagdollToHipsPos;
+    // total time in the air
     private float timeInAir;
+    // if it is the local player
     private bool isLocalPlayer;
+    // gravity to be used
     private float gravity;
+    // target rotation of the player
+    private float targetRotation;
+    // hips gameobject to use
     private GameObject hips;
+    // manager of the camera for the player
+    private PlayerCameraManager playerCameraManager;
     #endregion
 
     #region Initialize
@@ -113,6 +127,7 @@ public class Movement : MonoBehaviour
         isLocalPlayer = transform.root.GetComponent<BodyParts>().IsLocalPlayer();
         gravity = (physicsBasedMovement) ? physicsGravity : nonphysicsGravity;
         hips = (physicsBasedMovement) ? ragdollHips : nonRagdollHips;
+        playerCameraManager = transform.parent.GetComponent<PlayerCameraManager>();
     }
     #endregion
 
@@ -150,13 +165,26 @@ public class Movement : MonoBehaviour
     {
         if (currentState != States.locomotion) return;
 
-        // value that the locomotion blend value should be 
+        // value that the locomotion blend value should be
         float targetLocomotionBlendVal = 0;
         float targetLocomotionDirection = 0;
 
+        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
         if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift) targetLocomotionBlendVal = runVal;
-        else targetLocomotionBlendVal = walkVal;
+        else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
+        else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
+
+        if (lockedCameraMode)
+        {
+            if (input.x != 0)
+            {
+                int dir = (input.x < 0) ? -1 : 1;
+                if (leftShift) targetLocomotionDirection = dir * runVal;
+                else targetLocomotionDirection = dir * walkVal;
+            }
+
+            if (input.y < 0) targetLocomotionBlendVal = -walkVal;
+        }
 
         float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
         locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionDirSmoothVelocity, locomotionDirSmoothTime);
@@ -175,19 +203,29 @@ public class Movement : MonoBehaviour
     /// <param name = "leftControl"> was left control pressed </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
-        // if the input doesn't equal zero, player can rotate
-        if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+        if (currentCam != CameraModes.locked)
         {
-            // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            // if the input doesn't equal zero, player can rotate
+            if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+            {
+                // find target rotation of player based on camera's transform and rotate towards that angle smoothly
+                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.eulerAngles.y - camRotOffset, 0));
         }
     }
 
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        cc.Move(ragdollHips.transform.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime + ragdollHips.transform.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
+        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+        Transform transformToUse = (lockedCameraMode) ? Camera.main.transform : transform;
+        cc.Move(transformToUse.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
+        cc.Move(transformToUse.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>

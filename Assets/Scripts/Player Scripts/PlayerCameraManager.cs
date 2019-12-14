@@ -24,7 +24,7 @@ public class PlayerCameraManager : NetworkBehaviour
     // closeup
     private CinemachineFreeLook closeUpFreeLook;
     // locked
-    private CinemachineFreeLook lockedFreeLook;
+    private CinemachineFreeLook lockedFreeLookRagdoll, lockedFreeLookNonRagdoll;
 
     // movement script
     private Movement movement;
@@ -42,9 +42,9 @@ public class PlayerCameraManager : NetworkBehaviour
 
         bodyParts = GetComponent<BodyParts>();
         head = bodyParts.head;
-        lockedCamFollow = bodyParts.lockedCamFollow;
         cameraController = Camera.main.GetComponent<CameraController>();
         movement = nonRagdoll.GetComponent<Movement>();
+        lockedCamFollow = (movement.physicsBasedMovement) ? bodyParts.ragdollLockedCamFollow : bodyParts.nonRagdollLockedCamFollow;
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
         cinematicFreeLook.Follow = head.transform;
@@ -54,9 +54,13 @@ public class PlayerCameraManager : NetworkBehaviour
         closeUpFreeLook.Follow = head.transform;
         closeUpFreeLook.LookAt = head.transform;
 
-        lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
-        lockedFreeLook.Follow = lockedCamFollow.transform;
-        lockedFreeLook.LookAt = lockedCamFollow.transform;
+        lockedFreeLookRagdoll = cameraController.lockedCamRagdoll.GetComponent<CinemachineFreeLook>();
+        lockedFreeLookRagdoll.Follow = lockedCamFollow.transform;
+        lockedFreeLookRagdoll.LookAt = lockedCamFollow.transform;
+
+        lockedFreeLookNonRagdoll = cameraController.lockedCamNonRagdoll.GetComponent<CinemachineFreeLook>();
+        lockedFreeLookNonRagdoll.Follow = lockedCamFollow.transform;
+        lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
 
         ChangeCam(CameraModes.cinematic);
     }
@@ -73,19 +77,31 @@ public class PlayerCameraManager : NetworkBehaviour
             {
                 cinematicFreeLook.Priority = 1;
                 closeUpFreeLook.Priority = 0;
-                lockedFreeLook.Priority = 0;
+                lockedFreeLookRagdoll.Priority = 0;
+                lockedFreeLookNonRagdoll.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 1;
-                lockedFreeLook.Priority = 0;
+                lockedFreeLookRagdoll.Priority = 0;
+                lockedFreeLookNonRagdoll.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
-                lockedFreeLook.Priority = 1;
+
+                if (movement.physicsBasedMovement)
+                {
+                    lockedFreeLookRagdoll.Priority = 1;
+                    lockedFreeLookNonRagdoll.Priority = 0;
+                }
+                else
+                {
+                    lockedFreeLookRagdoll.Priority = 0;
+                    lockedFreeLookNonRagdoll.Priority = 1;
+                }
             }
 
             currentCam = mode;

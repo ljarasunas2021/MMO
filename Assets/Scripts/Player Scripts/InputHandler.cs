@@ -32,6 +32,7 @@ public class InputHandler : NetworkBehaviour
         uIScript = GameObject.FindObjectOfType<UIManager>();
         bodyParts = GetComponent<BodyParts>();
         itemHolding = new ItemHolding(null, ItemType.none);
+        UIManager.LockCursor(true);
     }
     #endregion
 
@@ -61,16 +62,7 @@ public class InputHandler : NetworkBehaviour
         if (Input.GetButtonDown("Pause"))
         {
             uIScript.TogglePauseMenu();
-            if (uIScript.togglePauseMenu)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            UIManager.LockCursor(!uIScript.togglePauseMenu);
         }
 
         if (Input.GetButtonDown("Dialogue Skip") && uIScript.toggleDialogueBox)
