@@ -360,9 +360,17 @@ public class Weapon : MonoBehaviour
 
     private void CreateHitEffects(RaycastHit hit) { foreach (GameObject hitEffect in hitEffects) if (hitEffect != null) playerWeapon.RpcCreateHitEffect(FindIndexEffect(hitEffect), hit.point, hit.normal); }
 
-    private void MakeMuzzleEffects() { playerWeapon.RpcMakeMuzzleEffect(FindIndexEffect(muzzleEffects[Random.Range(0, muzzleEffects.Length)]), muzzleEffectsPosition.position, muzzleEffectsPosition.eulerAngles); }
+    private void MakeMuzzleEffects()
+    {
+        if (playerWeapon == null || muzzleEffectsPosition == null) return;
+        playerWeapon.RpcMakeMuzzleEffect(FindIndexEffect(muzzleEffects[Random.Range(0, muzzleEffects.Length)]), muzzleEffectsPosition.position, muzzleEffectsPosition.eulerAngles);
+    }
 
-    private void SplitShells() { playerWeapon.CmdSplitShells(shell, shellSpitPosition.position, shellSpitPosition.eulerAngles, shellSpitForce, shellForceRandom, shellSpitTorqueX, shellTorqueRandom, shellSpitTorqueY); }
+    private void SplitShells()
+    {
+        if (playerWeapon == null || shellSpitPosition == null) return;
+        playerWeapon.CmdSplitShells(shell, shellSpitPosition.position, shellSpitPosition.eulerAngles, shellSpitForce, shellForceRandom, shellSpitTorqueX, shellTorqueRandom, shellSpitTorqueY);
+    }
 
     private void Reload()
     {
@@ -375,6 +383,8 @@ public class Weapon : MonoBehaviour
 
     private void Recoil()
     {
+        if (weaponModel == null) return;
+
         float kickBack = Random.Range(recoilKickBackMin, recoilKickBackMax);
         float kickRot = Random.Range(recoilRotationMin, recoilRotationMax);
 
