@@ -129,6 +129,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\RagdollControl.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollLimb.cs" />
+     <Compile Include="Assets\Scripts\UI\Compass.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
