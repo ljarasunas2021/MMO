@@ -109,9 +109,12 @@
      <Compile Include="Assets\Scripts\Controller Scripts\ItemPrefabsController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\LayerMaskController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Other\Compass.cs" />
+     <Compile Include="Assets\Scripts\Other\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
      <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
      <Compile Include="Assets\Scripts\Other\Target.cs" />
+     <Compile Include="Assets\Scripts\Other\Waypoint.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\AnimatorFollow.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\AnimLimb.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
@@ -129,7 +132,6 @@
      <Compile Include="Assets\Scripts\Player Scripts\RagdollControl.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollLimb.cs" />
-     <Compile Include="Assets\Scripts\UI\Compass.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
