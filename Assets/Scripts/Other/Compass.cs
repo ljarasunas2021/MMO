@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Compass : MonoBehaviour
 {
@@ -47,6 +48,8 @@ public class Compass : MonoBehaviour
     public void AddWaypoint(int waypointIndex)
     {
         GameObject waypt = Instantiate(waypointMarker, circleParent.transform);
+
+        waypt.GetComponent<Image>().color = wayPoints[waypointIndex].waypoint.GetComponent<Waypoint>().color;
         wayPoints[waypointIndex].marker = waypt;
     }
 }

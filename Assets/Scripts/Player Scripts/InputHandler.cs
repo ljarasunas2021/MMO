@@ -69,6 +69,8 @@ public class InputHandler : NetworkBehaviour
         {
             uIScript.PlayDialogue();
         }
+
+        if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
     }
 
     ///<summary> Check if input related to item holding should be called </summary>

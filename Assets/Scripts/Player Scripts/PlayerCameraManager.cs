@@ -63,6 +63,7 @@ public class PlayerCameraManager : NetworkBehaviour
         lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
 
         GameObject.FindObjectOfType<Compass>().Initialize(nonRagdoll);
+        GameObject.FindObjectOfType<Map>().player = nonRagdoll;
 
         ChangeCam(CameraModes.cinematic);
     }

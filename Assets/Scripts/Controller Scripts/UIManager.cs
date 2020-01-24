@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public Canvas dialogueBox;
     // dialogue text box
     public Text dialogueText;
+    public Canvas compassCanvas, mapCanvas;
 
     // source to play audio from
     private AudioSource audioSource;
@@ -19,11 +20,9 @@ public class UIManager : MonoBehaviour
     private Dialogue[] dialogue;
     // current place in dialogue
     private int currentDialogueIndex = 0;
+    private Map map;
 
-    // if pause menu is enabled
-    public bool togglePauseMenu;
-    // if dialogue box is enabled
-    public bool toggleDialogueBox;
+    public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
     // if player can move
     public bool canMove = true;
 
@@ -32,8 +31,11 @@ public class UIManager : MonoBehaviour
     {
         dialogueText = dialogueText.GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
-        pauseMenu.enabled = false;
-        dialogueBox.enabled = false;
+        map = mapCanvas.GetComponent<Map>();
+        pauseMenu.enabled = togglePauseMenu;
+        dialogueBox.enabled = toggleDialogueBox;
+        mapCanvas.enabled = toggleMap;
+        compassCanvas.enabled = !toggleMap;
     }
 
     // turn dialogue box on and off
@@ -72,6 +74,16 @@ public class UIManager : MonoBehaviour
         canMove = !canMove;
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
+    }
+
+    public void ToggleMap()
+    {
+        toggleMap = !toggleMap;
+        if (toggleMap) map.Enable();
+        else map.Disable();
+        mapCanvas.enabled = toggleMap;
+        compassCanvas.enabled = !toggleMap;
+
     }
 
     // lock the cursor
