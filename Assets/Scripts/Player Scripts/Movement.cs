@@ -354,5 +354,7 @@ public static class Parameters
     public static string targetUpperBodyState = "TargetUpperBodyState";
     public static string locomotionDir = "LocomotionDir";
     public static string knockedOut = "KnockedOut";
+    public static string leftFoot = "LeftFoot";
+    public static string rightFoot = "RightFoot";
 }
 #endregion
