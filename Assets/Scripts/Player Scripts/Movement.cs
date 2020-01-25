@@ -165,25 +165,27 @@ public class Movement : MonoBehaviour
     {
         if (currentState != States.locomotion) return;
 
-        // value that the locomotion blend value should be
         float targetLocomotionBlendVal = 0;
         float targetLocomotionDirection = 0;
 
-        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
-        if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
-        else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
-
-        if (lockedCameraMode)
+        if (UIManager.canMove)
         {
-            if (input.x != 0)
-            {
-                int dir = (input.x < 0) ? -1 : 1;
-                if (leftShift) targetLocomotionDirection = dir * runVal;
-                else targetLocomotionDirection = dir * walkVal;
-            }
+            bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+            if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
+            else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
+            else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
 
-            if (input.y < 0) targetLocomotionBlendVal = -walkVal;
+            if (lockedCameraMode)
+            {
+                if (input.x != 0)
+                {
+                    int dir = (input.x < 0) ? -1 : 1;
+                    if (leftShift) targetLocomotionDirection = dir * runVal;
+                    else targetLocomotionDirection = dir * walkVal;
+                }
+
+                if (input.y < 0) targetLocomotionBlendVal = -walkVal;
+            }
         }
 
         float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
@@ -203,6 +205,8 @@ public class Movement : MonoBehaviour
     /// <param name = "leftControl"> was left control pressed </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
+        if (!UIManager.canMove) return;
+
         if (currentCam != CameraModes.locked)
         {
             // if the input doesn't equal zero, player can rotate
@@ -233,6 +237,8 @@ public class Movement : MonoBehaviour
     /// <param name = "space"> was the space bar pressed </param>
     private void CheckForJump(Vector2 input, bool space)
     {
+        if (!UIManager.canMove) return;
+
         /// if space has been pressed jump
         if (space)
         {

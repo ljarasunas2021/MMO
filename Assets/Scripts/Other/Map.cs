@@ -30,6 +30,7 @@ public class Map : MonoBehaviour
     public void Enable()
     {
         UIManager.LockCursor(false);
+        UIManager.canMove = false;
         Vector3 pos = player.transform.position;
         Vector2 screenPos = new Vector2((imageWidth) * (pos.x - minX) / (maxX - minX), (imageHeight) * (pos.z - minZ) / (maxZ - minZ));
         playerMarkerInstant = GameObject.Instantiate(playerMarker, map.transform);
@@ -40,6 +41,7 @@ public class Map : MonoBehaviour
     public void Disable()
     {
         UIManager.LockCursor(true);
+        UIManager.canMove = true;
         Destroy(playerMarkerInstant);
     }
 }

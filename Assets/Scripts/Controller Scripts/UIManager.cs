@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
     // if player can move
-    public bool canMove = true;
+    public static bool canMove = true;
 
     // instantiate variables
     void Start()

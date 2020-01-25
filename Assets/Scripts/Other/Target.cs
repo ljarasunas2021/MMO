@@ -51,7 +51,7 @@ public class Target : MonoBehaviour
             switch (interactKey)
             {
                 case "npc":
-                    if (UIScript.canMove)
+                    if (UIManager.canMove)
                     {
                         StartCoroutine(RotateNPC());
 
@@ -66,7 +66,7 @@ public class Target : MonoBehaviour
     {
         if (PlayerCloseEnough())
         {
-            if (UIScript.canMove && !outline.enabled)
+            if (UIManager.canMove && !outline.enabled)
             {
                 outline.enabled = true;
             }
