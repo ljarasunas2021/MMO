@@ -44,7 +44,7 @@ public class Compass : MonoBehaviour
         }
     }
 
-    public void AddWaypoint(Waypoint waypoint)
+    public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker)
     {
         wayPoints.Add(new WaypointAndInstant(waypoint));
 
@@ -52,6 +52,20 @@ public class Compass : MonoBehaviour
 
         markerInstant.GetComponent<Image>().color = waypoint.color;
         wayPoints[wayPoints.Count - 1].marker = markerInstant;
+        wayPoints[wayPoints.Count - 1].mapMarker = mapMarker;
+    }
+
+    public void RemoveWaypoint(MapMarker mapMarker)
+    {
+        int index = -1;
+        for (int i = 0; i < wayPoints.Count; i++)
+        {
+            if (wayPoints[i].mapMarker == mapMarker) index = i;
+        }
+        Destroy(wayPoints[index].waypoint.gameObject);
+        Destroy(wayPoints[index].marker.gameObject);
+        Destroy(wayPoints[index].mapMarker.gameObject);
+        wayPoints.RemoveAt(index);
     }
 }
 
@@ -60,6 +74,7 @@ public class WaypointAndInstant
 {
     public Waypoint waypoint;
     public GameObject marker;
+    public MapMarker mapMarker;
 
     public WaypointAndInstant(Waypoint waypoint)
     {
