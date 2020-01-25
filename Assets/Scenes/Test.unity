@@ -28959,7 +28959,6 @@ MonoBehaviour:
   togglePauseMenu: 0
   toggleDialogueBox: 0
   toggleMap: 0
-  canMove: 1
 --- !u!1 &1186172670
 GameObject:
   m_ObjectHideFlags: 0
@@ -43532,7 +43531,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 2047436656
+  m_SceneId: 2637234723
 --- !u!1 &2124091510
 GameObject:
   m_ObjectHideFlags: 0

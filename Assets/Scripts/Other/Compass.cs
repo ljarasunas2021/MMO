@@ -5,23 +5,35 @@ using UnityEngine.UI;
 
 public class Compass : MonoBehaviour
 {
+    // player GameObject
     [HideInInspector] public GameObject player;
-    public GameObject waypointMarker, circleParent, mask;
+    // ui waypoint marker
+    public GameObject waypointMarker;
+    // the gameObject that rotates the minimap and the waypoints
+    public GameObject circleParent;
+    // the mask that makes the minimap circular
+    public GameObject mask;
+    // a list of the player's waypoints
     public List<WaypointAndInstant> wayPoints = new List<WaypointAndInstant>();
+    // the transform of Camera.main
     private Transform mainCamTransform;
+    // the width of the compass
     private float width;
 
+    // initialize the compass
     public void Initialize(GameObject player)
     {
         this.player = player;
     }
 
+    // intitialize variables at run time
     void Start()
     {
         mainCamTransform = Camera.main.transform;
         width = mask.GetComponent<RectTransform>().rect.width / 2;
     }
 
+    // rotate the circle parent accordingly
     void Update()
     {
         if (player == null) return;
@@ -34,7 +46,7 @@ public class Compass : MonoBehaviour
 
         foreach (WaypointAndInstant waypoint in wayPoints)
         {
-            Vector3 diff = waypoint.waypoint.GetPosition() - player.transform.position;
+            Vector3 diff = waypoint.waypoint.transform.position - player.transform.position;
             diff.y = 0;
             float rot = Vector3.Angle(diff, Vector3.forward);
             if (Vector3.forward.x - diff.x > 0) rot *= -1;
@@ -44,6 +56,7 @@ public class Compass : MonoBehaviour
         }
     }
 
+    // Add a waypoint to the waypoint list
     public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker)
     {
         wayPoints.Add(new WaypointAndInstant(waypoint));
@@ -55,6 +68,7 @@ public class Compass : MonoBehaviour
         wayPoints[wayPoints.Count - 1].mapMarker = mapMarker;
     }
 
+    // Remove a Waypoint and destroy gameObjects
     public void RemoveWaypoint(MapMarker mapMarker)
     {
         int index = -1;
@@ -69,6 +83,7 @@ public class Compass : MonoBehaviour
     }
 }
 
+// holds data for the waypoint itself, the waypoint marker on the compass, and the waypoint marker on the map
 [System.Serializable]
 public class WaypointAndInstant
 {

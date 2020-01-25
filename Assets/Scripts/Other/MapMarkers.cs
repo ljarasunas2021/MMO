@@ -3,12 +3,28 @@ using UnityEngine;
 
 public class MapMarkers : MonoBehaviour, IPointerClickHandler
 {
+    // the compass gameObject
     public Compass compass;
+    // the map GameObject
     public Map map;
-    public GameObject marker, waypoint;
+    // the marker prefab
+    public GameObject marker;
+    // the waypoint prefab
+    public GameObject waypoint;
+    // the main Camera
     private Camera mainCamera;
-    private float localScale, screenWidth, screenHeight, imageHeight, mapWidth, mapHeight, maxX, minX, maxZ, minZ;
+    // the scale of the canvas
+    private float localScale;
+    // the screen's width and height
+    private float screenWidth, screenHeight;
+    // the height of the marker
+    private float imageHeight;
+    // the map's height and width
+    private float mapWidth, mapHeight;
+    //the max coordinates of the player on the mapHeight
+    private float maxX, minX, maxZ, minZ;
 
+    // initialize the variables
     void Start()
     {
         mainCamera = Camera.main;
@@ -24,6 +40,7 @@ public class MapMarkers : MonoBehaviour, IPointerClickHandler
         minZ = map.minZ;
     }
 
+    // create a marker on click
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject markerInstant = Instantiate(marker, transform);
