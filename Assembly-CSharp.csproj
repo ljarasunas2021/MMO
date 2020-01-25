@@ -111,6 +111,7 @@
      <Compile Include="Assets\Scripts\Controller Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\Other\Compass.cs" />
      <Compile Include="Assets\Scripts\Other\Map.cs" />
+     <Compile Include="Assets\Scripts\Other\MapMarkers.cs" />
      <Compile Include="Assets\Scripts\Other\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
      <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />

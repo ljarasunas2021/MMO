@@ -9480,7 +9480,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 1689577157
+      value: 243293996
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -10897,50 +10897,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419662965}
   m_Mesh: {fileID: 23622242}
---- !u!1 &432774030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 432774032}
-  - component: {fileID: 432774031}
-  m_Layer: 0
-  m_Name: Waypoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &432774031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432774030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d47bb70f8dc0146e1b9de1fc15c016a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 1}
---- !u!4 &432774032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432774030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.52, y: 0, z: 15.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456845794
 GameObject:
   m_ObjectHideFlags: 3
@@ -15057,7 +15013,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 1139104769
+      value: 984987836
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -15956,7 +15912,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 3021734830
+      value: 487690185
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -32190,9 +32146,7 @@ MonoBehaviour:
     type: 3}
   circleParent: {fileID: 798317444}
   mask: {fileID: 519388716}
-  wayPoints:
-  - waypoint: {fileID: 432774031}
-    marker: {fileID: 0}
+  wayPoints: []
 --- !u!1 &1531075889 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5729793933798309162, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
@@ -41400,6 +41354,10 @@ MonoBehaviour:
   player: {fileID: 0}
   playerMarker: {fileID: 2470669101334622040, guid: c0a3ff99ddd264f28aaf81b6592c694f,
     type: 3}
+  imageWidth: 0
+  imageHeight: 0
+  screenWidth: 0
+  screenHeight: 0
 --- !u!1 &1778832984
 GameObject:
   m_ObjectHideFlags: 0
@@ -41860,8 +41818,9 @@ GameObject:
   - component: {fileID: 1996433426}
   - component: {fileID: 1996433428}
   - component: {fileID: 1996433427}
+  - component: {fileID: 1996433429}
   m_Layer: 0
-  m_Name: Image
+  m_Name: MapImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41923,6 +41882,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996433425}
   m_CullTransparentMesh: 0
+--- !u!114 &1996433429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996433425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524c856963e6b4ce2b412bda49315fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compass: {fileID: 1508135025}
+  map: {fileID: 1765024016}
+  marker: {fileID: 3726476398575383730, guid: f65e2d97be02341299e67a36e498d8c3, type: 3}
+  waypoint: {fileID: 9114463936868892358, guid: 4cb836ea61636411a82dbc02b85b24e8,
+    type: 3}
 --- !u!1001 &2015341787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41998,7 +41974,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 2714572282
+      value: 4270796500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -43644,7 +43620,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 745217861
+  m_SceneId: 2035534746
 --- !u!1 &2124091510
 GameObject:
   m_ObjectHideFlags: 0
@@ -50694,7 +50670,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 439051529
+      value: 3439292499
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}

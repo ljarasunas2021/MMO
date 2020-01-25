@@ -11,9 +11,9 @@ public class Map : MonoBehaviour
     public GameObject playerMarker;
     private GameObject playerMarkerInstant;
     private Camera mainCam;
-    private float imageWidth, imageHeight, screenWidth, screenHeight;
+    [HideInInspector] public float imageWidth, imageHeight, screenWidth, screenHeight;
 
-    void Start()
+    void Awake()
     {
         mainCam = Camera.main;
         Sprite mapSprite = map.GetComponent<Image>().sprite;
@@ -29,6 +29,7 @@ public class Map : MonoBehaviour
 
     public void Enable()
     {
+        UIManager.LockCursor(false);
         Vector3 pos = player.transform.position;
         Vector2 screenPos = new Vector2((imageWidth) * (pos.x - minX) / (maxX - minX), (imageHeight) * (pos.z - minZ) / (maxZ - minZ));
         playerMarkerInstant = GameObject.Instantiate(playerMarker, map.transform);
@@ -38,6 +39,7 @@ public class Map : MonoBehaviour
 
     public void Disable()
     {
+        UIManager.LockCursor(true);
         Destroy(playerMarkerInstant);
     }
 }

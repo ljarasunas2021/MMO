@@ -14,7 +14,6 @@ public class Compass : MonoBehaviour
     public void Initialize(GameObject player)
     {
         this.player = player;
-        for (int i = 0; i < wayPoints.Count; i++) AddWaypoint(i);
     }
 
     void Start()
@@ -45,12 +44,14 @@ public class Compass : MonoBehaviour
         }
     }
 
-    public void AddWaypoint(int waypointIndex)
+    public void AddWaypoint(Waypoint waypoint)
     {
-        GameObject waypt = Instantiate(waypointMarker, circleParent.transform);
+        wayPoints.Add(new WaypointAndInstant(waypoint));
 
-        waypt.GetComponent<Image>().color = wayPoints[waypointIndex].waypoint.GetComponent<Waypoint>().color;
-        wayPoints[waypointIndex].marker = waypt;
+        GameObject markerInstant = Instantiate(waypointMarker, circleParent.transform);
+
+        markerInstant.GetComponent<Image>().color = waypoint.color;
+        wayPoints[wayPoints.Count - 1].marker = markerInstant;
     }
 }
 
@@ -59,4 +60,9 @@ public class WaypointAndInstant
 {
     public Waypoint waypoint;
     public GameObject marker;
+
+    public WaypointAndInstant(Waypoint waypoint)
+    {
+        this.waypoint = waypoint;
+    }
 }
