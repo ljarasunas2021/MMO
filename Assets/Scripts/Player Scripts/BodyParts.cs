@@ -1,8 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
-public class BodyParts : MonoBehaviour
+///<summary> Contains references to important body parts </summary>
+public class BodyParts : NetworkBehaviour
 {
-    public GameObject handR, head;
+    //Gameobject reference to the 
+    // handR
+    public GameObject ragdollHandR;
+    public GameObject nonragdollHandR;
+    // head
+    public GameObject head;
+    // locked Camera Empty Gameobject (used for positioning the locked cam) on ragdoll and non ragdoll based on if physics or nonphysics movement
+    public GameObject ragdollLockedCamFollow, nonRagdollLockedCamFollow;
+
+    public bool IsLocalPlayer() { return isLocalPlayer; }
 }

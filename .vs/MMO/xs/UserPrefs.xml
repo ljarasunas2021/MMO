@@ -1,17 +1,16 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controller Scripts/LayerMaskController.cs">
+﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player Scripts/PlayerEquip.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player Scripts/CrossHair.cs" Line="10" Column="1" />
       <File FileName="Assets/Scripts/Player Scripts/Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="61" Column="1" />
       <File FileName="Assets/Scripts/Player Scripts/FootIK.cs" Line="88" Column="128" />
-      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" Line="4" Column="2" />
-      <File FileName="Assets/Scripts/Player Scripts/GrabItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" Line="5" Column="2" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3d37e28e-434c-49e5-b0da-3e07e75b9783" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ec8efafc-ee22-4995-804a-189088fbd5fd" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
