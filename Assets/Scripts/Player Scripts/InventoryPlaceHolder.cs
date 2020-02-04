@@ -53,7 +53,7 @@ public class InventoryPlaceHolder : MonoBehaviour, IDragHandler, IEndDragHandler
         placeHolder.SetItemAndIcon(itemAndIcon);
         SetItemAndIcon(placeHolderItemAndIcon);
 
-        if (isHotBarPlaceHolder) { inventoryManager.EquipItem(hotBarIndex, itemAndIcon.itemIndex); }
+        if (isHotBarPlaceHolder) { inventoryManager.EnableEquip(hotBarIndex, itemAndIcon.itemIndex); }
     }
 
     // set the item an icon

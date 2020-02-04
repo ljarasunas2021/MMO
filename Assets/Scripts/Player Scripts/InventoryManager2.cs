@@ -52,6 +52,8 @@ public class InventoryManager2 : MonoBehaviour
         inventoryEnabled = !inventoryEnabled;
 
         UIManager.LockCursor(!inventoryEnabled);
+
+        playerEquip.CmdChangeHotBarIndex(-1);
     }
 
     // equip a certain hot bar slot (item index isn't known)
@@ -61,9 +63,9 @@ public class InventoryManager2 : MonoBehaviour
     }
 
     // equip a certain hot bar slot (item index is known)
-    public void EquipItem(int slot, int itemIndex)
+    public void EnableEquip(int slot, int itemIndex)
     {
-        playerEquip.EquipItem(slot, itemIndex);
+        playerEquip.EnableEquip(slot, itemIndex);
     }
 
     // finish dragging an inventory placeholder, switch values and graphics

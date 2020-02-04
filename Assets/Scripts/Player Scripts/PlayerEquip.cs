@@ -10,6 +10,9 @@ public class PlayerEquip : NetworkBehaviour
     public GameObject sceneObjectPrefab;
 
     public bool disableWeaponCollider = true;
+
+    public int weaponTimeTillDespawn = 75;
+
     [SyncVar(hook = nameof(ChangeItem))]
     // equipped item index
     private int equippedItem = -1;
@@ -34,7 +37,9 @@ public class PlayerEquip : NetworkBehaviour
     // movement script of the player
     private Movement movement;
     // hot bar index of the equipped weapon
-    private int hotBarIndex;
+    private int hotBarIndex = -1, hotBarIndexCounter;
+    private Camera mainCam;
+    private bool alreadyDespawnedWeapon = false;
     #endregion
 
     #region Initialize
@@ -47,6 +52,7 @@ public class PlayerEquip : NetworkBehaviour
         inputHandler = GetComponent<InputHandler>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
+        mainCam = Camera.main;
 
         movement = nonRagdoll.GetComponent<Movement>();
         handR = (movement.physicsBasedMovement) ? bodyParts.ragdollHandR : bodyParts.nonragdollHandR;
@@ -78,7 +84,7 @@ public class PlayerEquip : NetworkBehaviour
 
     [Command]
     // Change the hot bar index
-    void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }
+    public void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }
 
     ///<summary> Find the index of the gameObject in the prefab array </summary>
     ///<param name = "item"> item to get the index of </param>
@@ -93,8 +99,29 @@ public class PlayerEquip : NetworkBehaviour
     // check for button presses to equip inventory slots
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && hotBarIndex != 0) inventoryManager.EquipSlot(0);
-        if (Input.GetMouseButtonDown(1) && hotBarIndex != 1) inventoryManager.EquipSlot(1);
+        if (Input.GetMouseButtonDown(0) && hotBarIndex != 0)
+        {
+            inventoryManager.EquipSlot(0);
+            alreadyDespawnedWeapon = false;
+        }
+
+        if (Input.GetMouseButton(0)) hotBarIndexCounter = weaponTimeTillDespawn;
+
+        if (Input.GetMouseButtonDown(1) && hotBarIndex != 1)
+        {
+            inventoryManager.EquipSlot(1);
+            alreadyDespawnedWeapon = false;
+        }
+
+        if (Input.GetMouseButton(1)) hotBarIndexCounter = weaponTimeTillDespawn;
+
+        hotBarIndexCounter--;
+
+        if (hotBarIndexCounter < 0 && !alreadyDespawnedWeapon)
+        {
+            EquipItem(-1, -1);
+            alreadyDespawnedWeapon = true;
+        }
     }
     #endregion
 
@@ -103,7 +130,7 @@ public class PlayerEquip : NetworkBehaviour
     public void Grab()
     {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = mainCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
         if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item) && hit.collider.gameObject.GetComponent<Item>() != null)
         {
@@ -119,6 +146,13 @@ public class PlayerEquip : NetworkBehaviour
         CmdChangeHotBarIndex(hotBarIndex);
         CmdChangeEquippedItem(itemIndex);
         EnableWeaponScript(itemIndex);
+    }
+
+    public void EnableEquip(int hotBarIndex, int itemIndex)
+    {
+        //CmdChangeHotBarIndex(hotBarIndex);
+        //CmdChangeEquippedItem(itemIndex);
+        //EnableWeaponScript(itemIndex);
     }
 
     // enable the weapon script of the newly equipped item
