@@ -2453,7 +2453,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7155055279979313472}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 712b995c3ce0c407a99b6d714acb0ff3, type: 3}
   m_Name: 
@@ -2464,12 +2464,20 @@ MonoBehaviour:
   ikRotPower: 0.4
   raycastDistance: 3
   offsetY: 0.1
-  lookIKWeight: 1
-  bodyWeight: 0.5
-  headWeight: 0.9
-  eyesWeight: 1
-  clampWeight: 1
-  lookDistance: 15
+  basicLookIK:
+    lookIKWeight: 1
+    bodyWeight: 0.25
+    headWeight: 0.5
+    eyesWeight: 1
+    clampWeight: 1
+    lookDistance: 15
+  equippedLookIK:
+    lookIKWeight: 1
+    bodyWeight: 1
+    headWeight: 1
+    eyesWeight: 1
+    clampWeight: 1.5
+    lookDistance: 15
 --- !u!1 &7253187043832422534
 GameObject:
   m_ObjectHideFlags: 0

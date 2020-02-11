@@ -40,6 +40,7 @@ public class PlayerEquip : NetworkBehaviour
     private int hotBarIndex = -1, hotBarIndexCounter;
     private Camera mainCam;
     private bool alreadyDespawnedWeapon = false;
+    private IKHandling ikHandling;
     #endregion
 
     #region Initialize
@@ -53,6 +54,7 @@ public class PlayerEquip : NetworkBehaviour
         playerCameraManager = GetComponent<PlayerCameraManager>();
         itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
         mainCam = Camera.main;
+        ikHandling = nonRagdoll.GetComponent<IKHandling>();
 
         movement = nonRagdoll.GetComponent<Movement>();
         handR = (movement.physicsBasedMovement) ? bodyParts.ragdollHandR : bodyParts.nonragdollHandR;
@@ -180,12 +182,16 @@ public class PlayerEquip : NetworkBehaviour
                 else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)UpperBodyStates.shotgunHold;
 
                 cameraMode = CameraModes.locked;
+
+                ikHandling.SwitchLookIK(LookIKTypes.Basic);
             }
             else
             {
                 upperBodyState = (int)UpperBodyStates.swordHold;
 
                 cameraMode = CameraModes.closeUp;
+
+                ikHandling.SwitchLookIK(LookIKTypes.Weapon);
             }
         }
 
