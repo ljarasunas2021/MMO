@@ -145,8 +145,11 @@ public class PlayerEquip : NetworkBehaviour
     // equip an item
     public void EquipItem(int hotBarIndex, int itemIndex)
     {
+        Debug.Log("1");
         CmdChangeHotBarIndex(hotBarIndex);
+        Debug.Log("2");
         CmdChangeEquippedItem(itemIndex);
+        Debug.Log("3");
         EnableWeaponScript(itemIndex);
     }
 
@@ -174,7 +177,11 @@ public class PlayerEquip : NetworkBehaviour
             weapon.enabled = true;
             weapon.SetUser(gameObject);
             weapon.SetHotBarIndex(hotBarIndex);
-            inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, ItemType.ranged));
+
+            ItemType itemType = ItemType.none;
+            if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Melee) itemType = ItemType.melee;
+            if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Ranged) itemType = ItemType.ranged;
+            inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, itemType));
 
             if (weapon.type == WeaponType.Ranged)
             {
@@ -220,8 +227,7 @@ public class ItemHolding
         this.item = item;
         this.type = type;
 
-        if (type == ItemType.ranged) weaponScript = item.GetComponent<Weapon>();
-        else weaponScript = null;
+        if (type == ItemType.ranged || type == ItemType.melee) weaponScript = item.GetComponent<Weapon>();
     }
 }
 #endregion

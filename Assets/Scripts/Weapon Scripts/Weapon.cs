@@ -422,7 +422,7 @@ public class Weapon : MonoBehaviour
     {
         this.user = user;
         playerWeapon = user.GetComponent<PlayerWeapon>();
-        if (type == WeaponType.Melee) userAnim = user.GetComponent<Animator>();
+        userAnim = user.GetComponent<PlayerWeapon>().nonRagdoll.GetComponent<Animator>();
     }
 
     public void SetHotBarIndex(int hotBarIndex)

@@ -78,7 +78,7 @@ public class InputHandler : NetworkBehaviour
     {
         if (itemHolding.type == ItemType.ranged) { itemHolding.weaponScript.CheckForUserInput(); }
 
-        //if (itemHolding.type == HoldingItemType.melee) { }
+        if (itemHolding.type == ItemType.melee) { itemHolding.weaponScript.CheckForUserInput(); }
 
         //if (itemHolding.type == HoldingItemType.collectable) { }
     }

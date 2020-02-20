@@ -59,6 +59,31 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\WeaponEditor.cs" />
      <Compile Include="Assets\Packages\VSCode\Plugins\Editor\VSCode.cs" />
+     <Compile Include="Assets\UniGLTF\Core\Editor\MaterialTests.cs" />
+     <Compile Include="Assets\UniGLTF\Core\Editor\UniGLTFTests.cs" />
+     <Compile Include="Assets\UniGLTF\Core\Scripts\Editor\gltfAssetPostprocessor.cs" />
+     <Compile Include="Assets\UniGLTF\Core\Scripts\Editor\ImporterMenu.cs" />
+     <Compile Include="Assets\UniGLTF\Core\Scripts\Editor\UniGLTFVersionMenu.cs" />
+     <Compile Include="Assets\UniGLTF\DepthFirstScheduler\Editor\DepthFirstScheduler.cs" />
+     <Compile Include="Assets\UniGLTF\UniHumanoid\Scripts\Editor\BoneMappingEditor.cs" />
+     <Compile Include="Assets\UniGLTF\UniHumanoid\Scripts\Editor\bvhAssetPostprocessor.cs" />
+     <Compile Include="Assets\UniGLTF\UniHumanoid\Scripts\Editor\HumanPoseTransferEditor.cs" />
+     <Compile Include="Assets\UniGLTF\UniHumanoid\Scripts\Editor\MuscleInspectorEditor.cs" />
+     <Compile Include="Assets\UniGLTF\UniHumanoid\Scripts\Editor\Tests\BvhLoaderTests.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\IWriteStreamTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\JsonDiffTests.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\JsonFormatterTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\JsonParserTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\ArrayTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\BooleanTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\FloatTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\IntTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\MapTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\RawTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\MsgPack\StringTest.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\SchemaTests.cs" />
+     <Compile Include="Assets\UniGLTF\UniJSON\Editor\Tests\ValidatorTests.cs" />
+     <Compile Include="Assets\UniGLTF\UniUnlit\Editor\UniUnlitEditor.cs" />
  <Reference Include="Cinemachine">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
