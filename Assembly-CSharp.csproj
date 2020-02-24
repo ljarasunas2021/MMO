@@ -93,6 +93,7 @@
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
      <Compile Include="Assets\Imports\QuickOutline\Scripts\Outline.cs" />
      <Compile Include="Assets\OutlineObject.cs" />
+     <Compile Include="Assets\SchoolBus.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
