@@ -57,6 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ActivateBus.cs" />
+     <Compile Include="Assets\BattleRoyalePlayer.cs" />
      <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
      <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
      <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
@@ -93,6 +95,7 @@
      <Compile Include="Assets\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
      <Compile Include="Assets\Imports\QuickOutline\Scripts\Outline.cs" />
      <Compile Include="Assets\OutlineObject.cs" />
+     <Compile Include="Assets\PlayersController.cs" />
      <Compile Include="Assets\SchoolBus.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
@@ -139,6 +142,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\RagdollLimb.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
+     <Compile Include="Assets\Storm.cs" />
      <Compile Include="Assets\UniGLTF\Core\Scripts\Extensions\ArrayExtensions.cs" />
      <Compile Include="Assets\UniGLTF\Core\Scripts\Extensions\glTFExtensions.cs" />
      <Compile Include="Assets\UniGLTF\Core\Scripts\Extensions\JsonParserExtensions.cs" />

@@ -1,23 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
+using UnityEngine;
 
 public class SchoolBus : NetworkBehaviour
 {
-    public float radius, speed;
+    public float radius, speed, centerRadius;
+    [HideInInspector] public bool activatedBus = false;
+    private PlayersController playersController;
+    public Transform dropPos;
 
-    public override void OnStartServer()
+    private void Start()
     {
-        base.OnStartServer();
+        playersController = GameObject.FindObjectOfType<PlayersController>();
+    }
+
+    public void ActivateBus()
+    {
         float theta = Random.Range(0, 2 * Mathf.PI);
-        transform.parent.position = new Vector3(Mathf.Cos(theta) * radius, transform.position.y, Mathf.Sin(theta) * radius);
-        Quaternion rot = Quaternion.LookRotation(new Vector3(0, transform.position.y, 0) - transform.parent.position, Vector3.up);
-        transform.parent.rotation = Quaternion.Euler(rot.eulerAngles + Vector3.up * 90);
+        float theta2 = Random.Range(0, 2 * Mathf.PI);
+        transform.position = new Vector3(Mathf.Cos(theta) * radius, transform.position.y, Mathf.Sin(theta) * radius);
+        float distance = Random.Range(0, centerRadius);
+        Vector3 center = new Vector3(Mathf.Cos(theta2) * distance, transform.position.y, Mathf.Sin(theta2) * distance);
+        Quaternion rot = Quaternion.LookRotation(center - transform.position, Vector3.up);
+        transform.rotation = Quaternion.Euler(rot.eulerAngles /*+ Vector3.up * 90*/);
+        activatedBus = true;
+        foreach (GameObject player in playersController.players)
+        {
+            player.GetComponent<PlayerCameraManager>().ChangeCam(CameraModes.bus);
+        }
     }
 
     void Update()
     {
-        transform.parent.Translate(transform.up * speed);
+        if (activatedBus)
+        {
+            transform.Translate(Vector3.forward * speed);
+        }
     }
 }

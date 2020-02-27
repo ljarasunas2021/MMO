@@ -725,39 +725,39 @@ namespace Mirror
         /// <para>This can be used as a hook to invoke effects or do client specific cleanup.</para>
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void OnNetworkDestroy() {}
+        public virtual void OnNetworkDestroy() { }
 
         /// <summary>
         /// This is invoked for NetworkBehaviour objects when they become active on the server.
         /// <para>This could be triggered by NetworkServer.Listen() for objects in the scene, or by NetworkServer.Spawn() for objects that are dynamically created.</para>
         /// <para>This will be called for objects on a "host" as well as for object on a dedicated server.</para>
         /// </summary>
-        public virtual void OnStartServer() {}
+        public virtual void OnStartServer() { }
 
         /// <summary>
         /// Called on every NetworkBehaviour when it is activated on a client.
         /// <para>Objects on the host have this function called, as there is a local client on the host. The values of SyncVars on object are guaranteed to be initialized correctly with the latest state from the server when this function is called on the client.</para>
         /// </summary>
-        public virtual void OnStartClient() {}
+        public virtual void OnStartClient() { }
 
         /// <summary>
         /// Called when the local player object has been set up.
         /// <para>This happens after OnStartClient(), as it is triggered by an ownership message from the server. This is an appropriate place to activate components or functionality that should only be active for the local player, such as cameras and input.</para>
         /// </summary>
-        public virtual void OnStartLocalPlayer() {}
+        public virtual void OnStartLocalPlayer() { }
 
         /// <summary>
         /// This is invoked on behaviours that have authority, based on context and <see cref="NetworkIdentity.localPlayerAuthority">'NetworkIdentity.localPlayerAuthority.'</see>
         /// <para>This is called after <see cref="OnStartServer">OnStartServer</see> and <see cref="OnStartClient">OnStartClient.</see></para>
         /// <para>When <see cref="NetworkIdentity.AssignClientAuthority"/> is called on the server, this will be called on the client that owns the object. When an object is spawned with NetworkServer.SpawnWithClientAuthority, this will be called on the client that owns the object.</para>
         /// </summary>
-        public virtual void OnStartAuthority() {}
+        public virtual void OnStartAuthority() { }
 
         /// <summary>
         /// This is invoked on behaviours when authority is removed.
         /// <para>When NetworkIdentity.RemoveClientAuthority is called on the server, this will be called on the client that owns the object.</para>
         /// </summary>
-        public virtual void OnStopAuthority() {}
+        public virtual void OnStopAuthority() { }
 
         /// <summary>
         /// Callback used by the visibility system to (re)construct the set of observers that can see this object.
@@ -776,7 +776,7 @@ namespace Mirror
         /// <para>Objects on a host (with a local client) cannot be disabled or destroyed when they are not visibile to the local client. So this function is called to allow custom code to hide these objects. A typical implementation will disable renderer components on the object. This is only called on local clients on a host.</para>
         /// </summary>
         /// <param name="vis">New visibility state.</param>
-        public virtual void OnSetLocalVisibility(bool vis) {}
+        public virtual void OnSetLocalVisibility(bool vis) { }
 
         /// <summary>
         /// Callback used by the visibility system to determine if an observer (player) can see this object.

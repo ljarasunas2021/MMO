@@ -26,6 +26,10 @@ public class PlayerCameraManager : NetworkBehaviour
     // locked
     private CinemachineFreeLook lockedFreeLookRagdoll, lockedFreeLookNonRagdoll;
 
+    private CinemachineFreeLook busFreeLook;
+
+    private SchoolBus bus;
+
     // movement script
     private Movement movement;
     // body parts script
@@ -44,6 +48,7 @@ public class PlayerCameraManager : NetworkBehaviour
         head = bodyParts.head;
         cameraController = Camera.main.GetComponent<CameraController>();
         movement = nonRagdoll.GetComponent<Movement>();
+        bus = GameObject.FindObjectOfType<SchoolBus>();
         lockedCamFollow = (movement.physicsBasedMovement) ? bodyParts.ragdollLockedCamFollow : bodyParts.nonRagdollLockedCamFollow;
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
@@ -61,6 +66,13 @@ public class PlayerCameraManager : NetworkBehaviour
         lockedFreeLookNonRagdoll = cameraController.lockedCamNonRagdoll.GetComponent<CinemachineFreeLook>();
         lockedFreeLookNonRagdoll.Follow = lockedCamFollow.transform;
         lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
+
+        busFreeLook = cameraController.busCam.GetComponent<CinemachineFreeLook>();
+        if (bus != null)
+        {
+            busFreeLook.Follow = bus.transform;
+            busFreeLook.LookAt = bus.transform;
+        }
 
         GameObject.FindObjectOfType<Compass>().Initialize(nonRagdoll);
         GameObject.FindObjectOfType<Map>().player = nonRagdoll;
@@ -82,6 +94,7 @@ public class PlayerCameraManager : NetworkBehaviour
                 closeUpFreeLook.Priority = 0;
                 lockedFreeLookRagdoll.Priority = 0;
                 lockedFreeLookNonRagdoll.Priority = 0;
+                busFreeLook.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
@@ -89,11 +102,13 @@ public class PlayerCameraManager : NetworkBehaviour
                 closeUpFreeLook.Priority = 1;
                 lockedFreeLookRagdoll.Priority = 0;
                 lockedFreeLookNonRagdoll.Priority = 0;
+                busFreeLook.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
+                busFreeLook.Priority = 0;
 
                 if (movement.physicsBasedMovement)
                 {
@@ -105,6 +120,14 @@ public class PlayerCameraManager : NetworkBehaviour
                     lockedFreeLookRagdoll.Priority = 0;
                     lockedFreeLookNonRagdoll.Priority = 1;
                 }
+            }
+            else if (mode == CameraModes.bus)
+            {
+                cinematicFreeLook.Priority = 0;
+                closeUpFreeLook.Priority = 0;
+                lockedFreeLookRagdoll.Priority = 0;
+                lockedFreeLookNonRagdoll.Priority = 0;
+                busFreeLook.Priority = 1;
             }
 
             currentCam = mode;
@@ -126,6 +149,7 @@ public enum CameraModes
 {
     cinematic,
     closeUp,
-    locked
+    locked,
+    bus
 }
 #endregion

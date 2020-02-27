@@ -20,6 +20,8 @@ public class InputHandler : NetworkBehaviour
     private bool isDead;
 
     private BodyParts bodyParts;
+    private SchoolBus schoolBus;
+    private BattleRoyalePlayer battleRoyalePlayer;
     #endregion
 
     #region Initialize
@@ -33,8 +35,16 @@ public class InputHandler : NetworkBehaviour
         bodyParts = GetComponent<BodyParts>();
         itemHolding = new ItemHolding(null, ItemType.none);
         UIManager.LockCursor(true);
+        schoolBus = FindObjectOfType<SchoolBus>();
+        battleRoyalePlayer = GetComponent<BattleRoyalePlayer>();
     }
     #endregion
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        GameObject.FindObjectOfType<PlayersController>().players.Add(gameObject);
+    }
 
     #region DealWithInput
     ///<summary> Create the input struct and send it off to all of the main voids </summary>
@@ -71,6 +81,8 @@ public class InputHandler : NetworkBehaviour
         }
 
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
+
+        if (schoolBus != null && Input.GetButtonDown("SummonSchoolBus")) CheckActivateBus();
     }
 
     ///<summary> Check if input related to item holding should be called </summary>
@@ -81,6 +93,18 @@ public class InputHandler : NetworkBehaviour
         if (itemHolding.type == ItemType.melee) { itemHolding.weaponScript.CheckForUserInput(); }
 
         //if (itemHolding.type == HoldingItemType.collectable) { }
+    }
+
+    private void CheckActivateBus()
+    {
+        if (schoolBus.activatedBus && !battleRoyalePlayer.dropped)
+        {
+            battleRoyalePlayer.Drop();
+        }
+        else if (!battleRoyalePlayer.dropped)
+        {
+            schoolBus.ActivateBus();
+        }
     }
 
     ///<summary> Change current item that's being held </summary>

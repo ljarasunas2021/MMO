@@ -9,5 +9,5 @@ public class CameraController : MonoBehaviour
     // closeup
     public GameObject closeUpCam;
     // locked
-    public GameObject lockedCamRagdoll, lockedCamNonRagdoll;
+    public GameObject lockedCamRagdoll, lockedCamNonRagdoll, busCam;
 }
