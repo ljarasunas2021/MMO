@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Editor\WeaponEditor.cs" />
      <Compile Include="Assets\Packages\VSCode\Plugins\Editor\VSCode.cs" />
      <Compile Include="Assets\UniGLTF\Core\Editor\MaterialTests.cs" />
