@@ -57,13 +57,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkAnimator.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkLobbyManager.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkLobbyPlayer.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkProximityChecker.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkTransform.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkTransformBase.cs" />
-     <Compile Include="Assets\Packages\Mirror\Components\NetworkTransformChild.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkAnimator.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkLobbyManager.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkLobbyPlayer.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkProximityChecker.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkTransform.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkTransformBase.cs" />
+     <Compile Include="Assets\Art\Packages\Mirror\Components\NetworkTransformChild.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -295,27 +295,6 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="AssetStoreToolsExtra">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Imports/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
- </Reference>
- <Reference Include="AssetStoreTools">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Imports/AssetStoreTools/Editor/AssetStoreTools.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
- </Reference>
- <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -330,6 +309,27 @@
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="AssetStoreTools">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreTools.dll</HintPath>
+ </Reference>
+ <Reference Include="AssetStoreToolsExtra">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Mdb">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Pdb">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Telepathy">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Rocks">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
