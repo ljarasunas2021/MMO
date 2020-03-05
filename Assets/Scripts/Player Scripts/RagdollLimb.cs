@@ -11,9 +11,9 @@ public class RagdollLimb : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         player = transform.root.gameObject;
-        if (player.GetComponent<BodyParts>().IsLocalPlayer())
-        {
-            rigidbody.isKinematic = false;
-        }
+        // if (player.GetComponent<BodyParts>().IsLocalPlayer())
+        // {
+        //     rigidbody.isKinematic = false;
+        // }
     }
 }

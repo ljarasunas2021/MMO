@@ -11411,6 +11411,7 @@ MonoBehaviour:
   closeUpCam: {fileID: 1360974938}
   lockedCamRagdoll: {fileID: 208052079}
   lockedCamNonRagdoll: {fileID: 824096640}
+  busCam: {fileID: 0}
 --- !u!1 &555678446
 GameObject:
   m_ObjectHideFlags: 0
@@ -35365,7 +35366,7 @@ MonoBehaviour:
   networkAddress: 10.11.133.18
   maxConnections: 10
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 7996416254279132292, guid: 98e2eaa917bd244df91b5910d5a240dc,
+  playerPrefab: {fileID: 8323976770010085358, guid: 59ede7535dedb4b7db9133620f1275db,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0

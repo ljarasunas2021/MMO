@@ -7,7 +7,6 @@ public class BattleRoyalePlayer : MonoBehaviour
     [HideInInspector] public bool dropped = false;
     private SchoolBus bus;
     private PlayerCameraManager playerCameraManager;
-    public GameObject nonRagdoll;
 
     private void Start()
     {
@@ -18,9 +17,9 @@ public class BattleRoyalePlayer : MonoBehaviour
     public void Drop()
     {
         dropped = true;
-        CharacterController cc = nonRagdoll.GetComponent<CharacterController>();
+        CharacterController cc = GetComponent<CharacterController>();
         cc.enabled = false;
-        nonRagdoll.transform.position = bus.dropPos.position;
+        transform.position = bus.dropPos.position;
         cc.enabled = true;
         playerCameraManager.ChangeCam(CameraModes.cinematic);
     }

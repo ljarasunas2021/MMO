@@ -294,10 +294,10 @@
      <Compile Include="Assets\Thirdparty\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
      <Compile Include="Assets\Thirdparty\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
      <Compile Include="Assets\Thirdparty\Imports\QuickOutline\Scripts\Outline.cs" />
-     <None Include="Assets\Art\Packages\unity3d.txt" />
+     <None Include="Assets\Thirdparty\Packages\unity3d.txt" />
      <None Include="Assets\Art\Shader\Storm.shader" />
-     <None Include="Assets\Art\Packages\Mirror\Readme.txt" />
-     <None Include="Assets\Art\Packages\Mirror\License.txt" />
+     <None Include="Assets\Thirdparty\Packages\Mirror\Readme.txt" />
+     <None Include="Assets\Thirdparty\Packages\Mirror\License.txt" />
      <None Include="Assets\Prefabs\UniGLTF\Resources\Shaders\StandardVColor.shader" />
      <None Include="Assets\Thirdparty\Imports\QuickOutline\Resources\Shaders\OutlineFill.shader" />
      <None Include="Assets\Thirdparty\Binston\Barrier.shader" />
@@ -557,6 +557,21 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="Mono.CecilX.Mdb">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Pdb">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CecilX.Rocks">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ </Reference>
+ <Reference Include="Telepathy">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
@@ -565,21 +580,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
- </Reference>
- <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Art/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

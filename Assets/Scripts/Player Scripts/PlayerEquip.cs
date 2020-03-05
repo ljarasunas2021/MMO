@@ -4,67 +4,43 @@ using UnityEngine;
 ///<summary> Allow the player to equip items </summary>
 public class PlayerEquip : NetworkBehaviour
 {
-    #region initialize
-    public GameObject nonRagdoll;
-    // scene object
     public GameObject sceneObjectPrefab;
-
-    public bool disableWeaponCollider = true;
-
     public int weaponTimeTillDespawn = 75;
 
     [SyncVar(hook = nameof(ChangeItem))]
-    // equipped item index
     private int equippedItem = -1;
-    // equipped item gameObject
+
     private GameObject equippedItemGO;
-    // max grab distance
     public int maxGrabDistance;
-    // body parts script
     private BodyParts bodyParts;
-    // inventory manager script
     private InventoryManager2 inventoryManager;
-    // input handler script
     private InputHandler inputHandler;
-    // handR gameobject
     private GameObject handR;
-    // animator attached to player
     private Animator animator;
-    // player camera manager script
     private PlayerCameraManager playerCameraManager;
-    // array of item prefabs
     private GameObject[] itemPrefabs;
-    // movement script of the player
     private Movement movement;
-    // hot bar index of the equipped weapon
     private int hotBarIndex = -1, hotBarIndexCounter;
     private Camera mainCam;
     private bool alreadyDespawnedWeapon = false;
     private IKHandling ikHandling;
-    #endregion
 
-    #region Initialize
-    ///<summary> Initialize components</summary>
     private void Start()
     {
-        animator = nonRagdoll.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         bodyParts = GetComponent<BodyParts>();
         inventoryManager = GameObject.FindObjectOfType<InventoryManager2>();
         inputHandler = GetComponent<InputHandler>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
         mainCam = Camera.main;
-        ikHandling = nonRagdoll.GetComponent<IKHandling>();
+        ikHandling = GetComponent<IKHandling>();
 
-        movement = nonRagdoll.GetComponent<Movement>();
-        handR = (movement.physicsBasedMovement) ? bodyParts.ragdollHandR : bodyParts.nonragdollHandR;
+        movement = GetComponent<Movement>();
+        handR = bodyParts.handR;
         inventoryManager.SetPlayer(gameObject);
     }
-    #endregion
 
-    #region ChangingItemBehaviour
-    ///<summary> Make it so that the current item is visible based on that item's index </summary>
-    ///<param name = "itemIndex"> Index of item that will be made visible </param>
     private void ChangeItem(int itemIndex)
     {
         foreach (Transform weapon in handR.transform) Destroy(weapon.gameObject);
@@ -80,25 +56,18 @@ public class PlayerEquip : NetworkBehaviour
     }
 
     [Command]
-    ///<summary> Change the equipped item </summary>
-    ///<param name = "selectedItem"> Item to make the index of </param>
     void CmdChangeEquippedItem(int itemIndex) { equippedItem = itemIndex; }
 
     [Command]
-    // Change the hot bar index
     public void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }
 
-    ///<summary> Find the index of the gameObject in the prefab array </summary>
-    ///<param name = "item"> item to get the index of </param>
     private int FindIndex(GameObject item)
     {
         int index = -1;
-        for (int i = 0; i < itemPrefabs.Length; i++)
-            if (item.name.Contains(itemPrefabs[i].name)) index = i;
+        for (int i = 0; i < itemPrefabs.Length; i++) if (item.name.Contains(itemPrefabs[i].name)) index = i;
         return index;
     }
 
-    // check for button presses to equip inventory slots
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && hotBarIndex != 0)
@@ -125,10 +94,6 @@ public class PlayerEquip : NetworkBehaviour
             alreadyDespawnedWeapon = true;
         }
     }
-    #endregion
-
-    #region Grab
-    ///<summary> Attempt a grab <summary>
     public void Grab()
     {
         RaycastHit hit;
@@ -142,22 +107,11 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
-    // equip an item
     public void EquipItem(int hotBarIndex, int itemIndex)
     {
-        Debug.Log("1");
         CmdChangeHotBarIndex(hotBarIndex);
-        Debug.Log("2");
         CmdChangeEquippedItem(itemIndex);
-        Debug.Log("3");
         EnableWeaponScript(itemIndex);
-    }
-
-    public void EnableEquip(int hotBarIndex, int itemIndex)
-    {
-        //CmdChangeHotBarIndex(hotBarIndex);
-        //CmdChangeEquippedItem(itemIndex);
-        //EnableWeaponScript(itemIndex);
     }
 
     // enable the weapon script of the newly equipped item
@@ -207,15 +161,9 @@ public class PlayerEquip : NetworkBehaviour
     }
 
     [Command]
-    ///<summary> Used to set rigidbody </summary>
-    ///<param name = "weapon"> rigidbody's gameObject </param>
-    ///<param name = "isKinematic"> value to set is kinematic to </param>
     private void CmdSetWeaponRigidBody(GameObject weapon, bool isKinematic) { weapon.transform.GetComponent<Rigidbody>().isKinematic = isKinematic; }
-    #endregion
 }
 
-#region ItemHolding
-///<summary> Holds current item that is being held </summary>
 public class ItemHolding
 {
     public GameObject item;
@@ -230,10 +178,7 @@ public class ItemHolding
         if (type == ItemType.ranged || type == ItemType.melee) weaponScript = item.GetComponent<Weapon>();
     }
 }
-#endregion
 
-#region ItemType
-/// <summary> type of item </summary>
 public enum ItemType
 {
     melee,
@@ -241,4 +186,3 @@ public enum ItemType
     collectable,
     none
 }
-#endregion

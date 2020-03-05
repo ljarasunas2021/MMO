@@ -4,23 +4,14 @@
 public class PlayerHealth : NetworkBehaviour
 {
     [SyncVar]
-    // health of player
-    public double health;
-
-    // input handler script
+    public float health;
     private InputHandler inputHandler;
 
-    #region Initialize
-    ///<summary> initialize variables </summary>
     private void Start() { inputHandler = GetComponent<InputHandler>(); }
-    #endregion
 
-    #region SubtractHealth
-    ///<summary> subtract health from player </summary>
-    public void SubtractHealth(double amount)
+    public void SubtractHealth(float amount)
     {
         health -= amount;
         if (health <= 0) inputHandler.SetDead(true);
     }
-    #endregion
 }

@@ -24,7 +24,7 @@ public class AnimatorFollow : MonoBehaviour
     private void Awake()
     {
         Anim[] anims = new Anim[] { locomotionAnim, fallingAnim };
-        movement = nonRagdoll.GetComponent<Movement>();
+        movement = GetComponent<Movement>();
 
         // set certain variables for each limb
         foreach (Limb limb in limbs)
@@ -42,23 +42,7 @@ public class AnimatorFollow : MonoBehaviour
 
     private void Start()
     {
-        isLocalPlayer = transform.root.GetComponent<BodyParts>().IsLocalPlayer();
-
-        // Set the current anim to locomotion
         ChangeCurrentAnim(locomotionAnim);
-
-        // hide non ragdoll by disabling renderers
-        if (movement.physicsBasedMovement && hideNonRagdoll)
-        {
-            foreach (SkinnedMeshRenderer renderer in nonRagdoll.GetComponentsInChildren<SkinnedMeshRenderer>()) renderer.enabled = false;
-            foreach (MeshRenderer renderer in nonRagdoll.GetComponentsInChildren<MeshRenderer>()) renderer.enabled = false;
-        }
-
-        if (!movement.physicsBasedMovement && hideRagdoll)
-        {
-            foreach (SkinnedMeshRenderer renderer in GetComponentsInChildren<SkinnedMeshRenderer>()) renderer.enabled = false;
-            foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) renderer.enabled = false;
-        }
     }
 
     private void FixedUpdate()
@@ -75,7 +59,6 @@ public class AnimatorFollow : MonoBehaviour
         Follow();
     }
 
-    ///<summary> Model the pose of the animated non ragdoll by adding torque to the joints and setting the target rotation </summary>
     private void Model()
     {
         float torqueAngle;

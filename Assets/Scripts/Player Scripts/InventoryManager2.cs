@@ -62,12 +62,6 @@ public class InventoryManager2 : MonoBehaviour
         playerEquip.EquipItem(slot, hotBar[slot].itemAndIcon.itemIndex);
     }
 
-    // equip a certain hot bar slot (item index is known)
-    public void EnableEquip(int slot, int itemIndex)
-    {
-        playerEquip.EnableEquip(slot, itemIndex);
-    }
-
     // finish dragging an inventory placeholder, switch values and graphics
     public void EndDrag(PointerEventData eventData)
     {

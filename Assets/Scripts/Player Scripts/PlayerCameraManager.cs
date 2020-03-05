@@ -5,39 +5,15 @@ using UnityEngine;
 ///<summary> Preform all actions related to player and the camera </summary>
 public class PlayerCameraManager : NetworkBehaviour
 {
-    #region Variables
-    public GameObject nonRagdoll;
-    // ____ body part
-    // head
     private GameObject head;
-    // locked camera empty gameObject
     private GameObject lockedCamFollow;
-
-    // current camera
     private CameraModes currentCam;
-    // camera controller script
-
     private CameraController cameraController;
-    // ___ Free Look camera
-    // cinematic
-    private CinemachineFreeLook cinematicFreeLook;
-    // closeup
-    private CinemachineFreeLook closeUpFreeLook;
-    // locked
-    private CinemachineFreeLook lockedFreeLookRagdoll, lockedFreeLookNonRagdoll;
-
-    private CinemachineFreeLook busFreeLook;
-
+    private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLookRagdoll, lockedFreeLookNonRagdoll, busFreeLook;
     private SchoolBus bus;
-
-    // movement script
     private Movement movement;
-    // body parts script
     private BodyParts bodyParts;
-    #endregion
 
-    #region SetCameraAtStart
-    ///<summary> Set the camera to follow you </summary>
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -47,9 +23,9 @@ public class PlayerCameraManager : NetworkBehaviour
         bodyParts = GetComponent<BodyParts>();
         head = bodyParts.head;
         cameraController = Camera.main.GetComponent<CameraController>();
-        movement = nonRagdoll.GetComponent<Movement>();
+        movement = GetComponent<Movement>();
         bus = GameObject.FindObjectOfType<SchoolBus>();
-        lockedCamFollow = (movement.physicsBasedMovement) ? bodyParts.ragdollLockedCamFollow : bodyParts.nonRagdollLockedCamFollow;
+        lockedCamFollow = bodyParts.lockedCamFollow;
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
         cinematicFreeLook.Follow = head.transform;
@@ -74,16 +50,12 @@ public class PlayerCameraManager : NetworkBehaviour
             busFreeLook.LookAt = bus.transform;
         }
 
-        GameObject.FindObjectOfType<Compass>().Initialize(nonRagdoll);
-        GameObject.FindObjectOfType<Map>().player = nonRagdoll;
+        GameObject.FindObjectOfType<Compass>().Initialize(gameObject);
+        GameObject.FindObjectOfType<Map>().player = gameObject;
 
         ChangeCam(CameraModes.cinematic);
     }
-    #endregion
 
-    #region ChangeCurrentCamera
-    ///<summary> Change current camera </summary>
-    ///<param name = "mode"> mode to switch to </param>
     public void ChangeCam(CameraModes mode)
     {
         if (mode != currentCam)
@@ -110,16 +82,9 @@ public class PlayerCameraManager : NetworkBehaviour
                 closeUpFreeLook.Priority = 0;
                 busFreeLook.Priority = 0;
 
-                if (movement.physicsBasedMovement)
-                {
-                    lockedFreeLookRagdoll.Priority = 1;
-                    lockedFreeLookNonRagdoll.Priority = 0;
-                }
-                else
-                {
-                    lockedFreeLookRagdoll.Priority = 0;
-                    lockedFreeLookNonRagdoll.Priority = 1;
-                }
+                lockedFreeLookRagdoll.Priority = 0;
+                lockedFreeLookNonRagdoll.Priority = 1;
+
             }
             else if (mode == CameraModes.bus)
             {
@@ -135,16 +100,10 @@ public class PlayerCameraManager : NetworkBehaviour
             movement.SetCurrentCam(currentCam);
         }
     }
-    #endregion
 
-    #region ReturnCameraMode
-    ///<summary> return current camera </summary>
     public CameraModes ReturnCameraMode() { return currentCam; }
-    #endregion
 }
 
-#region CameraModes
-///<summary> DIfferent camera modes</summary>
 public enum CameraModes
 {
     cinematic,
@@ -152,4 +111,3 @@ public enum CameraModes
     locked,
     bus
 }
-#endregion
