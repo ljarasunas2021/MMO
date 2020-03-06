@@ -57,6 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Art\BattleRoyaleSeriesPart1\ChangeCircle.cs" />
+     <Compile Include="Assets\Art\BattleRoyaleSeriesPart1\WorldCircle.cs" />
      <Compile Include="Assets\Art\Shader\BRS_ChangeCircle.cs" />
      <Compile Include="Assets\Prefabs\UniGLTF\Core\Scripts\Extensions\ArrayExtensions.cs" />
      <Compile Include="Assets\Prefabs\UniGLTF\Core\Scripts\Extensions\glTFExtensions.cs" />

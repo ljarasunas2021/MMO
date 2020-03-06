@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public Canvas compassCanvas, mapCanvas;
 
     // source to play audio from
-    private AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
     // dialogue strings
     private Dialogue[] dialogue;
     // current place in dialogue
@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         dialogueText = dialogueText.GetComponent<Text>();
-        audioSource = GetComponent<AudioSource>();
         map = mapCanvas.GetComponent<Map>();
         pauseMenu.enabled = togglePauseMenu;
         dialogueBox.enabled = toggleDialogueBox;
@@ -53,8 +52,6 @@ public class UIManager : MonoBehaviour
     // play a new line of audio
     public void PlayDialogue()
     {
-        Debug.Log("PLAY");
-
         currentDialogueIndex++;
         audioSource.Stop();
 

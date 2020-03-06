@@ -36,6 +36,7 @@ public class Map : MonoBehaviour
     // Called when map becomes visible, spawns player marker
     public void Enable()
     {
+        Debug.Log(player.gameObject.name);
         UIManager.LockCursor(false);
         UIManager.canMove = false;
         Vector3 pos = player.transform.position;

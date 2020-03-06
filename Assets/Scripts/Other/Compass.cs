@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class Compass : MonoBehaviour
+public class Compass : NetworkBehaviour
 {
     // player GameObject
     [HideInInspector] public GameObject player;
@@ -20,12 +21,6 @@ public class Compass : MonoBehaviour
     // the width of the compass
     private float width;
 
-    // initialize the compass
-    public void Initialize(GameObject player)
-    {
-        this.player = player;
-    }
-
     // intitialize variables at run time
     void Start()
     {
@@ -37,6 +32,8 @@ public class Compass : MonoBehaviour
     void Update()
     {
         if (player == null) return;
+
+        Debug.Log(player.gameObject.name);
 
         Vector3 forward = mainCamTransform.forward;
         forward.y = 0;

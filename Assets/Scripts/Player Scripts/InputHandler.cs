@@ -13,6 +13,7 @@ public class InputHandler : NetworkBehaviour
     private BodyParts bodyParts;
     private SchoolBus schoolBus;
     private BattleRoyalePlayer battleRoyalePlayer;
+    private Map map;
 
     void Start()
     {
@@ -25,6 +26,10 @@ public class InputHandler : NetworkBehaviour
         UIManager.LockCursor(true);
         schoolBus = FindObjectOfType<SchoolBus>();
         battleRoyalePlayer = GetComponent<BattleRoyalePlayer>();
+
+        if (!isLocalPlayer) return;
+        map = GameObject.FindObjectOfType<Map>();
+        map.player = gameObject;
     }
 
     public override void OnStartLocalPlayer()

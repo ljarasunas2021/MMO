@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1280
     height: 706
-  m_MinSize: {x: 713, y: 498}
-  m_MaxSize: {x: 18008, y: 14048}
+  m_MinSize: {x: 709, y: 498}
+  m_MaxSize: {x: 18004, y: 14048}
   vertical: 0
-  controlID: 77
+  controlID: 26
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 912
     height: 706
-  m_MinSize: {x: 436, y: 498}
-  m_MaxSize: {x: 14006, y: 14048}
+  m_MinSize: {x: 434, y: 498}
+  m_MaxSize: {x: 14004, y: 14048}
   vertical: 1
-  controlID: 78
+  controlID: 27
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,10 +192,10 @@ MonoBehaviour:
     y: 413
     width: 912
     height: 293
-  m_MinSize: {x: 436, y: 274}
-  m_MaxSize: {x: 14006, y: 10024}
+  m_MinSize: {x: 434, y: 274}
+  m_MaxSize: {x: 14004, y: 10024}
   vertical: 0
-  controlID: 79
+  controlID: 139
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 368
     height: 706
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -389,9 +389,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.000015258789, y: 300, z: -0.000015258789}
+    m_Target: {x: 0, y: 100, z: 0}
     speed: 2
-    m_Value: {x: 0.000015258789, y: 300, z: -0.000015258789}
+    m_Value: {x: 0, y: 100, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -419,13 +419,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.00057389645, y: -0.986755, z: 0.16218409, w: -0.0032578385}
+    m_Target: {x: -0.084466435, y: -0.026011473, z: -0.0021686964, w: 0.9960844}
     speed: 2
-    m_Value: {x: -0.00057389645, y: -0.986755, z: 0.16218409, w: -0.0032578385}
+    m_Value: {x: -0.084466435, y: -0.026011473, z: -0.0021686964, w: 0.9960844}
   m_Size:
-    m_Target: 107.96
+    m_Target: 323.03784
     speed: 2
-    m_Value: 107.96
+    m_Value: 323.03784
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -601,9 +601,6 @@ MonoBehaviour:
   - m_Target: {fileID: 1107736903519158370, guid: 57d2706e4335c46a68368c5838cfe804,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
-  - m_Target: {fileID: 1102760467360343836, guid: 57d2706e4335c46a68368c5838cfe804,
-      type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
   blendTreeGraph: {fileID: 0}
@@ -670,20 +667,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 164b0000
-      m_LastClickedID: 19222
-      m_ExpandedIDs: f8faffffd0fbffff
+      m_SelectedIDs: 62f0ffff
+      m_LastClickedID: 0
+      m_ExpandedIDs: f8e9ffff16eaffff88eaffff14f9ffffeaf9ffffd0fbffffaa2b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Storm
-        m_OriginalName: Storm
+        m_Name: ZoneWall_Interior
+        m_OriginalName: ZoneWall_Interior
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 19222
+        m_UserData: -5640
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -734,20 +731,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/Shader/BRS_ZoneWallVariants/A
+    - Assets/Art/BattleRoyaleSeriesPart1/Materials
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Art/Shader/BRS_ZoneWallVariants/A
+  - Assets/Art/BattleRoyaleSeriesPart1/Materials
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/lukas/version-control/mmo/Mmo/MMO
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 164}
-    m_SelectedIDs: 6a5f0000
-    m_LastClickedID: 24426
-    m_ExpandedIDs: 000000007c12000040180000f01800003a1f000096210000082200007c2200007e2500008625000064270000665f000000ca9a3b
+    scrollPos: {x: 0, y: 7.9976196}
+    m_SelectedIDs: 8a5e0000
+    m_LastClickedID: 24202
+    m_ExpandedIDs: 000000007e1200006a1500005218000004190000581f000070200000c021000032220000b4250000be2500006c2600009e270000565e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -775,7 +772,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007c12000040180000f01800004c20000096210000082200007e2500008625000064270000
+    m_ExpandedIDs: 000000007e1200006a1500005218000004190000581f000070200000c021000032220000b4250000be2500006c2600009e270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -806,18 +803,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 3231000010130000aa170000e61a0000cea20000000000007cb30000f81a0000e6110000e0120000ea130000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: BRS_ZoneWallVariants
-      m_OriginalName: BRS_ZoneWallVariants
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 24422
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
@@ -852,9 +849,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 300
-    y: 504
+    y: 487
     width: 608
-    height: 256
+    height: 273
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &21
 MonoBehaviour:

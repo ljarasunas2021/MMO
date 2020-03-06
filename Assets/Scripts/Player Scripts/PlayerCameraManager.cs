@@ -44,13 +44,14 @@ public class PlayerCameraManager : NetworkBehaviour
         lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
 
         busFreeLook = cameraController.busCam.GetComponent<CinemachineFreeLook>();
+
         if (bus != null)
         {
             busFreeLook.Follow = bus.transform;
             busFreeLook.LookAt = bus.transform;
         }
 
-        GameObject.FindObjectOfType<Compass>().Initialize(gameObject);
+        GameObject.FindObjectOfType<Compass>().player = gameObject;
         GameObject.FindObjectOfType<Map>().player = gameObject;
 
         ChangeCam(CameraModes.cinematic);
