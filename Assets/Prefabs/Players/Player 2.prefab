@@ -2647,7 +2647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  health: 10
+  health: 100
 --- !u!114 &5114085570619052573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2674,6 +2674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91f7ce29e5c47118d326dde1dd35b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   dropped: 0
 --- !u!1 &8373891875040284542
 GameObject:

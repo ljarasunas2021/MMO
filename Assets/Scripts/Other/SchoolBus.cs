@@ -23,11 +23,12 @@ public class SchoolBus : NetworkBehaviour
         float distance = Random.Range(0, centerRadius);
         Vector3 center = new Vector3(Mathf.Cos(theta2) * distance, transform.position.y, Mathf.Sin(theta2) * distance);
         Quaternion rot = Quaternion.LookRotation(center - transform.position, Vector3.up);
-        transform.rotation = Quaternion.Euler(rot.eulerAngles /*+ Vector3.up * 90*/);
+        transform.rotation = rot;
         activatedBus = true;
         foreach (GameObject player in playersController.players)
         {
             player.GetComponent<PlayerCameraManager>().ChangeCam(CameraModes.bus);
+            player.GetComponentInChildren<MinimapCamera>().ChangeParent(transform);
         }
     }
 

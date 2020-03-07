@@ -10,4 +10,5 @@ public static class LayerMaskController
     public static LayerMask player = 9;
     // item
     public static LayerMask item = 11;
+    public static LayerMask playerNonRagdoll = 13;
 }

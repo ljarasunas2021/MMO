@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class MinimapCamera : MonoBehaviour
 {
-    private Quaternion rot;
+    private bool playerMode = true;
+    [HideInInspector] public GameObject player;
+    private Vector3 localPos, localRot, localScale;
+
     void Start()
     {
-        rot = transform.rotation;
+        localPos = transform.localPosition;
+        localRot = transform.localEulerAngles;
+        localScale = transform.localScale;
+        player = transform.root.gameObject;
     }
 
-    void Update()
+    public void ChangeParent(Transform parent)
     {
-        transform.rotation = rot;
+        transform.parent = parent;
+        transform.localPosition = localPos;
+        transform.localRotation = Quaternion.Euler(localRot);
+        transform.localScale = localScale;
+
+        foreach (Renderer rend in player.GetComponentsInChildren<Renderer>())
+        {
+            rend.enabled = (parent.gameObject.layer == LayerMaskController.playerNonRagdoll);
+        }
     }
 }
