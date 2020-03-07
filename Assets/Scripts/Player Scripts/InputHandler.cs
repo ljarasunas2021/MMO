@@ -14,6 +14,7 @@ public class InputHandler : NetworkBehaviour
     private SchoolBus schoolBus;
     private BattleRoyalePlayer battleRoyalePlayer;
     private Map map;
+    private Storm storm;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class InputHandler : NetworkBehaviour
         UIManager.LockCursor(true);
         schoolBus = FindObjectOfType<SchoolBus>();
         battleRoyalePlayer = GetComponent<BattleRoyalePlayer>();
+        storm = GameObject.FindObjectOfType<Storm>();
 
         if (!isLocalPlayer) return;
         map = GameObject.FindObjectOfType<Map>();
@@ -80,7 +82,11 @@ public class InputHandler : NetworkBehaviour
     private void CheckActivateBus()
     {
         if (schoolBus.activatedBus && !battleRoyalePlayer.dropped) battleRoyalePlayer.Drop();
-        else if (!battleRoyalePlayer.dropped) schoolBus.ActivateBus();
+        else if (!battleRoyalePlayer.dropped)
+        {
+            schoolBus.ActivateBus();
+            storm.StartStorm();
+        }
     }
 
     public void ChangeItemHolding(ItemHolding itemHolding) { this.itemHolding = itemHolding; }

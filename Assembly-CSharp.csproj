@@ -258,6 +258,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\RagdollLimb.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
+     <Compile Include="Assets\StormTimer.cs" />
      <Compile Include="Assets\Thirdparty\Binston\FXAA\Antialiasing.cs" />
      <Compile Include="Assets\Thirdparty\Binston\FXAA\PostEffectsBase.cs" />
      <Compile Include="Assets\Thirdparty\Binston\FXAA\PostEffectsHelper.cs" />
@@ -344,6 +345,12 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Postprocessing.Editor">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Postprocessing.Runtime">
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="com.unity.cinemachine.editor">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
@@ -355,12 +362,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
