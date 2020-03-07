@@ -33,8 +33,6 @@ public class Compass : NetworkBehaviour
     {
         if (player == null) return;
 
-        Debug.Log(player.gameObject.name);
-
         Vector3 forward = mainCamTransform.forward;
         forward.y = 0;
         float rot1 = Vector3.Angle(Vector3.forward, forward);

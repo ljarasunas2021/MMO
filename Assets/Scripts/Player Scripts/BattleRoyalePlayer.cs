@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class BattleRoyalePlayer : MonoBehaviour
+public class BattleRoyalePlayer : NetworkBehaviour
 {
     [HideInInspector] public bool dropped = false;
     private SchoolBus bus;
