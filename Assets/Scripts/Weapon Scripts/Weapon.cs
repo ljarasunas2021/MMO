@@ -81,8 +81,6 @@ public class Weapon : MonoBehaviour
     public bool makeHitEffects = true; // Whether or not the weapon should make hit effects
     public GameObject[] hitEffects = new GameObject[] { null }; // Effects to be displayed where the "bullet" hit
 
-    public bool bulletHolesEnabled;
-
     public bool showCrosshair = true; // Whether or not the crosshair should be displayed
     public Texture2D crosshairTexture; // The texture used to draw the crosshair
     public int crosshairLength = 10; // The length of each crosshair line
@@ -96,10 +94,8 @@ public class Weapon : MonoBehaviour
 
     private bool canFire = true; // Whether or not the weapon can currently fire (used for semi-auto weapons)
     private AudioSource audioSource;
-    private BulletHoleController bulletHoleController;
     private AudioClip[] audioClipPrefabs;
     private GameObject[] effectPrefabs;
-    private Material[] materialPrefabs;
     private GameObject user;
     private PlayerWeapon playerWeapon;
     private Animator userAnim;
@@ -109,10 +105,8 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        bulletHoleController = GameObject.FindObjectOfType<BulletHoleController>();
         audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
         effectPrefabs = GameObject.FindObjectOfType<EffectsPrefabsController>().effectPrefabs;
-        materialPrefabs = bulletHoleController.ReturnMaterialPrefabs();
 
         if (type == WeaponType.Ranged)
         {
@@ -305,12 +299,6 @@ public class Weapon : MonoBehaviour
                 PlayerHealth health = hit.collider.GetComponent<PlayerHealth>();
                 if (health != null) health.SubtractHealth(damage);
 
-                if (bulletHolesEnabled)
-                {
-                    MeshRenderer colliderMR = hit.collider.gameObject.GetComponent<MeshRenderer>();
-                    if (colliderMR != null) bulletHoleController.RpcCreateBulletHole(FindIndexMaterial(colliderMR.sharedMaterial), hit.point, hit.normal);
-                }
-
                 if (makeHitEffects) CreateHitEffects(hit);
 
                 if (hit.rigidbody) playerWeapon.CmdAddForce(hit.collider.gameObject, ray.direction * power * forceMultiplier);
@@ -414,7 +402,7 @@ public class Weapon : MonoBehaviour
     public int FindIndexMaterial(Material material)
     {
         int index = -1;
-        for (int i = 0; i < materialPrefabs.Length; i++) if (material.name.Contains(materialPrefabs[i].name)) index = i;
+        //for (int i = 0; i < materialPrefabs.Length; i++) if (material.name.Contains(materialPrefabs[i].name)) index = i;
         return index;
     }
 

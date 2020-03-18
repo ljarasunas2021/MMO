@@ -262,10 +262,10 @@ public class WeaponEditor : Editor
             if (weapon.rangedType == RangedWeaponType.Raycast)
             {
                 showBulletHoles = EditorGUILayout.Foldout(showBulletHoles, "Bullet Holes");
-                if (showBulletHoles)
-                {
-                    weapon.bulletHolesEnabled = EditorGUILayout.Toggle("Enable Bullet Holes", weapon.bulletHolesEnabled);
-                }
+                // if (showBulletHoles)
+                // {
+                //     weapon.bulletHolesEnabled = EditorGUILayout.Toggle("Enable Bullet Holes", weapon.bulletHolesEnabled);
+                // }
             }
 
             // Crosshairs

@@ -670,8 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d130bceea11814a20b560e0d7c750a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSetSpeed: 0
-  speed: 0
+  useSetSpeed: 1
+  speed: 0.5
   previousSpeedMultiplier: 1
   useMomentum: 1
   accelerationSmoothTime: 1

@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 582d829a2086347ef995ac93a6cea078
+  - enabled: 1
+    path: Assets/Scenes/Chadwick.unity
+    guid: d83a46a33d0454bbfa2bca0b03013b75
   m_configObjects: {}
