@@ -118,7 +118,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18020
+  m_Name: pb_Mesh59962
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -781,12 +781,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - text: Hi im remmy
+    text: Hi I'm Remy
     audio: {fileID: 8300000, guid: 85a0025b9f54d4529aa89a02fb8199a5, type: 3}
-  - text: This is a test to see how well dialogue boxes work.
-    audio: {fileID: 8300000, guid: 04fdf7239f560437186bd6ab13ac95e0, type: 3}
-  - text: Anyone can cook
-    audio: {fileID: 8300000, guid: 360e8a75df15949b9b7e35db5b6ce91b, type: 3}
+    nextDialogueIsNPC: 1
+    nextDialogue:
+    - text: Anyone Can Cook
+      audio: {fileID: 8300000, guid: 04fdf7239f560437186bd6ab13ac95e0, type: 3}
+      nextDialogueIsNPC: 0
+      nextDialogue: []
+      playerDialogueOptions:
+      - button: {fileID: 6004577130527331091, guid: 8f80f65c02c4943ac8ac30c514f972e2,
+          type: 3}
+        nextDialogue:
+          text: Option 1
+          audio: {fileID: 8300000, guid: 360e8a75df15949b9b7e35db5b6ce91b, type: 3}
+          nextDialogueIsNPC: 0
+          nextDialogue: []
+          playerDialogueOptions: []
+      - button: {fileID: 4923738747777285363, guid: c4636d1c70b494c2b81d7050f4e864a3,
+          type: 3}
+        nextDialogue:
+          text: Option 2
+          audio: {fileID: 8300000, guid: 5ff421ecf74f7416d8104261cc30d31c, type: 3}
+          nextDialogueIsNPC: 0
+          nextDialogue: []
+          playerDialogueOptions: []
+      - button: {fileID: 5033663218578012004, guid: c999081db0a0040a0b0da626cd7050d2,
+          type: 3}
+        nextDialogue:
+          text: Option 3
+          audio: {fileID: 8300000, guid: 22cc62c23622c4c539ffc630b11a9e61, type: 3}
+          nextDialogueIsNPC: 0
+          nextDialogue: []
+          playerDialogueOptions: []
+    playerDialogueOptions:
+    - button: {fileID: 0}
+      nextDialogue:
+        text: 
+        audio: {fileID: 0}
+        nextDialogueIsNPC: 0
+        nextDialogue: []
+        playerDialogueOptions: []
+    - button: {fileID: 0}
+      nextDialogue:
+        text: 
+        audio: {fileID: 0}
+        nextDialogueIsNPC: 0
+        nextDialogue: []
+        playerDialogueOptions: []
   rotateSpeed: 0.25
   radius: 6
   gravity: 0.015
@@ -3836,7 +3878,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18012
+  m_Name: pb_Mesh60248
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4462,7 +4504,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18014
+  m_Name: pb_Mesh59894
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -9391,8 +9433,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613869201}
-  m_LocalRotation: {x: 0.09855587, y: 0.08603839, z: -0.008553379, w: 0.99136823}
-  m_LocalPosition: {x: 0, y: 6.6112714, z: -5.017182}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 310331712}
@@ -13994,7 +14036,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18016
+  m_Name: pb_Mesh60132
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -18796,7 +18838,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18024
+  m_Name: pb_Mesh60388
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -49088,6 +49130,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1116925717}
   compassCanvas: {fileID: 1779397935}
   mapCanvas: {fileID: 285753336}
+  dialogueCanvas: {fileID: 1132357848}
   audioSource: {fileID: 0}
   togglePauseMenu: 0
   toggleDialogueBox: 0
@@ -49120,7 +49163,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18022
+  m_Name: pb_Mesh59676
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -49280,7 +49323,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18018
+  m_Name: pb_Mesh60102
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -50347,7 +50390,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18026
+  m_Name: pb_Mesh59814
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

@@ -64,11 +64,6 @@ public class InputHandler : NetworkBehaviour
             UIManager.LockCursor(!uIScript.togglePauseMenu);
         }
 
-        if (Input.GetButtonDown("Dialogue Skip") && uIScript.toggleDialogueBox)
-        {
-            uIScript.PlayDialogue();
-        }
-
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
 
         if (schoolBus != null && Input.GetButtonDown("SummonSchoolBus")) CheckActivateBus();

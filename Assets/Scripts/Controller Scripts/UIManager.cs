@@ -12,14 +12,13 @@ public class UIManager : MonoBehaviour
     public Canvas dialogueBox;
     // dialogue text box
     public Text dialogueText;
-    public Canvas compassCanvas, mapCanvas;
+    public Canvas compassCanvas, mapCanvas, dialogueCanvas;
 
     // source to play audio from
     [HideInInspector] public AudioSource audioSource;
     // dialogue strings
-    private Dialogue[] dialogue;
+    private NPCDialogue dialogue;
     // current place in dialogue
-    private int currentDialogueIndex = 0;
     private Map map;
 
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
@@ -38,31 +37,53 @@ public class UIManager : MonoBehaviour
     }
 
     // turn dialogue box on and off
-    public void ToggleDialogue(Dialogue[] dialogue)
+    public void ToggleDialogue(NPCDialogue dialogue)
     {
-        canMove = toggleDialogueBox;
-        currentDialogueIndex = -1;
-        toggleDialogueBox = !toggleDialogueBox;
-        dialogueBox.enabled = !dialogueBox.enabled;
-        this.dialogue = dialogue;
-
-        if (dialogueBox.enabled) PlayDialogue();
+        canMove = (dialogue == null);
+        dialogueBox.enabled = (dialogue != null);
+        if (!canMove) PlayDialogue(dialogue);
     }
 
-    // play a new line of audio
-    public void PlayDialogue()
+    public void PlayDialogue(NPCDialogue dialogue)
     {
-        currentDialogueIndex++;
-        audioSource.Stop();
+        dialogueText.text = dialogue.text;
+        audioSource.PlayOneShot(dialogue.audio);
+        StartCoroutine(WaitUntilAudioIsDone(dialogue));
+    }
 
-        if (currentDialogueIndex > dialogue.Length - 1)
+    private IEnumerator WaitUntilAudioIsDone(NPCDialogue dialogue)
+    {
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue[0] != null)
         {
-            ToggleDialogue(dialogue);
-            return;
+            PlayDialogue(dialogue.nextDialogue[0]);
         }
+        else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0)
+        {
+            Debug.Log(1);
+            dialogueBox.enabled = false;
+            LockCursor(false);
+            List<Button> buttons = new List<Button>();
+            foreach (PlayerDialogueOption option in dialogue.playerDialogueOptions)
+            {
+                Button button = Instantiate(option.button, dialogueCanvas.transform);
+                buttons.Add(button);
+                button.onClick.AddListener(() => ClickButton(option.nextDialogue, buttons));
+            }
+        }
+        else
+        {
+            Debug.Log(2);
+            ToggleDialogue(null);
+        }
+    }
 
-        dialogueText.text = dialogue[currentDialogueIndex].text;
-        audioSource.PlayOneShot(dialogue[currentDialogueIndex].audio);
+    private void ClickButton(NPCDialogue dialogue, List<Button> buttons)
+    {
+        LockCursor(true);
+        dialogueBox.enabled = true;
+        foreach (Button button in buttons) Destroy(button.gameObject);
+        PlayDialogue(dialogue);
     }
 
     // turn on / off the pause menu
