@@ -35,15 +35,9 @@ public class PlayerCameraManager : NetworkBehaviour
         closeUpFreeLook.Follow = head.transform;
         closeUpFreeLook.LookAt = head.transform;
 
-        lockedFreeLookRagdoll = cameraController.lockedCamRagdoll.GetComponent<CinemachineFreeLook>();
-        lockedFreeLookRagdoll.Follow = lockedCamFollow.transform;
-        lockedFreeLookRagdoll.LookAt = lockedCamFollow.transform;
-
-        lockedFreeLookNonRagdoll = cameraController.lockedCamNonRagdoll.GetComponent<CinemachineFreeLook>();
+        lockedFreeLookNonRagdoll = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
         lockedFreeLookNonRagdoll.Follow = lockedCamFollow.transform;
         lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
-
-        busFreeLook = cameraController.busCam.GetComponent<CinemachineFreeLook>();
 
         if (bus != null)
         {

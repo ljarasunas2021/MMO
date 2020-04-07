@@ -22,10 +22,8 @@ public class UIManager : MonoBehaviour
     private Map map;
 
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
-    // if player can move
     public static bool canMove = true;
 
-    // instantiate variables
     void Start()
     {
         dialogueText = dialogueText.GetComponent<Text>();
@@ -36,7 +34,6 @@ public class UIManager : MonoBehaviour
         compassCanvas.enabled = !toggleMap;
     }
 
-    // turn dialogue box on and off
     public void ToggleDialogue(NPCDialogue dialogue)
     {
         canMove = (dialogue == null);
@@ -60,7 +57,6 @@ public class UIManager : MonoBehaviour
         }
         else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0)
         {
-            Debug.Log(1);
             dialogueBox.enabled = false;
             LockCursor(false);
             List<Button> buttons = new List<Button>();
@@ -73,7 +69,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(2);
             ToggleDialogue(null);
         }
     }
