@@ -1,8 +1,8 @@
 OSXUniversal
 PlayerPath?
-/Users/lukas/Desktop/ChadwickBattleRoyale.app
+/Users/lukas/Desktop/Test2.app
 SceneListBegin?
-Assets/Scenes/Chadwick.unity
+Assets/Scenes/Lobby2.unity
 SceneListEnd?
 a1f19ad47d3094e235f21b74dfc423a8 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessLayer
 25a6891c8318d80586b9cc7588ed171b Mirror.dll:Mirror.TelepathyTransport
@@ -42,7 +42,7 @@ dae31b340a76a5f475899e604343a314 Mirror.Examples.dll:Mirror.Examples.Additive.Pl
 313e6225056aa781db7cc8cb62b83954 Assembly-CSharp.dll:AnimFollow.CameraMovement1_AF
 71bb6a6b6c8f052f948db64c7dd3ca4f Mirror.dll:Mirror.NetworkStartPosition
 837b91b8a5c38fa0a7232f06a351468d Assembly-CSharp.dll:.PlayerHealth
-5e3f9902825e68b40135919c6950a414 Assembly-CSharp.dll:.Weapon
+17b18a66a89792d84671c0c2dc431bd7 Assembly-CSharp.dll:.Weapon
 83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.MinimapCamera
 c80bc562de10fdbf8b2e9bcb89d80421 Cinemachine.dll:Cinemachine.CinemachineCollisionImpulseSource
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -311,8 +311,8 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 14079b0afbb5e6763947dc924e87b1bd Mirror.Examples.dll:.UIServerStatusSlot
 71bb6a6b6c8f052f948db64c7dd3ca4f Cinemachine.dll:Cinemachine.CinemachineHardLookAt
 47017c71c23739c1424029577f495445 Mirror.dll:Mirror.NetworkIdentity
-45772f7459ec7f276cad58ea0226970a Assembly-CSharp.dll:.CameraController
-6cd9448b8cdf57f02401671a2c6f9b7d Assembly-CSharp.dll:.Target
+2ee1cce001c2b4e3b34b71ae4bb6508f Assembly-CSharp.dll:.CameraController
+13c8a7a22d8767bd9923f22da4a70e88 Assembly-CSharp.dll:.Target
 1ed4ded4e387b610fe08f8e6011fa76a Assembly-CSharp.dll:.Health
 8d2fe04f04c4f222b5786168f7dd7ae1 Assembly-CSharp.dll:.ChangeLayerWeight
 09cd40c4fa1b0b16473881091474be50 Assembly-CSharp.dll:.FirstPersonCharacter
@@ -320,7 +320,7 @@ d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 6fd2bb55b3ee5edb6040a1c5bccd0e07 Assembly-CSharp.dll:.RigidBodySpawn
 edec34fa37ceb4e15d29a1e2697f1b00 Mirror.Components.dll:Mirror.NetworkTransform
 e87f50864f8a979f1228e8c69bd62658 Mirror.Examples.dll:Mirror.Examples.Pong.Player
-7fd5aa30b135a76ad3b589be11ca5dab Assembly-CSharp.dll:.UIManager
+d7f7d2ef92e6bb4b5de8d80a12718d8a Assembly-CSharp.dll:.UIManager
 a0806da19f178c0be530921ca3a0a11d Mirror.Examples.dll:Mirror.Examples.NetworkRoom.OfflineGUI
 d5630f96bd5a6a6eed7e1754c3fb8703 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessVolume
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:AnimFollow.ReplaceJoints_AF
