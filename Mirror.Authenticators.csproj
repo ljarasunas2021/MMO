@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Thirdparty\Packages\Mirror\Authenticators\BasicAuthenticator.cs" />
+     <Compile Include="Assets\Thirdparty\Mirror\Authenticators\BasicAuthenticator.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -289,26 +289,20 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="AssetStoreToolsExtra">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
- </Reference>
- <Reference Include="AssetStoreTools">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreTools.dll</HintPath>
- </Reference>
  <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

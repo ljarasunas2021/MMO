@@ -9,8 +9,7 @@ public class PlayerCameraManager : NetworkBehaviour
     private GameObject lockedCamFollow;
     private CameraModes currentCam;
     private CameraController cameraController;
-    private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLookRagdoll, lockedFreeLookNonRagdoll, busFreeLook;
-    private SchoolBus bus;
+    private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
     private Movement movement;
     private BodyParts bodyParts;
 
@@ -24,7 +23,6 @@ public class PlayerCameraManager : NetworkBehaviour
         head = bodyParts.head;
         cameraController = Camera.main.GetComponent<CameraController>();
         movement = GetComponent<Movement>();
-        bus = GameObject.FindObjectOfType<SchoolBus>();
         lockedCamFollow = bodyParts.lockedCamFollow;
 
         cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
@@ -35,15 +33,9 @@ public class PlayerCameraManager : NetworkBehaviour
         closeUpFreeLook.Follow = head.transform;
         closeUpFreeLook.LookAt = head.transform;
 
-        lockedFreeLookNonRagdoll = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
-        lockedFreeLookNonRagdoll.Follow = lockedCamFollow.transform;
-        lockedFreeLookNonRagdoll.LookAt = lockedCamFollow.transform;
-
-        if (bus != null)
-        {
-            busFreeLook.Follow = bus.transform;
-            busFreeLook.LookAt = bus.transform;
-        }
+        lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
+        lockedFreeLook.Follow = lockedCamFollow.transform;
+        lockedFreeLook.LookAt = lockedCamFollow.transform;
 
         GameObject.FindObjectOfType<Compass>().player = gameObject;
         GameObject.FindObjectOfType<Map>().player = gameObject;
@@ -53,41 +45,27 @@ public class PlayerCameraManager : NetworkBehaviour
 
     public void ChangeCam(CameraModes mode)
     {
+        Debug.Log(mode);
+
         if (mode != currentCam)
         {
             if (mode == CameraModes.cinematic)
             {
                 cinematicFreeLook.Priority = 1;
                 closeUpFreeLook.Priority = 0;
-                lockedFreeLookRagdoll.Priority = 0;
-                lockedFreeLookNonRagdoll.Priority = 0;
-                busFreeLook.Priority = 0;
+                lockedFreeLook.Priority = 0;
             }
             else if (mode == CameraModes.closeUp)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 1;
-                lockedFreeLookRagdoll.Priority = 0;
-                lockedFreeLookNonRagdoll.Priority = 0;
-                busFreeLook.Priority = 0;
+                lockedFreeLook.Priority = 0;
             }
             else if (mode == CameraModes.locked)
             {
                 cinematicFreeLook.Priority = 0;
                 closeUpFreeLook.Priority = 0;
-                busFreeLook.Priority = 0;
-
-                lockedFreeLookRagdoll.Priority = 0;
-                lockedFreeLookNonRagdoll.Priority = 1;
-
-            }
-            else if (mode == CameraModes.bus)
-            {
-                cinematicFreeLook.Priority = 0;
-                closeUpFreeLook.Priority = 0;
-                lockedFreeLookRagdoll.Priority = 0;
-                lockedFreeLookNonRagdoll.Priority = 0;
-                busFreeLook.Priority = 1;
+                lockedFreeLook.Priority = 1;
             }
 
             currentCam = mode;

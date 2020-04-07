@@ -57,34 +57,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Editor\WeaponEditor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\Core\Editor\MaterialTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\Core\Editor\UniGLTFTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\Core\Scripts\Editor\gltfAssetPostprocessor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\Core\Scripts\Editor\ImporterMenu.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\Core\Scripts\Editor\UniGLTFVersionMenu.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\DepthFirstScheduler\Editor\DepthFirstScheduler.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniHumanoid\Scripts\Editor\BoneMappingEditor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniHumanoid\Scripts\Editor\bvhAssetPostprocessor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniHumanoid\Scripts\Editor\HumanPoseTransferEditor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniHumanoid\Scripts\Editor\MuscleInspectorEditor.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniHumanoid\Scripts\Editor\Tests\BvhLoaderTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\IWriteStreamTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\JsonDiffTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\JsonFormatterTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\JsonParserTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\ArrayTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\BooleanTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\FloatTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\IntTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\MapTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\RawTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\MsgPack\StringTest.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\SchemaTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniJSON\Editor\Tests\ValidatorTests.cs" />
-     <Compile Include="Assets\Prefabs\UniGLTF\UniUnlit\Editor\UniUnlitEditor.cs" />
-     <Compile Include="Assets\Thirdparty\Packages\VSCode\Plugins\Editor\VSCode.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\Core\Editor\MaterialTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\Core\Editor\UniGLTFTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\Core\Scripts\Editor\gltfAssetPostprocessor.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\Core\Scripts\Editor\ImporterMenu.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\Core\Scripts\Editor\UniGLTFVersionMenu.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\DepthFirstScheduler\Editor\DepthFirstScheduler.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniHumanoid\Scripts\Editor\BoneMappingEditor.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniHumanoid\Scripts\Editor\bvhAssetPostprocessor.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniHumanoid\Scripts\Editor\HumanPoseTransferEditor.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniHumanoid\Scripts\Editor\MuscleInspectorEditor.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniHumanoid\Scripts\Editor\Tests\BvhLoaderTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\IWriteStreamTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\JsonDiffTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\JsonFormatterTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\JsonParserTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\ArrayTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\BooleanTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\FloatTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\IntTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\MapTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\RawTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\MsgPack\StringTest.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\SchemaTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniJSON\Editor\Tests\ValidatorTests.cs" />
+     <Compile Include="Assets\Thirdparty\UniGLTF\UniUnlit\Editor\UniUnlitEditor.cs" />
+     <Compile Include="Assets\Thirdparty\VSCode\Plugins\Editor\VSCode.cs" />
  <Reference Include="Cinemachine">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
@@ -361,26 +360,20 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="AssetStoreToolsExtra">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
- </Reference>
- <Reference Include="AssetStoreTools">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Imports/AssetStoreTools/Editor/AssetStoreTools.dll</HintPath>
- </Reference>
  <Reference Include="Mono.CecilX.Mdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Pdb">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
  </Reference>
  <Reference Include="Mono.CecilX.Rocks">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
  <Reference Include="Telepathy">
- <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Packages/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+ <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Assets/Thirdparty/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

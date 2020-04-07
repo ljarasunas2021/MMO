@@ -7,27 +7,21 @@ public class InputHandler : NetworkBehaviour
     private ItemHolding itemHolding;
     private Movement movement;
     private PlayerEquip playerEquip;
-    private InventoryManager2 inventoryManager;
+    private InventoryManager inventoryManager;
     private UIManager uIScript;
     private bool isDead;
     private BodyParts bodyParts;
-    private SchoolBus schoolBus;
-    private BattleRoyalePlayer battleRoyalePlayer;
     private Map map;
-    private Storm storm;
 
     void Start()
     {
         movement = GetComponent<Movement>();
         playerEquip = GetComponent<PlayerEquip>();
-        inventoryManager = GameObject.FindObjectOfType<InventoryManager2>();
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         uIScript = GameObject.FindObjectOfType<UIManager>();
         bodyParts = GetComponent<BodyParts>();
         itemHolding = new ItemHolding(null, ItemType.none);
         UIManager.LockCursor(true);
-        schoolBus = FindObjectOfType<SchoolBus>();
-        battleRoyalePlayer = GetComponent<BattleRoyalePlayer>();
-        storm = GameObject.FindObjectOfType<Storm>();
 
         if (!isLocalPlayer) return;
         map = GameObject.FindObjectOfType<Map>();
@@ -65,23 +59,11 @@ public class InputHandler : NetworkBehaviour
         }
 
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
-
-        if (schoolBus != null && Input.GetButtonDown("SummonSchoolBus")) CheckActivateBus();
     }
 
     private void CheckItemHolding()
     {
         if (itemHolding.type != ItemType.none) itemHolding.weaponScript.CheckForUserInput();
-    }
-
-    private void CheckActivateBus()
-    {
-        if (schoolBus.activatedBus && !battleRoyalePlayer.dropped) battleRoyalePlayer.Drop();
-        else if (!battleRoyalePlayer.dropped)
-        {
-            schoolBus.ActivateBus();
-            storm.StartStorm();
-        }
     }
 
     public void ChangeItemHolding(ItemHolding itemHolding) { this.itemHolding = itemHolding; }

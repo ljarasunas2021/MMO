@@ -13,7 +13,7 @@ public class PlayerEquip : NetworkBehaviour
     private GameObject equippedItemGO;
     public int maxGrabDistance;
     private BodyParts bodyParts;
-    private InventoryManager2 inventoryManager;
+    private InventoryManager inventoryManager;
     private InputHandler inputHandler;
     private GameObject handR;
     private Animator animator;
@@ -29,7 +29,7 @@ public class PlayerEquip : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         bodyParts = GetComponent<BodyParts>();
-        inventoryManager = GameObject.FindObjectOfType<InventoryManager2>();
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         inputHandler = GetComponent<InputHandler>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
         itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
