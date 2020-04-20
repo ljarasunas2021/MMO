@@ -13,8 +13,6 @@ public class Target : MonoBehaviour
 
     public float radius;
 
-    public float gravity;
-
     private Outline outline;
     private UIManager UIScript;
     private CharacterController cc;
@@ -26,21 +24,6 @@ public class Target : MonoBehaviour
         outline = GetComponent<Outline>();
         outline.enabled = false;
         cc = GetComponent<CharacterController>();
-    }
-
-    private void Update()
-    {
-        AddGravity();
-    }
-
-    private void AddGravity()
-    {
-        if (cc.isGrounded) veloY = 0;
-        else veloY += gravity;
-
-        cc.Move(new Vector3(0, -veloY, 0));
-
-        if (cc.isGrounded) veloY = 0;
     }
 
     public void Interact()

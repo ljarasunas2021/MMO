@@ -39,6 +39,8 @@ public class PlayerEquip : NetworkBehaviour
         movement = GetComponent<Movement>();
         handR = bodyParts.handR;
         inventoryManager.SetPlayer(gameObject);
+
+        hotBarIndexCounter = weaponTimeTillDespawn;
     }
 
     private void ChangeItem(int itemIndex)
@@ -49,6 +51,7 @@ public class PlayerEquip : NetworkBehaviour
         if (itemIndex != -1)
         {
             equippedItemGO = Instantiate(itemPrefabs[itemIndex], handR.transform);
+            Debug.Log(equippedItemGO.name);
             Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
             equippedItemGO.transform.localPosition = weaponScript.startPos;
             equippedItemGO.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
@@ -56,7 +59,10 @@ public class PlayerEquip : NetworkBehaviour
     }
 
     [Command]
-    void CmdChangeEquippedItem(int itemIndex) { equippedItem = itemIndex; }
+    void CmdChangeEquippedItem(int itemIndex)
+    {
+        equippedItem = itemIndex;
+    }
 
     [Command]
     public void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }

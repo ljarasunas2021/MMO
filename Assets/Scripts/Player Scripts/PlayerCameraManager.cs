@@ -45,8 +45,6 @@ public class PlayerCameraManager : NetworkBehaviour
 
     public void ChangeCam(CameraModes mode)
     {
-        Debug.Log(mode);
-
         if (mode != currentCam)
         {
             if (mode == CameraModes.cinematic)

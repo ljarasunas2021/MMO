@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
     private float actualROF; // The frequency between shots based on the rateOfFire
     private float fireTimer; // Timer used to fire at a set frequency
 
-    public bool infiniteAmmo = false; // Whether or not this weapon should have unlimited ammo
+    public bool infiniteAmmo = true; // Whether or not this weapon should have unlimited ammo
     public int ammoCapacity = 12; // The number of rounds this weapon can fire before it has to reload
     public int shotPerRound = 1; // The number of "bullets" that will be fired on each round.  Usually this will be 1, but set to a higher number for things like shotguns with spread
     private int currentAmmo; // How much ammo the weapon currently has
@@ -257,7 +257,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Raycasting system
-    void Fire()
+    public void Fire()
     {
         fireTimer = 0.0f;
 
@@ -267,7 +267,7 @@ public class Weapon : MonoBehaviour
 
         if (currentAmmo <= 0)
         {
-            DryFire();
+            //DryFire();
             return;
         }
 
@@ -325,7 +325,7 @@ public class Weapon : MonoBehaviour
 
         if (currentAmmo <= 0)
         {
-            DryFire();
+            //DryFire();
             return;
         }
 
@@ -388,6 +388,7 @@ public class Weapon : MonoBehaviour
     public int FindIndexAudioClip(AudioClip clip)
     {
         int index = -1;
+        if (audioClipPrefabs == null) audioClipPrefabs = FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
         for (int i = 0; i < audioClipPrefabs.Length; i++) if (clip.name.Contains(audioClipPrefabs[i].name)) index = i;
         return index;
     }
@@ -410,7 +411,7 @@ public class Weapon : MonoBehaviour
     {
         this.user = user;
         playerWeapon = user.GetComponent<PlayerWeapon>();
-        userAnim = user.GetComponent<PlayerWeapon>().GetComponent<Animator>();
+        userAnim = user.GetComponent<Animator>();
     }
 
     public void SetHotBarIndex(int hotBarIndex)
