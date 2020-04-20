@@ -102,6 +102,17 @@ public class Weapon : MonoBehaviour
     private Dictionary<UpperBodyStates, UpperBodyStates[]> meleeCombosDict = new Dictionary<UpperBodyStates, UpperBodyStates[]>();
     private int hotBarIndex;
 
+    private bool showAim = true;
+    private Ray ray1;
+
+    void OnDrawGizmos()
+    {
+        if (showAim)
+        {
+            Gizmos.DrawRay(ray1.origin, ray1.direction * 1000);
+        }
+    }
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -285,6 +296,8 @@ public class Weapon : MonoBehaviour
 
             Ray ray = new Ray(raycastStartSpot.position, direction);
             RaycastHit hit;
+
+            ray1 = ray;
 
             if (Physics.Raycast(ray, out hit, range))
             {

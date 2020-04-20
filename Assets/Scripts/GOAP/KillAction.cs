@@ -7,7 +7,7 @@ namespace SwordGC.AI.Actions
 {
     public class KillAction : GoapAction
     {
-        private int targetPlayerId;
+        private int targetPlayerId, minCountdown = 10, maxCountdown = 30, timeTillCanShoot = 0;
         private GoapAgent agent;
 
         public KillAction(GoapAgent agent, int targetPlayerId) : base(agent)
@@ -26,13 +26,13 @@ namespace SwordGC.AI.Actions
 
         public override void Perform()
         {
-            agent.GetComponent<EnemyAI1>().itemHolding.weaponScript.Fire();
+            if (timeTillCanShoot <= 0)
+            {
+                agent.GetComponent<EnemyAI1>().itemHolding.weaponScript.Fire();
+                timeTillCanShoot = Random.Range(minCountdown, maxCountdown);
+            }
 
-            Vector3 dir = (target.transform.position - agent.transform.position).normalized;
-
-            Quaternion lookRot = Quaternion.LookRotation(dir);
-
-            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRot, Time.deltaTime * 20);
+            timeTillCanShoot--;
         }
 
         public override GoapAction Clone()
