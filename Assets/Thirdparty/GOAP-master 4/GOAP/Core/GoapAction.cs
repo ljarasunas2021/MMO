@@ -499,6 +499,7 @@ namespace SwordGC.AI.Goap
         public class Effects
         {
             public const string PLAYER_DEAD = "PlayerDead";
+            public const string AI_DEAD = "AIDead";
         }
     }
 }

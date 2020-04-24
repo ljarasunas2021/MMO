@@ -28,22 +28,9 @@ public class EnemyAI1 : GoapAgent
         goals.Add(GoapGoal.Goals.KILL_PLAYER, new KillPlayerGoal(GoapGoal.Goals.KILL_PLAYER, 1));
 
         dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
+        dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", false);
 
         possibleActions.Add(new KillAction(this, 0));
-
-        //possibleActions.Add(new FindPlayerAction(this, 0));
-        // possible
-        // // create Actions
-        // for (int i = 1; i < testPlayerCount; i++)
-        // {
-        //     dataSet.SetData(GoapAction.Effects.KNOCKED_OUT_PLAYER + i, false);
-
-        //     possibleActions.Add(new KillAction(this, i));
-        //     possibleActions.Add(new KnockoutPlayerAction(this, i));
-        //     possibleActions.Add(new ThrowAtPlayerAction(this, i));
-        // }
-        // possibleActions.Add(new GrabItemAction(this));
-
 
         anim = GetComponent<Animator>();
         itemPrefabsController = FindObjectOfType<ItemPrefabsController>();
@@ -85,19 +72,7 @@ public class EnemyAI1 : GoapAgent
 
             Vector3 idealPosition = player.transform.position + offset1;
 
-            //currentPosition = raycastStartSpot.gameObject.transform.position + raycastStartSpot.gameObject.transform.forward * Vector3.Distance(raycastStartSpot.position, player.transform.position);
-
-            //Debug.Log(raycastStartSpot.forward);
-
-            //Debug.Log(idealPosition.x + " " + currentPosition.x + " " + Time.time + " " + currentTime + " " + (idealPosition.x - currentPosition.x) * 0.1);
-
-            //Debug.Log(idealPosition + " " + currentPosition);
-
-            Debug.Log(currentPosition);
-
-            float change = xPID.Update(idealPosition.x, currentPosition.x, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
-            offset.x += change;
-            //Debug.Log((idealPosition.x - currentPosition.x) + " " + change);
+            offset.x += xPID.Update(idealPosition.x, currentPosition.x, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
             offset.y += yPID.Update(idealPosition.y, currentPosition.y, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
             offset.z += zPID.Update(idealPosition.z, currentPosition.z, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
 
@@ -137,16 +112,22 @@ public class EnemyAI1 : GoapAgent
         zPID.dFactor = aimD;
     }
 
+    public void Dead()
+    {
+        dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", true);
+    }
+
+    public void PlayerDead()
+    {
+        dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", true);
+    }
+
     void OnDrawGizmos()
     {
         if (player != null && raycastStartSpot != null)
         {
-            //Gizmos.DrawWireSphere(player.transform.position + offset, 0.25f);
-            //Debug.Log(currentPosition);
-            //currentPosition = raycastStartSpot.position + raycastStartSpot.forward * Vector3.Distance(raycastStartSpot.position, player.transform.position);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(currentPosition, 0.5f);
-            //Debug.Log(raycastStartSpot.position + raycastStartSpot.forward * Vector3.Distance(raycastStartSpot.position, player.transform.position));
         }
     }
 }
