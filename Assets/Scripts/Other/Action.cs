@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Action1 : MonoBehaviour
 {
     public IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("Not Derived");
+        Debug.Log("HERE");
     }
 }

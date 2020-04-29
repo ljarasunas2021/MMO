@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerDialogueOption : MonoBehaviour
 {
+    [Header("Dialogue")]
     public Button button;
     public NPCDialogue nextDialogue;
+
+    [Header("Action")]
     public Action1 action;
     public bool actionBeforeDialogue;
 }

@@ -63,9 +63,9 @@ public class UIManager : MonoBehaviour
             yield return StartCoroutine(dialogue.action.Execute());
         }
 
-        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue[0] != null)
+        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null)
         {
-            StartCoroutine(PlayDialogue(dialogue.nextDialogue[0]));
+            StartCoroutine(PlayDialogue(dialogue.nextDialogue));
         }
         else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0)
         {
