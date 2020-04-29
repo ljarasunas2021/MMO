@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
 
             LockCursor(false);
             List<Button> buttons = new List<Button>();
-            foreach (PlayerDialogueOption option in dialogue.playerDialogueOptions)
+            foreach (PlayerDialogue option in dialogue.playerDialogueOptions)
             {
                 Button button = Instantiate(option.button, dialogueCanvas.transform);
                 buttons.Add(button);
@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ClickButton(PlayerDialogueOption optionChosen, NPCDialogue dialogue, List<Button> buttons)
+    private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
     {
         LockCursor(true);
 

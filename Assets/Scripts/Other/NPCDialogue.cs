@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
 {
-    [Header("Dialogue")]
     public string text;
     public AudioClip audio;
 
-    [Header("Next Dialogue")]
     public bool nextDialogueIsNPC;
     public NPCDialogue nextDialogue;
-    public PlayerDialogueOption[] playerDialogueOptions;
+    public bool options;
+    public PlayerDialogue[] playerDialogueOptions;
+    public PlayerDialogue playerDialogue;
 
-    [Header("Action")]
     public Action1 action;
     public bool actionBeforeDialogue;
 }

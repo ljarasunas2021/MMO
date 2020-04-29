@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\NPCDialogueEditor.cs" />
+    <Compile Include="Assets\Editor\PlayerDialogueEditor.cs" />
     <Compile Include="Assets\Editor\WeaponEditor.cs" />
     <Compile Include="Assets\Thirdparty\GOAP-master 4\GOAP\Editor\DrawArrow.cs" />
     <Compile Include="Assets\Thirdparty\GOAP-master 4\GOAP\Editor\GoapAgentEditor.cs" />

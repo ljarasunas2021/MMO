@@ -68,6 +68,10 @@
     <Compile Include="Assets\Scripts\Actions\BossGivesWalkie.cs" />
     <Compile Include="Assets\Scripts\Actions\EquipNameTag.cs" />
     <Compile Include="Assets\Scripts\Actions\MissionTakeWalkie.cs" />
+    <Compile Include="Assets\Scripts\Actions\Pause.cs" />
+    <Compile Include="Assets\Scripts\Actions\RedCapFight.cs" />
+    <Compile Include="Assets\Scripts\Actions\StepForward.cs" />
+    <Compile Include="Assets\Scripts\Actions\WalksAway.cs" />
     <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
@@ -94,7 +98,7 @@
     <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
     <Compile Include="Assets\Scripts\Other\OutlineObject.cs" />
     <Compile Include="Assets\Scripts\Other\PID.cs" />
-    <Compile Include="Assets\Scripts\Other\PlayerDialogueOption.cs" />
+    <Compile Include="Assets\Scripts\Other\PlayerDialogue.cs" />
     <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
     <Compile Include="Assets\Scripts\Other\Target.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
