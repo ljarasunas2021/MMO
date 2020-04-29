@@ -80,23 +80,5 @@ public class Target : MonoBehaviour
 }
 
 
-[System.Serializable]
-public class NPCDialogue
-{
-    public string text;
-    public AudioClip audio;
-    public bool nextDialogueIsNPC;
-    public NPCDialogue[] nextDialogue;
-    public PlayerDialogueOption[] playerDialogueOptions;
-}
-
-[System.Serializable]
-public class PlayerDialogueOption
-{
-    public Button button;
-    public NPCDialogue nextDialogue;
-}
-
-
 
 

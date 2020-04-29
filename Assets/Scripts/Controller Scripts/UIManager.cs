@@ -38,33 +38,51 @@ public class UIManager : MonoBehaviour
     {
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
-        if (!canMove) PlayDialogue(dialogue);
+        if (!canMove) StartCoroutine(PlayDialogue(dialogue));
     }
 
-    public void PlayDialogue(NPCDialogue dialogue)
+    private IEnumerator PlayDialogue(NPCDialogue dialogue)
     {
+        if (dialogue.action != null && dialogue.actionBeforeDialogue)
+        {
+            yield return StartCoroutine(dialogue.action.Execute());
+        }
+
         dialogueText.text = dialogue.text;
         audioSource.PlayOneShot(dialogue.audio);
+
         StartCoroutine(WaitUntilAudioIsDone(dialogue));
     }
 
     private IEnumerator WaitUntilAudioIsDone(NPCDialogue dialogue)
     {
         yield return new WaitWhile(() => audioSource.isPlaying);
+
+        if (dialogue.action != null && !dialogue.actionBeforeDialogue)
+        {
+            yield return StartCoroutine(dialogue.action.Execute());
+        }
+
         if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue[0] != null)
         {
-            PlayDialogue(dialogue.nextDialogue[0]);
+            StartCoroutine(PlayDialogue(dialogue.nextDialogue[0]));
         }
         else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0)
         {
             dialogueBox.enabled = false;
+
+            if (dialogue.playerDialogueOptions[0].action != null && dialogue.playerDialogueOptions[0].actionBeforeDialogue)
+            {
+                yield return StartCoroutine(dialogue.playerDialogueOptions[0].action.Execute());
+            }
+
             LockCursor(false);
             List<Button> buttons = new List<Button>();
             foreach (PlayerDialogueOption option in dialogue.playerDialogueOptions)
             {
                 Button button = Instantiate(option.button, dialogueCanvas.transform);
                 buttons.Add(button);
-                button.onClick.AddListener(() => ClickButton(option.nextDialogue, buttons));
+                button.onClick.AddListener(() => StartCoroutine(ClickButton(option, option.nextDialogue, buttons)));
             }
         }
         else
@@ -73,12 +91,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void ClickButton(NPCDialogue dialogue, List<Button> buttons)
+    private IEnumerator ClickButton(PlayerDialogueOption optionChosen, NPCDialogue dialogue, List<Button> buttons)
     {
         LockCursor(true);
+
+        if (optionChosen.action != null && !optionChosen.actionBeforeDialogue)
+        {
+            yield return StartCoroutine(optionChosen.action.Execute());
+        }
+
         dialogueBox.enabled = true;
         foreach (Button button in buttons) Destroy(button.gameObject);
-        PlayDialogue(dialogue);
+        StartCoroutine(PlayDialogue(dialogue));
     }
 
     // turn on / off the pause menu
