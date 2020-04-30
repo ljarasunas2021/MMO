@@ -6667,7 +6667,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh9896
+  m_Name: pb_Mesh9904
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -15133,7 +15133,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1754018243}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056247876
 MonoBehaviour:
@@ -17120,7 +17120,7 @@ RectTransform:
   m_Children:
   - {fileID: 1778831322}
   m_Father: {fileID: 1754018243}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20187,7 +20187,7 @@ RectTransform:
   m_Children:
   - {fileID: 2095340298}
   m_Father: {fileID: 1754018243}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -25045,11 +25045,11 @@ Transform:
   - {fileID: 632660741}
   - {fileID: 598677575}
   - {fileID: 2036697649}
-  - {fileID: 1056247875}
   - {fileID: 1423877840}
   - {fileID: 2059444420}
   - {fileID: 1207520569}
   - {fileID: 1921245654}
+  - {fileID: 1056247875}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27751,7 +27751,7 @@ RectTransform:
   m_Children:
   - {fileID: 1624185644}
   m_Father: {fileID: 1754018243}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -28273,6 +28273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025774e27c7c841d5a81c58aad445c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 2
 --- !u!114 &1932307824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29947,7 +29948,7 @@ RectTransform:
   m_Children:
   - {fileID: 506058967}
   m_Father: {fileID: 1754018243}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -47840,6 +47841,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5c95e48428f43218b6b6cf1af29bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2036697646}
+  equipButton: {fileID: 1183832163082941310, guid: c999f838fd2074e0ab0f149722620842,
+    type: 3}
+  unEquipButton: {fileID: 364606708160622607, guid: 466287d08d25a450f95a5b83175eac6d,
+    type: 3}
 --- !u!114 &3856318443686878700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48122,6 +48128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025774e27c7c841d5a81c58aad445c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 2
 --- !u!114 &3856318443686878710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62214,6 +62221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336ea832a5ccb44f883b46d58b96b25a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forward: 1
 --- !u!1 &4705876634357773601
 GameObject:
   m_ObjectHideFlags: 0
@@ -62514,6 +62522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96af6154f07fe4a1e84051221ec6689e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2036697646}
+  report: {fileID: 5436769401278840559, guid: ecb4e1d28a0b64784a82a58d862909d8, type: 3}
+  missionShowTime: 2
 --- !u!1 &4705876634357773617
 GameObject:
   m_ObjectHideFlags: 0

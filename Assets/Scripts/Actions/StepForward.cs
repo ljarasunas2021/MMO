@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class StepForward : Action1
 {
-    public IEnumerator Execute()
+    public float forward;
+
+    public new IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("HERE");
+        transform.position += transform.forward * forward;
     }
 }

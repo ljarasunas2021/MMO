@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RedCapFight : Action1
 {
-    public IEnumerator Execute()
+    public new IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("HERE");
+        Debug.Log("IMPLEMENT FIGHT");
     }
 }

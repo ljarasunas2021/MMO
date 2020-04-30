@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class WalksAway : Action1
 {
-    // also show MISSION
+    public Canvas canvas;
+    public GameObject report;
+    private GameObject reportInstant;
+    public float missionShowTime;
+
     public IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("HERE");
+        Debug.Log("Implement Walk Away");
+
+        reportInstant = Instantiate(report, canvas.transform);
+
+        yield return new WaitForSeconds(missionShowTime);
+
+        Destroy(reportInstant);
     }
 }
