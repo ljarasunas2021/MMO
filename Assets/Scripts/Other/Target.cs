@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
-    public NPCDialogue dialogue;
+    public Dialogue[] dialogue;
 
     [Range(0, 1)]
     public float rotateSpeed;
@@ -17,6 +17,7 @@ public class Target : MonoBehaviour
     private UIManager UIScript;
     private CharacterController cc;
     private float veloY = 0;
+    private int currentDialogIndex = 0;
 
     void Start()
     {
@@ -35,7 +36,9 @@ public class Target : MonoBehaviour
                 StartCoroutine(RotateNPC());
 
                 UIScript.audioSource = GetComponent<AudioSource>();
-                UIScript.ToggleDialogue(dialogue);
+                UIScript.ToggleDialogue(dialogue[currentDialogIndex]);
+
+                if (currentDialogIndex + 1 < dialogue.Length) currentDialogIndex++;
             }
         }
     }
@@ -77,6 +80,13 @@ public class Target : MonoBehaviour
             yield return 0;
         }
     }
+}
+
+[System.Serializable]
+public class Dialogue
+{
+    public NPCDialogue NPCDialogue;
+    public PlayerDialogue playerDialogue;
 }
 
 

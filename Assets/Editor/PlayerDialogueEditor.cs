@@ -31,7 +31,7 @@ public class PlayerDialogueEditor : Editor
         }
         else
         {
-            playerDialogue.text = EditorGUILayout.TextArea("Text", playerDialogue.text);
+            playerDialogue.text = EditorGUILayout.TextField("Text", playerDialogue.text);
             playerDialogue.time = EditorGUILayout.FloatField("Time To Display Dialogue", playerDialogue.time);
         }
 

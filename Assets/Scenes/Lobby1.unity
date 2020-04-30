@@ -905,7 +905,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 132700537
+      value: 1302413335
       objectReference: {fileID: 0}
     - target: {fileID: 5729793933798309167, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
@@ -1790,7 +1790,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 150486776
+      value: 417724702
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -4162,7 +4162,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 17327c1c6041b47e580fedcbc25f8b8e
-  m_SceneId: 1107575167
+  m_SceneId: 1716854802
 --- !u!114 &247380022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21185,7 +21185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa6b65d450eb4da5af52dfd7bbd678d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 0}
+  dialogue: []
   rotateSpeed: 0.25
   radius: 6
 --- !u!95 &1494950516
@@ -22824,7 +22824,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 2353036148
+      value: 3133344871
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -25770,7 +25770,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 328677750
+      value: 2241634447
       objectReference: {fileID: 0}
     - target: {fileID: 5729793933798309167, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
@@ -27894,8 +27894,9 @@ GameObject:
   - component: {fileID: 1932307814}
   - component: {fileID: 1932307813}
   - component: {fileID: 1932307812}
+  - component: {fileID: 1932307829}
   - component: {fileID: 1932307820}
-  - component: {fileID: 1932307819}
+  - component: {fileID: 1932307827}
   - component: {fileID: 1932307811}
   - component: {fileID: 1932307823}
   - component: {fileID: 1932307822}
@@ -27903,7 +27904,7 @@ GameObject:
   - component: {fileID: 1932307825}
   - component: {fileID: 1932307821}
   - component: {fileID: 1932307828}
-  - component: {fileID: 1932307827}
+  - component: {fileID: 1932307819}
   - component: {fileID: 1932307824}
   m_Layer: 0
   m_Name: Manager (1)
@@ -27929,9 +27930,11 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: 08611cc000161413287cdebefef46320, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 1932307822}
   - {fileID: 1932307821}
+  playerDialogue: {fileID: 0}
   action: {fileID: 1932307823}
   actionBeforeDialogue: 0
 --- !u!82 &1932307812
@@ -28073,7 +28076,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa6b65d450eb4da5af52dfd7bbd678d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 1932307820}
+  dialogue:
+  - NPCDialogue: {fileID: 0}
+    playerDialogue: {fileID: 1932307829}
   rotateSpeed: 0.1
   radius: 6
 --- !u!114 &1932307816
@@ -28143,14 +28148,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932307810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: He tried to eat me!
-  audio: {fileID: 0}
+  option: 0
+  button: {fileID: 0}
+  text: "You\u2019d better. "
+  time: 2
   nextDialogueIsNPC: 1
-  nextDialogue: {fileID: 1932307811}
+  nextDialogue: {fileID: 1932307824}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307820
@@ -28169,9 +28178,11 @@ MonoBehaviour:
     about Mr. Cap.  He likes to get to know the staff.  He\u2019s harmless, really,
     just a little...excitable."
   audio: {fileID: 8300000, guid: ff31d79f1fef048a28b3ff468fb7ec45, type: 3}
-  nextDialogueIsNPC: 1
-  nextDialogue: {fileID: 1932307819}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 1932307827}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307821
@@ -28186,8 +28197,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 8245071992638941318, guid: 3facc607bacbb4f4da03725637d23b51, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 1932307828}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307822
@@ -28202,8 +28220,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 1932307826}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307823
@@ -28235,7 +28260,9 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: fb0c6966729574702ba70a3cac202931, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307825
@@ -28247,14 +28274,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932307810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 0}
   text: "I\u2019d prefer that, thank you."
-  audio: {fileID: 0}
-  nextDialogueIsNPC: 0
+  time: 2
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 1932307824}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307826
@@ -28269,12 +28300,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "Of course.  (Pause.)  And if Mr. Cap really makes you uncomfortable, I\u2019ll
-    gladly transfer you to work permanently in the West Wing."
+  text: "Of course. And if Mr. Cap really makes you uncomfortable, I\u2019ll gladly
+    transfer you to work permanently in the West Wing."
   audio: {fileID: 8300000, guid: 32fefc42b4c8a43df9aab6047bb345df, type: 3}
-  nextDialogueIsNPC: 1
-  nextDialogue: {fileID: 1932307825}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 1932307825}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307827
@@ -28286,14 +28319,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932307810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: You'd Better.
-  audio: {fileID: 0}
+  option: 0
+  button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: He tried to eat me!
+  time: 1.5
   nextDialogueIsNPC: 1
-  nextDialogue: {fileID: 1932307824}
+  nextDialogue: {fileID: 1932307811}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &1932307828
@@ -28312,9 +28349,34 @@ MonoBehaviour:
     I\u2019ll transfer you to work permanently in the West Wing. We do so value our
     employees\u2019...peace of mind."
   audio: {fileID: 8300000, guid: a67c8f645aacc4dacbc38b31c1877a5b, type: 3}
-  nextDialogueIsNPC: 1
-  nextDialogue: {fileID: 1932307827}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 1932307819}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &1932307829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932307810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: '[Tell her what happened.]'
+  time: 2
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 1932307820}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &1937425353
@@ -29247,7 +29309,7 @@ PrefabInstance:
     - target: {fileID: 5729793933798309160, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
         type: 3}
       propertyPath: m_SceneId
-      value: 2026310385
+      value: 2402059463
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa, type: 3}
@@ -47501,7 +47563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa6b65d450eb4da5af52dfd7bbd678d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 3856318443686878690}
+  dialogue:
+  - NPCDialogue: {fileID: 3856318443686878690}
+    playerDialogue: {fileID: 0}
   rotateSpeed: 0.1
   radius: 6
 --- !u!114 &3856318443686878689
@@ -47535,15 +47599,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: "I hope you realize that this sort of chronic lateness is unacceptable.  You\u2019re
-    on thin ice"
+    on thin ice."
   audio: {fileID: 8300000, guid: 40688730e93984b02ba2fb799529e95c, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 3856318443686878691}
   - {fileID: 3856318443686878695}
   - {fileID: 3856318443686878694}
   - {fileID: 3856318443686878693}
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878691
@@ -47558,8 +47624,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 1798720946309462778, guid: 065491d0082084a04b337b4debcaf0e6, type: 3}
+  text: 
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878692}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878692
@@ -47574,11 +47647,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "Hmph.  You\u2019re lucky we\u2019re understaffed right now. "
+  text: "You\u2019re lucky we\u2019re understaffed right now. "
   audio: {fileID: 8300000, guid: 1c4d8a404c8714ec6a3a5fcd1f1c51d8, type: 3}
   nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878697}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 3856318443686878698}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878693
@@ -47593,8 +47668,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 6437387335126357834, guid: a9e6649e9b8a343be9420925f84ae9dc, type: 3}
+  text: 
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878692}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878694
@@ -47609,8 +47691,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 6767323010700913926, guid: ae029ad54204a4a08bc9b7df497f2a4d, type: 3}
+  text: 
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878692}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878695
@@ -47625,8 +47714,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 8893472101158921088, guid: f17a6b9aec4bc4166a158f1190ab7053, type: 3}
+  text: 
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878692}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878696
@@ -47641,11 +47737,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "Oh, and before I forget, here\u2019s your nametag."
+  text: "Oh, and before I forget, here\u2019s your nametag. s"
   audio: {fileID: 8300000, guid: 0580d280b53b442fcb4819da12db7b88, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
-  playerDialogueOptions: []
+  options: 0
+  playerDialogueOptions:
+  - {fileID: 0}
+  playerDialogue: {fileID: 0}
   action: {fileID: 3856318443686878699}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878697
@@ -47665,7 +47764,9 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: f99c86052dc7645a79f60c9cac9bfba1, type: 3}
   nextDialogueIsNPC: 1
   nextDialogue: {fileID: 3856318443686878696}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 3856318443686878700}
   actionBeforeDialogue: 0
 --- !u!114 &3856318443686878698
@@ -61244,7 +61345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa6b65d450eb4da5af52dfd7bbd678d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 4705876634357773586}
+  dialogue:
+  - NPCDialogue: {fileID: 4705876634357773586}
+    playerDialogue: {fileID: 0}
   rotateSpeed: 0.1
   radius: 6
 --- !u!1 &4705876634357773575
@@ -61307,7 +61410,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 3304639899
+  m_SceneId: 3497832489
 --- !u!1 &4705876634357773579
 GameObject:
   m_ObjectHideFlags: 0
@@ -61482,8 +61585,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 1164574875819659254, guid: 163ae7b7495274314999bdc78d933ee0, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773588}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773585
@@ -61518,11 +61628,13 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: 5893b41868c314855aad877f2a0dc43a, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 4705876634357773584}
   - {fileID: 4705876634357773594}
   - {fileID: 4705876634357773592}
   - {fileID: 4705876634357773590}
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773587
@@ -61558,9 +61670,11 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: ae58e7081390c4d718d0f723b34cf547, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 4705876634357773606}
   - {fileID: 4705876634357773604}
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773589
@@ -61591,8 +61705,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 3824171284890532188, guid: a147187b99e664542aba7e82e14777fe, type: 3}
+  text: 
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773588}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773591
@@ -61623,8 +61744,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 7934846954162574679, guid: 4d5b44bd189c7493b9bdfef51e6ade0b, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773588}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773593
@@ -61655,8 +61783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 2886055730571716814, guid: 7485d63c610714d7e891b0cd1d25b18a, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773588}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773595
@@ -61687,8 +61822,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 6188267236693889411, guid: 2cfb2f3fed75f4c74b3d1d00f14a1bdf, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773608}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773597
@@ -61719,8 +61861,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 4936470992531075745, guid: fcf1eb1af657542fc9e3ede0ac24bf92, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773608}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773599
@@ -61783,9 +61932,11 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: 5811005119f394dfd9245d42d1dad43b, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 4705876634357773598}
   - {fileID: 4705876634357773596}
+  playerDialogue: {fileID: 0}
   action: {fileID: 4705876634357773600}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773603
@@ -61816,8 +61967,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 1720978782103378168, guid: 91873060ed1c2407d84877849529c5d3, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773602}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773605
@@ -61848,8 +62006,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 2755958826652714724, guid: f89b6ad553b4f4682a66a13bef7ce35f, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773602}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773607
@@ -61885,9 +62050,11 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: 410c291aa77054960b645f3ce5b762fa, type: 3}
   nextDialogueIsNPC: 0
   nextDialogue: {fileID: 0}
+  options: 1
   playerDialogueOptions:
   - {fileID: 4705876634357773614}
   - {fileID: 4705876634357773612}
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773609
@@ -61922,7 +62089,9 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: bbadc621f34a54db9a402a4bd64baeec, type: 3}
   nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773618}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 4705876634357773620}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773611
@@ -61953,8 +62122,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 5990266585300574710, guid: 70238850844884f2097e4fbcf4abe780, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773610}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773613
@@ -61985,8 +62161,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  option: 1
   button: {fileID: 7761561569307819799, guid: 53b16608b16e6470f9f11100ad8c7265, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
   nextDialogue: {fileID: 4705876634357773610}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 0}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773615
@@ -62050,7 +62233,9 @@ MonoBehaviour:
   audio: {fileID: 8300000, guid: 87839e404e1364637b7a6ed0fcd8108d, type: 3}
   nextDialogueIsNPC: 1
   nextDialogue: {fileID: 0}
+  options: 0
   playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
   action: {fileID: 4705876634357773616}
   actionBeforeDialogue: 0
 --- !u!1 &4705876634357773619
