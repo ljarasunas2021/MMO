@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UI;
+using TMPro;
 
 [CustomEditor(typeof(NPCDialogue))]
 public class NPCDialogueEditor : Editor
@@ -53,7 +54,7 @@ public class NPCDialogueEditor : Editor
 
             if (NPCDialogue.nextDialogue != null)
             {
-                name = NPCDialogue.text;
+                name = NPCDialogue.nextDialogue.text;
             }
 
             NPCDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, NPCDialogue.nextDialogue, typeof(NPCDialogue));
@@ -64,9 +65,7 @@ public class NPCDialogueEditor : Editor
 
             if (NPCDialogue.options)
             {
-                EditorGUILayout.LabelField("Player Dialogue Options");
-
-                int length = EditorGUILayout.IntField("Length", NPCDialogue.playerDialogueOptions.Length);
+                int length = EditorGUILayout.IntField("Player Dialogue Options Length", NPCDialogue.playerDialogueOptions.Length);
                 if (NPCDialogue.playerDialogueOptions.Length != length)
                 {
                     PlayerDialogue[] copy = NPCDialogue.playerDialogueOptions;
@@ -83,12 +82,12 @@ public class NPCDialogueEditor : Editor
                 {
                     string name = " ";
 
-                    if (NPCDialogue.playerDialogueOptions[i] != null)
+                    if (NPCDialogue.playerDialogueOptions[i] != null && NPCDialogue.playerDialogueOptions[i].button != null)
                     {
-                        name = NPCDialogue.playerDialogueOptions[i].button.GetComponentInChildren<Text>().text;
+                        name = NPCDialogue.playerDialogueOptions[i].button.GetComponentInChildren<TextMeshProUGUI>().text;
                     }
 
-                    NPCDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField(name, NPCDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
+                    NPCDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField("      " + name, NPCDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
                     if (NPCDialogue.playerDialogueOptions[i] != null) NPCDialogue.playerDialogueOptions[i].option = true;
                 }
 

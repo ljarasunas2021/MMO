@@ -59,7 +59,7 @@ public class PlayerDialogueEditor : Editor
 
             if (playerDialogue.nextDialogue != null)
             {
-                name = playerDialogue.text;
+                name = playerDialogue.nextDialogue.text;
             }
 
             playerDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, playerDialogue.nextDialogue, typeof(NPCDialogue));
