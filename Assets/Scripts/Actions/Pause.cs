@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Pause : Action1
 {
-    public IEnumerator Execute()
+
+    public float time = 2;
+
+    public new IEnumerator Execute()
     {
-        yield return 0;
-        Debug.Log("HERE");
+        yield return new WaitForSeconds(time);
     }
 }

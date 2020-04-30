@@ -3286,6 +3286,36 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b5d4295aec7349109302186974c5857, type: 3}
+--- !u!1 &180670121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180670122}
+  m_Layer: 0
+  m_Name: Walkie Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &180670122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180670121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.4324327, z: 9.459459}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3856318443686576635}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &181517803
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,7 +5824,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324749283}
-  m_Mesh: {fileID: 1812117385}
+  m_Mesh: {fileID: 406228850}
 --- !u!1 &325199614
 GameObject:
   m_ObjectHideFlags: 0
@@ -6631,6 +6661,166 @@ Transform:
   m_Father: {fileID: 1386998848}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!43 &406228850
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: pb_Mesh9896
+  serializedVersion: 9
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 96
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 25
+    localAABB:
+      m_Center: {x: 100, y: 0, z: 100}
+      m_Extent: {x: 100, y: 0, z: 100}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 000001000200010003000200010004000300040005000300040006000500060007000500060008000700080009000700020003000a0003000b000a00030005000b0005000c000b00050007000c0007000d000c00070009000d0009000e000d000a000b000f000b0010000f000b000c0010000c00110010000c000d0011000d00120011000d000e0012000e00130012000f0010001400100015001400100011001500110016001500110012001600120017001600120013001700130018001700
+  m_VertexData:
+    serializedVersion: 2
+    m_VertexCount: 25
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 40
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 1200
+    _typelessdata: 000000000000000000000000000000000000803f000000000000803f0000000000000000000080bf0000000000000000000000000000000000004842000000000000803f000000000000803f0000000000000000000080bf0000000000004842000048420000000000000000000000000000803f000000000000803f0000000000000000000080bf0000484200000000000048420000000000004842000000000000803f000000000000803f0000000000000000000080bf000048420000484200000000000000000000c842000000000000803f000000000000803f0000000000000000000080bf000000000000c84200004842000000000000c842000000000000803f000000000000803f0000000000000000000080bf000048420000c842000000000000000000001643000000000000803f000000000000803f0000000000000000000080bf0000000000001643000048420000000000001643000000000000803f000000000000803f0000000000000000000080bf0000484200001643000000000000000000004843000000000000803f000000000000803f0000000000000000000080bf0000000000004843000048420000000000004843000000000000803f000000000000803f0000000000000000000080bf00004842000048430000c8420000000000000000000000000000803f000000000000803f0000000000000000000080bf0000c842000000000000c8420000000000004842000000000000803f000000000000803f0000000000000000000080bf0000c842000048420000c842000000000000c842000000000000803f000000000000803f0000000000000000000080bf0000c8420000c8420000c8420000000000001643000000000000803f000000000000803f0000000000000000000080bf0000c842000016430000c8420000000000004843000000000000803f000000000000803f0000000000000000000080bf0000c84200004843000016430000000000000000000000000000803f000000000000803f0000000000000000000080bf0000164300000000000016430000000000004842000000000000803f000000000000803f0000000000000000000080bf000016430000484200001643000000000000c842000000000000803f000000000000803f0000000000000000000080bf000016430000c842000016430000000000001643000000000000803f000000000000803f0000000000000000000080bf0000164300001643000016430000000000004843000000000000803f000000000000803f0000000000000000000080bf0000164300004843000048430000000000000000000000000000803f000000000000803f0000000000000000000080bf0000484300000000000048430000000000004842000000000000803f000000000000803f0000000000000000000080bf000048430000484200004843000000000000c842000000000000803f000000000000803f0000000000000000000080bf000048430000c842000048430000000000001643000000000000803f000000000000803f0000000000000000000080bf0000484300001643000048430000000000004843000000000000803f000000000000803f0000000000000000000080bf0000484300004843
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 100, y: 0, z: 100}
+    m_Extent: {x: 100, y: 0, z: 100}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimized: 0
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &412068354
 GameObject:
   m_ObjectHideFlags: 0
@@ -25308,166 +25498,6 @@ Transform:
   m_Father: {fileID: 48081957}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1812117385
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh9550
-  serializedVersion: 9
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 96
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 25
-    localAABB:
-      m_Center: {x: 100, y: 0, z: 100}
-      m_Extent: {x: 100, y: 0, z: 100}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200010004000300040005000300040006000500060007000500060008000700080009000700020003000a0003000b000a00030005000b0005000c000b00050007000c0007000d000c00070009000d0009000e000d000a000b000f000b0010000f000b000c0010000c00110010000c000d0011000d00120011000d000e0012000e00130012000f0010001400100015001400100011001500110016001500110012001600120017001600120013001700130018001700
-  m_VertexData:
-    serializedVersion: 2
-    m_VertexCount: 25
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 24
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 40
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 1200
-    _typelessdata: 000000000000000000000000000000000000803f000000000000803f0000000000000000000080bf0000000000000000000000000000000000004842000000000000803f000000000000803f0000000000000000000080bf0000000000004842000048420000000000000000000000000000803f000000000000803f0000000000000000000080bf0000484200000000000048420000000000004842000000000000803f000000000000803f0000000000000000000080bf000048420000484200000000000000000000c842000000000000803f000000000000803f0000000000000000000080bf000000000000c84200004842000000000000c842000000000000803f000000000000803f0000000000000000000080bf000048420000c842000000000000000000001643000000000000803f000000000000803f0000000000000000000080bf0000000000001643000048420000000000001643000000000000803f000000000000803f0000000000000000000080bf0000484200001643000000000000000000004843000000000000803f000000000000803f0000000000000000000080bf0000000000004843000048420000000000004843000000000000803f000000000000803f0000000000000000000080bf00004842000048430000c8420000000000000000000000000000803f000000000000803f0000000000000000000080bf0000c842000000000000c8420000000000004842000000000000803f000000000000803f0000000000000000000080bf0000c842000048420000c842000000000000c842000000000000803f000000000000803f0000000000000000000080bf0000c8420000c8420000c8420000000000001643000000000000803f000000000000803f0000000000000000000080bf0000c842000016430000c8420000000000004843000000000000803f000000000000803f0000000000000000000080bf0000c84200004843000016430000000000000000000000000000803f000000000000803f0000000000000000000080bf0000164300000000000016430000000000004842000000000000803f000000000000803f0000000000000000000080bf000016430000484200001643000000000000c842000000000000803f000000000000803f0000000000000000000080bf000016430000c842000016430000000000001643000000000000803f000000000000803f0000000000000000000080bf0000164300001643000016430000000000004843000000000000803f000000000000803f0000000000000000000080bf0000164300004843000048430000000000000000000000000000803f000000000000803f0000000000000000000080bf0000484300000000000048430000000000004842000000000000803f000000000000803f0000000000000000000080bf000048430000484200004843000000000000c842000000000000803f000000000000803f0000000000000000000080bf000048430000c842000048430000000000001643000000000000803f000000000000803f0000000000000000000080bf0000484300001643000048430000000000004843000000000000803f000000000000803f0000000000000000000080bf0000484300004843
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 100, y: 0, z: 100}
-    m_Extent: {x: 100, y: 0, z: 100}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimized: 0
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1814872165
 GameObject:
   m_ObjectHideFlags: 0
@@ -27912,7 +27942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1932307811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37330,6 +37360,7 @@ Transform:
   - {fileID: 3856318443686578043}
   - {fileID: 3856318443686577931}
   - {fileID: 3856318443686577877}
+  - {fileID: 180670122}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47481,6 +47512,18 @@ GameObject:
   - component: {fileID: 3856318443686878696}
   - component: {fileID: 3856318443686878699}
   - component: {fileID: 3856318443686878701}
+  - component: {fileID: 3856318443686878713}
+  - component: {fileID: 3856318443686878712}
+  - component: {fileID: 3856318443686878711}
+  - component: {fileID: 3856318443686878710}
+  - component: {fileID: 3856318443686878709}
+  - component: {fileID: 3856318443686878708}
+  - component: {fileID: 3856318443686878707}
+  - component: {fileID: 3856318443686878706}
+  - component: {fileID: 3856318443686878705}
+  - component: {fileID: 3856318443686878704}
+  - component: {fileID: 3856318443686878703}
+  - component: {fileID: 3856318443686878702}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -47566,6 +47609,8 @@ MonoBehaviour:
   dialogue:
   - NPCDialogue: {fileID: 3856318443686878690}
     playerDialogue: {fileID: 0}
+  - NPCDialogue: {fileID: 0}
+    playerDialogue: {fileID: 3856318443686878713}
   rotateSpeed: 0.1
   radius: 6
 --- !u!114 &3856318443686878689
@@ -47781,6 +47826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d83447a1db4045a3b0c4f657722f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkie: {fileID: 8132475294610968597, guid: 97a0b340fe392454b82fbec38aa75554, type: 3}
+  position: {fileID: 180670122}
 --- !u!114 &3856318443686878699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47805,6 +47852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d46b621ef5e3453aac35f846d786b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2036697646}
+  mission: {fileID: 5436769401278840559, guid: b87e83e94e6354519b5f09429632f717, type: 3}
+  time: 2
 --- !u!82 &3856318443686878701
 AudioSource:
   m_ObjectHideFlags: 0
@@ -47901,6 +47951,270 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3856318443686878702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "Lovely. Why don\u2019t you take the day off. Rest. Recharge. And be back
+    here at 8 sharp!"
+  audio: {fileID: 8300000, guid: fb0c6966729574702ba70a3cac202931, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 0}
+  text: "You\u2019d better. "
+  time: 2
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878702}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "Oh, there\u2019s no need for that! If Mr. Cap makes you that uncomfortable,
+    I\u2019ll transfer you to work permanently in the West Wing. We do so value our
+    employees\u2019...peace of mind."
+  audio: {fileID: 8300000, guid: a67c8f645aacc4dacbc38b31c1877a5b, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 3856318443686878703}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 1
+  button: {fileID: 8245071992638941318, guid: 3facc607bacbb4f4da03725637d23b51, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878704}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 0}
+  text: "I\u2019d prefer that, thank you."
+  time: 2
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878702}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "Of course. And if Mr. Cap really makes you uncomfortable, I\u2019ll gladly
+    transfer you to work permanently in the West Wing."
+  audio: {fileID: 8300000, guid: 32fefc42b4c8a43df9aab6047bb345df, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 3856318443686878706}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 1
+  button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: Text
+  time: 0
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878707}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025774e27c7c841d5a81c58aad445c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3856318443686878710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "I\u2019m sure you just misinterpreted his intentions; Mr. Cap is a valued
+    customer. "
+  audio: {fileID: 8300000, guid: 08611cc000161413287cdebefef46320, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 1
+  playerDialogueOptions:
+  - {fileID: 3856318443686878708}
+  - {fileID: 3856318443686878705}
+  playerDialogue: {fileID: 0}
+  action: {fileID: 3856318443686878709}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: He tried to eat me!
+  time: 1.5
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878710}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "My, well, that certainly is unfortunate.  We\u2019ve had several complaints
+    about Mr. Cap.  He likes to get to know the staff.  He\u2019s harmless, really,
+    just a little...excitable."
+  audio: {fileID: 8300000, guid: ff31d79f1fef048a28b3ff468fb7ec45, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 3856318443686878711}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
+--- !u!114 &3856318443686878713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856318443686878683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838a28406f79b4a59a70b7efa7ac8ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  option: 0
+  button: {fileID: 8776497924983492456, guid: 90d3bc7cd89394b9699312492fb3f119, type: 3}
+  text: '[Tell her what happened.]'
+  time: 2
+  nextDialogueIsNPC: 1
+  nextDialogue: {fileID: 3856318443686878712}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  action: {fileID: 0}
+  actionBeforeDialogue: 0
 --- !u!95 &4705876634348406531
 Animator:
   serializedVersion: 3

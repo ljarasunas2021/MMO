@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BossGivesWalkie : Action1
 {
-    public IEnumerator Execute()
+    public GameObject walkie;
+    public Transform position;
+
+    public new IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("HERE");
+        Instantiate(walkie, position.position, Quaternion.identity);
     }
 }

@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class MissionTakeWalkie : Action1
 {
-    public IEnumerator Execute()
+    public Canvas canvas;
+    public GameObject mission;
+    public float time;
+    private GameObject missionInstant;
+
+    public new IEnumerator Execute()
     {
-        yield return 0;
-        Debug.Log("HERE");
+        missionInstant = Instantiate(mission, canvas.transform);
+        yield return new WaitForSeconds(time);
+        Destroy(missionInstant);
     }
 }
