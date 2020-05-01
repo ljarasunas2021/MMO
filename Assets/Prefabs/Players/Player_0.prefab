@@ -2164,7 +2164,7 @@ GameObject:
   - component: {fileID: 9163205752803508488}
   - component: {fileID: 4316355087376566697}
   m_Layer: 13
-  m_Name: Player 2
+  m_Name: Player_0
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2178,7 +2178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8323976770010085358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6743132121205921863}
@@ -2494,6 +2494,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   health: 100
+  isPlayer: 1
 --- !u!114 &5114085570619052573
 MonoBehaviour:
   m_ObjectHideFlags: 0
