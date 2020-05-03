@@ -5,6 +5,8 @@ public class PlayerHealth : NetworkBehaviour
 {
     [SyncVar]
     public float health;
+
+    public float maxHealth;
     public bool isPlayer = true;
     private InputHandler inputHandler;
     private HealthBar healthBar;
@@ -14,6 +16,7 @@ public class PlayerHealth : NetworkBehaviour
         inputHandler = GetComponent<InputHandler>();
         healthBar = FindObjectOfType<HealthBar>();
         healthBar.Initialize(gameObject, health);
+        maxHealth = health;
     }
 
     public void SubtractHealth(float amount)

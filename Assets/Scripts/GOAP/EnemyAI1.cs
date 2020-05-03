@@ -27,7 +27,7 @@ public class EnemyAI1 : GoapAgent
 
         goals.Add(GoapGoal.Goals.KILL_PLAYER, new KillPlayerGoal(GoapGoal.Goals.KILL_PLAYER, 1));
 
-        dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
+        dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", true);
         dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", false);
 
         possibleActions.Add(new KillAction(this, 0));
@@ -36,6 +36,16 @@ public class EnemyAI1 : GoapAgent
         itemPrefabsController = FindObjectOfType<ItemPrefabsController>();
         itemPrefabs = itemPrefabsController.itemPrefabs;
 
+        xPID = new PID(aimP, aimI, aimD);
+        yPID = new PID(aimP, aimI, aimD);
+        zPID = new PID(aimP, aimI, aimD);
+
+        offset1 = offset;
+    }
+
+    public void StartFiring()
+    {
+        dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
         equippedItemGO = Instantiate(itemPrefabs[weaponIndex], handR.transform);
         Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
         weaponScript.shootFromMiddleOfScreen = false;
@@ -50,12 +60,12 @@ public class EnemyAI1 : GoapAgent
         if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Melee) itemType = ItemType.melee;
         if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Ranged) itemType = ItemType.ranged;
         itemHolding = new ItemHolding(equippedItemGO, itemType);
+    }
 
-        xPID = new PID(aimP, aimI, aimD);
-        yPID = new PID(aimP, aimI, aimD);
-        zPID = new PID(aimP, aimI, aimD);
-
-        offset1 = offset;
+    public void StopFiring()
+    {
+        Destroy(equippedItemGO);
+        itemHolding = null;
     }
 
     public LookIK enemyLookIK;
