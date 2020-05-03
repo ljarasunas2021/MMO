@@ -9,6 +9,12 @@ public class EquipNameTag : Action1
     public Button equipButton, unEquipButton;
     private Button equipButtonInstant, unEquipButtonInstant;
     private bool clicked = false;
+    private Equip equip;
+
+    void Start()
+    {
+        equip = FindObjectOfType<Equip>();
+    }
 
     public new IEnumerator Execute()
     {
@@ -28,6 +34,7 @@ public class EquipNameTag : Action1
         Destroy(equipButtonInstant);
         Destroy(unEquipButtonInstant);
         clicked = true;
-        Debug.Log("ADD NAMETAG HERE");
+
+        equip.ChangeEquipped((index == 0) ? true : false);
     }
 }

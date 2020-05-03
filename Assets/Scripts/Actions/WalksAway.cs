@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WalksAway : Action1
 {
@@ -8,11 +9,20 @@ public class WalksAway : Action1
     public GameObject report;
     private GameObject reportInstant;
     public float missionShowTime;
+    public Transform position;
 
-    public IEnumerator Execute()
+    private NavMeshAgent agent;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    public new IEnumerator Execute()
     {
         yield return 0;
-        Debug.Log("Implement Walk Away");
+
+        agent.SetDestination(position.position);
 
         reportInstant = Instantiate(report, canvas.transform);
 

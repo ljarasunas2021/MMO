@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{CAEB3896-DDD4-15A7-D54A-C105D91C147F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror", "Mirror.csproj", "{63011931-6F1F-98B8-ADC4-CA55B90B58CD}"
