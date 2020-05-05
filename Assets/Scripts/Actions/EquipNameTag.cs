@@ -10,14 +10,18 @@ public class EquipNameTag : Action1
     private Button equipButtonInstant, unEquipButtonInstant;
     private bool clicked = false;
     private Equip equip;
+    public GameObject dialogueBox;
 
     void Start()
     {
         equip = FindObjectOfType<Equip>();
     }
 
-    public new IEnumerator Execute()
+    public override IEnumerator Execute()
     {
+        dialogueBox.SetActive(false);
+        UIManager.LockCursor(false);
+
         equipButtonInstant = Instantiate(equipButton, canvas.transform);
         unEquipButtonInstant = Instantiate(unEquipButton, canvas.transform);
 
@@ -27,12 +31,15 @@ public class EquipNameTag : Action1
         unEquipButtonInstant.onClick.AddListener(() => { ButtonClicked(1); });
 
         while (!clicked) yield return 0;
+
+        UIManager.LockCursor(true);
+        dialogueBox.SetActive(true);
     }
 
     private void ButtonClicked(int index)
     {
-        Destroy(equipButtonInstant);
-        Destroy(unEquipButtonInstant);
+        Destroy(equipButtonInstant.gameObject);
+        Destroy(unEquipButtonInstant.gameObject);
         clicked = true;
 
         equip.ChangeEquipped((index == 0) ? true : false);

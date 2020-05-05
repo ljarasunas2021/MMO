@@ -8,11 +8,14 @@ public class MissionTakeWalkie : Action1
     public GameObject mission;
     public float time;
     private GameObject missionInstant;
+    public GameObject dialogueBox;
 
-    public new IEnumerator Execute()
+    public override IEnumerator Execute()
     {
+        dialogueBox.SetActive(false);
         missionInstant = Instantiate(mission, canvas.transform);
         yield return new WaitForSeconds(time);
         Destroy(missionInstant);
+        dialogueBox.SetActive(true);
     }
 }

@@ -18,7 +18,7 @@ public class WalksAway : Action1
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public new IEnumerator Execute()
+    public override IEnumerator Execute()
     {
         yield return 0;
 

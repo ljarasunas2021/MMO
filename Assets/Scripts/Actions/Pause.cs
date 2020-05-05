@@ -7,7 +7,7 @@ public class Pause : Action1
 
     public float time = 2;
 
-    public new IEnumerator Execute()
+    public override IEnumerator Execute()
     {
         yield return new WaitForSeconds(time);
     }

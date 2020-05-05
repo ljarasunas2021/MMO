@@ -6,11 +6,10 @@ using TMPro;
 public class Equip : MonoBehaviour
 {
     public bool equipped;
-    private TextMeshProUGUI buttonText;
+    public TextMeshProUGUI buttonText;
 
     void Start()
     {
-        buttonText = transform.GetComponentInChildren<TextMeshProUGUI>();
         ChangeEquipped(equipped);
     }
 

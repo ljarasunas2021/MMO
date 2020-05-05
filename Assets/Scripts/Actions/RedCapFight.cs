@@ -14,7 +14,7 @@ public class RedCapFight : Action1
         playerHealth = GameObject.Find("Player_0(Clone)").GetComponent<PlayerHealth>();
     }
 
-    public new IEnumerator Execute()
+    public override IEnumerator Execute()
     {
         Instantiate(weapon, weaponSpawnPosition.position, Quaternion.identity);
 
