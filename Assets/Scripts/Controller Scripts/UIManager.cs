@@ -4,8 +4,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
-{
+public class UIManager : MonoBehaviour {
     // pause menu canvas
     public Canvas pauseMenu;
     // dialogue box canvax
@@ -24,8 +23,7 @@ public class UIManager : MonoBehaviour
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
     public static bool canMove = true;
 
-    void Start()
-    {
+    void Start() {
         dialogueText = dialogueText.GetComponent<Text>();
         map = mapCanvas.GetComponent<Map>();
         pauseMenu.enabled = togglePauseMenu;
@@ -34,28 +32,24 @@ public class UIManager : MonoBehaviour
         compassCanvas.enabled = !toggleMap;
     }
 
-    public void ToggleDialogue(Dialogue dialogue)
-    {
+    public void ToggleDialogue(Dialogue dialogue) {
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
-        if (!canMove)
-        {
+        if (!canMove) {
             NPCDialogue NPCDialogue = dialogue.NPCDialogue;
             PlayerDialogue playerDialogue = dialogue.playerDialogue;
 
-            if (NPCDialogue != null) StartCoroutine(PlayDialogue(NPCDialogue));
-            else if (playerDialogue != null) StartCoroutine(PlayDialogue(playerDialogue));
+            if (NPCDialogue != null)StartCoroutine(PlayDialogue(NPCDialogue));
+            else if (playerDialogue != null)StartCoroutine(PlayDialogue(playerDialogue));
             else Debug.Log("Dialogue Not Set Correctly");
         }
     }
 
-    private IEnumerator PlayDialogue(NPCDialogue dialogue)
-    {
+    private IEnumerator PlayDialogue(NPCDialogue dialogue) {
         dialogueBox.enabled = true;
 
-        if (dialogue.action != null && dialogue.actionBeforeDialogue)
-        {
-            yield return StartCoroutine(dialogue.action.Execute());
+        if (dialogue.action != null && dialogue.actionBeforeDialogue) {
+            StartCoroutine(dialogue.action.Execute());
         }
 
         dialogueText.text = dialogue.text;
@@ -63,117 +57,92 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitWhile(() => audioSource.isPlaying);
 
-        if (dialogue.action != null && !dialogue.actionBeforeDialogue)
-        {
-            yield return StartCoroutine(dialogue.action.Execute());
+        if (dialogue.action != null && !dialogue.actionBeforeDialogue) {
+            StartCoroutine(dialogue.action.Execute());
         }
 
-        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null)
-        {
+        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null) {
             StartCoroutine(PlayDialogue(dialogue.nextDialogue));
-        }
-        else if (!dialogue.nextDialogueIsNPC && (dialogue.options && dialogue.playerDialogueOptions.Length > 0) || (!dialogue.options && dialogue.playerDialogue != null))
-        {
+        } else if (!dialogue.nextDialogueIsNPC && (dialogue.options && dialogue.playerDialogueOptions.Length > 0) || (!dialogue.options && dialogue.playerDialogue != null)) {
 
-            if (dialogue.options && dialogue.playerDialogueOptions.Length > 0)
-            {
+            if (dialogue.options && dialogue.playerDialogueOptions.Length > 0) {
                 StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions));
-            }
-            else if (!dialogue.options && dialogue.playerDialogue != null)
-            {
+            } else if (!dialogue.options && dialogue.playerDialogue != null) {
                 StartCoroutine(PlayDialogue(dialogue.playerDialogue));
             }
-        }
-        else
-        {
+        } else {
             ToggleDialogue(null);
         }
     }
 
-    private IEnumerator PlayDialogue(PlayerDialogue dialogue)
-    {
+    private IEnumerator PlayDialogue(PlayerDialogue dialogue) {
         dialogueBox.enabled = true;
 
-        if (dialogue.action != null && dialogue.actionBeforeDialogue)
-        {
-            yield return StartCoroutine(dialogue.action.Execute());
+        if (dialogue.action != null && dialogue.actionBeforeDialogue) {
+            StartCoroutine(dialogue.action.Execute());
         }
 
         dialogueText.text = dialogue.text;
 
         yield return new WaitForSeconds(dialogue.time);
 
-        if (dialogue.action != null && !dialogue.actionBeforeDialogue)
-        {
-            yield return StartCoroutine(dialogue.action.Execute());
+        if (dialogue.action != null && !dialogue.actionBeforeDialogue) {
+            StartCoroutine(dialogue.action.Execute());
         }
 
-        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null)
-        {
+        if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null) {
             StartCoroutine(PlayDialogue(dialogue.nextDialogue));
-        }
-        else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0 || dialogue.playerDialogue != null)
-        {
-            if (dialogue.options && dialogue.playerDialogueOptions.Length > 0)
-            {
+        } else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0 || dialogue.playerDialogue != null) {
+            if (dialogue.options && dialogue.playerDialogueOptions.Length > 0) {
                 StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions));
-            }
-            else if (!dialogue.options && dialogue.playerDialogue != null)
-            {
+            } else if (!dialogue.options && dialogue.playerDialogue != null) {
                 StartCoroutine(PlayDialogue(dialogue.playerDialogue));
             }
-        }
-        else
-        {
+        } else {
             ToggleDialogue(null);
         }
     }
 
-    private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions)
-    {
+    private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions) {
         dialogueBox.enabled = false;
 
-        if (playerDialogueOptions[0].action != null && playerDialogueOptions[0].actionBeforeDialogue)
-        {
-            yield return StartCoroutine(playerDialogueOptions[0].action.Execute());
+        if (playerDialogueOptions[0].action != null && playerDialogueOptions[0].actionBeforeDialogue) {
+            StartCoroutine(playerDialogueOptions[0].action.Execute());
         }
 
         LockCursor(false);
         List<Button> buttons = new List<Button>();
-        foreach (PlayerDialogue option in playerDialogueOptions)
-        {
+        foreach (PlayerDialogue option in playerDialogueOptions) {
             Button button = Instantiate(option.button, dialogueCanvas.transform);
             buttons.Add(button);
             button.onClick.AddListener(() => StartCoroutine(ClickButton(option, option.nextDialogue, buttons)));
         }
+
+        yield return 0;
     }
 
-    private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
-    {
+    private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons) {
         LockCursor(true);
 
-        if (optionChosen.action != null && !optionChosen.actionBeforeDialogue)
-        {
+        if (optionChosen.action != null && !optionChosen.actionBeforeDialogue) {
             yield return StartCoroutine(optionChosen.action.Execute());
         }
 
         dialogueBox.enabled = true;
-        foreach (Button button in buttons) Destroy(button.gameObject);
+        foreach (Button button in buttons)Destroy(button.gameObject);
         StartCoroutine(PlayDialogue(dialogue));
     }
 
     // turn on / off the pause menu
-    public void TogglePauseMenu()
-    {
+    public void TogglePauseMenu() {
         canMove = !canMove;
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
     }
 
-    public void ToggleMap()
-    {
+    public void ToggleMap() {
         toggleMap = !toggleMap;
-        if (toggleMap) map.Enable();
+        if (toggleMap)map.Enable();
         else map.Disable();
         mapCanvas.enabled = toggleMap;
         compassCanvas.enabled = !toggleMap;
@@ -181,20 +150,13 @@ public class UIManager : MonoBehaviour
     }
 
     // lock the cursor
-    public static void LockCursor(bool locked)
-    {
-        if (locked)
-        {
+    public static void LockCursor(bool locked) {
+        if (locked) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }
-        else
-        {
+        } else {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
 }
-
-
-

@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 8132475294609034965}
   - component: {fileID: 8132475294610937528}
   - component: {fileID: 8132475294610937531}
-  - component: {fileID: 8132475294610937530}
-  - component: {fileID: 8132475294610937529}
   - component: {fileID: 8132475294610937535}
   - component: {fileID: 8132475294610937534}
   - component: {fileID: 8132475294610937533}
@@ -113,37 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6003816e6e13b4c28af1311bdd4b9548, type: 3}
---- !u!114 &8132475294610937530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8132475294610968597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e827a64827e40e6af5eff755364473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
---- !u!114 &8132475294610937529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8132475294610968597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.18212414, g: 1, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &8132475294610937535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,5 +154,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 0
-  m_AssetId: 
-  m_SceneId: 1115962661
+  m_AssetId: 97a0b340fe392454b82fbec38aa75554
+  m_SceneId: 0

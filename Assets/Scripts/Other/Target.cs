@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
+    public bool useOutline = true;
     public Dialogue[] dialogue;
 
     [Range(0, 1)]
@@ -45,6 +46,8 @@ public class Target : MonoBehaviour
 
     void OnMouseOver()
     {
+        if (!useOutline) return;
+
         if (PlayerCloseEnough())
         {
             if (UIManager.canMove && !outline.enabled)
