@@ -10,6 +10,7 @@ public class WalksAway : Action1
     private GameObject reportInstant;
     public float missionShowTime;
     public Transform position;
+    public GameObject dialogueBox;
 
     private NavMeshAgent agent;
 
@@ -20,6 +21,8 @@ public class WalksAway : Action1
 
     public override IEnumerator Execute()
     {
+        dialogueBox.SetActive(false);
+
         yield return 0;
 
         agent.SetDestination(position.position);
@@ -29,5 +32,7 @@ public class WalksAway : Action1
         yield return new WaitForSeconds(missionShowTime);
 
         Destroy(reportInstant);
+
+        dialogueBox.SetActive(true);
     }
 }

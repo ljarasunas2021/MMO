@@ -7,15 +7,15 @@ public class RedCapFight : Action1
     private PlayerHealth playerHealth, enemyHealth;
     public Transform weaponSpawnPosition;
     public GameObject weapon;
-
-    private void Start()
-    {
-        enemyHealth = GetComponent<PlayerHealth>();
-        playerHealth = GameObject.Find("Player_0(Clone)").GetComponent<PlayerHealth>();
-    }
+    public GameObject dialogueBox;
 
     public override IEnumerator Execute()
     {
+        enemyHealth = GetComponent<PlayerHealth>();
+        playerHealth = GameObject.Find("Player_0(Clone)").GetComponent<PlayerHealth>();
+
+        dialogueBox.SetActive(false);
+
         Instantiate(weapon, weaponSpawnPosition.position, Quaternion.identity);
 
         GetComponent<EnemyAI1>().StartFiring();
@@ -31,5 +31,7 @@ public class RedCapFight : Action1
         }
 
         if (playerHealth.health <= 0) playerHealth.health = playerHealth.maxHealth;
+
+        dialogueBox.SetActive(true);
     }
 }
