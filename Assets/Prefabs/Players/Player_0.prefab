@@ -2477,7 +2477,7 @@ MonoBehaviour:
   syncInterval: 0.1
   sceneObjectPrefab: {fileID: 5729793933798309162, guid: 2f08d53ed038e4e9e9cd887a5a35dcaa,
     type: 3}
-  weaponTimeTillDespawn: 75
+  weaponTimeTillDespawn: 150
   maxGrabDistance: 100000
 --- !u!114 &7593214373622234501
 MonoBehaviour:
@@ -2494,6 +2494,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   health: 100
+  maxHealth: 0
   isPlayer: 1
 --- !u!114 &5114085570619052573
 MonoBehaviour:

@@ -63,7 +63,7 @@ public class InputHandler : NetworkBehaviour
 
     private void CheckItemHolding()
     {
-        if (itemHolding.type != ItemType.none) itemHolding.weaponScript.CheckForUserInput();
+        if (itemHolding.type != ItemType.none && UIManager.canShoot) itemHolding.weaponScript.CheckForUserInput();
     }
 
     public void ChangeItemHolding(ItemHolding itemHolding) { this.itemHolding = itemHolding; }

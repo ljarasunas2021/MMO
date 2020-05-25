@@ -1,15 +1,16 @@
-﻿using SwordGC.AI.Actions;
-using SwordGC.AI.Goap;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
+using SwordGC.AI.Actions;
+using SwordGC.AI.Goap;
+using UnityEngine;
 
 public class EnemyAI1 : GoapAgent
 {
     public int weaponIndex;
     public float aimP, aimI, aimD;
     public GameObject handR;
+    public bool startAtAwake = false;
 
     private GameObject equippedItemGO;
     private ItemPrefabsController itemPrefabsController;
@@ -41,6 +42,8 @@ public class EnemyAI1 : GoapAgent
         zPID = new PID(aimP, aimI, aimD);
 
         offset1 = offset;
+
+        if (startAtAwake) StartFiring();
     }
 
     public void StartFiring()

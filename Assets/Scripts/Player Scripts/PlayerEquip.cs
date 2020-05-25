@@ -51,10 +51,10 @@ public class PlayerEquip : NetworkBehaviour
         if (itemIndex != -1)
         {
             equippedItemGO = Instantiate(itemPrefabs[itemIndex], handR.transform);
-            Debug.Log(equippedItemGO.name);
             Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
             equippedItemGO.transform.localPosition = weaponScript.startPos;
             equippedItemGO.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
+            weaponScript.used = true;
         }
     }
 

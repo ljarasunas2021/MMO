@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     private Map map;
 
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
-    public static bool canMove = true;
+    public static bool canMove = true, canShoot = true;
 
     void Start()
     {
@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void ToggleDialogue(Dialogue dialogue)
     {
+        canShoot = (dialogue == null);
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
         if (!canMove)
@@ -167,6 +168,7 @@ public class UIManager : MonoBehaviour
     // turn on / off the pause menu
     public void TogglePauseMenu()
     {
+        canShoot = !canShoot;
         canMove = !canMove;
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
@@ -174,6 +176,7 @@ public class UIManager : MonoBehaviour
 
     public void ToggleMap()
     {
+        canShoot = !canShoot;
         toggleMap = !toggleMap;
         if (toggleMap) map.Enable();
         else map.Disable();

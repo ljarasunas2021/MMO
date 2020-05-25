@@ -105,6 +105,8 @@ public class Weapon : MonoBehaviour
     private bool showAim = true;
     private Ray ray1;
 
+    public bool used = false;
+
     void OnDrawGizmos()
     {
         if (showAim)
@@ -242,6 +244,8 @@ public class Weapon : MonoBehaviour
 
     void OnGUI()
     {
+        if (!used) return;
+
         if (type == WeaponType.Ranged)
         {
             if (rangedType == RangedWeaponType.Projectile) currentAccuracy = accuracy;
