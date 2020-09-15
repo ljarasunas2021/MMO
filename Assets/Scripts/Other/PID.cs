@@ -1,4 +1,5 @@
-﻿[System.Serializable]
+﻿// standard PID controller
+[System.Serializable]
 public class PID
 {
     public float pFactor, iFactor, dFactor;

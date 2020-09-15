@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    // singleton
+    public static UIManager instance;
     // pause menu canvas
     public Canvas pauseMenu;
     // dialogue box canvax
@@ -24,8 +26,19 @@ public class UIManager : MonoBehaviour
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
     public static bool canMove = true, canShoot = true;
 
+    // set ui at start
     void Start()
     {
+        //singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("There is already an instance of the Audio Prefabs Controller.");
+        }
+
         dialogueText = dialogueText.GetComponent<Text>();
         map = mapCanvas.GetComponent<Map>();
         pauseMenu.enabled = togglePauseMenu;
@@ -34,6 +47,7 @@ public class UIManager : MonoBehaviour
         compassCanvas.enabled = !toggleMap;
     }
 
+    // toggle dialogue
     public void ToggleDialogue(Dialogue dialogue)
     {
         canShoot = (dialogue == null);
@@ -50,6 +64,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // play the NPC's dialogue
     private IEnumerator PlayDialogue(NPCDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -91,6 +106,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // play the player's dialogue
     private IEnumerator PlayDialogue(PlayerDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -130,6 +146,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // allow the player to choose from dialogue options
     private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions)
     {
         dialogueBox.enabled = false;
@@ -151,6 +168,7 @@ public class UIManager : MonoBehaviour
         yield return 0;
     }
 
+    // click on dialogue option
     private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
     {
         LockCursor(true);
@@ -174,6 +192,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.enabled = !pauseMenu.enabled;
     }
 
+    // turn on/off the map
     public void ToggleMap()
     {
         canShoot = !canShoot;

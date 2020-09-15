@@ -3,16 +3,19 @@ using UnityEngine;
 
 public class NPCMovement : MonoBehaviour
 {
+    // speed of npc
     [Range(0, 1)]
     public float speed;
-
+    // min/max frames till npc moves
     public float minFramesTillMove, maxFramesTillMove;
-
+    // radius within which npc can move
     public float moveRadius = 5;
-
+    // animator of npc
     private Animator animator;
+    // actual frames till npc moves
     private int framesTillMove;
 
+    // start npc
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,6 +23,7 @@ public class NPCMovement : MonoBehaviour
         SetFramesToMove();
     }
 
+    // move if necessary
     void Update()
     {
         if (framesTillMove < 0) StartCoroutine(MoveNPC());
@@ -27,16 +31,19 @@ public class NPCMovement : MonoBehaviour
         framesTillMove--;
     }
 
+    // get max and min x, max and min z
     private float[] GetRange()
     {
         return new float[] { transform.position.x + moveRadius, transform.position.x - moveRadius, transform.position.z + moveRadius, transform.position.z - moveRadius };
     }
 
+    // get randome grames to move
     private void SetFramesToMove()
     {
         framesTillMove = (int)Random.Range(minFramesTillMove, maxFramesTillMove);
     }
 
+    // move npc
     private IEnumerator MoveNPC()
     {
         float[] ranges = GetRange();

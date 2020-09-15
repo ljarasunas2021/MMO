@@ -38,9 +38,12 @@ public class PlayerEquip : NetworkBehaviour
 
         movement = GetComponent<Movement>();
         handR = bodyParts.handR;
-        inventoryManager.SetPlayer(gameObject);
 
         hotBarIndexCounter = weaponTimeTillDespawn;
+
+        if (!isLocalPlayer) return;
+
+        inventoryManager.SetPlayer(gameObject);
     }
 
     private void ChangeItem(int itemIndex)
@@ -108,8 +111,8 @@ public class PlayerEquip : NetworkBehaviour
         if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item) && hit.collider.gameObject.GetComponent<Item>() != null)
         {
             GameObject item = hit.collider.gameObject;
-            Destroy(item.transform.parent.gameObject);
             inventoryManager.AddInventoryItem(FindIndex(item), item.GetComponent<Item>().icon);
+            Destroy(item.transform.parent.gameObject);
         }
     }
 

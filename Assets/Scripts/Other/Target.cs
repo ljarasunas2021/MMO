@@ -6,20 +6,29 @@ using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
+    // target would be outlined
     public bool useOutline = true;
+    // dialogue
     public Dialogue[] dialogue;
 
+    // speed of rotation
     [Range(0, 1)]
     public float rotateSpeed;
 
+    // radius for player
     public float radius;
 
+    // components
     private Outline outline;
     private UIManager UIScript;
     private CharacterController cc;
+
+    // y rotation velocity
     private float veloY = 0;
+    // current dialogue index
     private int currentDialogIndex = 0;
 
+    // get ready
     void Start()
     {
         UIScript = GameObject.FindObjectOfType<UIManager>();
@@ -28,6 +37,7 @@ public class Target : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
+    // interact with player if necessary
     public void Interact()
     {
         if (PlayerCloseEnough())
@@ -44,6 +54,7 @@ public class Target : MonoBehaviour
         }
     }
 
+    // enable outline if neccessary
     void OnMouseOver()
     {
         if (!useOutline) return;
@@ -61,17 +72,20 @@ public class Target : MonoBehaviour
         }
     }
 
+    // disable outline once mouse exits
     void OnMouseExit()
     {
         outline.enabled = false;
     }
 
+    // is the player within range
     private bool PlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
         return (playerDist < radius);
     }
 
+    // rotate the npc
     private IEnumerator RotateNPC()
     {
         float i = 0;
@@ -85,6 +99,7 @@ public class Target : MonoBehaviour
     }
 }
 
+// either the player or npc dialogue
 [System.Serializable]
 public class Dialogue
 {

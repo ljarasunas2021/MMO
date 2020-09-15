@@ -1,16 +1,70 @@
 ﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player Scripts/PlayerEquip.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Other/NPCMovement.cs">
     <Files>
       <File FileName="Assets/Scripts/Player Scripts/Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="61" Column="1" />
-      <File FileName="Assets/Scripts/Player Scripts/FootIK.cs" Line="88" Column="128" />
-      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" Line="5" Column="2" />
-      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Actions/BossGivesWalkie.cs" />
+      <File FileName="Assets/Scripts/Actions/EquipNameTag.cs" />
+      <File FileName="Assets/Scripts/Actions/MissionTakeWalkie.cs" />
+      <File FileName="Assets/Scripts/Actions/Pause.cs" />
+      <File FileName="Assets/Scripts/Actions/RedCapFight.cs" />
+      <File FileName="Assets/Scripts/Actions/StepForward.cs" />
+      <File FileName="Assets/Scripts/Actions/WalksAway.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/AnimationMomentum.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCanRotate.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCurrentState.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeLayerWeight.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" />
+      <File FileName="Assets/Scripts/UI/MinimapCamera.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" />
+      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" />
+      <File FileName="Assets/Scripts/GOAP/KillAction.cs" />
+      <File FileName="Assets/Scripts/GOAP/KillPlayerGoal.cs" />
+      <File FileName="Assets/Scripts/Other/ExpressionParser.cs" />
+      <File FileName="Assets/Scripts/Other/NPCDialogue.cs" />
+      <File FileName="Assets/Scripts/Other/NPCMovement.cs" Line="46" Column="16" />
+      <File FileName="Assets/Scripts/Other/OutlineObject.cs" />
+      <File FileName="Assets/Scripts/Other/PID.cs" />
+      <File FileName="Assets/Scripts/Other/PlayerDialogue.cs" />
+      <File FileName="Assets/Scripts/Other/RigidBodySpawn.cs" />
+      <File FileName="Assets/Scripts/Other/Target.cs" Line="102" Column="37" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MMO" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Cades Assets" expanded="True">
+                <Node name="Assets" expanded="True">
+                  <Node name="Apps" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="Actions" expanded="True" />
+                <Node name="Animation Controller Scripts" expanded="True" />
+                <Node name="Controller Scripts" expanded="True" />
+                <Node name="GOAP" expanded="True" />
+                <Node name="Other" expanded="True">
+                  <Node name="NPCMovement.cs" selected="True" />
+                </Node>
+                <Node name="Player Scripts" expanded="True" />
+                <Node name="UI" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ec8efafc-ee22-4995-804a-189088fbd5fd" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="16c73903-0181-43b4-9b47-784244371840" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

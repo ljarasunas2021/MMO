@@ -1,6 +1,6 @@
 OSXUniversal
 PlayerPath?
-/Users/lukas/Desktop/Test3.app
+/Users/lukas/Desktop/MMO 1.app
 SceneListBegin?
 Assets/Scenes/Lobby.unity
 SceneListEnd?
@@ -51,7 +51,7 @@ dae31b340a76a5f475899e604343a314 Mirror.Examples.dll:Mirror.Examples.Additive.Pl
 71bb6a6b6c8f052f948db64c7dd3ca4f Mirror.dll:Mirror.NetworkStartPosition
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.EventSystemChecker
 ef9246fba0a4f95fa6d37ca614d9c0fb Assembly-CSharp.dll:.PlayerHealth
-17b18a66a89792d84671c0c2dc431bd7 Assembly-CSharp.dll:.Weapon
+10b56707a9ea6bede85d883786a48cce Assembly-CSharp.dll:.Weapon
 39a1af780851540205de944aa74817a6 Assembly-CSharp.dll:UnityStandardAssets.Vehicles.Car.SkidTrail
 83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.MinimapCamera
 4c8291d25dca17797af887fe722d36ce Assembly-CSharp.dll:.BasicPuzzle

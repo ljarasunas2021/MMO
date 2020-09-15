@@ -5,23 +5,33 @@ using SwordGC.AI.Actions;
 using SwordGC.AI.Goap;
 using UnityEngine;
 
+// GOAP AI system for enemy 1
 public class EnemyAI1 : GoapAgent
 {
+    // current index of weapon holding
     public int weaponIndex;
+    // PID controller for aim
     public float aimP, aimI, aimD;
+    // right hand
     public GameObject handR;
+    // start AI at awake?
     public bool startAtAwake = false;
 
+    // equipped item gameobject 
     private GameObject equippedItemGO;
-    private ItemPrefabsController itemPrefabsController;
-    private GameObject[] itemPrefabs;
+    // PID controllers for each axis
     private PID xPID, yPID, zPID;
+    // the time from the previous frame
     private float currentTime;
 
+    // animator
     private Animator anim;
+    // player equip component
     private PlayerEquip playerEquip;
+    // object being held
     [HideInInspector] public ItemHolding itemHolding;
 
+    // set up goap agent and PID controller
     public override void Awake()
     {
         base.Awake();
@@ -34,8 +44,6 @@ public class EnemyAI1 : GoapAgent
         possibleActions.Add(new KillAction(this, 0));
 
         anim = GetComponent<Animator>();
-        itemPrefabsController = FindObjectOfType<ItemPrefabsController>();
-        itemPrefabs = itemPrefabsController.itemPrefabs;
 
         xPID = new PID(aimP, aimI, aimD);
         yPID = new PID(aimP, aimI, aimD);
@@ -46,10 +54,11 @@ public class EnemyAI1 : GoapAgent
         if (startAtAwake) StartFiring();
     }
 
+    // start firing weapon
     public void StartFiring()
     {
         dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
-        equippedItemGO = Instantiate(itemPrefabs[weaponIndex], handR.transform);
+        equippedItemGO = Instantiate(ItemPrefabsController.instance.itemPrefabs[weaponIndex], handR.transform);
         Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
         weaponScript.shootFromMiddleOfScreen = false;
         weaponScript.raycastStartSpot = equippedItemGO.transform.Find("ShootSpot");
@@ -65,18 +74,25 @@ public class EnemyAI1 : GoapAgent
         itemHolding = new ItemHolding(equippedItemGO, itemType);
     }
 
+    // stop firign weapon
     public void StopFiring()
     {
         Destroy(equippedItemGO);
         itemHolding = null;
     }
 
+    // when enemy should look
     public LookIK enemyLookIK;
+    // offset for shooting
     public Vector3 offset;
+    // target = player
     private GameObject player;
+    // Starting position to cast raycast to shoot
     private Transform raycastStartSpot;
+    // current position and offset
     private Vector3 currentPosition, offset1;
 
+    // Aim
     void OnAnimatorIK()
     {
         if (player != null && raycastStartSpot != null)
@@ -101,6 +117,7 @@ public class EnemyAI1 : GoapAgent
         currentTime = Time.time;
     }
 
+    // rotate enemy
     void LateUpdate()
     {
         if (player != null && raycastStartSpot != null)
@@ -125,16 +142,19 @@ public class EnemyAI1 : GoapAgent
         zPID.dFactor = aimD;
     }
 
+    // set data that this enemy is dead
     public void Dead()
     {
         dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", true);
     }
 
+    // set data that this player is dead
     public void PlayerDead()
     {
         dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", true);
     }
 
+    // visualize shooting
     void OnDrawGizmos()
     {
         if (player != null && raycastStartSpot != null)
@@ -145,6 +165,7 @@ public class EnemyAI1 : GoapAgent
     }
 }
 
+// find gameobject with name aName
 public static class TransformDeepChildExtension
 {
     public static Transform FindDeepChild(this Transform aParent, string aName)
