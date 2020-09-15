@@ -39,25 +39,39 @@ public class Movement : NetworkBehaviour
     [Header("Camera Values")]
     [SerializeField] public float camRotOffset;
 
+    // smooth velocities
     private float speedSmoothVelocity;
     private float locomotionSmoothVelocity;
     private float turnSmoothVelocity;
     private float locomotionDirSmoothVelocity;
 
+    // distance to raycast downwards
     private float maxRaycastDownDist;
+    // current y velocity
     private float velocityY;
+    // locmotion vars
     private float locomotionBlendVal;
     private float locomotionDirection;
+    // current locomotion state
     [HideInInspector] public States currentState;
+    // transform of camera
     private Transform camTransform;
+    // animator of player
     private Animator animator;
+    // character controller of player
     private CharacterController cc;
+    // current camera mode
     private CameraModes currentCam;
+    // displacement from gameobject pivot to hips
     private Vector3 toHipsDisplacement;
+    // time in air
     private float timeInAir;
+    // target rotation
     private float targetRotation;
+    // player camera manager script
     private PlayerCameraManager playerCameraManager;
 
+    // init vars
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -70,6 +84,7 @@ public class Movement : NetworkBehaviour
         playerCameraManager = GetComponent<PlayerCameraManager>();
     }
 
+    // move correctly
     public void Move()
     {
         currentState = (States)animator.GetInteger(Parameters.currentState);
@@ -90,6 +105,7 @@ public class Movement : NetworkBehaviour
         animator.SetInteger(Parameters.currentState, (int)currentState);
     }
 
+    // move using wasd
     private void SetSpeed()
     {
         bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
@@ -98,6 +114,7 @@ public class Movement : NetworkBehaviour
         cc.Move(transformToUse.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
+    // set locomotion blend and dir
     private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
     {
         if (currentState != States.locomotion) return;
@@ -135,6 +152,7 @@ public class Movement : NetworkBehaviour
         animator.SetFloat(Parameters.locomotionDir, locomotionDirection);
     }
 
+    // rotate the player
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
         if (!UIManager.canMove) return;
@@ -153,6 +171,7 @@ public class Movement : NetworkBehaviour
         }
     }
 
+    // check if jumping
     private void CheckForJump(Vector2 input, bool space)
     {
         if (!UIManager.canMove) return;
@@ -165,6 +184,7 @@ public class Movement : NetworkBehaviour
         }
     }
 
+    // deal with in air movement
     private void SetValuesIfMidAir(bool space)
     {
         RaycastHit hit;
@@ -207,6 +227,7 @@ public class Movement : NetworkBehaviour
     public void SetCurrentCam(CameraModes currentCam) { this.currentCam = currentCam; }
 }
 
+// anim states
 #region States
 ///<summary> Animations and indexes associated with those animations </summary>
 public enum States
@@ -226,6 +247,7 @@ public enum States
     knockedOut = 12
 }
 
+// upper body states
 public enum UpperBodyStates
 {
     none = 0,
@@ -241,6 +263,7 @@ public enum UpperBodyStates
 }
 #endregion
 
+// params in anim controller
 #region Parameters
 /// <summary> Names of parameters used in the animation controller </summary>
 public static class Parameters

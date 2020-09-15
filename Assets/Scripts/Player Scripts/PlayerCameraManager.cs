@@ -5,14 +5,22 @@ using UnityEngine;
 ///<summary> Preform all actions related to player and the camera </summary>
 public class PlayerCameraManager : NetworkBehaviour
 {
+    // gmaeobjects of player
     private GameObject head;
     private GameObject lockedCamFollow;
+
+    // current camera
     private CameraModes currentCam;
+    // camera controller script
     private CameraController cameraController;
+    // cinemchine free look cameras
     private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
+    // movement script of player
     private Movement movement;
+    // body parts script of player
     private BodyParts bodyParts;
 
+    // set free look vars and appropriate camera
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -43,6 +51,7 @@ public class PlayerCameraManager : NetworkBehaviour
         ChangeCam(CameraModes.cinematic);
     }
 
+    // change camera to the appropriate one
     public void ChangeCam(CameraModes mode)
     {
         if (mode != currentCam)
@@ -72,13 +81,14 @@ public class PlayerCameraManager : NetworkBehaviour
         }
     }
 
+    // return the current camera mode
     public CameraModes ReturnCameraMode() { return currentCam; }
 }
 
+// 4 diff camera modes
 public enum CameraModes
 {
     cinematic,
     closeUp,
     locked,
-    bus
 }

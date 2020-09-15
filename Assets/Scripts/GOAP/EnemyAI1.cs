@@ -51,12 +51,13 @@ public class EnemyAI1 : GoapAgent
 
         offset1 = offset;
 
-        if (startAtAwake) StartFiring();
+        if (startAtAwake) StartCoroutine(StartFiring());
     }
 
     // start firing weapon
-    public void StartFiring()
+    public IEnumerator StartFiring()
     {
+        yield return new WaitForEndOfFrame();
         dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
         equippedItemGO = Instantiate(ItemPrefabsController.instance.itemPrefabs[weaponIndex], handR.transform);
         Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();

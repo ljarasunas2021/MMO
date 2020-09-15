@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    //singleton
+    public static Map instance;
     // the map image itself
     public GameObject map;
     // the max and min Z and X values of the player that correspond with the bounds of the map
@@ -25,6 +27,15 @@ public class Map : MonoBehaviour
     // initialize the variables at runtime
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("There already exists an instance of the map script");
+        }
+
         mainCam = Camera.main;
         Sprite mapSprite = map.GetComponent<Image>().sprite;
         imageWidth = mapSprite.rect.width;

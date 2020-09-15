@@ -153,7 +153,6 @@
     <Compile Include="Assets\Scripts\Player Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\IKHandling.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\InputHandler.cs" />
-    <Compile Include="Assets\Scripts\Player Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerCameraManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerEquip.cs" />

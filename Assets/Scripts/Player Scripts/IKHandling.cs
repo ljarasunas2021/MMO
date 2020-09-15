@@ -2,18 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// handles IK of player
 public class IKHandling : MonoBehaviour
 {
-    public float ikWeight = 1, ikRotWeight, ikRotAnglePower, ikRotPower, raycastDistance = 1, offsetY;
+    // how much ik should be applied, distance from ground to center of body
+    public float ikWeight = 1, offsetY;
+    // look iks to be applied at appropriate times
     public LookIK basicLookIK, equippedLookIK;
+    // the current look ik (basic or equipped)
     private LookIK currentLookIK;
+    // ground angle under left/right foot
     private float groundAngleLeft, groundAngleRight;
+    // transform of left/right foot
     private Transform leftFoot, rightFoot;
+    // animator
     private Animator anim;
+    // positions
     private Vector3 leftFootPos, rightFootPos, lookPos;
+    // rotations
     private Quaternion leftFootRot, rightFootRot;
+    // main/only camera
     private Camera mainCam;
 
+    // set vars
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,12 +36,14 @@ public class IKHandling : MonoBehaviour
         currentLookIK = basicLookIK;
     }
 
+    // switch the type of look IK
     public void SwitchLookIK(LookIKTypes type)
     {
         if (type == LookIKTypes.Basic) currentLookIK = basicLookIK;
         else if (type == LookIKTypes.Weapon) currentLookIK = equippedLookIK;
     }
 
+    // find where it should look
     void Update()
     {
         Ray ray = new Ray(mainCam.transform.position, mainCam.transform.forward);
@@ -56,6 +69,7 @@ public class IKHandling : MonoBehaviour
         // }
     }
 
+    // set look at weight and position / apply IK
     void OnAnimatorIK()
     {
         anim.SetLookAtWeight(currentLookIK.lookIKWeight, currentLookIK.bodyWeight, currentLookIK.headWeight, currentLookIK.eyesWeight, currentLookIK.clampWeight);
@@ -78,12 +92,14 @@ public class IKHandling : MonoBehaviour
     }
 }
 
+// variables needed for an ik, come directly from unity
 [System.Serializable]
 public class LookIK
 {
     public float lookIKWeight, bodyWeight, headWeight, eyesWeight, clampWeight, lookDistance;
 }
 
+// different types of look ik
 public enum LookIKTypes
 {
     Basic,

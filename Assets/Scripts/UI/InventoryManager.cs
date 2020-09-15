@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    // singleton
+    public static InventoryManager instance;
     // inventory slots array
     public InventoryPlaceHolder[] inventorySlots;
     // array of hot bar slots
@@ -19,9 +21,17 @@ public class InventoryManager : MonoBehaviour
     // the player equip script of the player
     private PlayerEquip playerEquip;
 
-    // set default indexes and values for arrays
+    // set singleton, set default indexes and values for arrays
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Debug.LogError("There already exists an instance of the inventory script");
+        }
+
         for (int i = 0; i < hotBar.Length; i++)
         {
             hotBar[i].SetHotBarIndex(i);

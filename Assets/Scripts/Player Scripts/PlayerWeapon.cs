@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using Mirror;
 
+// does commands for player's weapon
 public class PlayerWeapon : NetworkBehaviour
 {
+    // audio clips for weapon
     private AudioClip[] audioClipPrefabs;
+    // audio source to play sounds from
     private AudioSource audioSource;
+    // effects for weapon
     private GameObject[] effectPrefabs;
 
+    // init vars
     private void Start()
     {
         audioClipPrefabs = GameObject.FindObjectOfType<AudioPrefabsController>().audioClipPrefabs;
@@ -14,6 +19,7 @@ public class PlayerWeapon : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    // add force to gameobject
     [Command]
     public void CmdAddForce(GameObject gameObjectToAddForceTo, Vector3 force)
     {
@@ -21,6 +27,7 @@ public class PlayerWeapon : NetworkBehaviour
         if (rg != null && !rg.isKinematic) rg.AddForce(force, ForceMode.Impulse);
     }
 
+    // split shells of gun
     [Command]
     public void CmdSplitShells(GameObject shell, Vector3 shellSpitPosition, Vector3 shellSpitRotation, float shellSpitForce, float shellForceRandom, float shellSpitTorqueX, float shellTorqueRandom, float shellSpitTorqueY)
     {
@@ -32,18 +39,21 @@ public class PlayerWeapon : NetworkBehaviour
         shellRG.AddTorque(new Vector3(shellSpitTorqueX + Random.Range(-shellTorqueRandom, shellTorqueRandom), shellSpitTorqueY + Random.Range(-shellTorqueRandom, shellTorqueRandom), 0), ForceMode.Impulse);
     }
 
+    // play sound
     [ClientRpc]
     public void RpcPlaySound(int audioIndex)
     {
         audioSource.PlayOneShot(audioClipPrefabs[audioIndex]);
     }
 
+    // create hit effect
     [ClientRpc]
     public void RpcCreateHitEffect(int hitEffectIndex, Vector3 hitPoint, Vector3 hitNormal)
     {
         Instantiate(effectPrefabs[hitEffectIndex], hitPoint, Quaternion.FromToRotation(Vector3.up, hitNormal));
     }
 
+    // create muzzle effect
     [ClientRpc]
     public void RpcMakeMuzzleEffect(int muzfxIndex, Vector3 position, Vector3 rotation)
     {

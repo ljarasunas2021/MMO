@@ -4,27 +4,39 @@ using UnityEngine;
 ///<summary> Allow the player to equip items </summary>
 public class PlayerEquip : NetworkBehaviour
 {
+    // scene object prefab
     public GameObject sceneObjectPrefab;
+    // time until the weapon holding can despawn if not used
     public int weaponTimeTillDespawn = 75;
 
+    // equipped item index
     [SyncVar(hook = nameof(ChangeItem))]
     private int equippedItem = -1;
 
+    // equipped item gameobject
     private GameObject equippedItemGO;
+    // maximum grab distance
     public int maxGrabDistance;
+    // scripts of player
     private BodyParts bodyParts;
     private InventoryManager inventoryManager;
     private InputHandler inputHandler;
     private GameObject handR;
     private Animator animator;
     private PlayerCameraManager playerCameraManager;
-    private GameObject[] itemPrefabs;
     private Movement movement;
-    private int hotBarIndex = -1, hotBarIndexCounter;
-    private Camera mainCam;
-    private bool alreadyDespawnedWeapon = false;
     private IKHandling ikHandling;
 
+    // item prefabs array
+    private GameObject[] itemPrefabs;
+    // hot bar vars
+    private int hotBarIndex = -1, hotBarIndexCounter;
+    // maincamera
+    private Camera mainCam;
+    // weapon has been despawned bool
+    private bool alreadyDespawnedWeapon = false;    
+
+    // init vars
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -32,7 +44,7 @@ public class PlayerEquip : NetworkBehaviour
         inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         inputHandler = GetComponent<InputHandler>();
         playerCameraManager = GetComponent<PlayerCameraManager>();
-        itemPrefabs = GameObject.FindObjectOfType<ItemPrefabsController>().itemPrefabs;
+        itemPrefabs = ItemPrefabsController.instance.itemPrefabs;
         mainCam = Camera.main;
         ikHandling = GetComponent<IKHandling>();
 
@@ -46,6 +58,7 @@ public class PlayerEquip : NetworkBehaviour
         inventoryManager.SetPlayer(gameObject);
     }
 
+    // change the current item
     private void ChangeItem(int itemIndex)
     {
         foreach (Transform weapon in handR.transform) Destroy(weapon.gameObject);
@@ -61,15 +74,18 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
+    // change equipped item index
     [Command]
     void CmdChangeEquippedItem(int itemIndex)
     {
         equippedItem = itemIndex;
     }
 
+    // change hot bar index
     [Command]
     public void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }
 
+    // find correct item index
     private int FindIndex(GameObject item)
     {
         int index = -1;
@@ -77,24 +93,25 @@ public class PlayerEquip : NetworkBehaviour
         return index;
     }
 
+    // possibly equip a new slot
+    public void PossibleEquipSlot(int index)
+    {
+        if (hotBarIndex != index)
+        {
+            inventoryManager.EquipSlot(index);
+            alreadyDespawnedWeapon = false;
+        }
+    }
+
+    // reset hotbarIndex counter if use item
+    public void UseItem(int index)
+    {
+        hotBarIndexCounter = weaponTimeTillDespawn;
+    }
+
+    // control hot bar index counter
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && hotBarIndex != 0)
-        {
-            inventoryManager.EquipSlot(0);
-            alreadyDespawnedWeapon = false;
-        }
-
-        if (Input.GetMouseButton(0)) hotBarIndexCounter = weaponTimeTillDespawn;
-
-        if (Input.GetMouseButtonDown(1) && hotBarIndex != 1)
-        {
-            inventoryManager.EquipSlot(1);
-            alreadyDespawnedWeapon = false;
-        }
-
-        if (Input.GetMouseButton(1)) hotBarIndexCounter = weaponTimeTillDespawn;
-
         hotBarIndexCounter--;
 
         if (hotBarIndexCounter < 0 && !alreadyDespawnedWeapon)
@@ -103,19 +120,24 @@ public class PlayerEquip : NetworkBehaviour
             alreadyDespawnedWeapon = true;
         }
     }
+
+    // grab weapon
     public void Grab()
     {
         RaycastHit hit;
         Ray ray = mainCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-        if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item) && hit.collider.gameObject.GetComponent<Item>() != null)
-        {
-            GameObject item = hit.collider.gameObject;
-            inventoryManager.AddInventoryItem(FindIndex(item), item.GetComponent<Item>().icon);
-            Destroy(item.transform.parent.gameObject);
+        if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item)) {
+            Item item = hit.collider.gameObject.GetComponent<Item>();
+            if (item != null)
+            {
+                inventoryManager.AddInventoryItem(FindIndex(item.gameObject), item.icon);
+                Destroy(item.transform.parent.gameObject);
+            }
         }
     }
 
+    // equip item
     public void EquipItem(int hotBarIndex, int itemIndex)
     {
         CmdChangeHotBarIndex(hotBarIndex);
@@ -142,8 +164,8 @@ public class PlayerEquip : NetworkBehaviour
             weapon.SetHotBarIndex(hotBarIndex);
 
             ItemType itemType = ItemType.none;
-            if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Melee) itemType = ItemType.melee;
-            if (equippedItemGO.GetComponent<Weapon>().type == WeaponType.Ranged) itemType = ItemType.ranged;
+            if (weapon.type == WeaponType.Melee) itemType = ItemType.melee;
+            if (weapon.type == WeaponType.Ranged) itemType = ItemType.ranged;
             inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, itemType));
 
             if (weapon.type == WeaponType.Ranged)
@@ -169,16 +191,22 @@ public class PlayerEquip : NetworkBehaviour
         playerCameraManager.ChangeCam(cameraMode);
     }
 
+    // use rigidbody on server
     [Command]
     private void CmdSetWeaponRigidBody(GameObject weapon, bool isKinematic) { weapon.transform.GetComponent<Rigidbody>().isKinematic = isKinematic; }
 }
 
+// current item held
 public class ItemHolding
 {
+    // actual item
     public GameObject item;
+    // item type
     public ItemType type;
+    // item's weapon script
     public Weapon weaponScript;
 
+    // constructor
     public ItemHolding(GameObject item, ItemType type)
     {
         this.item = item;
@@ -188,6 +216,7 @@ public class ItemHolding
     }
 }
 
+// types of items
 public enum ItemType
 {
     melee,
