@@ -1,6 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
 
+// holds all map markers
 public class MapMarkers : MonoBehaviour, IPointerClickHandler
 {
     // the compass gameObject

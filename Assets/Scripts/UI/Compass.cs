@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
+// manage compass ui
 public class Compass : NetworkBehaviour
 {
     // player GameObject

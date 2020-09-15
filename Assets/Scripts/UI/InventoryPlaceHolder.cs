@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// draggable object in inventory
 public class InventoryPlaceHolder : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     // is a hot bar slot

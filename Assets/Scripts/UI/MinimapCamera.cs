@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// minimap camera
 public class MinimapCamera : MonoBehaviour
 {
-    private bool playerMode = true;
+    // player gameobject
     [HideInInspector] public GameObject player;
+    // local ____ at start
     private Vector3 localPos, localRot, localScale;
 
+    // init vars
     void Start()
     {
         localPos = transform.localPosition;
@@ -16,6 +19,7 @@ public class MinimapCamera : MonoBehaviour
         player = transform.root.gameObject;
     }
 
+    // change parent of minimap
     public void ChangeParent(Transform parent)
     {
         transform.parent = parent;
