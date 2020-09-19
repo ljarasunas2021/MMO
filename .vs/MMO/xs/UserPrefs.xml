@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/Map.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Weapon Scripts/Weapon.cs">
     <Files>
       <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="110" Column="40" IsPinned="True" />
-      <File FileName="Assets/Scripts/Player Scripts/Movement.cs" Line="266" Column="29" />
-      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" Line="219" Column="18" />
-      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" Line="24" Column="2" />
+      <File FileName="Assets/Scripts/Player Scripts/Movement.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" />
       <File FileName="Assets/Scripts/Actions/BossGivesWalkie.cs" />
       <File FileName="Assets/Scripts/Actions/EquipNameTag.cs" />
       <File FileName="Assets/Scripts/Actions/MissionTakeWalkie.cs" />
@@ -19,34 +19,36 @@
       <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" />
-      <File FileName="Assets/Scripts/UI/MinimapCamera.cs" Line="22" Column="32" />
+      <File FileName="Assets/Scripts/UI/MinimapCamera.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" />
-      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" Line="57" Column="27" />
+      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" />
       <File FileName="Assets/Scripts/GOAP/KillAction.cs" />
       <File FileName="Assets/Scripts/GOAP/KillPlayerGoal.cs" />
       <File FileName="Assets/Scripts/Other/ExpressionParser.cs" />
       <File FileName="Assets/Scripts/Other/NPCDialogue.cs" />
-      <File FileName="Assets/Scripts/Other/NPCMovement.cs" Line="46" Column="16" />
+      <File FileName="Assets/Scripts/Other/NPCMovement.cs" />
       <File FileName="Assets/Scripts/Other/OutlineObject.cs" />
       <File FileName="Assets/Scripts/Other/PID.cs" />
       <File FileName="Assets/Scripts/Other/PlayerDialogue.cs" />
       <File FileName="Assets/Scripts/Other/RigidBodySpawn.cs" />
-      <File FileName="Assets/Scripts/Other/Target.cs" Line="102" Column="37" />
-      <File FileName="Assets/Scripts/Player Scripts/BodyParts.cs" Line="7" Column="29" />
-      <File FileName="Assets/Scripts/Player Scripts/Gravity.cs" Line="27" Column="33" />
-      <File FileName="Assets/Scripts/Player Scripts/HealthBar.cs" Line="29" Column="10" />
-      <File FileName="Assets/Scripts/Player Scripts/IKHandling.cs" Line="102" Column="30" />
-      <File FileName="Assets/Scripts/UI/InventoryManager.cs" Line="29" Column="29" />
-      <File FileName="Assets/Scripts/UI/Map.cs" Line="34" Column="13" />
-      <File FileName="Assets/Scripts/Player Scripts/PlayerCameraManager.cs" Line="93" Column="12" />
-      <File FileName="Assets/Scripts/Player Scripts/PlayerHealth.cs" Line="24" Column="28" />
-      <File FileName="Assets/Scripts/Player Scripts/PlayerWeapon.cs" Line="56" Column="28" />
-      <File FileName="Assets/Scripts/UI/Compass.cs" Line="85" Column="2" />
-      <File FileName="Assets/Scripts/UI/InventoryPlaceHolder.cs" Line="7" Column="33" />
-      <File FileName="Assets/Scripts/UI/MapMarker.cs" Line="4" Column="18" />
-      <File FileName="Assets/Scripts/UI/MapMarkers.cs" Line="4" Column="25" />
+      <File FileName="Assets/Scripts/Other/Target.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/BodyParts.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/Gravity.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/HealthBar.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/IKHandling.cs" />
+      <File FileName="Assets/Scripts/UI/InventoryManager.cs" />
+      <File FileName="Assets/Scripts/UI/Map.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerCameraManager.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerHealth.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerWeapon.cs" />
+      <File FileName="Assets/Scripts/UI/Compass.cs" />
+      <File FileName="Assets/Scripts/UI/InventoryPlaceHolder.cs" />
+      <File FileName="Assets/Scripts/UI/MapMarker.cs" />
+      <File FileName="Assets/Scripts/UI/MapMarkers.cs" />
+      <File FileName="Assets/Scripts/Weapon Scripts/Item.cs" />
+      <File FileName="Assets/Scripts/Weapon Scripts/Weapon.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -65,8 +67,9 @@
                 <Node name="GOAP" expanded="True" />
                 <Node name="Other" expanded="True" />
                 <Node name="Player Scripts" expanded="True" />
-                <Node name="UI" expanded="True">
-                  <Node name="Map.cs" selected="True" />
+                <Node name="UI" expanded="True" />
+                <Node name="Weapon Scripts" expanded="True">
+                  <Node name="Weapon.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="Thirdparty" expanded="True">
@@ -84,7 +87,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="16c73903-0181-43b4-9b47-784244371840" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="70db999c-b02c-4d76-8898-86f636049ed8" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
