@@ -868,39 +868,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c3eef51605949ecac34c20e17f3934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motions:
-  - name: run
-    locomotionBlendValue: 0.9
-    locomotionDirValue: 0
-    speed: {x: 0, y: 5}
-  - name: walk
-    locomotionBlendValue: 0.3
-    locomotionDirValue: 0
-    speed: {x: 0, y: 2}
-  - name: idle
+  states:
+  - name: Idle
     locomotionBlendValue: 0
     locomotionDirValue: 0
     speed: {x: 0, y: 0}
-  - name: left strife
-    locomotionBlendValue: 0
-    locomotionDirValue: -0.9
-    speed: {x: -5, y: 0}
-  - name: right strife
-    locomotionBlendValue: 0
-    locomotionDirValue: 0.9
-    speed: {x: 5, y: 0}
-  - name: left walk
-    locomotionBlendValue: 0
-    locomotionDirValue: -0.3
-    speed: {x: -1, y: 0}
-  - name: right walk
-    locomotionBlendValue: 0
-    locomotionDirValue: 0.3
-    speed: {x: 1, y: 0}
-  - name: backwards walk
+  - name: Walk
+    locomotionBlendValue: 0.3
+    locomotionDirValue: 0
+    speed: {x: 0, y: 2}
+  - name: Walk Back
     locomotionBlendValue: -0.3
     locomotionDirValue: 0
-    speed: {x: 0, y: -2}
+    speed: {x: 0, y: -2.5}
+  - name: Run
+    locomotionBlendValue: 0.9
+    locomotionDirValue: 0
+    speed: {x: 0, y: 5}
+  - name: Right Walk
+    locomotionBlendValue: 0
+    locomotionDirValue: 0.3
+    speed: {x: 2, y: 0}
+  - name: Left Walk
+    locomotionBlendValue: 0
+    locomotionDirValue: -0.3
+    speed: {x: -2, y: 0}
+  - name: Right Run
+    locomotionBlendValue: 0
+    locomotionDirValue: 1
+    speed: {x: 5, y: 0}
+  - name: Left Run
+    locomotionBlendValue: 0
+    locomotionDirValue: -1
+    speed: {x: -5, y: 0}
   accelerationSmoothTime: 0.1
   decelerationSmoothTime: 0.3
 --- !u!114 &114957214746974250
@@ -1010,7 +1010,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 70210db152d934446a9f2f88d6dc0685, type: 3}
     m_Threshold: 2
-    m_Position: {x: 0, y: 1}
+    m_Position: {x: 0, y: 0.9}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend

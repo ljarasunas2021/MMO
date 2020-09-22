@@ -1,30 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-///<Summary> Add momentum between locomotion states </summary>
+///<Summary> Controls the speed of the player while playing the locomotion state. </summary>
 public class LocomotionMomentum : StateMachineBehaviour
 {
-    #region Variables
-    // list of motions with their speed
-    public LocomotionMotion[] motions;
+    // array of every locomotion state
+    public LocomotionState[] states;
 
     [Header("Smooth Times")]
-    // how fast player accelerates, decelerates
+    // how fast the player should accelerate, decelerate
     public float accelerationSmoothTime, decelerationSmoothTime;
 
     //velocity of the change in speed
     private float smoothVelocity;
-    // target speed velocity should reach
+    // speed the player should reach
     private float targetSpeed;
 
-    // a dictionary that every double from -1 to 1 and gives an upper and lower bound for locomotion blend values with the corresponding speeds to the bounds
+    // a dictionary which for every double from -1 to 1 defines a BoundsAndSpeed. This dictionary is used to find the appropriate z speed for a player's locomotion blend value
     private Dictionary<double, BoundsAndSpeed> locomotionBlendDict = new Dictionary<double, BoundsAndSpeed>();
-    // a dictionary that every double from -1 to 1 and gives an upper and lower bound for locomotion direction values with the corresponding speeds to the bounds
+    // a dictionary which for every double from -1 to 1 defines a BoundsAndSpeed. This dictionary is used to find the appropriate x speed for a player's locomotion dir value
     private Dictionary<double, BoundsAndSpeed> locomotionDirDict = new Dictionary<double, BoundsAndSpeed>();
-    #endregion
 
-    #region Initialize
-    /// <summary> Set up dictionaries above </summary>
+    /// <summary> Inits the locmotionBlend and locomotionDir dictionaries </summary>
     private void Awake()
     {
         for (double i = -1; i < 1; i += 0.1)
@@ -33,26 +30,26 @@ public class LocomotionMomentum : StateMachineBehaviour
             float lowerBound = -1;
             float upperBoundSpeed = 0;
             float lowerBoundSpeed = 0;
-            foreach (LocomotionMotion motion in motions)
+            foreach (LocomotionState state in states)
             {
-                float currentValue = motion.locomotionBlendValue;
+                float currentValue = state.locomotionBlendValue;
 
                 if (currentValue < upperBound && currentValue > i)
                 {
                     upperBound = currentValue;
-                    upperBoundSpeed = motion.speed.y;
+                    upperBoundSpeed = state.speed.y;
                 }
                 else if (currentValue > lowerBound && currentValue < i)
                 {
                     lowerBound = currentValue;
-                    lowerBoundSpeed = motion.speed.y;
+                    lowerBoundSpeed = state.speed.y;
                 }
                 else if (currentValue == i)
                 {
                     lowerBound = (float)i;
-                    lowerBoundSpeed = motion.speed.y;
+                    lowerBoundSpeed = state.speed.y;
                     upperBound = (float)i;
-                    upperBoundSpeed = motion.speed.y;
+                    upperBoundSpeed = state.speed.y;
                 }
             }
             i = ConvertToDouble((float)i);
@@ -65,7 +62,7 @@ public class LocomotionMomentum : StateMachineBehaviour
             float lowerBound = -1;
             float upperBoundSpeed = 0;
             float lowerBoundSpeed = 0;
-            foreach (LocomotionMotion motion in motions)
+            foreach (LocomotionState motion in states)
             {
                 float currentValue = motion.locomotionDirValue;
 
@@ -91,11 +88,11 @@ public class LocomotionMomentum : StateMachineBehaviour
             locomotionDirDict.Add((double)i, new BoundsAndSpeed(lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed));
         }
     }
-    #endregion
 
-    #region SetSpeed
-    ///<summary> Set speed of player based on locomotion blend and dir values </summary>
-    // idea is that you find the target locomotion blend and dir value, find most nearby motions and linearly find target speed based on those nearby motions and the speeds of those motions
+    ///<summary> Sets the player's speed. First find the current locomotion blend and dir values, then using the dictionaries find the appropriate speed based off of the closest motions. This function is called automatically by Unity.  </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
@@ -112,36 +109,43 @@ public class LocomotionMomentum : StateMachineBehaviour
         animator.SetFloat(Parameters.currentSpeedZ, zSpeed);
         animator.SetFloat(Parameters.currentSpeedX, xSpeed);
     }
-    #endregion
 
-    #region ConvertToDouble
-    ///<summary> Convert float to double </summary>
+    ///<summary> Convert a float to a double </summary>
     ///<param name = "i"> float to be converted </param>
+    ///<returns> a double </returns>
     private double ConvertToDouble(float i)
     {
         return Mathf.Round(i * 10) / 10;
     }
-    #endregion
 }
 
-#region LocomotionMomentum
 [System.Serializable]
-///<summary> motion with corresponding speed </summary>
-public class LocomotionMotion
+///<summary> locomotion state with its corresponding locomotion variables </summary>
+public class LocomotionState
 {
+    // name of the locomotion state
     public string name;
+    // y-axis value of the blend tree for this state
     public float locomotionBlendValue;
+    // x-axis value of the blend tree for this state
     public float locomotionDirValue;
+    // speed at which the player should be moving at this state
     public Vector2 speed;
 }
-#endregion
 
-#region BoundsAndSpeed
-/// <summary> used to find upper and lower bound around a double from -1 to 1 </summary>
+/// <summary> Given a double between -1 and 1, this class stores variables to find a player's speed through interpolation </summary>
 public class BoundsAndSpeed
 {
-    public float lowerBound, lowerBoundSpeed, upperBound, upperBoundSpeed;
+    // the largest locomotionBlend or locomotionDir value (of a motion) less than the double
+    public float lowerBound;
+    // the speed of the lowerBound's motion
+    public float lowerBoundSpeed;
+    // the smallest locomotionBlend or locomotionDir value (of a motion) greater than the double
+    public float upperBound;
+    // the speed of the upperBound's motion
+    public float upperBoundSpeed;
 
+    // constructor
     public BoundsAndSpeed(float lowerBound, float lowerBoundSpeed, float upperBound, float upperBoundSpeed)
     {
         this.lowerBound = lowerBound;
@@ -150,4 +154,3 @@ public class BoundsAndSpeed
         this.upperBoundSpeed = upperBoundSpeed;
     }
 }
-#endregion

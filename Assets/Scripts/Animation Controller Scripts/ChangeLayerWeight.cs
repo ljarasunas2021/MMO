@@ -1,33 +1,35 @@
 ﻿using UnityEngine;
 
-/// <summary> Change weight of layer on enter or exit </summary>
+/// <summary> Changes the weight of the animation layer on enter and/or exit </summary>
 public class ChangeLayerWeight : StateMachineBehaviour
 {
-    #region Variables
     [Header("Enter")]
-    // if layer weight should change on enter
+    // should the layer weight be changed when the animator starts playing this animation
     public bool onEnter;
-    // what the layer weight should change to
+    // if onEnter, then this will be the layer weight when the animator starts playing this animation
     public float enterLayerWeight;
 
     [Header("Exit")]
-    // if layer weight should change on exit
+    // should the layer weight be changed when the animator stops playing this animation
     public bool onExit;
-    // what the layer weight should change to
+    // if onEnter, then this will be the layer weight when the animator stops playing this animation
     public float exitLayerWeight;
-    #endregion
 
-    #region Layer Weight
-    ///<summary> Change layer weight if on enter </summary>
+    ///<summary> When the animation starts playing, if onEnter, this function sets the layer weight to the enterLayerWeight. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (onEnter) animator.SetLayerWeight(layerIndex, enterLayerWeight);
     }
 
-    ///<summary> Change layer weight if on exit </summary>
+    ///<summary> When the animation stops playing, if onExit, this function sets the layer weight to the exitLayerWeight. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (onExit) animator.SetLayerWeight(layerIndex, exitLayerWeight);
     }
-    #endregion
 }

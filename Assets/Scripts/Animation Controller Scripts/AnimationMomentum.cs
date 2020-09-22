@@ -1,31 +1,31 @@
 ﻿using UnityEngine;
 
-///<summary> Set speed according to animation being played </summary>
+///<summary> Sets the player's speed based on the animation being played. </summary>
 public class AnimationMomentum : StateMachineBehaviour
 {
-    #region Variables
     [Header("TargetSpeed")]
-    // use predefined speed
+    // should the player's speed be set to a constant 
     public bool useSetSpeed;
-    // predefined speed - speed animation will move at
+    // if useSetSpeed, the player's speed will be this constant
     public float speed;
-    // use previous speed times this multiplier
+    // if !useSetSpeed, the player's speed will be set to the player's current speed times this multiplier
     public float previousSpeedMultiplier;
 
     [Header("Momentum")]
-    // use momentum meaning that previous speed will carry to your current speed
+    // smoothly change the speed of the player
     public bool useMomentum;
-    // time it will take to accelerate, decelerate
+    // if useMomentum, the time it will take to accelerate, decelerate
     public float accelerationSmoothTime, decelerationSmoothTime;
 
-    // velocity that the momentum uses
+    // velocity variable that the momentum uses
     private float smoothVelocity;
-    // target speed while anim is playing
+    // the target speed that the player will interpolate towards
     private float targetSpeed;
-    #endregion
 
-    #region SetSpeed
-    /// <summary> Set the target speed </summary>
+    /// <summary> When this animation starts playing, this function sets the target speed and sets the player's speed if the player isn't using momentum. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -33,10 +33,13 @@ public class AnimationMomentum : StateMachineBehaviour
         if (useSetSpeed) targetSpeed = speed;
         else targetSpeed = animator.GetFloat(Parameters.currentSpeedZ) * previousSpeedMultiplier;
 
-        if (!useMomentum) animator.SetFloat(Parameters.currentSpeedZ, speed);
+        if (!useMomentum) animator.SetFloat(Parameters.currentSpeedZ, targetSpeed);
     }
 
-    /// <summary> If use momentum slerp between current and target speed </summary>
+    /// <summary> If useMomentum, interpolate between the current and target speed. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
@@ -54,5 +57,4 @@ public class AnimationMomentum : StateMachineBehaviour
             }
         }
     }
-    #endregion
 }

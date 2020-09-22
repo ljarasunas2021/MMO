@@ -1,34 +1,35 @@
 ﻿using UnityEngine;
 
-///<summary> Change current state at animation start / end
+///<summary> Change the target upper body state on the animtion's enter and/or exit <\summary>
 public class ChangeTargetUpperBodyState : StateMachineBehaviour
 {
-    #region Variables
     [Header("Enter")]
-    // should the variable be changed on state enter
+    // should the target upper body state be changed when the animator starts playing this animation
     public bool onEnter;
-    // value that the current state should change to when entering
+    // if onEnter, then this will be the target upper body state when the animator starts playing this animation
     public int enterValue;
-    //public bool changeTargetValueToo;
 
     [Header("Exit")]
-    // should the variable be changed on state exit
+    // should the target upper body state be changed when the animator stops playing this animation
     public bool onExit;
-    // value that the current state should change to when exiting
+    // if onExit, then this will be the target upper body state when the animator stops playing this animation
     public int exitValue;
-    #endregion
 
-    #region ChangeVariables
-    ///<summary> if on enter will set the integer </summary>
+    ///<summary> When the animation starts playing, if onEnter, this function sets the target upper body state to the enterValue. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (onEnter) animator.SetInteger(Parameters.targetUpperBodyState, enterValue);
     }
 
-    ///<summary> if on exit will set the integer </summary>
+    ///<summary> When the animation stops playing, if onExit, this function sets the target upper body state to the exitValue. This function is called automatically by Unity. </summary>
+    /// <param name="animator"> animator on root gameobject </param>
+    /// <param name="stateInfo"> information about the animator state </param>
+    /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (onExit) animator.SetInteger(Parameters.targetUpperBodyState, exitValue);
     }
-    #endregion
 }
