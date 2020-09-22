@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-///<summary> Array of audio files to use as an array for commands to pull from</summary>
+///<summary> Singleton that holds array of all audio files in game </summary>
 public class AudioPrefabsController : MonoBehaviour
 {
     // singleton instance
@@ -8,9 +8,9 @@ public class AudioPrefabsController : MonoBehaviour
     // array of audio clips to play
     public AudioClip[] audioClipPrefabs;
 
+    /// <summary> Create a singleton pattern </summary>
     private void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-/// <summary> Contains references to the layer masks </summary>
+/// <summary> Static class that contains references to all layers </summary>
 public static class LayerMaskController
 {
     // contains the layermask for the ____ layer

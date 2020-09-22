@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-///<summary> Array of effects for commands to use </summary>
+/// <summary> Singleton which stores every effect prefab </summary>
 public class EffectsPrefabsController : MonoBehaviour
 {
     //singleton
@@ -9,9 +9,9 @@ public class EffectsPrefabsController : MonoBehaviour
     // array of effects
     public GameObject[] effectPrefabs;
 
+    /// <summary> Create a singleton</summary>
     private void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;

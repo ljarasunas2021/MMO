@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-// this script stores the different cameras
+/// <summary> Singleton which stores every camera </summary>
 public class CameraController : MonoBehaviour
 {
     //singleton
@@ -8,9 +8,9 @@ public class CameraController : MonoBehaviour
     //different cameras
     public GameObject cinematicCam, closeUpCam, lockedCam;
 
+    /// <summary> Create a singleton</summary>
     private void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;

@@ -9,9 +9,9 @@ public class ItemPrefabsController : MonoBehaviour
     // array of the prefabs of the items
     public GameObject[] itemPrefabs;
 
+    /// <summary> Create a singleton</summary>
     private void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;

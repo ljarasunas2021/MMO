@@ -4,29 +4,30 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Manages the UI for the entire game</summary>
 public class UIManager : MonoBehaviour
 {
     // singleton
     public static UIManager instance;
-    // pause menu canvas
-    public Canvas pauseMenu;
-    // dialogue box canvax
-    public Canvas dialogueBox;
     // dialogue text box
     public Text dialogueText;
-    public Canvas compassCanvas, mapCanvas, dialogueCanvas;
+    // the ____ canvas
+    public Canvas pauseMenu, dialogueBox, compassCanvas, mapCanvas, dialogueCanvas;
 
     // source to play audio from
     [HideInInspector] public AudioSource audioSource;
-    // dialogue strings
+
+    // the npc's dialogue
     private NPCDialogue dialogue;
-    // current place in dialogue
+    // the map
     private Map map;
 
+    // toggle booleans
     public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
+    // abilities based on UI
     public static bool canMove = true, canShoot = true;
 
-    // set ui at start
+    /// <summary> Create singleton pattern, init vars, enable and disable appropriate objects </summary>
     void Start()
     {
         //singleton pattern
@@ -47,7 +48,8 @@ public class UIManager : MonoBehaviour
         compassCanvas.enabled = !toggleMap;
     }
 
-    // toggle dialogue
+    /// <summary> Toggle the audio on or off</summary>
+    /// <param name="dialogue">the dialogue to play</param>
     public void ToggleDialogue(Dialogue dialogue)
     {
         canShoot = (dialogue == null);
@@ -64,7 +66,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // play the NPC's dialogue
+    /// <summary> Play an NPC's dialogue</summary>
+    /// <param name="dialogue"> the NPC's dialogue </param>
+    /// <returns> the coroutine </returns>
     private IEnumerator PlayDialogue(NPCDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -106,7 +110,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // play the player's dialogue
+    /// <summary> Play the player's dialogue</summary>
+    /// <param name="dialogue"> the player's dialogue </param>
+    /// <returns> the coroutine </returns>
     private IEnumerator PlayDialogue(PlayerDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -146,7 +152,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // allow the player to choose from dialogue options
+    /// <summary> Allow the player to choose a dialogue option </summary>
+    /// <param name="dialogue"> an array of the player's dialogue options </param>
+    /// <returns> the coroutine </returns>
     private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions)
     {
         dialogueBox.enabled = false;
@@ -168,7 +176,11 @@ public class UIManager : MonoBehaviour
         yield return 0;
     }
 
-    // click on dialogue option
+    /// <summary> Click one of the player's dialogue options </summary>
+    /// <param name="optionChosen"> the dialogue option the player chose </param>
+    /// <param name="dialogue"> the corresponding NPC's dialogue </param>
+    /// <param name="buttons"> the list of dialogue option buttons </param>
+    /// <returns> the coroutine </returns>
     private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
     {
         LockCursor(true);
@@ -183,7 +195,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(PlayDialogue(dialogue));
     }
 
-    // turn on / off the pause menu
+    /// <summary> Toggle the pause menu on or off </summary>
     public void TogglePauseMenu()
     {
         canShoot = !canShoot;
@@ -192,7 +204,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.enabled = !pauseMenu.enabled;
     }
 
-    // turn on/off the map
+    /// <summary> Toggle the map on or off </summary>
     public void ToggleMap()
     {
         canShoot = !canShoot;
@@ -204,7 +216,8 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // lock the cursor
+    /// <summary> Lock or unlock the cursor </summary>
+    /// <param name="locked"> whether the cursor should be locked </param>
     public static void LockCursor(bool locked)
     {
         if (locked)
