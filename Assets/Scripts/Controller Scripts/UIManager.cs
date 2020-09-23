@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
     /// <summary> Create singleton pattern, init vars, enable and disable appropriate objects </summary>
     void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;
@@ -68,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     /// <summary> Play an NPC's dialogue</summary>
     /// <param name="dialogue"> the NPC's dialogue </param>
-    /// <returns> the coroutine </returns>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     private IEnumerator PlayDialogue(NPCDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -112,7 +111,7 @@ public class UIManager : MonoBehaviour
 
     /// <summary> Play the player's dialogue</summary>
     /// <param name="dialogue"> the player's dialogue </param>
-    /// <returns> the coroutine </returns>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     private IEnumerator PlayDialogue(PlayerDialogue dialogue)
     {
         dialogueBox.enabled = true;
@@ -154,7 +153,7 @@ public class UIManager : MonoBehaviour
 
     /// <summary> Allow the player to choose a dialogue option </summary>
     /// <param name="dialogue"> an array of the player's dialogue options </param>
-    /// <returns> the coroutine </returns>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions)
     {
         dialogueBox.enabled = false;
@@ -180,7 +179,7 @@ public class UIManager : MonoBehaviour
     /// <param name="optionChosen"> the dialogue option the player chose </param>
     /// <param name="dialogue"> the corresponding NPC's dialogue </param>
     /// <param name="buttons"> the list of dialogue option buttons </param>
-    /// <returns> the coroutine </returns>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
     {
         LockCursor(true);

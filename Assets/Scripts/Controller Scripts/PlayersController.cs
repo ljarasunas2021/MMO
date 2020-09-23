@@ -11,9 +11,9 @@ public class PlayersController : MonoBehaviour
     // list of all players
     public List<GameObject> players;
 
+    /// <summary> Create a singleton</summary>
     private void Start()
     {
-        //singleton pattern
         if (instance == null)
         {
             instance = this;

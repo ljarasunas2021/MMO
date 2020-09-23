@@ -3,7 +3,7 @@
 ///<summary> Array of prefabs for commands to pull from </summary>
 public class ItemPrefabsController : MonoBehaviour
 {
-    //singleton
+    // singleton
     public static ItemPrefabsController instance;
 
     // array of the prefabs of the items

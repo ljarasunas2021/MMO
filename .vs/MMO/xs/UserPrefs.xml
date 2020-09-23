@@ -4,7 +4,7 @@
       <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="110" Column="40" IsPinned="True" />
       <File FileName="Assets/Scripts/Player Scripts/Movement.cs" />
       <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" Line="6" Column="8" />
       <File FileName="Assets/Scripts/Actions/BossGivesWalkie.cs" />
       <File FileName="Assets/Scripts/Actions/EquipNameTag.cs" />
       <File FileName="Assets/Scripts/Actions/MissionTakeWalkie.cs" />
@@ -16,13 +16,13 @@
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCanRotate.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCurrentState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeLayerWeight.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" Line="17" Column="10" />
+      <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" Line="11" Column="47" />
+      <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" Line="12" Column="1" />
       <File FileName="Assets/Scripts/UI/MinimapCamera.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" Line="11" Column="20" />
+      <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" Line="227" Column="10" />
+      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" Line="6" Column="1" />
       <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" />
       <File FileName="Assets/Scripts/GOAP/KillAction.cs" />
       <File FileName="Assets/Scripts/GOAP/KillPlayerGoal.cs" />
