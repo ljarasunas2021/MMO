@@ -42,7 +42,7 @@ public class PlayerHealth : NetworkBehaviour
         }
         else
         {
-            if (health <= 0) GetComponent<EnemyAI1>().Dead();
+            if (health <= 0) GetComponent<EnemyAI1>().EnemyDead();
         }
     }
 }

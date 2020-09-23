@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// dialogue for npc
+/// <summary> Holds variables for an NPC's dialogue </summary>
 public class NPCDialogue : MonoBehaviour
 {
-    // what npc will say (text + audio)
+    // the words that will show up in the NPC's textbox when it speaks
     public string text;
+    // the audio that plays when the NPC speaks
     public AudioClip audio;
 
-    // npc will speak after this one
+    // will the next dialgoue be spoken by the NPC
     public bool nextDialogueIsNPC;
-    // the next dialogue (if is npc)
+    // if nextDialogueIsNPC, this is the next dialogue
     public NPCDialogue nextDialogue;
-    // if the player speaks next, will the player be presented with options
+    // if not nextDialogueIsNPC (meaning the next dialogue is the player), can the player choose from dialogue options
     public bool options;
-    // if so these are the options
+    // if options, then there are the options the player can choose from
     public PlayerDialogue[] playerDialogueOptions;
-    // if not then the player will just say this
+    // if not options, then the player will just say this dialogue
     public PlayerDialogue playerDialogue;
 
-    // action that happens
-    public Action1 action;
-    // if action happends before or after dialogue
+    // if an action happens before or after dialogue
     public bool actionBeforeDialogue;
+    // the action that happens
+    public Action1 action;
+    
 }

@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-// outline the opject
+/// <summary> Outline an object if a cursor is over the object </summary>
 public class OutlineObject : MonoBehaviour {
 
-    // outline
+    // the outline of the object
     private Outline outline;
-    //radius in order for outline 
+    // radius that the outline should have
     public float radius;
-    // disable outline at start
+
+    /// <summary> Disable the outline at the start </summary>
     void Start() {
         outline = gameObject.GetComponent<Outline>();
         outline.enabled = false;
     }
 
-    // is the player close enough for it to be outlined
+    /// <summary> Is the player close enough for it to be outlined </summary>
+    /// <returns> whether the player is close enough for the gameobject to be outlined </returns>
     private bool PlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
         return (playerDist < radius);
     }
 
-    // enable outline at appropriate times
+    /// <summary> When the mouse hovers over a gameobject, outline the object </summary>
     void OnMouseOver() {
         if (PlayerCloseEnough()) {
             outline.enabled = true;
@@ -32,7 +34,7 @@ public class OutlineObject : MonoBehaviour {
         }
     }
 
-    // diable when mouse exits
+    /// <summary> Disable the outline when the mouse exits the gameobject </summary>
     void OnMouseExit() {
         outline.enabled = false;
     }

@@ -24,8 +24,8 @@ public class PlayerDialogueEditor : Editor
         }
 
         EditorGUILayout.LabelField("Dialogue", EditorStyles.boldLabel);
-        playerDialogue.option = EditorGUILayout.Toggle("Player Has Options", playerDialogue.option);
-        if (playerDialogue.option)
+        playerDialogue.options = EditorGUILayout.Toggle("Player Has Options", playerDialogue.options);
+        if (playerDialogue.options)
         {
             playerDialogue.button = (Button)EditorGUILayout.ObjectField("Option Button", playerDialogue.button, typeof(Button));
         }
@@ -66,9 +66,9 @@ public class PlayerDialogueEditor : Editor
         }
         else
         {
-            playerDialogue.options = EditorGUILayout.Toggle("Player Has Options", playerDialogue.options);
+            playerDialogue.nextOptions = EditorGUILayout.Toggle("Player Has Options", playerDialogue.nextOptions);
 
-            if (playerDialogue.options)
+            if (playerDialogue.nextOptions)
             {
                 EditorGUILayout.LabelField("Player Dialogue Options");
 
@@ -95,7 +95,7 @@ public class PlayerDialogueEditor : Editor
                     }
 
                     playerDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField(name, playerDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
-                    if (playerDialogue.playerDialogueOptions[i] != null) playerDialogue.playerDialogueOptions[i].option = true;
+                    if (playerDialogue.playerDialogueOptions[i] != null) playerDialogue.playerDialogueOptions[i].nextOptions = true;
                 }
 
                 //NPCDialogue.playerDialogueOptions[0] = (PlayerDialogue[])EditorGUILayout.ObjectField("Player Dialogue Options", NPCDialogue.playerDialogueOptions, typeof(PlayerDialogue[]));
@@ -110,7 +110,7 @@ public class PlayerDialogueEditor : Editor
                 }
 
                 playerDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, playerDialogue.playerDialogue, typeof(PlayerDialogue));
-                if (playerDialogue.playerDialogue != null) playerDialogue.playerDialogue.option = false;
+                if (playerDialogue.playerDialogue != null) playerDialogue.playerDialogue.nextOptions = false;
             }
         }
 

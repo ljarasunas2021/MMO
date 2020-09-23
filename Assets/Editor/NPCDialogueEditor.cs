@@ -88,7 +88,7 @@ public class NPCDialogueEditor : Editor
                     }
 
                     NPCDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField("      " + name, NPCDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
-                    if (NPCDialogue.playerDialogueOptions[i] != null) NPCDialogue.playerDialogueOptions[i].option = true;
+                    if (NPCDialogue.playerDialogueOptions[i] != null) NPCDialogue.playerDialogueOptions[i].options = true;
                 }
 
                 //NPCDialogue.playerDialogueOptions[0] = (PlayerDialogue[])EditorGUILayout.ObjectField("Player Dialogue Options", NPCDialogue.playerDialogueOptions, typeof(PlayerDialogue[]));
@@ -103,7 +103,7 @@ public class NPCDialogueEditor : Editor
                 }
 
                 NPCDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, NPCDialogue.playerDialogue, typeof(PlayerDialogue));
-                if (NPCDialogue.playerDialogue != null) NPCDialogue.playerDialogue.option = false;
+                if (NPCDialogue.playerDialogue != null) NPCDialogue.playerDialogue.options = false;
             }
         }
 

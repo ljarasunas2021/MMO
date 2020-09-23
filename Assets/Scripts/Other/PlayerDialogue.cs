@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Holds variables for an player's dialogue </summary>
 public class PlayerDialogue : MonoBehaviour
 {
     [Header("Dialogue")]
-    // should the player have options
-    public bool option;
-    // dialogue button
+    // should the player have different dialogue options 
+    public bool options;
+    // if options, this is a button for a dialogue option
     public Button button;
-    // dialogue text
+    // if not options, this is the text that will be displayed for the player
     public string text;
-    // dialogue time on screen
+    // the amount of time the text is on the screen
     public float time;
 
     [Header("Next Dialogue")]
-    // is the next dialogue an npc
+    // does the NPC speek next
     public bool nextDialogueIsNPC;
-    // if so this is the next dialogue
+    // if nextDialogueIsNPC, then this is the next dialogue that will be played
     public NPCDialogue nextDialogue;
-    // if not should the player have dialogue options
-    public bool options;
-    // if so, heres the options
+    // if not nextDialogueIsNPC (meaning the player speaks next), will the player have dialogue options
+    public bool nextOptions;
+    // if nextOptions, heres the player dialogue options
     public PlayerDialogue[] playerDialogueOptions;
-    // otherwise, heres the players next dialogue
+    // if not nextOptions, heres the player's next dialogue
     public PlayerDialogue playerDialogue;
 
     [Header("Action")]
-    // possible action
-    public Action1 action;
-    // should the action happen before or after the dialogue
+    // should an action happen before or after the dialogue
     public bool actionBeforeDialogue;
+    // the action that would happen
+    public Action1 action;
 }

@@ -136,6 +136,7 @@
      <Compile Include="Assets\Scripts\Other\Action.cs" />
      <Compile Include="Assets\Scripts\Other\ExpressionParser.cs" />
      <Compile Include="Assets\Scripts\Other\NPCDialogue.cs" />
+     <Compile Include="Assets\Scripts\Other\NPCInteract.cs" />
      <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
      <Compile Include="Assets\Scripts\Other\OutlineObject.cs" />
      <Compile Include="Assets\Scripts\Other\PID.cs" />

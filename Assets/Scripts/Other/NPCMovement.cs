@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary> Controls the movement of the NPC </summary>
 public class NPCMovement : MonoBehaviour
 {
-    // speed of npc
+    // NPC's speed
     [Range(0, 1)]
     public float speed;
-    // min/max frames till npc moves
+    // min/max frames till npc starts moving to its next position
     public float minFramesTillMove, maxFramesTillMove;
     // radius within which npc can move
     public float moveRadius = 5;
-    // animator of npc
+    // animator component of npc
     private Animator animator;
     // actual frames till npc moves
     private int framesTillMove;
 
-    // start npc
+    /// <summary> Init vars </summary>
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,7 +24,7 @@ public class NPCMovement : MonoBehaviour
         SetFramesToMove();
     }
 
-    // move if necessary
+    /// <summary> Move the NPC if necessary </summary>
     void Update()
     {
         if (framesTillMove < 0) StartCoroutine(MoveNPC());
@@ -31,22 +32,24 @@ public class NPCMovement : MonoBehaviour
         framesTillMove--;
     }
 
-    // get max and min x, max and min z
-    private float[] GetRange()
+    /// <summary> Find the bounds within which the NPC can move</summary>
+    /// <returns> a float array of the form [max X position, min X position, max Z position, min Z position] </returns>
+    private float[] GetMovementBounds()
     {
         return new float[] { transform.position.x + moveRadius, transform.position.x - moveRadius, transform.position.z + moveRadius, transform.position.z - moveRadius };
     }
 
-    // get randome grames to move
+    /// <summary> Set the frames till move variable </summary>
     private void SetFramesToMove()
     {
         framesTillMove = (int)Random.Range(minFramesTillMove, maxFramesTillMove);
     }
 
-    // move npc
+    /// <summary> Move the NPC</summary>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     private IEnumerator MoveNPC()
     {
-        float[] ranges = GetRange();
+        float[] ranges = GetMovementBounds();
         Vector3 toMove = new Vector3(Random.Range(ranges[0], ranges[1]), transform.position.y, Random.Range(ranges[2], ranges[3]));
         framesTillMove = int.MaxValue;
 
