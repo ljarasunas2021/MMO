@@ -5,33 +5,46 @@ using SwordGC.AI.Actions;
 using SwordGC.AI.Goap;
 using UnityEngine;
 
-// GOAP AI system for enemy 1
+///<summary> GOAP AI system for enemy 1 </summary>
 public class EnemyAI1 : GoapAgent
 {
-    // current index of weapon holding
+    // index of current weapon the enemy is holding
     public int weaponIndex;
-    // PID controller for aim
+    // PID controller for enemy's aim system
     public float aimP, aimI, aimD;
-    // right hand
+    // right hand gameobject
     public GameObject handR;
-    // start AI at awake?
+    // should the AI start at awake?
     public bool startAtAwake = false;
 
     // equipped item gameobject 
     private GameObject equippedItemGO;
-    // PID controllers for each axis
+    // PID controllers for each axis while aiming
     private PID xPID, yPID, zPID;
     // the time from the previous frame
-    private float currentTime;
+    private float previousFrameTime;
 
-    // animator
+    // animator component of enemy
     private Animator anim;
-    // player equip component
-    private PlayerEquip playerEquip;
-    // object being held
+    // item the enemy is holding
     [HideInInspector] public ItemHolding itemHolding;
 
-    // set up goap agent and PID controller
+    // the enemy's LookIK
+    public LookIK enemyLookIK;
+    // the offset from where the player is shooting to where the enemy is positioned
+    private Vector3 aimOffset;
+    // the target for the AI to shoot at (probably the player)
+    private GameObject target;
+    // the position to cast the raycast from in order to shoot
+    private Transform raycastStartSpot;
+    // the current position of where the AI is aiming
+    private Vector3 currentAimPosition;
+    // the offset from the target's postion to where the enemy should shoot the target
+    public Vector3 targetOffset;
+    // the speed at which the enemy rotates
+    public float rotationSpeed = 10; 
+
+    /// </summary> Set up this GOAP agent and the PID controller, init vars </summary>
     public override void Awake()
     {
         base.Awake();
@@ -49,12 +62,11 @@ public class EnemyAI1 : GoapAgent
         yPID = new PID(aimP, aimI, aimD);
         zPID = new PID(aimP, aimI, aimD);
 
-        offset1 = offset;
-
         if (startAtAwake) StartCoroutine(StartFiring());
     }
 
-    // start firing weapon
+    /// <summary> Start the enemy's firing </summary>
+    /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
     public IEnumerator StartFiring()
     {
         yield return new WaitForEndOfFrame();
@@ -75,100 +87,83 @@ public class EnemyAI1 : GoapAgent
         itemHolding = new ItemHolding(equippedItemGO, itemType);
     }
 
-    // stop firign weapon
+    /// <summary> Stop firing the weapon </summary>
     public void StopFiring()
     {
         Destroy(equippedItemGO);
         itemHolding = null;
     }
 
-    // when enemy should look
-    public LookIK enemyLookIK;
-    // offset for shooting
-    public Vector3 offset;
-    // target = player
-    private GameObject player;
-    // Starting position to cast raycast to shoot
-    private Transform raycastStartSpot;
-    // current position and offset
-    private Vector3 currentPosition, offset1;
-
-    // Aim
+    /// <summary> Adjust the aim of the enemy. This function is called automatically by Unity if the enemy's anim had IK enabled. </summary>
     void OnAnimatorIK()
     {
-        if (player != null && raycastStartSpot != null)
+        if (target != null && raycastStartSpot != null)
         {
             anim.SetLookAtWeight(enemyLookIK.lookIKWeight, enemyLookIK.bodyWeight, enemyLookIK.headWeight, enemyLookIK.eyesWeight, enemyLookIK.clampWeight);
 
-            Vector3 idealPosition = player.transform.position + offset1;
+            Vector3 idealPosition = target.transform.position + targetOffset;
 
-            offset.x += xPID.Update(idealPosition.x, currentPosition.x, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
-            offset.y += yPID.Update(idealPosition.y, currentPosition.y, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
-            offset.z += zPID.Update(idealPosition.z, currentPosition.z, Mathf.Clamp(Time.time - currentTime, 0.001f, 100));
+            aimOffset.x += xPID.Update(idealPosition.x, currentAimPosition.x, Mathf.Clamp(Time.time - previousFrameTime, 0.001f, 100));
+            aimOffset.y += yPID.Update(idealPosition.y, currentAimPosition.y, Mathf.Clamp(Time.time - previousFrameTime, 0.001f, 100));
+            aimOffset.z += zPID.Update(idealPosition.z, currentAimPosition.z, Mathf.Clamp(Time.time - previousFrameTime, 0.001f, 100));
 
-            anim.SetLookAtPosition(player.transform.position + offset + offset1);
+            anim.SetLookAtPosition(target.transform.position + aimOffset + targetOffset);
         }
         else
         {
-            player = GameObject.Find("Player_0(Clone)");
+            target = GameObject.Find("Player_0(Clone)");
 
             raycastStartSpot = transform.FindDeepChild("ShootSpot");
         }
 
-        currentTime = Time.time;
+        previousFrameTime = Time.time;
     }
 
-    // rotate enemy
+    /// <summary> Rotate the enemy to aim at the target </summary>
     void LateUpdate()
     {
-        if (player != null && raycastStartSpot != null)
+        if (target != null && raycastStartSpot != null)
         {
-            currentPosition = raycastStartSpot.position + raycastStartSpot.forward * Vector3.Distance(raycastStartSpot.position, player.transform.position);
+            currentAimPosition = raycastStartSpot.position + raycastStartSpot.forward * Vector3.Distance(raycastStartSpot.position, target.transform.position);
 
-            Vector3 dir = (player.transform.position - transform.position).normalized;
+            Vector3 dir = (target.transform.position - transform.position).normalized;
 
             Quaternion lookRot = Quaternion.LookRotation(dir);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 10);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
         }
-
-        xPID.pFactor = aimP;
-        xPID.iFactor = aimI;
-        xPID.dFactor = aimD;
-        yPID.pFactor = aimP;
-        yPID.iFactor = aimI;
-        yPID.dFactor = aimD;
-        zPID.pFactor = aimP;
-        zPID.iFactor = aimI;
-        zPID.dFactor = aimD;
     }
 
-    // set data that this enemy is dead
-    public void Dead()
+    /// <summary> Set GOAP data to display that the enemy died </summary>
+    public void EnemyDead()
     {
         dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", true);
     }
 
-    // set data that this player is dead
+    /// <summary> Set GOAP data to display that the player died </summary>
     public void PlayerDead()
     {
         dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", true);
     }
 
-    // visualize shooting
+    /// <summary> Visualize where the enemy AI is aiming </summary>
     void OnDrawGizmos()
     {
-        if (player != null && raycastStartSpot != null)
+        if (target != null && raycastStartSpot != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(currentPosition, 0.5f);
+            Gizmos.DrawWireSphere(currentAimPosition, 0.5f);
         }
     }
 }
 
-// find gameobject with name aName
+/// <summary> Find a child of a gameobject with a certain name </summary>
 public static class TransformDeepChildExtension
 {
+    /// <summary> Find a child of a gameobject with a certain name </summary>
+    /// <param name="aParent"> the transform of the parent that this function should search children of </param>
+    /// <param name="aName"> the name of the child this function should search for </param>
+    /// <returns> the transform of the child </returns>
     public static Transform FindDeepChild(this Transform aParent, string aName)
     {
         Queue<Transform> queue = new Queue<Transform>();

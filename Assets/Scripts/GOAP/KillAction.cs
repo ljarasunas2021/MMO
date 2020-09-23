@@ -5,15 +5,24 @@ using UnityEngine;
 
 namespace SwordGC.AI.Actions
 {
-    // killing action
+    /// <summary> A killing action for the GOAP AI </summary>
     public class KillAction : GoapAction
     {
-        // target player id, shooting varibales
-        private int targetPlayerId, minCountdown = 10, maxCountdown = 30, timeTillCanShoot = 0;
-        // agent
+        // the player id of the target
+        private int targetPlayerId;
+        // the minimum countdown to shoot
+        private int minCountdown = 10;
+        // the maximum countdown to shoot
+        private int  maxCountdown = 30;
+        // the amount of time until the AI can shoot
+        private int  timeTillCanShoot = 0;
+        // the goap agent itself
         private GoapAgent agent;
 
-        // def of kill action
+        /// <summary> Contstructor for the kill action </summary>
+        /// <param name="agent"> agent that will execute this action </param>
+        /// <param name="targetPlayerId"> player id of the target of this action </param>
+        /// <returns> the KillAction object created </returns>
         public KillAction(GoapAgent agent, int targetPlayerId) : base(agent)
         {
             this.agent = agent;
@@ -28,7 +37,7 @@ namespace SwordGC.AI.Actions
             targetString = "Player_" + targetPlayerId + "(Clone)";
         }
 
-        // preform kill action
+        /// <summary> Perform the kill action </summary>
         public override void Perform()
         {
             if (timeTillCanShoot <= 0)
@@ -40,7 +49,8 @@ namespace SwordGC.AI.Actions
             timeTillCanShoot--;
         }
 
-        // clone action
+        /// <summary> Clone and return this GOAP action </summary>
+        /// <returns> the clone </returns>
         public override GoapAction Clone()
         {
             return new KillAction(agent, targetPlayerId).SetClone(originalObjectGUID);
