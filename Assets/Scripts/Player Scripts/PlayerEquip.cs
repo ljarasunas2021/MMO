@@ -138,7 +138,7 @@ public class PlayerEquip : NetworkBehaviour
             Item item = hit.collider.gameObject.GetComponent<Item>();
             if (item != null)
             {
-                inventoryManager.AddInventoryItem(FindIndex(item.gameObject), item.icon);
+                inventoryManager.AddInventoryItem(FindItemIndex(item.gameObject), item.icon);
                 Destroy(item.transform.parent.gameObject);
             }
         }

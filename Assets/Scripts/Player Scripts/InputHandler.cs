@@ -110,7 +110,7 @@ public class InputHandler : NetworkBehaviour
             }
             if (Input.GetMouseButton(i))
             {
-                playerEquip.UseItem(i);
+                playerEquip.UseItem();
             }
         }
     }
