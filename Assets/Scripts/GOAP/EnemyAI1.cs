@@ -5,7 +5,7 @@ using SwordGC.AI.Actions;
 using SwordGC.AI.Goap;
 using UnityEngine;
 
-///<summary> GOAP AI system for enemy 1 </summary>
+///<summary> GOAP AI system for enemy 1. To learn about GOAP AI, visit https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793 </summary>
 public class EnemyAI1 : GoapAgent
 {
     // index of current weapon the enemy is holding

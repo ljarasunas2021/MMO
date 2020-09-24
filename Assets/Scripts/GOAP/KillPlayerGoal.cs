@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary> The kill player goal for the GOAP Agent </summary>
+/// <summary> The kill player goal for the GOAP Agent. To learn about GOAP AI, visit https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793  </summary>
 public class KillPlayerGoal : GoapGoal
 {
     /// <summary> Constructor for the KillPlayerGoal </summary>

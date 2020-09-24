@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SwordGC.AI.Actions
 {
-    /// <summary> A killing action for the GOAP AI </summary>
+    /// <summary> A killing action for the GOAP AI. To learn about GOAP AI, visit https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793  </summary>
     public class KillAction : GoapAction
     {
         // the player id of the target
