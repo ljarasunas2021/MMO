@@ -19,7 +19,7 @@ public class OutlineObject : MonoBehaviour {
 
     /// <summary> Is the player close enough for it to be outlined </summary>
     /// <returns> whether the player is close enough for the gameobject to be outlined </returns>
-    private bool PlayerCloseEnough()
+    private bool IsPlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
         return (playerDist < radius);
@@ -27,7 +27,7 @@ public class OutlineObject : MonoBehaviour {
 
     /// <summary> When the mouse hovers over a gameobject, outline the object </summary>
     void OnMouseOver() {
-        if (PlayerCloseEnough()) {
+        if (IsPlayerCloseEnough()) {
             outline.enabled = true;
         } else {
             outline.enabled = false;

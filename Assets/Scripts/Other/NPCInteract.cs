@@ -38,7 +38,7 @@ public class NPCInteract : Target
     /// <summary> Interact with the player </summary>
     public override void Interact()
     {
-        if (PlayerCloseEnough())
+        if (IsPlayerCloseEnough())
         {
             if (UIManager.canMove)
             {
@@ -54,7 +54,7 @@ public class NPCInteract : Target
 
     /// <summary> Is the player within range of the NPC </summary>
     /// <returns> Whether the player is in range of the NPC </returns>
-    private bool PlayerCloseEnough()
+    private bool IsPlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
         return (playerDist < radius);
