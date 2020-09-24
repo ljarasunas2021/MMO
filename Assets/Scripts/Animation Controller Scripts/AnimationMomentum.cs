@@ -31,9 +31,9 @@ public class AnimationMomentum : StateMachineBehaviour
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         if (useSetSpeed) targetSpeed = speed;
-        else targetSpeed = animator.GetFloat(Parameters.currentSpeedZ) * previousSpeedMultiplier;
+        else targetSpeed = animator.GetFloat(PlayerAnimParameters.currentSpeedZ) * previousSpeedMultiplier;
 
-        if (!useMomentum) animator.SetFloat(Parameters.currentSpeedZ, targetSpeed);
+        if (!useMomentum) animator.SetFloat(PlayerAnimParameters.currentSpeedZ, targetSpeed);
     }
 
     /// <summary> If useMomentum, interpolate between the current and target speed. This function is called automatically by Unity. </summary>
@@ -46,14 +46,14 @@ public class AnimationMomentum : StateMachineBehaviour
 
         if (useMomentum)
         {
-            float currentSpeed = animator.GetFloat(Parameters.currentSpeedZ);
+            float currentSpeed = animator.GetFloat(PlayerAnimParameters.currentSpeedZ);
             if (speed - currentSpeed > 0)
             {
-                animator.SetFloat(Parameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, accelerationSmoothTime));
+                animator.SetFloat(PlayerAnimParameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, accelerationSmoothTime));
             }
             else
             {
-                animator.SetFloat(Parameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, decelerationSmoothTime));
+                animator.SetFloat(PlayerAnimParameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, decelerationSmoothTime));
             }
         }
     }

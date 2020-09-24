@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// add gravity to CC
+/// <summary> Adds gravity to cc </summary>
+[RequireComponent(typeof(CharacterController))]
 public class Gravity : MonoBehaviour
 {
     // gravity amount
@@ -12,19 +13,19 @@ public class Gravity : MonoBehaviour
     // cc variable
     private CharacterController cc;
 
-    // get the cc
+    /// <summary> Get the CC </summary>
     private void Start()
     {
         cc = GetComponent<CharacterController>();
     }
 
-    // add the gravity each frame
+    /// <summary> Add gravity each frame </summary>
     private void Update()
     {
         AddGravity();
     }
 
-    // add gravity appropriately
+    /// <summary> Add appropriate gravity </summary>
     private void AddGravity()
     {
         if (cc.isGrounded) veloY = 0;

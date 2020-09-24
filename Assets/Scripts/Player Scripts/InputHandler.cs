@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using Mirror;
 
-///<summary> Used to manage all of the player input </summary>
+///<summary> Used to manage all of the player's input </summary>
 public class InputHandler : NetworkBehaviour
 {
     // current item holding
     private ItemHolding itemHolding;
-    // appropriate scripts:
+    // components of player:
     private Movement movement;
     private PlayerEquip playerEquip;
+    private BodyParts bodyParts;
+
+    // singletons
     private InventoryManager inventoryManager;
     private UIManager uIScript;
-    private BodyParts bodyParts;
     private Map map;
 
     // camera
@@ -20,7 +22,7 @@ public class InputHandler : NetworkBehaviour
     // player is dead
     private bool isDead;
 
-    // init vars
+    /// <summary> Init vars </summary>
     void Start()
     {
         movement = GetComponent<Movement>();
@@ -41,14 +43,14 @@ public class InputHandler : NetworkBehaviour
         map.player = gameObject;
     }
 
-    // add player to players controller
+    /// <summary> Add player to player controller </summary>
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         PlayersController.instance.players.Add(gameObject);
     }
 
-    // test for ui
+    /// <summary> Test for input </summary>
     void Update()
     {
         if (!isLocalPlayer) return;
@@ -58,16 +60,16 @@ public class InputHandler : NetworkBehaviour
         TestUI();
         TestInteraction();
         TestEquip();
-        CheckItemHolding();
+        TestItemHolding();
     }
 
-    // test for movement
+    /// <summary> Test for movement input </summary>
     private void TestMove() { if (!isDead) movement.Move(); }
 
-    // test for grabbing
+    /// <summary> Test for grabbing input </summary>
     private void TestGrab() { if (Input.GetButtonDown("Pickup") && !isDead) playerEquip.Grab(); }
 
-    // test for UI
+    /// <summary> Test for UI input </summary>
     private void TestUI()
     {
         if (Input.GetButtonDown("Inventory") && !isDead) inventoryManager.ChangeEnabled();
@@ -81,7 +83,7 @@ public class InputHandler : NetworkBehaviour
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
     }
 
-    // test interaction
+    /// <summary> Test for interaction input </summary>
     private void TestInteraction()
     {
         if (Input.GetMouseButtonDown(0))
@@ -97,6 +99,7 @@ public class InputHandler : NetworkBehaviour
         }
     }
 
+    /// <summary> Test for equip input </summary>
     private void TestEquip()
     {
         for (int i = 0; i < 2; i++)
@@ -112,15 +115,17 @@ public class InputHandler : NetworkBehaviour
         }
     }
 
-    // test for input related to items holding
-    private void CheckItemHolding()
+    /// <summary> Test for input related to the item the player is holding </summary>
+    private void TestItemHolding()
     {
         if (itemHolding.type != ItemType.none && UIManager.canShoot) itemHolding.weaponScript.CheckForUserInput();
     }
 
-    // change the item holding
+    /// <summary> Change the item holding </summary>
+    /// <param name="itemHolding"> the new item holding </param>
     public void ChangeItemHolding(ItemHolding itemHolding) { this.itemHolding = itemHolding; }
 
-    // change is dead
+    /// <summary> Set the isDead variable </summary>
+    /// <param name="dead"> the new value for isDead </param>
     public void SetDead(bool dead) { isDead = dead; }
 }

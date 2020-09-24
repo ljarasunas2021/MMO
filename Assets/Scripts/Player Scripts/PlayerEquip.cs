@@ -1,7 +1,7 @@
 ﻿using Mirror;
 using UnityEngine;
 
-///<summary> Allow the player to equip items </summary>
+///<summary> Allow the player to equip and unequip items </summary>
 public class PlayerEquip : NetworkBehaviour
 {
     // scene object prefab
@@ -17,6 +17,7 @@ public class PlayerEquip : NetworkBehaviour
     private GameObject equippedItemGO;
     // maximum grab distance
     public int maxGrabDistance;
+
     // scripts of player
     private BodyParts bodyParts;
     private InventoryManager inventoryManager;
@@ -31,12 +32,12 @@ public class PlayerEquip : NetworkBehaviour
     private GameObject[] itemPrefabs;
     // hot bar vars
     private int hotBarIndex = -1, hotBarIndexCounter;
-    // maincamera
+    // main camera
     private Camera mainCam;
     // weapon has been despawned bool
     private bool alreadyDespawnedWeapon = false;    
 
-    // init vars
+    /// <summary> Init vars </summary>
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -58,7 +59,8 @@ public class PlayerEquip : NetworkBehaviour
         inventoryManager.SetPlayer(gameObject);
     }
 
-    // change the current item
+    /// <summary> Change the current equipped item </summary>
+    /// <param name="itemIndex"> the index of the new equipped item </param>
     private void ChangeItem(int itemIndex)
     {
         foreach (Transform weapon in handR.transform) Destroy(weapon.gameObject);
@@ -74,26 +76,31 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
-    // change equipped item index
+    /// <summary> Change the equipped item index </summary>
+    /// <param name="itemIndex"> new equipped item index </param>
     [Command]
     void CmdChangeEquippedItem(int itemIndex)
     {
         equippedItem = itemIndex;
     }
 
-    // change hot bar index
+    /// <summary> Change the hot bar index </summary>
+    /// <param name="hotBarIndex"> new hot bar index </param>
     [Command]
     public void CmdChangeHotBarIndex(int hotBarIndex) { this.hotBarIndex = hotBarIndex; }
 
-    // find correct item index
-    private int FindIndex(GameObject item)
+    /// <summary> Find the item index of an item </summary>
+    /// <param name="item"> the item </param>
+    /// <returns> the item index of the item </returns>
+    private int FindItemIndex(GameObject item)
     {
         int index = -1;
         for (int i = 0; i < itemPrefabs.Length; i++) if (item.name.Contains(itemPrefabs[i].name)) index = i;
         return index;
     }
 
-    // possibly equip a new slot
+    /// <summary> Equip new slot (possibly) </summary>
+    /// <param name="index"> slot index </param>
     public void PossibleEquipSlot(int index)
     {
         if (hotBarIndex != index)
@@ -103,13 +110,13 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
-    // reset hotbarIndex counter if use item
-    public void UseItem(int index)
+    /// <summary> Reset hotbarIndex counter if use item </summary>
+    public void UseItem()
     {
         hotBarIndexCounter = weaponTimeTillDespawn;
     }
 
-    // control hot bar index counter
+    /// <summary> Control hotbar index counter </summary>
     private void Update()
     {
         hotBarIndexCounter--;
@@ -121,7 +128,7 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
-    // grab weapon
+    /// <summary> Grab an item </summary>
     public void Grab()
     {
         RaycastHit hit;
@@ -137,7 +144,9 @@ public class PlayerEquip : NetworkBehaviour
         }
     }
 
-    // equip item
+    /// <summary> Equip an item </summary>
+    /// <param name="hotBarIndex"> the hot bar index of the new item </param>
+    /// <param name="itemIndex"> the new item's index </param>
     public void EquipItem(int hotBarIndex, int itemIndex)
     {
         CmdChangeHotBarIndex(hotBarIndex);
@@ -145,7 +154,8 @@ public class PlayerEquip : NetworkBehaviour
         EnableWeaponScript(itemIndex);
     }
 
-    // enable the weapon script of the newly equipped item
+    /// <summary> Enable the weapon script on a newly equipped weapon </summary>
+    /// <param name="itemIndex"> item index of newly equipped item </param>
     private void EnableWeaponScript(int itemIndex)
     {
         int upperBodyState = 0;
@@ -154,7 +164,7 @@ public class PlayerEquip : NetworkBehaviour
         if (itemIndex == -1)
         {
             cameraMode = CameraModes.cinematic;
-            upperBodyState = (int)UpperBodyStates.none;
+            upperBodyState = (int)PlayerAnimUpperBodyState.none;
         }
         else
         {
@@ -170,8 +180,8 @@ public class PlayerEquip : NetworkBehaviour
 
             if (weapon.type == WeaponType.Ranged)
             {
-                if (weapon.rangedHold == RangedHoldType.pistol) upperBodyState = (int)UpperBodyStates.pistolHold;
-                else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)UpperBodyStates.shotgunHold;
+                if (weapon.rangedHold == RangedHoldType.pistol) upperBodyState = (int)PlayerAnimUpperBodyState.pistolHold;
+                else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)PlayerAnimUpperBodyState.shotgunHold;
 
                 cameraMode = CameraModes.locked;
 
@@ -179,7 +189,7 @@ public class PlayerEquip : NetworkBehaviour
             }
             else
             {
-                upperBodyState = (int)UpperBodyStates.swordHold;
+                upperBodyState = (int)PlayerAnimUpperBodyState.swordHold;
 
                 cameraMode = CameraModes.closeUp;
 
@@ -187,16 +197,18 @@ public class PlayerEquip : NetworkBehaviour
             }
         }
 
-        animator.SetInteger(Parameters.upperBodyState, upperBodyState);
+        animator.SetInteger(PlayerAnimParameters.upperBodyState, upperBodyState);
         playerCameraManager.ChangeCam(cameraMode);
     }
 
-    // use rigidbody on server
+    /// <summary> Set a rigidbody's isKinematic var on the server </summary>
+    /// <param name="weapon"> weapon gameobject </param>
+    /// <param name="isKinematic"> should the weapon be kinematic </param>
     [Command]
     private void CmdSetWeaponRigidBody(GameObject weapon, bool isKinematic) { weapon.transform.GetComponent<Rigidbody>().isKinematic = isKinematic; }
 }
 
-// current item held
+/// <summary> Holds vars for item thats being held </summary>
 public class ItemHolding
 {
     // actual item
@@ -206,7 +218,9 @@ public class ItemHolding
     // item's weapon script
     public Weapon weaponScript;
 
-    // constructor
+    /// <summary> Constructor</summary>
+    /// <param name="item"> actual item gameobject </param>
+    /// <param name="type"> item's type </param>
     public ItemHolding(GameObject item, ItemType type)
     {
         this.item = item;
@@ -216,7 +230,7 @@ public class ItemHolding
     }
 }
 
-// types of items
+/// <summary> Type of items </summary>
 public enum ItemType
 {
     melee,

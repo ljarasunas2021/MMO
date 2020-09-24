@@ -22,7 +22,7 @@ public class ChangeUpperBodyState : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onEnter) animator.SetInteger(Parameters.upperBodyState, enterValue);
+        if (onEnter) animator.SetInteger(PlayerAnimParameters.upperBodyState, enterValue);
     }
 
     ///<summary> When the animation stops playing, if onExit, this function sets the current upper body state to the exitValue. This function is called automatically by Unity. </summary>
@@ -31,6 +31,6 @@ public class ChangeUpperBodyState : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onExit) animator.SetInteger(Parameters.upperBodyState, exitValue);
+        if (onExit) animator.SetInteger(PlayerAnimParameters.upperBodyState, exitValue);
     }
 }

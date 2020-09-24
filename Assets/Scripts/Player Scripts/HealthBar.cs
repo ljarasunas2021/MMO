@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// manages health bar
+/// <summary> Manages the health bar UI</summary>
 public class HealthBar : MonoBehaviour
 {
     // singleton
@@ -17,7 +17,7 @@ public class HealthBar : MonoBehaviour
     // rect transform of green image
     private RectTransform greenRect;
 
-    // get correct variables
+    /// <summary> Init vars, make singleton </summary>
     private void Start() {
         if (instance == null)
         {
@@ -32,14 +32,17 @@ public class HealthBar : MonoBehaviour
         startingWidth = greenRect.rect.width;
     }
 
-    // intialize player vars
+    /// <summary> Init the player vars, called when local player starts their game</summary>
+    /// <param name="player"> local player gameobject </param>
+    /// <param name="maxHealth"> maximum health of player </param>
     public void Initialize(GameObject player, float maxHealth) {
         this.player = player;
         this.maxHealth = maxHealth;
     }
 
-    // take damage appropriately
-    public void TakeDamage(float health) {
+    /// <summary> Set the health of the health bar </summary>
+    /// <param name="health"> health for the health bar </param>
+    public void SetHealth(float health) {
         greenRect.sizeDelta = new Vector2((health / maxHealth) * startingWidth, greenRect.rect.height);
     }
 }

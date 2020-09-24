@@ -21,7 +21,7 @@ public class ChangeCanRotate : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onEnter) animator.SetBool(Parameters.canRotate, enterValue);
+        if (onEnter) animator.SetBool(PlayerAnimParameters.canRotate, enterValue);
     }
 
     ///<summary> if onExit, this function will set the player's rotation to the appropriate value when the animator stops playing this animation. This function is called automatically by Unity. </summary>
@@ -30,6 +30,6 @@ public class ChangeCanRotate : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onExit) animator.SetBool(Parameters.canRotate, exitValue);
+        if (onExit) animator.SetBool(PlayerAnimParameters.canRotate, exitValue);
     }
 }

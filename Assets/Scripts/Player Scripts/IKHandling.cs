@@ -2,29 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// handles IK of player
+/// <summary> Handles player's IK </summary>
 public class IKHandling : MonoBehaviour
 {
-    // how much ik should be applied, distance from ground to center of body
-    public float ikWeight = 1, offsetY;
-    // look iks to be applied at appropriate times
+    // how much ik should be applied
+    [Range(0, 1)]
+    public float ikWeight = 1;
+    // distance from ground to center of body
+    public float offsetY;
+    // look iks to be applied when player is not equipped (basic) / equipped
     public LookIK basicLookIK, equippedLookIK;
     // the current look ik (basic or equipped)
     private LookIK currentLookIK;
     // ground angle under left/right foot
     private float groundAngleLeft, groundAngleRight;
-    // transform of left/right foot
+    // transform of the left/right foot
     private Transform leftFoot, rightFoot;
-    // animator
+    // animator component of player
     private Animator anim;
-    // positions
+    // left foot / right foot / where the player is looking positions
     private Vector3 leftFootPos, rightFootPos, lookPos;
-    // rotations
+    // left / right foot rotations
     private Quaternion leftFootRot, rightFootRot;
-    // main/only camera
+    // the main camera
     private Camera mainCam;
 
-    // set vars
+    /// <summary> Init vars </summary>
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -36,14 +39,15 @@ public class IKHandling : MonoBehaviour
         currentLookIK = basicLookIK;
     }
 
-    // switch the type of look IK
+    /// <summary> Switch the current look IK </summary>
+    /// <param name="type"> the type of look IK that should be switched to </param>
     public void SwitchLookIK(LookIKTypes type)
     {
         if (type == LookIKTypes.Basic) currentLookIK = basicLookIK;
         else if (type == LookIKTypes.Weapon) currentLookIK = equippedLookIK;
     }
 
-    // find where it should look
+    /// <summary> Find look pos </summary>
     void Update()
     {
         Ray ray = new Ray(mainCam.transform.position, mainCam.transform.forward);
@@ -69,7 +73,7 @@ public class IKHandling : MonoBehaviour
         // }
     }
 
-    // set look at weight and position / apply IK
+    /// <summary> Apply the IK. This function is called automatically by Unity </summary>
     void OnAnimatorIK()
     {
         anim.SetLookAtWeight(currentLookIK.lookIKWeight, currentLookIK.bodyWeight, currentLookIK.headWeight, currentLookIK.eyesWeight, currentLookIK.clampWeight);
@@ -92,14 +96,14 @@ public class IKHandling : MonoBehaviour
     }
 }
 
-// variables needed for an ik, come directly from unity
+/// <summary> Class that holds Unity variables for a IK</summary>
 [System.Serializable]
 public class LookIK
 {
     public float lookIKWeight, bodyWeight, headWeight, eyesWeight, clampWeight, lookDistance;
 }
 
-// different types of look ik
+/// <summary> Types of look IKs</summary>
 public enum LookIKTypes
 {
     Basic,

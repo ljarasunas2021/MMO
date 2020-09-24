@@ -406,6 +406,7 @@
 "Assets/Scripts/Other/Action.cs"
 "Assets/Scripts/Other/ExpressionParser.cs"
 "Assets/Scripts/Other/NPCDialogue.cs"
+"Assets/Scripts/Other/NPCInteract.cs"
 "Assets/Scripts/Other/NPCMovement.cs"
 "Assets/Scripts/Other/OutlineObject.cs"
 "Assets/Scripts/Other/PID.cs"

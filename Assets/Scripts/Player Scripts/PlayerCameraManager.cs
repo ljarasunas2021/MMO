@@ -5,7 +5,7 @@ using UnityEngine;
 ///<summary> Preform all actions related to player and the camera </summary>
 public class PlayerCameraManager : NetworkBehaviour
 {
-    // gmaeobjects of player
+    // player gameobject
     private GameObject head;
     private GameObject lockedCamFollow;
 
@@ -20,7 +20,7 @@ public class PlayerCameraManager : NetworkBehaviour
     // body parts script of player
     private BodyParts bodyParts;
 
-    // set free look vars and appropriate camera
+    /// <summary> Init vars </summary>
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -51,7 +51,8 @@ public class PlayerCameraManager : NetworkBehaviour
         ChangeCam(CameraModes.cinematic);
     }
 
-    // change camera to the appropriate one
+    /// <summary> Change the current camera </summary>
+    /// <param name="mode"> the new current camera mode </param>
     public void ChangeCam(CameraModes mode)
     {
         if (mode != currentCam)
@@ -81,11 +82,12 @@ public class PlayerCameraManager : NetworkBehaviour
         }
     }
 
-    // return the current camera mode
+    /// <summary> Return current camera mode </summary>
+    /// <returns> current camera mode </returns>
     public CameraModes ReturnCameraMode() { return currentCam; }
 }
 
-// 4 diff camera modes
+/// <summary> 3 different camera modes </summary>
 public enum CameraModes
 {
     cinematic,

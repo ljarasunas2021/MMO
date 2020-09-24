@@ -412,6 +412,7 @@
 "Assets/Scripts/Other/PID.cs"
 "Assets/Scripts/Other/PlayerDialogue.cs"
 "Assets/Scripts/Other/RigidBodySpawn.cs"
+"Assets/Scripts/Other/Target.cs"
 "Assets/Scripts/Player Scripts/BodyParts.cs"
 "Assets/Scripts/Player Scripts/Gravity.cs"
 "Assets/Scripts/Player Scripts/HealthBar.cs"

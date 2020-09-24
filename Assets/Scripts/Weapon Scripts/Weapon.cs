@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
     private GameObject user;
     private PlayerWeapon playerWeapon;
     private Animator userAnim;
-    private Dictionary<UpperBodyStates, UpperBodyStates[]> meleeCombosDict = new Dictionary<UpperBodyStates, UpperBodyStates[]>();
+    private Dictionary<PlayerAnimUpperBodyState, PlayerAnimUpperBodyState[]> meleeCombosDict = new Dictionary<PlayerAnimUpperBodyState, PlayerAnimUpperBodyState[]>();
     private int hotBarIndex;
 
     private bool showAim = true;
@@ -136,7 +136,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            meleeCombos = new MeleeCombo[] { new MeleeCombo(UpperBodyStates.midInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.midSlashLeft }), new MeleeCombo(UpperBodyStates.midSlashLeft, new UpperBodyStates[] { UpperBodyStates.midInwardSlashRight }), new MeleeCombo(UpperBodyStates.highToLowInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.lowToHighSlashLeft }), new MeleeCombo(UpperBodyStates.lowToHighSlashLeft, new UpperBodyStates[] { UpperBodyStates.highToLowInwardSlashRight }), new MeleeCombo(UpperBodyStates.highToLowSlashLeft, new UpperBodyStates[] { UpperBodyStates.lowToHighInwardSlashRight }), new MeleeCombo(UpperBodyStates.lowToHighInwardSlashRight, new UpperBodyStates[] { UpperBodyStates.highToLowSlashLeft }) };
+            meleeCombos = new MeleeCombo[] { new MeleeCombo(PlayerAnimUpperBodyState.midInwardSlashRight, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.midSlashLeft }), new MeleeCombo(PlayerAnimUpperBodyState.midSlashLeft, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.midInwardSlashRight }), new MeleeCombo(PlayerAnimUpperBodyState.highToLowInwardSlashRight, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.lowToHighSlashLeft }), new MeleeCombo(PlayerAnimUpperBodyState.lowToHighSlashLeft, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.highToLowInwardSlashRight }), new MeleeCombo(PlayerAnimUpperBodyState.highToLowSlashLeft, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.lowToHighInwardSlashRight }), new MeleeCombo(PlayerAnimUpperBodyState.lowToHighInwardSlashRight, new PlayerAnimUpperBodyState[] { PlayerAnimUpperBodyState.highToLowSlashLeft }) };
             foreach (MeleeCombo combo in meleeCombos) meleeCombosDict.Add(combo.attack, combo.combos);
         }
     }
@@ -221,23 +221,23 @@ public class Weapon : MonoBehaviour
             if (Input.GetMouseButtonUp(hotBarIndex))
             {
 
-                UpperBodyStates currentUpperBodyState = (UpperBodyStates)userAnim.GetInteger(Parameters.upperBodyState);
+                PlayerAnimUpperBodyState currentUpperBodyState = (PlayerAnimUpperBodyState)userAnim.GetInteger(PlayerAnimParameters.upperBodyState);
                 int targetState = 0;
 
-                if (currentUpperBodyState == UpperBodyStates.swordHold)
+                if (currentUpperBodyState == PlayerAnimUpperBodyState.swordHold)
                 {
-                    List<UpperBodyStates> possibleStates = new List<UpperBodyStates>(meleeCombosDict.Keys);
+                    List<PlayerAnimUpperBodyState> possibleStates = new List<PlayerAnimUpperBodyState>(meleeCombosDict.Keys);
 
                     targetState = (int)possibleStates[Random.Range(0, possibleStates.Count)];
                 }
                 else
                 {
-                    UpperBodyStates[] possibleStates = meleeCombosDict[currentUpperBodyState];
+                    PlayerAnimUpperBodyState[] possibleStates = meleeCombosDict[currentUpperBodyState];
 
                     targetState = (int)possibleStates[Random.Range(0, possibleStates.Length)];
                 }
 
-                userAnim.SetInteger(Parameters.targetUpperBodyState, (int)targetState);
+                userAnim.SetInteger(PlayerAnimParameters.targetUpperBodyState, (int)targetState);
             }
         }
     }
@@ -464,10 +464,10 @@ public enum RangedHoldType
 [System.Serializable]
 public class MeleeCombo
 {
-    public UpperBodyStates attack;
-    public UpperBodyStates[] combos;
+    public PlayerAnimUpperBodyState attack;
+    public PlayerAnimUpperBodyState[] combos;
 
-    public MeleeCombo(UpperBodyStates attack, UpperBodyStates[] combos)
+    public MeleeCombo(PlayerAnimUpperBodyState attack, PlayerAnimUpperBodyState[] combos)
     {
         this.attack = attack;
         this.combos = combos;

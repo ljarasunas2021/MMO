@@ -97,8 +97,8 @@ public class LocomotionMomentum : StateMachineBehaviour
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        float locomotionBlendVal = animator.GetFloat(Parameters.locomotionBlend);
-        float locomotionDirVal = animator.GetFloat(Parameters.locomotionDir);
+        float locomotionBlendVal = animator.GetFloat(PlayerAnimParameters.locomotionBlend);
+        float locomotionDirVal = animator.GetFloat(PlayerAnimParameters.locomotionDir);
 
         BoundsAndSpeed zBound = locomotionBlendDict[ConvertToDouble(locomotionBlendVal)];
         float zSpeed = (zBound.lowerBound != zBound.upperBound) ? (((locomotionBlendVal - zBound.lowerBound) / (zBound.upperBound - zBound.lowerBound)) * (zBound.upperBoundSpeed - zBound.lowerBoundSpeed)) + zBound.lowerBoundSpeed : zBound.upperBoundSpeed;
@@ -106,8 +106,8 @@ public class LocomotionMomentum : StateMachineBehaviour
         BoundsAndSpeed xBound = locomotionDirDict[ConvertToDouble(locomotionDirVal)];
         float xSpeed = (xBound.lowerBound != xBound.upperBound) ? (((locomotionDirVal - xBound.lowerBound) / (xBound.upperBound - xBound.lowerBound)) * (xBound.upperBoundSpeed - xBound.lowerBoundSpeed)) + xBound.lowerBoundSpeed : xBound.upperBoundSpeed;
 
-        animator.SetFloat(Parameters.currentSpeedZ, zSpeed);
-        animator.SetFloat(Parameters.currentSpeedX, xSpeed);
+        animator.SetFloat(PlayerAnimParameters.currentSpeedZ, zSpeed);
+        animator.SetFloat(PlayerAnimParameters.currentSpeedX, xSpeed);
     }
 
     ///<summary> Convert a float to a double </summary>

@@ -21,7 +21,7 @@ public class ChangeCurrentState : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onEnter) animator.SetInteger(Parameters.currentState, enterValue);
+        if (onEnter) animator.SetInteger(PlayerAnimParameters.currentState, enterValue);
     }
 
     ///<summary> When the animation stops playing, if onExit, this function sets the current state to the exitValue. This function is called automatically by Unity. </summary>
@@ -30,6 +30,6 @@ public class ChangeCurrentState : StateMachineBehaviour
     /// <param name="layerIndex"> the layer of this animator state </param>
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (onExit) animator.SetInteger(Parameters.currentState, exitValue);
+        if (onExit) animator.SetInteger(PlayerAnimParameters.currentState, exitValue);
     }
 }

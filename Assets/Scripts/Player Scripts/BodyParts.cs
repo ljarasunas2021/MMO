@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Mirror;
 
-//Holds variables for body parts
+/// <summary> Holds variables for player's body parts</summary>
 public class BodyParts : NetworkBehaviour
 {
     // body part gameobjects

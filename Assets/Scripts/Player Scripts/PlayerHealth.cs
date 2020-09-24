@@ -9,13 +9,14 @@ public class PlayerHealth : NetworkBehaviour
 
     // max health
     public float maxHealth;
-    // is player?
+    // is this a player
     public bool isPlayer = true;
+    
     // player scripts
     private InputHandler inputHandler;
     private HealthBar healthBar;
 
-    // init vars
+    /// <summary> Init vars </summary>
     private void Start()
     {
         inputHandler = GetComponent<InputHandler>();
@@ -24,13 +25,14 @@ public class PlayerHealth : NetworkBehaviour
         maxHealth = health;
     }
 
-    // subtract health from player
+    /// <summary> Subtract health from player </summary>
+    /// <param name="amount"> amount of health to subtract </param>
     public void SubtractHealth(float amount)
     {
         health -= amount;
         if (isPlayer)
         {
-            healthBar.TakeDamage(health);
+            healthBar.SetHealth(health);
             if (health <= 0)
             {
                 inputHandler.SetDead(true);
