@@ -1,7 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
 
-// holds all map markers
+/// <summary> Holds all of the map markers </summary>
 public class MapMarkers : MonoBehaviour, IPointerClickHandler
 {
     // the compass gameObject
@@ -25,7 +25,7 @@ public class MapMarkers : MonoBehaviour, IPointerClickHandler
     //the max coordinates of the player on the mapHeight
     private float maxX, minX, maxZ, minZ;
 
-    // initialize the variables
+    /// <summary> Init vars </summary>
     void Start()
     {
         mainCamera = Camera.main;
@@ -41,7 +41,8 @@ public class MapMarkers : MonoBehaviour, IPointerClickHandler
         minZ = map.minZ;
     }
 
-    // create a marker on click
+    /// <summary> Create a marker when the player clicks </summary>
+    /// <param name="eventData"> information about the player's click </param>
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject markerInstant = Instantiate(marker, transform);

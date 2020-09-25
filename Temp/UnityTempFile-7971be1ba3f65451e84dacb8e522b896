@@ -430,7 +430,6 @@
 "Assets/Scripts/UI/Map.cs"
 "Assets/Scripts/UI/MapMarker.cs"
 "Assets/Scripts/UI/MapMarkers.cs"
-"Assets/Scripts/UI/MinimapCamera.cs"
 "Assets/Scripts/UI/Waypoint.cs"
 "Assets/Scripts/Weapon Scripts/Item.cs"
 "Assets/Scripts/Weapon Scripts/Weapon.cs"

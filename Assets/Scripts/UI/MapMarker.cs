@@ -1,13 +1,14 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
 
-// on maps marker
+/// <summary> Markers on the map </summary>
 public class MapMarker : MonoBehaviour, IPointerClickHandler
 {
     // the compass gameObject
     [HideInInspector] public Compass compass;
 
-    // Destroy the gameObject and remove it form the compass on click
+    /// <summary> Destroy the gameObject and remove it from the compass on click </summary>
+    /// <param name="eventData"> information of the pointer's click </param>
     public void OnPointerClick(PointerEventData eventData)
     {
         compass.RemoveWaypoint(this);

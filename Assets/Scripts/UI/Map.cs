@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Handles the UI with the map</summary>
 public class Map : MonoBehaviour
 {
     //singleton
@@ -24,7 +25,7 @@ public class Map : MonoBehaviour
     // the screen's width and height
     [HideInInspector] public float screenWidth, screenHeight;
 
-    // initialize the variables at runtime
+    /// <summary> Init vars </summary>
     void Awake()
     {
         if (instance == null)
@@ -44,7 +45,7 @@ public class Map : MonoBehaviour
         screenHeight = Screen.height;
     }
 
-    // Called when map becomes visible, spawns player marker
+    /// <summary> When the map is enabled, refresh the player's position on the marker </summary>
     public void Enable()
     {
         Debug.Log(player.gameObject.name);
@@ -57,7 +58,7 @@ public class Map : MonoBehaviour
         playerMarkerInstant.transform.rotation = Quaternion.identity;
     }
 
-    // called when map becomes invisible, deletes player marker
+    /// <summary> When the map is disabled, destroy the player's map marker </summary>
     public void Disable()
     {
         UIManager.LockCursor(true);

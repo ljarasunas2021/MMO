@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary> Manages the inventory </summary>
 public class InventoryManager : MonoBehaviour
 {
     // singleton
@@ -21,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     // the player equip script of the player
     private PlayerEquip playerEquip;
 
-    // set singleton, set default indexes and values for arrays
+    /// <summary> Create singleton, set default indexes and values for arrays</summary>
     void Start()
     {
         if (instance == null)
@@ -39,7 +40,9 @@ public class InventoryManager : MonoBehaviour
         foreach (InventoryPlaceHolder inventorySlot in inventorySlots) inventorySlot.itemAndIcon = new InventoryItemAndIcon(-1, null);
     }
 
-    // Add an inventory item to the inventory
+    /// <summary> Add an inventory item </summary>
+    /// <param name="itemIndex"> index from item prefabs for an item to place in inventory </param>
+    /// <param name="icon"> icon to put in inventory panel </param>
     public void AddInventoryItem(int itemIndex, Sprite icon)
     {
         int index = -1;
@@ -54,7 +57,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // toggle the inventory on and off
+    /// <summary> Toggle the inventory on and off </summary>
     public void ChangeEnabled()
     {
         inventoryCanvas.SetActive(!inventoryEnabled);
@@ -66,20 +69,23 @@ public class InventoryManager : MonoBehaviour
         playerEquip.CmdChangeHotBarIndex(-1);
     }
 
-    // equip a certain hot bar slot (item index isn't known)
+    /// <summary> equip a certain hot bar slot </summary>
+    /// <param name="slot"> the slot to equip </param>
     public void EquipSlot(int slot)
     {
         playerEquip.EquipItem(slot, hotBar[slot].itemAndIcon.itemIndex);
     }
 
-    // finish dragging an inventory placeholder, switch values and graphics
+    /// <summary> Finish dragging an inventory placeholder, switch values and graphics </summary>
+    /// <param name="eventData"> informaiton about the drag </param>
     public void EndDrag(PointerEventData eventData)
     {
         foreach (InventoryPlaceHolder slot in inventorySlots) slot.CheckForDrop(eventData);
         foreach (InventoryPlaceHolder hotSlot in hotBar) hotSlot.CheckForDrop(eventData);
     }
 
-    // set the player variables
+    /// <summary> Set player variables </summary>
+    /// <param name="player"> local player </param>
     public void SetPlayer(GameObject player)
     {
         this.player = player;
@@ -96,7 +102,9 @@ public class InventoryItemAndIcon
     // icon that is shown in the inventory
     public Sprite icon;
 
-    // create a new inventory item and icon
+    /// <summary> Constructor </summary>
+    /// <param name="itemIndex"> index of item prefab </param>
+    /// <param name="icon"> icon for inventory panel </param>
     public InventoryItemAndIcon(int itemIndex, Sprite icon)
     {
         this.itemIndex = itemIndex;

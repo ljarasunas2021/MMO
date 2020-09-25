@@ -160,7 +160,6 @@
      <Compile Include="Assets\Scripts\UI\Map.cs" />
      <Compile Include="Assets\Scripts\UI\MapMarker.cs" />
      <Compile Include="Assets\Scripts\UI\MapMarkers.cs" />
-     <Compile Include="Assets\Scripts\UI\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\UI\Waypoint.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// holds a waypoint
+/// <summary> Holds data for a waypoint </summary>
 public class Waypoint : MonoBehaviour
 {
-    // the color the waypoint should show
+    // color for waypoint (currently only black)
     public Color color;
 }

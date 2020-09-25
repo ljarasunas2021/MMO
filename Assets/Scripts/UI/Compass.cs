@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
-// manage compass ui
+/// <summary> Manage the compass UI </summary>
 public class Compass : NetworkBehaviour
 {
     // player GameObject
@@ -22,14 +22,14 @@ public class Compass : NetworkBehaviour
     // the width of the compass
     private float width;
 
-    // intitialize variables at run time
+    /// <summary> Init vars </summary>
     void Start()
     {
         mainCamTransform = Camera.main.transform;
         width = mask.GetComponent<RectTransform>().rect.width / 2;
     }
 
-    // rotate the circle parent accordingly
+    /// <summary> Rotate the compass accordingly </summary>
     void Update()
     {
         if (player == null) return;
@@ -48,23 +48,25 @@ public class Compass : NetworkBehaviour
             if (Vector3.forward.x - diff.x > 0) rot *= -1;
             rot *= Mathf.PI / 180;
             Vector2 localPosition = new Vector2(Mathf.Sin(rot) * width, Mathf.Cos(rot) * width);
-            waypoint.marker.transform.localPosition = localPosition;
+            waypoint.compassMarker.transform.localPosition = localPosition;
         }
     }
 
-    // Add a waypoint to the waypoint list
+    /// <summary> Add a waypoint to the waypoint list, display waypoint appropriately </summary>
+    /// <param name="waypoint"> the waypoint (empty gameobject in space that markers should point to) </param>
+    /// <param name="mapMarker"> the waypoints marker on the map </param>
     public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker)
     {
-        wayPoints.Add(new WaypointAndInstant(waypoint));
+        wayPoints.Add(new WaypointAndInstant(waypoint, null, mapMarker));
 
         GameObject markerInstant = Instantiate(waypointMarker, circleParent.transform);
 
         markerInstant.GetComponent<Image>().color = waypoint.color;
-        wayPoints[wayPoints.Count - 1].marker = markerInstant;
-        wayPoints[wayPoints.Count - 1].mapMarker = mapMarker;
+        wayPoints[wayPoints.Count - 1].compassMarker = markerInstant;
     }
 
-    // Remove a Waypoint and destroy gameObjects
+    /// <summary> Remove a waypoint and destroy the appropriate gameobjects </summary>
+    /// <param name="mapMarker"> map marker of waypoint to delete </param>
     public void RemoveWaypoint(MapMarker mapMarker)
     {
         int index = -1;
@@ -73,22 +75,31 @@ public class Compass : NetworkBehaviour
             if (wayPoints[i].mapMarker == mapMarker) index = i;
         }
         Destroy(wayPoints[index].waypoint.gameObject);
-        Destroy(wayPoints[index].marker.gameObject);
+        Destroy(wayPoints[index].compassMarker.gameObject);
         Destroy(wayPoints[index].mapMarker.gameObject);
         wayPoints.RemoveAt(index);
     }
 }
 
-// holds data for the waypoint itself, the waypoint marker on the compass, and the waypoint marker on the map
+/// <summary> Class that holds the waypoint and its instant </summary>
 [System.Serializable]
 public class WaypointAndInstant
 {
+    // the waypoint itself
     public Waypoint waypoint;
-    public GameObject marker;
+    // marker on the map
+    public GameObject compassMarker;
+    // marker on the compass
     public MapMarker mapMarker;
 
-    public WaypointAndInstant(Waypoint waypoint)
+    /// <summary> Constructor </summary>
+    /// <param name="waypoint"> the waypoint (empty gameobject in space that markers should point to) </param>
+    /// <param name="compassMarker"> marker on the map</param>
+    /// <param name="mapMarker"> marker on the compass </param>
+    public WaypointAndInstant(Waypoint waypoint, GameObject compassMarker, MapMarker mapMarker)
     {
         this.waypoint = waypoint;
+        this.mapMarker = mapMarker;
+        this.compassMarker = compassMarker;
     }
 }

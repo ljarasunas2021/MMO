@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// draggable object in inventory
+/// <summary> Draggable item in inventory</summary>
 public class InventoryPlaceHolder : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    // is a hot bar slot
+    // is this a hot bar slot
     public bool isHotBarPlaceHolder = false;
     // start position
     [HideInInspector] public Vector3 startPos;
     // the item and icon that is in this inventory slot
     [HideInInspector] public InventoryItemAndIcon itemAndIcon;
-    // image that can be changed to display the icon
+    // image for displaying the icon
     [HideInInspector] public Image image;
 
-    // the inventory manager script
+    // the inventory manager singleton
     private InventoryManager inventoryManager;
     // index if it is a hot bar
     private int hotBarIndex = -1;
 
-    // initiate values of vars
+    /// <summary> Init vars </summary>
     void Start()
     {
         startPos = transform.position;
@@ -29,20 +29,23 @@ public class InventoryPlaceHolder : MonoBehaviour, IDragHandler, IEndDragHandler
         image = GetComponent<Image>();
     }
 
-    // make it look like its being dragged
+    /// <summary> Start dragging this placeholder </summary>
+    /// <param name="eventData"> information about the drag </param>
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
     }
 
-    // Check all cases by calling end drag, bring to start position
+    /// <summary> Finish dragging this placeholder </summary>
+    /// <param name="eventData"> information about the drag </param>
     public void OnEndDrag(PointerEventData eventData)
     {
         inventoryManager.EndDrag(eventData);
         transform.position = startPos;
     }
 
-    // if item dropped over another switch values and images
+    /// <summary> Called if another item is dropped on this one. Switches itemAndIcon's </summary>
+    /// <param name="eventData"></param>
     public void CheckForDrop(PointerEventData eventData)
     {
         if (!RectTransformUtility.RectangleContainsScreenPoint((RectTransform)transform, Input.mousePosition)) return;
@@ -57,14 +60,16 @@ public class InventoryPlaceHolder : MonoBehaviour, IDragHandler, IEndDragHandler
         //if (isHotBarPlaceHolder) { inventoryManager.EnableEquip(hotBarIndex, itemAndIcon.itemIndex); }
     }
 
-    // set the item an icon
+    /// <summary> Set the item and icon </summary>
+    /// <param name="itemAndIcon"> new value of item and icon </param>
     public void SetItemAndIcon(InventoryItemAndIcon itemAndIcon)
     {
         this.itemAndIcon = itemAndIcon;
         image.sprite = (itemAndIcon.icon != null) ? itemAndIcon.icon : inventoryManager.defaultSprite;
     }
 
-    // set the hot bar index
+    /// <summary> Set the hot bar index </summary>
+    /// <param name="hotBarIndex"> new value for hot bar index </param>
     public void SetHotBarIndex(int hotBarIndex)
     {
         this.hotBarIndex = hotBarIndex;
