@@ -63,7 +63,11 @@ public class PlayerEquip : NetworkBehaviour
     /// <param name="itemIndex"> the index of the new equipped item </param>
     private void ChangeItem(int itemIndex)
     {
-        foreach (Transform weapon in handR.transform) Destroy(weapon.gameObject);
+        foreach (Transform weapon in handR.transform) {
+            if (!weapon.name.Contains("mixamorig")) {
+                Destroy(weapon.gameObject);
+            }
+        }
         //while (handR.transform.childCount > 0) DestroyImmediate(handR.transform.GetChild(0).gameObject);
 
         if (itemIndex != -1)
