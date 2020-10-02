@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false, toggleInventory = false;
     // abilities based on UI
     public bool canMove = true, canShoot = true;
+    // should the dialogue be skipped
+    private bool skipDialogue = false;
 
     /// <summary> Create singleton pattern, init vars, enable and disable appropriate objects </summary>
     void Start()
@@ -55,6 +57,7 @@ public class UIManager : MonoBehaviour
     {
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
+        toggleDialogueBox = (dialogue != null);
 
         if (dialogue != null)
         {
@@ -84,7 +87,13 @@ public class UIManager : MonoBehaviour
         dialogueText.text = dialogue.text;
         audioSource.PlayOneShot(dialogue.audio);
 
-        yield return new WaitWhile(() => audioSource.isPlaying);
+        while(audioSource.isPlaying) {
+            if (skipDialogue) {
+                audioSource.Stop();
+                skipDialogue = false;
+            }
+            yield return 0;
+        }
 
         if (dialogue.action != null && !dialogue.actionBeforeDialogue)
         {
@@ -127,6 +136,16 @@ public class UIManager : MonoBehaviour
 
         dialogueText.text = dialogue.text;
 
+        float dialogueCounter = 0;
+
+        while(dialogueCounter < dialogue.time) {
+            if (skipDialogue) {
+                dialogueCounter = dialogue.time;
+                skipDialogue = false;
+            }
+            dialogueCounter += Time.deltaTime;
+            yield return 0;
+        }
         yield return new WaitForSeconds(dialogue.time);
 
         if (dialogue.action != null && !dialogue.actionBeforeDialogue)
@@ -194,6 +213,7 @@ public class UIManager : MonoBehaviour
         }
 
         dialogueBox.enabled = true;
+        skipDialogue = false;
         foreach (Button button in buttons) Destroy(button.gameObject);
         StartCoroutine(PlayDialogue(dialogue));
     }
@@ -247,5 +267,12 @@ public class UIManager : MonoBehaviour
     /// <summary> Set can shoot to the appropriate value </summary>
     private void SetCanShoot() {
         canShoot = !toggleMap && !toggleDialogueBox && !togglePauseMenu && !toggleInventory;
+    }
+
+    /// <summary> Check if a dialogue can be skipped (if the player presses enter, when the dialogue box is up) </summary>
+    public void CheckForSkipDialogue() {
+        if (toggleDialogueBox) {
+            skipDialogue = true;
+        }
     }
 }

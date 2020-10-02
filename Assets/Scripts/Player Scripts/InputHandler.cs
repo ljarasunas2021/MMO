@@ -81,6 +81,8 @@ public class InputHandler : NetworkBehaviour
         }
 
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
+
+        if (Input.GetButtonDown("SkipDialogue")) uIScript.CheckForSkipDialogue();
     }
 
     /// <summary> Test for interaction input </summary>
