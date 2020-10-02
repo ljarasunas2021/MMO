@@ -12,6 +12,8 @@ public class Map : MonoBehaviour
     public GameObject map;
     // the max and min Z and X values of the player that correspond with the bounds of the map
     public float maxZ, minZ, maxX, minX;
+    // map's canvas reference resolution
+    public Vector2 referenceResolution = new Vector2(800, 600);
     // the player game object
     [HideInInspector] public GameObject player;
     // the marker that shows the player's current position
@@ -48,13 +50,13 @@ public class Map : MonoBehaviour
     /// <summary> When the map is enabled, refresh the player's position on the marker </summary>
     public void Enable()
     {
-        Debug.Log(player.gameObject.name);
+        Debug.Log(imageWidth + " " + Screen.width);
         UIManager.instance.LockCursor(false);
         UIManager.instance.canMove = false;
         Vector3 pos = player.transform.position;
-        Vector2 screenPos = new Vector2((imageWidth) * (pos.x - minX) / (maxX - minX), (imageHeight) * (pos.z - minZ) / (maxZ - minZ));
+        Vector2 screenPos = new Vector2((pos.x - minX) / (maxX - minX) * referenceResolution.x - referenceResolution.x / 2, (pos.z - minZ) / (maxZ - minZ) * referenceResolution.y - referenceResolution.y / 2);
         playerMarkerInstant = GameObject.Instantiate(playerMarker, map.transform);
-        playerMarkerInstant.transform.localPosition = screenPos - new Vector2(imageWidth / 2, imageHeight / 2);
+        playerMarkerInstant.transform.localPosition = screenPos;
         playerMarkerInstant.transform.rotation = Quaternion.identity;
     }
 
