@@ -23,9 +23,9 @@ public class UIManager : MonoBehaviour
     private Map map;
 
     // toggle booleans
-    public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false;
+    [HideInInspector] public bool togglePauseMenu = false, toggleDialogueBox = false, toggleMap = false, toggleInventory = false;
     // abilities based on UI
-    public static bool canMove = true, canShoot = true;
+    public bool canMove = true, canShoot = true;
 
     /// <summary> Create singleton pattern, init vars, enable and disable appropriate objects </summary>
     void Start()
@@ -45,13 +45,14 @@ public class UIManager : MonoBehaviour
         dialogueBox.enabled = toggleDialogueBox;
         mapCanvas.enabled = toggleMap;
         compassCanvas.enabled = !toggleMap;
+
+        SetCanShoot();
     }
 
     /// <summary> Toggle the audio on or off</summary>
     /// <param name="dialogue">the dialogue to play</param>
     public void ToggleDialogue(Dialogue dialogue)
     {
-        canShoot = (dialogue == null);
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
         if (!canMove)
@@ -63,6 +64,8 @@ public class UIManager : MonoBehaviour
             else if (playerDialogue != null) StartCoroutine(PlayDialogue(playerDialogue));
             else Debug.Log("Dialogue Not Set Correctly");
         }
+
+        SetCanShoot();
     }
 
     /// <summary> Play an NPC's dialogue</summary>
@@ -197,27 +200,28 @@ public class UIManager : MonoBehaviour
     /// <summary> Toggle the pause menu on or off </summary>
     public void TogglePauseMenu()
     {
-        canShoot = !canShoot;
         canMove = !canMove;
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
+
+        SetCanShoot();
     }
 
     /// <summary> Toggle the map on or off </summary>
     public void ToggleMap()
     {
-        canShoot = !canShoot;
         toggleMap = !toggleMap;
         if (toggleMap) map.Enable();
         else map.Disable();
         mapCanvas.enabled = toggleMap;
         compassCanvas.enabled = !toggleMap;
 
+        SetCanShoot();
     }
 
     /// <summary> Lock or unlock the cursor </summary>
     /// <param name="locked"> whether the cursor should be locked </param>
-    public static void LockCursor(bool locked)
+    public void LockCursor(bool locked)
     {
         if (locked)
         {
@@ -229,5 +233,18 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+
+    /// <summary> Turn the Inventory on or off </summary>
+    public void ToggleInventory() {
+        toggleInventory = !toggleInventory;
+        InventoryManager.instance.ChangeEnabled();
+
+        SetCanShoot();
+    }
+
+    /// <summary> Set can shoot to the appropriate value </summary>
+    private void SetCanShoot() {
+        canShoot = !toggleMap && !toggleDialogueBox && !togglePauseMenu && !toggleInventory;
     }
 }

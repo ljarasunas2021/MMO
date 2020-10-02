@@ -33,7 +33,7 @@ public class InputHandler : NetworkBehaviour
         uIScript = UIManager.instance;
         
         itemHolding = new ItemHolding(null, ItemType.none);
-        UIManager.LockCursor(true);
+        UIManager.instance.LockCursor(true);
 
         cam = Camera.main;
 
@@ -72,12 +72,12 @@ public class InputHandler : NetworkBehaviour
     /// <summary> Test for UI input </summary>
     private void TestUI()
     {
-        if (Input.GetButtonDown("Inventory") && !isDead) inventoryManager.ChangeEnabled();
+        if (Input.GetButtonDown("Inventory")) uIScript.ToggleInventory();
 
         if (Input.GetButtonDown("Pause"))
         {
             uIScript.TogglePauseMenu();
-            UIManager.LockCursor(!uIScript.togglePauseMenu);
+            UIManager.instance.LockCursor(!uIScript.togglePauseMenu);
         }
 
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
@@ -118,7 +118,7 @@ public class InputHandler : NetworkBehaviour
     /// <summary> Test for input related to the item the player is holding </summary>
     private void TestItemHolding()
     {
-        if (itemHolding.type != ItemType.none && UIManager.canShoot) itemHolding.weaponScript.CheckForUserInput();
+        if (itemHolding.type != ItemType.none && UIManager.instance.canShoot) itemHolding.weaponScript.CheckForUserInput();
     }
 
     /// <summary> Change the item holding </summary>

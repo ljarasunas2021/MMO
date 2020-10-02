@@ -20,7 +20,7 @@ public class EquipNameTag : Action1
     public override IEnumerator Execute()
     {
         dialogueBox.SetActive(false);
-        UIManager.LockCursor(false);
+        UIManager.instance.LockCursor(false);
 
         equipButtonInstant = Instantiate(equipButton, canvas.transform);
         unEquipButtonInstant = Instantiate(unEquipButton, canvas.transform);
@@ -32,7 +32,7 @@ public class EquipNameTag : Action1
 
         while (!clicked) yield return 0;
 
-        UIManager.LockCursor(true);
+        UIManager.instance.LockCursor(true);
         dialogueBox.SetActive(true);
     }
 

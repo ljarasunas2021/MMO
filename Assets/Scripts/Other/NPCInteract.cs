@@ -40,7 +40,7 @@ public class NPCInteract : Target
     {
         if (IsPlayerCloseEnough())
         {
-            if (UIManager.canMove)
+            if (UIManager.instance.canMove)
             {
                 StartCoroutine(RotateNPC());
 

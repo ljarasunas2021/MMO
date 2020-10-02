@@ -139,7 +139,7 @@ public class Movement : NetworkBehaviour
         float targetLocomotionBlendVal = 0;
         float targetLocomotionDirection = 0;
 
-        if (UIManager.canMove)
+        if (UIManager.instance.canMove)
         {
             bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
             if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
@@ -175,7 +175,7 @@ public class Movement : NetworkBehaviour
     /// <param name="mousePos"> the position of the player's mouse </param>
     private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
-        if (!UIManager.canMove) return;
+        if (!UIManager.instance.canMove) return;
 
         if (currentCam != CameraModes.locked)
         {
@@ -196,7 +196,7 @@ public class Movement : NetworkBehaviour
     /// <param name="space"> if the player pressed the space bar </param>
     private void CheckForJump(Vector2 input, bool space)
     {
-        if (!UIManager.canMove) return;
+        if (!UIManager.instance.canMove) return;
 
         if (space)
         {

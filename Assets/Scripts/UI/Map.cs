@@ -49,8 +49,8 @@ public class Map : MonoBehaviour
     public void Enable()
     {
         Debug.Log(player.gameObject.name);
-        UIManager.LockCursor(false);
-        UIManager.canMove = false;
+        UIManager.instance.LockCursor(false);
+        UIManager.instance.canMove = false;
         Vector3 pos = player.transform.position;
         Vector2 screenPos = new Vector2((imageWidth) * (pos.x - minX) / (maxX - minX), (imageHeight) * (pos.z - minZ) / (maxZ - minZ));
         playerMarkerInstant = GameObject.Instantiate(playerMarker, map.transform);
@@ -61,8 +61,8 @@ public class Map : MonoBehaviour
     /// <summary> When the map is disabled, destroy the player's map marker </summary>
     public void Disable()
     {
-        UIManager.LockCursor(true);
-        UIManager.canMove = true;
+        UIManager.instance.LockCursor(true);
+        UIManager.instance.canMove = true;
         Destroy(playerMarkerInstant);
     }
 }

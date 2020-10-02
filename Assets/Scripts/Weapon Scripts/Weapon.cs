@@ -250,7 +250,7 @@ public class Weapon : MonoBehaviour
         {
             if (rangedType == RangedWeaponType.Projectile) currentAccuracy = accuracy;
 
-            if (showCrosshair)
+            if (showCrosshair && UIManager.instance.canShoot)
             {
                 Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
 

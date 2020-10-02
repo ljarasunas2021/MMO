@@ -143,6 +143,7 @@
      <Compile Include="Assets\Scripts\Other\PlayerDialogue.cs" />
      <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
      <Compile Include="Assets\Scripts\Other\Target.cs" />
+     <Compile Include="Assets\Scripts\Other\TransformDeepChildExtension.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Gravity.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\HealthBar.cs" />
@@ -996,7 +997,6 @@
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2018.4.8f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
- <Compile Include="Assets\Scripts\Other\TransformDeepChildExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Mirror.Weaver.csproj">

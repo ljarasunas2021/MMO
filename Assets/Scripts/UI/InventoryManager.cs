@@ -64,7 +64,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryEnabled = !inventoryEnabled;
 
-        UIManager.LockCursor(!inventoryEnabled);
+        UIManager.instance.LockCursor(!inventoryEnabled);
 
         playerEquip.CmdChangeHotBarIndex(-1);
     }
