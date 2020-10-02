@@ -21,10 +21,21 @@ public class Compass : NetworkBehaviour
     private Transform mainCamTransform;
     // the width of the compass
     private float width;
+    // singleton instance var
+    public static Compass instance;
 
     /// <summary> Init vars </summary>
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("There already exists an instance of the compass script");
+        }
+
         mainCamTransform = Camera.main.transform;
         width = mask.GetComponent<RectTransform>().rect.width / 2;
     }
