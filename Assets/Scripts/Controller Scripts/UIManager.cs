@@ -55,7 +55,8 @@ public class UIManager : MonoBehaviour
     {
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
-        if (!canMove)
+
+        if (dialogue != null)
         {
             NPCDialogue NPCDialogue = dialogue.NPCDialogue;
             PlayerDialogue playerDialogue = dialogue.playerDialogue;
