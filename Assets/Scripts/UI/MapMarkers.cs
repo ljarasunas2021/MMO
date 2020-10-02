@@ -1,5 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary> Holds all of the map markers </summary>
 public class MapMarkers : MonoBehaviour, IPointerClickHandler
@@ -14,27 +15,18 @@ public class MapMarkers : MonoBehaviour, IPointerClickHandler
     public GameObject waypoint;
     // the main Camera
     private Camera mainCamera;
-    // the scale of the canvas
-    private float localScale;
-    // the screen's width and height
-    private float screenWidth, screenHeight;
     // the height of the marker
-    private float imageHeight;
-    // the map's height and width
-    private float mapWidth, mapHeight;
+    private float markerHeight;
     //the max coordinates of the player on the mapHeight
     private float maxX, minX, maxZ, minZ;
+    // scale of map
+    private float xScale = .95f, yScale = .95f;
 
     /// <summary> Init vars </summary>
     void Start()
     {
         mainCamera = Camera.main;
-        localScale = GetComponent<RectTransform>().localScale.x;
-        screenWidth = Screen.width;
-        screenHeight = Screen.height;
-        imageHeight = marker.GetComponent<RectTransform>().rect.height;
-        mapWidth = map.imageWidth;
-        mapHeight = map.imageHeight;
+        markerHeight = marker.GetComponent<RectTransform>().rect.height;
         maxX = map.maxX;
         minX = map.minX;
         maxZ = map.maxZ;
@@ -46,15 +38,13 @@ public class MapMarkers : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject markerInstant = Instantiate(marker, transform);
-        Vector2 localPos = (eventData.position - new Vector2(screenWidth, screenHeight) / 2) / localScale + Vector2.up * imageHeight / 2;
-        markerInstant.transform.localPosition = localPos;
+        markerInstant.transform.position = eventData.position + Vector2.up * markerHeight;
         MapMarker mapMarker = markerInstant.GetComponent<MapMarker>();
         mapMarker.compass = compass;
 
         GameObject waypointInstant = Instantiate(waypoint, null);
 
-        Vector2 screenPos = localPos + Vector2.down * imageHeight / 2 + new Vector2(mapWidth / 2, mapHeight / 2);
-        Vector2 worldPos = new Vector2((screenPos.x * (maxX - minX) / mapWidth) + minX, (screenPos.y * (maxZ - minZ) / mapHeight) + minZ);
+        Vector2 worldPos = new Vector2((((eventData.position.x - Screen.width/2) * 2 / (Screen.width * xScale)) + 1)/2 * (maxX - minX) + minX, (((eventData.position.y - Screen.height/2) * 2 / (Screen.height * yScale)) + 1)/2 * (maxZ - minZ) + minZ);
         waypointInstant.transform.position = worldPos.x * Vector3.right + worldPos.y * Vector3.forward;
 
         compass.AddWaypoint(waypointInstant.GetComponent<Waypoint>(), mapMarker);
