@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 73334521}
   - component: {fileID: 73334520}
   - component: {fileID: 73334526}
+  - component: {fileID: 73334527}
   m_Layer: 0
   m_Name: remy (1)
   m_TagString: Untagged
@@ -723,6 +724,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 0.015
+--- !u!114 &73334527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73334519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e827a64827e40e6af5eff755364473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
 --- !u!43 &77891346
 Mesh:
   m_ObjectHideFlags: 0
