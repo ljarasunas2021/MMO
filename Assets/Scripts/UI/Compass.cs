@@ -45,18 +45,15 @@ public class Compass : NetworkBehaviour
     {
         if (player == null) return;
 
-        Vector3 forward = mainCamTransform.forward;
+        Vector3 forward = player.transform.forward;
         forward.y = 0;
-        float rot1 = Vector3.Angle(Vector3.forward, forward);
-        if (forward.x < 0) rot1 *= -1;
-        circleParent.transform.rotation = Quaternion.Euler(Vector3.forward * rot1);
+        float rot1 = Vector3.SignedAngle(Vector3.forward, forward, Vector3.up);
 
         foreach (WaypointAndInstant waypoint in wayPoints)
         {
             Vector3 diff = waypoint.waypoint.transform.position - player.transform.position;
             diff.y = 0;
-            float rot = Vector3.Angle(diff, Vector3.forward);
-            if (Vector3.forward.x - diff.x > 0) rot *= -1;
+            float rot = Vector3.SignedAngle(player.transform.forward, diff, Vector3.up);
             rot *= Mathf.PI / 180;
             Vector2 localPosition = new Vector2(Mathf.Sin(rot) * width, Mathf.Cos(rot) * width);
             waypoint.compassMarker.transform.localPosition = localPosition;
