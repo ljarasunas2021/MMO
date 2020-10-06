@@ -13,7 +13,9 @@ public class Map : MonoBehaviour
     // the max and min Z and X values of the player that correspond with the bounds of the map
     public float maxZ, minZ, maxX, minX;
     // map's canvas reference resolution
-    public Vector2 referenceResolution = new Vector2(800, 600);
+    [HideInInspector] public Vector2 referenceResolution;
+    // map scale
+    public Vector2 mapScale = new Vector2(.95f, .95f);
     // the player game object
     [HideInInspector] public GameObject player;
     // the marker that shows the player's current position
@@ -39,6 +41,9 @@ public class Map : MonoBehaviour
             Debug.LogError("There already exists an instance of the map script");
         }
 
+        RectTransform rt = GetComponent<RectTransform>();
+        referenceResolution = new Vector2(rt.rect.width, rt.rect.height);
+
         mainCam = Camera.main;
         Sprite mapSprite = map.GetComponent<Image>().sprite;
         imageWidth = mapSprite.rect.width;
@@ -50,11 +55,11 @@ public class Map : MonoBehaviour
     /// <summary> When the map is enabled, refresh the player's position on the marker </summary>
     public void Enable()
     {
-        Debug.Log(imageWidth + " " + Screen.width);
         UIManager.instance.LockCursor(false);
         UIManager.instance.canMove = false;
         Vector3 pos = player.transform.position;
-        Vector2 screenPos = new Vector2((pos.x - minX) / (maxX - minX) * referenceResolution.x - referenceResolution.x / 2, (pos.z - minZ) / (maxZ - minZ) * referenceResolution.y - referenceResolution.y / 2);
+        Vector2 screenPos = new Vector2((pos.x - minX) / (maxX - minX) * referenceResolution.x * mapScale.x - referenceResolution.x * mapScale.x / 2, (pos.z - minZ) / (maxZ - minZ) * referenceResolution.y * mapScale.y - referenceResolution.y * mapScale.y / 2);
+        Debug.Log(referenceResolution);
         playerMarkerInstant = GameObject.Instantiate(playerMarker, map.transform);
         playerMarkerInstant.transform.localPosition = screenPos;
         playerMarkerInstant.transform.rotation = Quaternion.identity;

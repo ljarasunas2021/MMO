@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         mapCanvas.enabled = toggleMap;
         compassCanvas.enabled = !toggleMap;
 
-        SetCanShoot();
+        UpdateCanShoot();
     }
 
     /// <summary> Toggle the audio on or off</summary>
@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
             else Debug.Log("Dialogue Not Set Correctly");
         }
 
-        SetCanShoot();
+        UpdateCanShoot();
     }
 
     /// <summary> Play an NPC's dialogue</summary>
@@ -225,7 +225,7 @@ public class UIManager : MonoBehaviour
         togglePauseMenu = !togglePauseMenu;
         pauseMenu.enabled = !pauseMenu.enabled;
 
-        SetCanShoot();
+        UpdateCanShoot();
     }
 
     /// <summary> Toggle the map on or off </summary>
@@ -237,7 +237,7 @@ public class UIManager : MonoBehaviour
         mapCanvas.enabled = toggleMap;
         compassCanvas.enabled = !toggleMap;
 
-        SetCanShoot();
+        UpdateCanShoot();
     }
 
     /// <summary> Lock or unlock the cursor </summary>
@@ -261,11 +261,11 @@ public class UIManager : MonoBehaviour
         toggleInventory = !toggleInventory;
         InventoryManager.instance.ChangeEnabled();
 
-        SetCanShoot();
+        UpdateCanShoot();
     }
 
     /// <summary> Set can shoot to the appropriate value </summary>
-    private void SetCanShoot() {
+    private void UpdateCanShoot() {
         canShoot = !toggleMap && !toggleDialogueBox && !togglePauseMenu && !toggleInventory;
     }
 

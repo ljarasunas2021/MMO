@@ -1549,7 +1549,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285753335}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1581,6 +1581,7 @@ MonoBehaviour:
   maxX: 100
   minX: -100
   referenceResolution: {x: 800, y: 600}
+  mapScale: {x: 0.95, y: 0.95}
   player: {fileID: 0}
   playerMarker: {fileID: 2470669101334622040, guid: c0a3ff99ddd264f28aaf81b6592c694f,
     type: 3}
