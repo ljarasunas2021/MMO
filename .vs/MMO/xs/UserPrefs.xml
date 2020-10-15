@@ -1,5 +1,5 @@
-﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|Unit Tests">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Other/TransformDeepChildExtension.cs">
+﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs">
     <Files>
       <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="110" Column="14" IsPinned="True" />
       <File FileName="Assets/Scripts/Player Scripts/Movement.cs" />
@@ -16,13 +16,13 @@
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCanRotate.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCurrentState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeLayerWeight.cs" />
-      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" Line="17" Column="10" />
+      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" />
       <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" />
-      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" />
       <File FileName="Assets/Scripts/GOAP/KillAction.cs" />
       <File FileName="Assets/Scripts/GOAP/KillPlayerGoal.cs" />
       <File FileName="Assets/Scripts/Other/ExpressionParser.cs" />
@@ -53,18 +53,17 @@
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeUpperBodyState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/LocomotionMomentum.cs" />
       <File FileName="Assets/Scripts/Other/TransformDeepChildExtension.cs" Line="1" Column="1" />
+      <File FileName="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs" Line="3" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MMO" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Assets" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="Controller Scripts" expanded="True" />
-                  <Node name="GOAP" expanded="True" />
-                  <Node name="Other" expanded="True">
-                    <Node name="TransformDeepChildExtension.cs" selected="True" />
+            <Node name="Assets" expanded="True">
+              <Node name="Thirdparty" expanded="True">
+                <Node name="Standard Assets" expanded="True">
+                  <Node name="Utility" expanded="True">
+                    <Node name="SimpleActivatorMenu.cs" selected="True" />
                   </Node>
                 </Node>
               </Node>
@@ -76,7 +75,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="25259166-e922-414f-a0a2-13a871df349a" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
