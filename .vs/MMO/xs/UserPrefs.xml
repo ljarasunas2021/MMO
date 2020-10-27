@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/Map.cs">
     <Files>
       <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="110" Column="14" IsPinned="True" />
       <File FileName="Assets/Scripts/Player Scripts/Movement.cs" />
@@ -38,7 +38,7 @@
       <File FileName="Assets/Scripts/Player Scripts/HealthBar.cs" />
       <File FileName="Assets/Scripts/Player Scripts/IKHandling.cs" />
       <File FileName="Assets/Scripts/UI/InventoryManager.cs" />
-      <File FileName="Assets/Scripts/UI/Map.cs" />
+      <File FileName="Assets/Scripts/UI/Map.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player Scripts/PlayerCameraManager.cs" />
       <File FileName="Assets/Scripts/Player Scripts/PlayerHealth.cs" />
       <File FileName="Assets/Scripts/Player Scripts/PlayerWeapon.cs" />
@@ -52,7 +52,7 @@
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeTargetUpperBodyState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeUpperBodyState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/LocomotionMomentum.cs" />
-      <File FileName="Assets/Scripts/Other/TransformDeepChildExtension.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Other/TransformDeepChildExtension.cs" />
       <File FileName="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs" Line="12" Column="37" />
     </Files>
     <Pads>
@@ -60,11 +60,14 @@
         <State name="__root__">
           <Node name="MMO" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="UI" expanded="True">
+                  <Node name="Map.cs" selected="True" />
+                </Node>
+              </Node>
               <Node name="Thirdparty" expanded="True">
                 <Node name="Standard Assets" expanded="True">
-                  <Node name="Utility" expanded="True">
-                    <Node name="SimpleActivatorMenu.cs" selected="True" />
-                  </Node>
+                  <Node name="Utility" expanded="True" />
                 </Node>
               </Node>
             </Node>
@@ -75,7 +78,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="25259166-e922-414f-a0a2-13a871df349a" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0a4eda24-ea95-48fd-b658-80c89070563a" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
