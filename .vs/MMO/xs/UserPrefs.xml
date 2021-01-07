@@ -53,7 +53,7 @@
       <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeUpperBodyState.cs" />
       <File FileName="Assets/Scripts/Animation Controller Scripts/LocomotionMomentum.cs" />
       <File FileName="Assets/Scripts/Other/TransformDeepChildExtension.cs" />
-      <File FileName="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs" Line="12" Column="37" />
+      <File FileName="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -61,6 +61,7 @@
           <Node name="MMO" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
+                <Node name="Player Scripts" expanded="True" />
                 <Node name="UI" expanded="True">
                   <Node name="Map.cs" selected="True" />
                 </Node>
@@ -78,7 +79,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0a4eda24-ea95-48fd-b658-80c89070563a" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="05e37253-2ab5-4d90-9ca1-5cd82c504b07" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
