@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class QuestSystem : MonoBehaviour
+public class QuestSystem : NetworkBehaviour
 {
     [Header("References")]
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas canvas = null;
+    [SerializeField] private Transform contentTransform = null;
+    [SerializeField] private GameObject questItemPrefab = null;
 
+    // Key which toggles quest system visibility
     private const KeyCode toggleKey = KeyCode.Q;
 
     // QuestSystem singleton
@@ -33,7 +37,17 @@ public class QuestSystem : MonoBehaviour
 
     private void Update()
     {
+        // Return if not local player
+        if (!isLocalPlayer) return;
+
         // If toggle key pressed, toggle active
         if (Input.GetKeyDown(toggleKey)) Active = !Active;
+    }
+
+    // Creates a quest with given key, title, and description
+    public void CreateQuest(string key, string title, string description)
+    {
+        // Instantiate quest item at content
+        Object.Instantiate(questItemPrefab, Vector3.zero, Quaternion.identity, contentTransform);
     }
 }
