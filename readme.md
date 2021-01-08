@@ -2,11 +2,11 @@
 
 This branch implements `QuestSystem.cs`, `QuestItem.cs`, and their respective prefabs.
 
-These scripts and prefabs can be found in `Assets/Scripts/UI/Quest System` and `Assets/Prefabs/UI/Quest System`.
+These assets can be found in `Assets/Scripts/UI/Quest System` and `Assets/Prefabs/UI/Quest System`.
 
 ## Controls
 
-The Quest System canvas is by default toggled by pressing Q. This can be changed via `toggleKey` in `QuestSystem.cs`.
+The quest canvas is by default toggled with Q. This can be changed via `toggleKey` in `QuestSystem.cs`.
 
 ## Scripting
 
@@ -23,9 +23,9 @@ public void ResolveQuest(string key);
 ## Usage Examples
 
 ```cs
-// Creates "Secret Keys" quest
-QuestSystem.instance.CreateQuest("keys-1", "Secret Keys", "Can you find the secret keys?");
+// Creates "Secret Door" quest
+QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secret door?");
 
-// Resolves "Secret Keys" quest
-QuestSystem.instance.ResolveQuest("keys-1");
+// Resolves "Secret Door" quest
+QuestSystem.instance.ResolveQuest("door-1");
 ```
