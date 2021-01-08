@@ -1,7 +1,7 @@
-﻿using Mirror;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestSystem : NetworkBehaviour
+public class QuestSystem : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Canvas canvas = null;
@@ -30,16 +30,18 @@ public class QuestSystem : NetworkBehaviour
         }
     }
 
+    // Quest items stored by key and reference to GameObject
+    private Dictionary<string, GameObject> questItems = new Dictionary<string, GameObject>();
+
     private void Awake()
     {
-        instance = this;
+        // Initialize singleton
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
     }
 
     private void Update()
     {
-        // Return if not local player
-        if (!isLocalPlayer) return;
-
         // If toggle key pressed, toggle active
         if (Input.GetKeyDown(toggleKey)) Active = !Active;
     }
@@ -47,7 +49,25 @@ public class QuestSystem : NetworkBehaviour
     // Creates a quest with given key, title, and description
     public void CreateQuest(string key, string title, string description)
     {
-        // Instantiate quest item at content
-        Object.Instantiate(questItemPrefab, Vector3.zero, Quaternion.identity, contentTransform);
+        // If key already contained in quest items, return
+        if (questItems.ContainsKey(key)) return;
+
+        // Instantiate and initialize quest item at content
+        GameObject questItem = Object.Instantiate(questItemPrefab, Vector3.zero, Quaternion.identity, contentTransform);
+        questItem.GetComponent<QuestItem>().Initialize(title, description);
+
+        // Add quest item to dictionary
+        questItems.Add(key, questItem);
+    }
+
+    // Removes a quest by key
+    public void ResolveQuest(string key)
+    {
+        // If key not in quest items, return
+        if (!questItems.ContainsKey(key)) return;
+
+        // Destroy corresponding GameObject and remove from dictionary
+        Destroy(questItems[key]);
+        questItems.Remove(key);
     }
 }
