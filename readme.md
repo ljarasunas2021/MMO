@@ -10,9 +10,12 @@ The quest canvas is by default toggled with Q. This can be changed via `toggleKe
 
 ## Scripting
 
-`QuestItem.cs` creates an `instance` singleton.
+`QuestSystem.cs` creates an `instance` singleton.
 
 ```cs
+// Active property which automatically updates canvas visibility
+public bool Active { get; set; }
+
 // Creates a quest with given key, title, and description
 public void CreateQuest(string key, string title, string description);
 
@@ -23,9 +26,12 @@ public void ResolveQuest(string key);
 ## Usage Examples
 
 ```cs
-// Creates "Secret Door" quest
+// Activate quest system
+QuestSystem.instance.Active = true;
+
+// Create "Secret Door" quest
 QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secret door?");
 
-// Resolves "Secret Door" quest
+// Resolve "Secret Door" quest
 QuestSystem.instance.ResolveQuest("door-1");
 ```
