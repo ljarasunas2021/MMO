@@ -23,9 +23,9 @@ public void ResolveQuest(string key);
 ## Usage Examples
 
 ```cs
-// Creates "Innkeeper's Keys" quest
-QuestSystem.instance.CreateQuest("inn-1", "Innkeeper's Keys", "The innkeeper has lost their keys.");
+// Creates "Secret Keys" quest
+QuestSystem.instance.CreateQuest("keys-1", "Secret Keys", "Can you find the secret keys?");
 
-// Resolves "Innkeeper's Keys" quest
-QuestSystem.instance.ResolveQuest("inn-1");
+// Resolves "Secret Keys" quest
+QuestSystem.instance.ResolveQuest("keys-1");
 ```
