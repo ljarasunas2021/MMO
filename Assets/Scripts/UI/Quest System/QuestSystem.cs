@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestSystem : MonoBehaviour
+public class QuestSystem : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Canvas canvas = null;
@@ -42,6 +43,9 @@ public class QuestSystem : MonoBehaviour
 
     private void Update()
     {
+        // Return if not local player
+        if (!isLocalPlayer) return;
+
         // If toggle key pressed, toggle active
         if (Input.GetKeyDown(toggleKey)) Active = !Active;
     }
