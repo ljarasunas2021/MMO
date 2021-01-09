@@ -6,7 +6,7 @@ public class Blur : MonoBehaviour {
     private float avgR = 0;
     private float avgG = 0;
     private float avgB = 0;
-    private float avgA = 0;
+    // private float avgA = 0;
     private float blurPixelCount = 0;
    
     public int radius =2;

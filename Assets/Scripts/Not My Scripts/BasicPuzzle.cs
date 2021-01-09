@@ -8,7 +8,7 @@ public class BasicPuzzle : MonoBehaviour
     public GameObject puzzlePipe = null;
     public GameObject puzzlePipeWrong = null;
     bool solved = false;
-    bool needReset = false;
+    // bool needReset = false;
     private Vector3 puzzleSphereCoords;
     void Start()
     {

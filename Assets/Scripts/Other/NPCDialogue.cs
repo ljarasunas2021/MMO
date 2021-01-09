@@ -8,7 +8,7 @@ public class NPCDialogue : MonoBehaviour
     // the words that will show up in the NPC's textbox when it speaks
     public string text;
     // the audio that plays when the NPC speaks
-    public AudioClip audio;
+    public AudioClip audioClip;
 
     // will the next dialgoue be spoken by the NPC
     public bool nextDialogueIsNPC;

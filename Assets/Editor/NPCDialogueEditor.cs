@@ -16,7 +16,7 @@ public class NPCDialogueEditor : Editor
         if (NPCDialogue.actionBeforeDialogue)
         {
             EditorGUILayout.LabelField("Action", EditorStyles.boldLabel);
-            NPCDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", NPCDialogue.action, typeof(Action1));
+            NPCDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", NPCDialogue.action, typeof(Action1), true);
             if (NPCDialogue.action != null)
             {
                 NPCDialogue.actionBeforeDialogue = EditorGUILayout.Toggle("Action Before Dialogue", NPCDialogue.actionBeforeDialogue);
@@ -28,14 +28,14 @@ public class NPCDialogueEditor : Editor
         EditorGUILayout.LabelField("Dialogue", EditorStyles.boldLabel);
 
         NPCDialogue.text = EditorGUILayout.TextField("Text", NPCDialogue.text);
-        NPCDialogue.audio = (AudioClip)EditorGUILayout.ObjectField("Audio", NPCDialogue.audio, typeof(AudioClip));
+        NPCDialogue.audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio", NPCDialogue.GetComponent<AudioSource>(), typeof(AudioClip), true);
 
         EditorGUILayout.Space();
 
         if (!NPCDialogue.actionBeforeDialogue)
         {
             EditorGUILayout.LabelField("Action", EditorStyles.boldLabel);
-            NPCDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", NPCDialogue.action, typeof(Action1));
+            NPCDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", NPCDialogue.action, typeof(Action1), true);
             if (NPCDialogue.action != null)
             {
                 NPCDialogue.actionBeforeDialogue = EditorGUILayout.Toggle("Action Before Dialogue", NPCDialogue.actionBeforeDialogue);
@@ -57,7 +57,7 @@ public class NPCDialogueEditor : Editor
                 name = NPCDialogue.nextDialogue.text;
             }
 
-            NPCDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, NPCDialogue.nextDialogue, typeof(NPCDialogue));
+            NPCDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, NPCDialogue.nextDialogue, typeof(NPCDialogue), true);
         }
         else
         {
@@ -87,7 +87,7 @@ public class NPCDialogueEditor : Editor
                         name = NPCDialogue.playerDialogueOptions[i].button.GetComponentInChildren<TextMeshProUGUI>().text;
                     }
 
-                    NPCDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField("      " + name, NPCDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
+                    NPCDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField("      " + name, NPCDialogue.playerDialogueOptions[i], typeof(PlayerDialogue), true);
                     if (NPCDialogue.playerDialogueOptions[i] != null) NPCDialogue.playerDialogueOptions[i].options = true;
                 }
 
@@ -102,7 +102,7 @@ public class NPCDialogueEditor : Editor
                     name = NPCDialogue.playerDialogue.text;
                 }
 
-                NPCDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, NPCDialogue.playerDialogue, typeof(PlayerDialogue));
+                NPCDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, NPCDialogue.playerDialogue, typeof(PlayerDialogue), true);
                 if (NPCDialogue.playerDialogue != null) NPCDialogue.playerDialogue.options = false;
             }
         }

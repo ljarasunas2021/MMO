@@ -6,7 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(Weapon))]
 public class WeaponEditor : Editor
 {
-    private bool showPluginSupport = false;
+    // private bool showPluginSupport = false;
     private bool showCombos = false;
     private bool showGrab = false;
     private bool showGeneral = false;

@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
         }
 
         dialogueText.text = dialogue.text;
-        audioSource.PlayOneShot(dialogue.audio);
+        audioSource.PlayOneShot(dialogue.audioClip);
 
         while(audioSource.isPlaying) {
             if (skipDialogue) {

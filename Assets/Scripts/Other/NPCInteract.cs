@@ -24,7 +24,7 @@ public class NPCInteract : Target
     private UIManager UIScript;
     
     // y velocity of NPC
-    private float veloY = 0;
+    // private float veloY = 0;
     // current index for dialogue
     private int currentDialogIndex = 0;
 

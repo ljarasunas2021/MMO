@@ -9,7 +9,7 @@ public class BossGivesWalkie : Action1
 
     public override IEnumerator Execute()
     {
-        if (false) yield return 0;
         Instantiate(walkie, position.position, Quaternion.identity);
+        yield break;
     }
 }

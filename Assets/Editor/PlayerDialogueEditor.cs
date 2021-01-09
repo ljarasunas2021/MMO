@@ -14,7 +14,7 @@ public class PlayerDialogueEditor : Editor
         if (playerDialogue.actionBeforeDialogue)
         {
             EditorGUILayout.LabelField("Action", EditorStyles.boldLabel);
-            playerDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", playerDialogue.action, typeof(Action1));
+            playerDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", playerDialogue.action, typeof(Action1), true);
             if (playerDialogue.action != null)
             {
                 playerDialogue.actionBeforeDialogue = EditorGUILayout.Toggle("Action Before Dialogue", playerDialogue.actionBeforeDialogue);
@@ -27,7 +27,7 @@ public class PlayerDialogueEditor : Editor
         playerDialogue.options = EditorGUILayout.Toggle("Player Has Options", playerDialogue.options);
         if (playerDialogue.options)
         {
-            playerDialogue.button = (Button)EditorGUILayout.ObjectField("Option Button", playerDialogue.button, typeof(Button));
+            playerDialogue.button = (Button)EditorGUILayout.ObjectField("Option Button", playerDialogue.button, typeof(Button), true);
         }
         else
         {
@@ -40,7 +40,7 @@ public class PlayerDialogueEditor : Editor
         if (!playerDialogue.actionBeforeDialogue)
         {
             EditorGUILayout.LabelField("Action", EditorStyles.boldLabel);
-            playerDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", playerDialogue.action, typeof(Action1));
+            playerDialogue.action = (Action1)EditorGUILayout.ObjectField("Action", playerDialogue.action, typeof(Action1), true);
             if (playerDialogue.action != null)
             {
                 playerDialogue.actionBeforeDialogue = EditorGUILayout.Toggle("Action Before Dialogue", playerDialogue.actionBeforeDialogue);
@@ -62,7 +62,7 @@ public class PlayerDialogueEditor : Editor
                 name = playerDialogue.nextDialogue.text;
             }
 
-            playerDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, playerDialogue.nextDialogue, typeof(NPCDialogue));
+            playerDialogue.nextDialogue = (NPCDialogue)EditorGUILayout.ObjectField("Next Dialogue: " + name, playerDialogue.nextDialogue, typeof(NPCDialogue), true);
         }
         else
         {
@@ -94,7 +94,7 @@ public class PlayerDialogueEditor : Editor
                         name = playerDialogue.playerDialogueOptions[i].button.GetComponentInChildren<Text>().text;
                     }
 
-                    playerDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField(name, playerDialogue.playerDialogueOptions[i], typeof(PlayerDialogue));
+                    playerDialogue.playerDialogueOptions[i] = (PlayerDialogue)EditorGUILayout.ObjectField(name, playerDialogue.playerDialogueOptions[i], typeof(PlayerDialogue), true);
                     if (playerDialogue.playerDialogueOptions[i] != null) playerDialogue.playerDialogueOptions[i].nextOptions = true;
                 }
 
@@ -109,7 +109,7 @@ public class PlayerDialogueEditor : Editor
                     name = playerDialogue.playerDialogue.text;
                 }
 
-                playerDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, playerDialogue.playerDialogue, typeof(PlayerDialogue));
+                playerDialogue.playerDialogue = (PlayerDialogue)EditorGUILayout.ObjectField("Player Dialogue: " + name, playerDialogue.playerDialogue, typeof(PlayerDialogue), true);
                 if (playerDialogue.playerDialogue != null) playerDialogue.playerDialogue.nextOptions = false;
             }
         }
