@@ -30,6 +30,54 @@ If not working on main, `git checkout` a new branch:
 
 ## Scripting
 
+### Inventory Manager
+
+`InventoryManager.cs` creates an `instance` singleton.
+
+Methods and classes:
+
+```cs
+// Toggles the inventory on and off
+public void ChangeEnabled();
+
+// Equips given hotbar slot
+public void EquipSlot(int slot);
+
+// An inventory item by index and its icon
+public InventoryItemAndIcon(int itemIndex, Sprite icon) {}
+```
+
+Usage examples:
+
+```cs
+// Toggle inventory
+InventoryManager.instance.ChangeEnabled();
+
+// Equips hotbar slot 0
+InventoryManager.instance.EquipSlot(0);
+
+// Create an empty inventory item
+InventoryItemAndIcon emptyItem = new InventoryItemAndIcon(-1, null);
+```
+
+### Health Bar
+
+`HealthBar.cs` creates an `instance` singleton.
+
+Methods:
+
+```cs
+// Sets the health of the health bar to given value
+public void SetHealth(float health);
+```
+
+Usage examples:
+
+```cs
+// Set player health to 0
+HealthBar.instance.SetHealth(0);
+```
+
 ### Quest System
 
 `QuestSystem.cs` creates an `instance` singleton.
@@ -58,3 +106,18 @@ QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secr
 
 // Resolve "Secret Door" quest
 QuestSystem.instance.ResolveQuest("door-1");
+```
+
+### Compass
+
+`Compass.cs` creates an `instance` singleton.
+
+Methods:
+
+```cs
+// Adds a waypoint to the waypoint list and displays it accordingly
+public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker);
+
+// Removes a waypoint and destroys the appropriate GameObjects
+public void RemoveWaypoint(MapMarker mapMarker);
+```
