@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class QuestItem : MonoBehaviour
+public class Quest : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private TextMeshProUGUI titleText = null;
@@ -12,6 +12,5 @@ public class QuestItem : MonoBehaviour
     {
         titleText.text = title;
         descriptionText.text = description;
-        //
     }
 }

@@ -7,7 +7,7 @@ public class QuestSystem : NetworkBehaviour
     [Header("References")]
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private Transform contentTransform = null;
-    [SerializeField] private GameObject questItemPrefab = null;
+    [SerializeField] private GameObject questPrefab = null, progressQuestPrefab = null;
 
     // Key which toggles quest system visibility
     private const KeyCode toggleKey = KeyCode.Q;
@@ -51,17 +51,28 @@ public class QuestSystem : NetworkBehaviour
     }
 
     // Creates a quest with given key, title, and description
-    public void CreateQuest(string key, string title, string description)
+    public void CreateQuest(string key, string title, string description, bool progressBar)
     {
         // If key already contained in quest items, return
         if (questItems.ContainsKey(key)) return;
 
         // Instantiate and initialize quest item at content
-        GameObject questItem = Object.Instantiate(questItemPrefab, Vector3.zero, Quaternion.identity, contentTransform);
-        questItem.GetComponent<QuestItem>().Initialize(title, description);
+        GameObject prefab = progressBar ? progressQuestPrefab : questPrefab;
+        GameObject questItem = Object.Instantiate(questPrefab, Vector3.zero, Quaternion.identity, contentTransform);
+        questItem.GetComponent<Quest>().Initialize(title, description);
 
         // Add quest item to dictionary
         questItems.Add(key, questItem);
+    }
+
+    // Sets quest progress by key
+    public void SetQuestProgress(string key, float val)
+    {
+        // If key not in quest items, return
+        if (!questItems.ContainsKey(key)) return;
+
+        // If ProgressQuest component not null, set progress to val
+        questItems[key].GetComponent<ProgressQuest>()?.SetProgress(val);
     }
 
     // Removes a quest by key
