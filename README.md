@@ -110,7 +110,7 @@ QuestSystem.instance.Active = true;
 QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secret door?", true);
 
 // Set "Secret Door" quest progress to 60%
-QuestSystem.instance.CreateQuest("door-1", 0.6f);
+QuestSystem.instance.SetQuestProgress("door-1", 0.6f);
 
 // Resolve "Secret Door" quest
 QuestSystem.instance.ResolveQuest("door-1");
