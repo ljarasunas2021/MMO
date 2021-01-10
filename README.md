@@ -17,6 +17,8 @@ If not working on main, `git checkout` a new branch:
 
 `git checkout -b [branch name here]`
 
+The project uses Unity version 2019.4.12f1.
+
 ## Controls
 
 - Movement: WASD/arrow keys
@@ -89,7 +91,10 @@ Properties and methods:
 public bool Active { get; set; }
 
 // Creates a quest with given key, title, and description
-public void CreateQuest(string key, string title, string description);
+public void CreateQuest(string key, string title, string description, bool progressBar);
+
+// Sets quest progress by key
+public void SetQuestProgress(string key, float val);
 
 // Removes a quest by key
 public void ResolveQuest(string key);
@@ -101,8 +106,11 @@ Usage examples:
 // Activate quest system
 QuestSystem.instance.Active = true;
 
-// Create "Secret Door" quest
-QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secret door?");
+// Create "Secret Door" progress quest
+QuestSystem.instance.CreateQuest("door-1", "Secret Door", "Can you find the secret door?", true);
+
+// Set "Secret Door" quest progress to 60%
+QuestSystem.instance.CreateQuest("door-1", 0.6f);
 
 // Resolve "Secret Door" quest
 QuestSystem.instance.ResolveQuest("door-1");
