@@ -1,5 +1,5 @@
-﻿using Mirror;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class QuestSystem : NetworkBehaviour
@@ -44,7 +44,7 @@ public class QuestSystem : NetworkBehaviour
     private void Update()
     {
         // Return if not local player
-        if (!isLocalPlayer) return;
+        // if (!isLocalPlayer) return;
 
         // If toggle key pressed, toggle active
         if (Input.GetKeyDown(toggleKey)) Active = !Active;
@@ -58,7 +58,7 @@ public class QuestSystem : NetworkBehaviour
 
         // Instantiate and initialize quest item at content
         GameObject prefab = progressBar ? progressQuestPrefab : questPrefab;
-        GameObject questItem = Object.Instantiate(questPrefab, Vector3.zero, Quaternion.identity, contentTransform);
+        GameObject questItem = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity, contentTransform);
         questItem.GetComponent<Quest>().Initialize(title, description);
 
         // Add quest item to dictionary

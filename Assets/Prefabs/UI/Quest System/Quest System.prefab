@@ -123,7 +123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3224.4946, y: 3824.4949}
+  m_AnchoredPosition: {x: -3374.483, y: 3824.4832}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6490179893702506325
@@ -546,7 +546,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 6490179894973457908}
   contentTransform: {fileID: 6490179893702506324}
-  questItemPrefab: {fileID: 3281007885129642665, guid: 35eeb4c3d7ccb4beeb0b57070d5d789c,
+  questPrefab: {fileID: 3281007885129642665, guid: 35eeb4c3d7ccb4beeb0b57070d5d789c,
+    type: 3}
+  progressQuestPrefab: {fileID: 3281007885129642665, guid: 06189a46aecc94451866081b42c7aa64,
     type: 3}
 --- !u!1 &6490179895381301732
 GameObject:
