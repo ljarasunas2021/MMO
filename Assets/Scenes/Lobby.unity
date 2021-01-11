@@ -120,14 +120,14 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5bf7befbc7e9c444b9861df22c96d735, type: 2}
 --- !u!43 &3936152
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17502
+  m_Name: pb_Mesh17508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -518,6 +518,8 @@ GameObject:
   - component: {fileID: 73334520}
   - component: {fileID: 73334526}
   - component: {fileID: 73334527}
+  - component: {fileID: 73334528}
+  - component: {fileID: 73334529}
   m_Layer: 0
   m_Name: remy (1)
   m_TagString: Untagged
@@ -670,18 +672,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - NPCDialogue: {fileID: 0}
+  - NPCDialogue: {fileID: 73334528}
     playerDialogue: {fileID: 0}
-  - NPCDialogue: {fileID: 0}
-    playerDialogue: {fileID: 0}
-  - NPCDialogue: {fileID: 0}
-    playerDialogue: {fileID: 0}
-  - NPCDialogue: {fileID: 0}
-    playerDialogue: {fileID: 0}
-  - NPCDialogue: {fileID: 0}
-    playerDialogue: {fileID: 0}
+  interactRadius: 6
+  stationary: 0
+  moveDistance: 40
+  interacting: 0
   rotateSpeed: 0.25
-  radius: 6
 --- !u!95 &73334524
 Animator:
   serializedVersion: 3
@@ -709,7 +706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73334519}
   m_LocalRotation: {x: -0, y: -0.7797884, z: -0, w: 0.62604326}
-  m_LocalPosition: {x: 7.9499736, y: -1.88, z: -0.2854077}
+  m_LocalPosition: {x: 7.9499736, y: -1.992, z: -0.2854077}
   m_LocalScale: {x: 0.50000024, y: 0.5, z: 0.50000024}
   m_Children:
   - {fileID: 328203263}
@@ -730,7 +727,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73334519}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb77b59079fb64cb2bf9682a57a42b09, type: 3}
   m_Name: 
@@ -749,13 +746,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
+--- !u!114 &73334528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73334519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4c057d55084f218cef1206b28f1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 'I '
+  audioClip: {fileID: 8300000, guid: 40688730e93984b02ba2fb799529e95c, type: 3}
+  nextDialogueIsNPC: 0
+  nextDialogue: {fileID: 0}
+  options: 0
+  playerDialogueOptions: []
+  playerDialogue: {fileID: 0}
+  actionBeforeDialogue: 0
+  action: {fileID: 0}
+--- !u!195 &73334529
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73334519}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!43 &77891346
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17664
+  m_Name: pb_Mesh17674
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1871,7 +1911,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17696
+  m_Name: pb_Mesh17706
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4409,7 +4449,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17364
+  m_Name: pb_Mesh17370
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6037,7 +6077,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &626776406
 Transform:
@@ -7431,7 +7471,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &780086207
 Transform:
@@ -10499,7 +10539,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17954
+  m_Name: pb_Mesh17964
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11120,7 +11160,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &955483866
 Transform:
@@ -18358,7 +18398,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10535.452
+      value: 43412.418
       objectReference: {fileID: 0}
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -18368,7 +18408,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -10085.463
+      value: -39362.72
       objectReference: {fileID: 0}
     - target: {fileID: 6490179894973457864, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -18521,7 +18561,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1296745033
 Transform:
@@ -30366,7 +30406,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1333955971
 Transform:
@@ -33919,7 +33959,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17418
+  m_Name: pb_Mesh17424
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -34546,7 +34586,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1624930831
 Transform:
@@ -35810,7 +35850,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17174
+  m_Name: pb_Mesh17180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36523,7 +36563,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17832
+  m_Name: pb_Mesh17842
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36765,7 +36805,7 @@ GameObject:
   m_TagString: bulletHole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1910823515
 Transform:

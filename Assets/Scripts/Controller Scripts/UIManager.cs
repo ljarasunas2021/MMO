@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
 
     /// <summary> Toggle the audio on or off</summary>
     /// <param name="dialogue">the dialogue to play</param>
-    public void ToggleDialogue(Dialogue dialogue)
+    public void ToggleDialogue(Dialogue dialogue, NPCInteract nPC)
     {
         canMove = (dialogue == null);
         dialogueBox.enabled = (dialogue != null);
@@ -64,9 +64,13 @@ public class UIManager : MonoBehaviour
             NPCDialogue NPCDialogue = dialogue.NPCDialogue;
             PlayerDialogue playerDialogue = dialogue.playerDialogue;
 
-            if (NPCDialogue != null) StartCoroutine(PlayDialogue(NPCDialogue));
-            else if (playerDialogue != null) StartCoroutine(PlayDialogue(playerDialogue));
+            if (NPCDialogue != null) StartCoroutine(PlayDialogue(NPCDialogue, nPC));
+            else if (playerDialogue != null) StartCoroutine(PlayDialogue(playerDialogue, nPC));
             else Debug.Log("Dialogue Not Set Correctly");
+        }
+        else
+        {
+            nPC.interacting = false;
         }
 
         UpdateCanShoot();
@@ -75,7 +79,7 @@ public class UIManager : MonoBehaviour
     /// <summary> Play an NPC's dialogue</summary>
     /// <param name="dialogue"> the NPC's dialogue </param>
     /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
-    private IEnumerator PlayDialogue(NPCDialogue dialogue)
+    private IEnumerator PlayDialogue(NPCDialogue dialogue, NPCInteract nPC)
     {
         dialogueBox.enabled = true;
 
@@ -102,30 +106,30 @@ public class UIManager : MonoBehaviour
 
         if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null)
         {
-            StartCoroutine(PlayDialogue(dialogue.nextDialogue));
+            StartCoroutine(PlayDialogue(dialogue.nextDialogue, nPC));
         }
         else if (!dialogue.nextDialogueIsNPC && (dialogue.options && dialogue.playerDialogueOptions.Length > 0) || (!dialogue.options && dialogue.playerDialogue != null))
         {
 
             if (dialogue.options && dialogue.playerDialogueOptions.Length > 0)
             {
-                StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions));
+                StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions, nPC));
             }
             else if (!dialogue.options && dialogue.playerDialogue != null)
             {
-                StartCoroutine(PlayDialogue(dialogue.playerDialogue));
+                StartCoroutine(PlayDialogue(dialogue.playerDialogue, nPC));
             }
         }
         else
         {
-            ToggleDialogue(null);
+            ToggleDialogue(null, nPC);
         }
     }
 
     /// <summary> Play the player's dialogue</summary>
     /// <param name="dialogue"> the player's dialogue </param>
     /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
-    private IEnumerator PlayDialogue(PlayerDialogue dialogue)
+    private IEnumerator PlayDialogue(PlayerDialogue dialogue, NPCInteract nPC)
     {
         dialogueBox.enabled = true;
 
@@ -155,29 +159,29 @@ public class UIManager : MonoBehaviour
 
         if (dialogue.nextDialogueIsNPC && dialogue.nextDialogue != null)
         {
-            StartCoroutine(PlayDialogue(dialogue.nextDialogue));
+            StartCoroutine(PlayDialogue(dialogue.nextDialogue, nPC));
         }
         else if (!dialogue.nextDialogueIsNPC && dialogue.playerDialogueOptions.Length > 0 || dialogue.playerDialogue != null)
         {
             if (dialogue.options && dialogue.playerDialogueOptions.Length > 0)
             {
-                StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions));
+                StartCoroutine(PlayDialogue(dialogue.playerDialogueOptions, nPC));
             }
             else if (!dialogue.options && dialogue.playerDialogue != null)
             {
-                StartCoroutine(PlayDialogue(dialogue.playerDialogue));
+                StartCoroutine(PlayDialogue(dialogue.playerDialogue, nPC));
             }
         }
         else
         {
-            ToggleDialogue(null);
+            ToggleDialogue(null, nPC);
         }
     }
 
     /// <summary> Allow the player to choose a dialogue option </summary>
     /// <param name="dialogue"> an array of the player's dialogue options </param>
     /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
-    private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions)
+    private IEnumerator PlayDialogue(PlayerDialogue[] playerDialogueOptions, NPCInteract nPC)
     {
         dialogueBox.enabled = false;
 
@@ -192,7 +196,7 @@ public class UIManager : MonoBehaviour
         {
             Button button = Instantiate(option.button, dialogueCanvas.transform);
             buttons.Add(button);
-            button.onClick.AddListener(() => StartCoroutine(ClickButton(option, option.nextDialogue, buttons)));
+            button.onClick.AddListener(() => StartCoroutine(ClickButton(option, option.nextDialogue, buttons, nPC)));
         }
 
         yield return 0;
@@ -203,7 +207,7 @@ public class UIManager : MonoBehaviour
     /// <param name="dialogue"> the corresponding NPC's dialogue </param>
     /// <param name="buttons"> the list of dialogue option buttons </param>
     /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
-    private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons)
+    private IEnumerator ClickButton(PlayerDialogue optionChosen, NPCDialogue dialogue, List<Button> buttons, NPCInteract nPC)
     {
         LockCursor(true);
 
@@ -215,7 +219,7 @@ public class UIManager : MonoBehaviour
         dialogueBox.enabled = true;
         skipDialogue = false;
         foreach (Button button in buttons) Destroy(button.gameObject);
-        StartCoroutine(PlayDialogue(dialogue));
+        StartCoroutine(PlayDialogue(dialogue, nPC));
     }
 
     /// <summary> Toggle the pause menu on or off </summary>

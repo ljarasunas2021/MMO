@@ -83,6 +83,8 @@ public class InputHandler : NetworkBehaviour
         if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
 
         if (Input.GetButtonDown("SkipDialogue")) uIScript.CheckForSkipDialogue();
+
+        if (Input.GetButtonDown("ToggleQuests")) QuestSystem.instance.Active = !QuestSystem.instance.Active;
     }
 
     /// <summary> Test for interaction input </summary>

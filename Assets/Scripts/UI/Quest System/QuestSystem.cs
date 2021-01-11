@@ -9,9 +9,6 @@ public class QuestSystem : NetworkBehaviour
     [SerializeField] private Transform contentTransform = null;
     [SerializeField] private GameObject questPrefab = null, progressQuestPrefab = null;
 
-    // Key which toggles quest system visibility
-    private const KeyCode toggleKey = KeyCode.Q;
-
     // QuestSystem singleton
     public static QuestSystem instance;
 
@@ -39,15 +36,6 @@ public class QuestSystem : NetworkBehaviour
         // Initialize singleton
         if (instance != null) Destroy(gameObject);
         else instance = this;
-    }
-
-    private void Update()
-    {
-        // Return if not local player
-        // if (!isLocalPlayer) return;
-
-        // If toggle key pressed, toggle active
-        if (Input.GetKeyDown(toggleKey)) Active = !Active;
     }
 
     // Creates a quest with given key, title, and description

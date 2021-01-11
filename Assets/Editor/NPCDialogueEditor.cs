@@ -28,7 +28,7 @@ public class NPCDialogueEditor : Editor
         EditorGUILayout.LabelField("Dialogue", EditorStyles.boldLabel);
 
         NPCDialogue.text = EditorGUILayout.TextField("Text", NPCDialogue.text);
-        NPCDialogue.audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio", NPCDialogue.GetComponent<AudioSource>(), typeof(AudioClip), true);
+        NPCDialogue.audioClip = (AudioClip)EditorGUILayout.ObjectField("Audio", NPCDialogue.audioClip, typeof(AudioClip), true);
 
         EditorGUILayout.Space();
 
