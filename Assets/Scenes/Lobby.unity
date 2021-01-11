@@ -674,9 +674,9 @@ MonoBehaviour:
   dialogue:
   - NPCDialogue: {fileID: 73334528}
     playerDialogue: {fileID: 0}
-  interactRadius: 6
-  stationary: 0
-  moveDistance: 40
+  interactRadius: 0
+  stationary: 1
+  moveDistance: 0
   interacting: 0
   rotateSpeed: 0.25
 --- !u!95 &73334524
@@ -18398,7 +18398,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50793.01
+      value: 52128.934
       objectReference: {fileID: 0}
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -18408,7 +18408,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -46743.46
+      value: -47629.383
       objectReference: {fileID: 0}
     - target: {fileID: 6490179894973457864, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
