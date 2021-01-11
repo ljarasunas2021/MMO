@@ -30,6 +30,33 @@ The project uses Unity version 2019.4.12f1.
 - Toggle map: M
 - Toggle quests: Q
 
+## Namespaces
+
+Your scripts should be enclosed under the `MMO` namespace.
+
+Namespaces are used for organization and prevention of scope conflicts.
+
+- MMO
+  - Actions
+  - GOAP
+  - Player
+  - UI
+    - Inventory
+    - Map
+    - QuestSystem
+
+You may encounter the error message `The type or namespace [x] could not be found.`
+
+If this happens, you most likely have missed an import statement.
+
+For example, if you require an `Inventory` script, make sure to include:
+
+```cs
+using MMO.UI.Inventory;
+```
+
+At the top of your script.
+
 ## Scripting
 
 ### Inventory Manager
