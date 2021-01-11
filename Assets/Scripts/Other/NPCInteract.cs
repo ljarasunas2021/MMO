@@ -3,25 +3,46 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 /// <summary> Interact with the NPC</summary>
 public class NPCInteract : Target
 {
+    [Header("Dialogue")]
     // dialogue for the NPC
     public Dialogue[] dialogue;
+
+    // how close the player must be to the npc to interact with it
+    public float interactRadius;
+
+    [Header("Movement")]
+    // Should the npc not move
+    public bool stationary = true;
+
+    // if not stationary, how far should the npc move each time
+    public float moveDistance;
+
+    // is the npc interacting
+    [HideInInspector] public bool interacting = false;
+
+    // interacting last frame
+    private bool interactingLastFrame = false;
 
     // npc's rotation speed
     [Range(0, 1)]
     public float rotateSpeed;
 
-    // how close the player must be to the npc to interact with it
-    public float radius;
-
     // npc's character controller
     private CharacterController cc;
 
+    // npc's Nav Mesh Agent script
+    private NavMeshAgent navMeshAgent;
+
     // UIManager singleton reference
     private UIManager UIScript;
+
+    // npc's animator
+    private Animator anim;
     
     // y velocity of NPC
     // private float veloY = 0;
@@ -33,6 +54,10 @@ public class NPCInteract : Target
     {
         UIScript = GameObject.FindObjectOfType<UIManager>();
         cc = GetComponent<CharacterController>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        SetNewDestination();
+        anim.SetBool("walking", true);
     }
 
     /// <summary> Interact with the player </summary>
@@ -42,14 +67,62 @@ public class NPCInteract : Target
         {
             if (UIManager.instance.canMove)
             {
+                interacting = true;
+
                 StartCoroutine(RotateNPC());
 
                 UIScript.audioSource = GetComponent<AudioSource>();
-                UIScript.ToggleDialogue(dialogue[currentDialogIndex]);
+                UIScript.ToggleDialogue(dialogue[currentDialogIndex], this);
 
                 if (currentDialogIndex + 1 < dialogue.Length) currentDialogIndex++;
             }
         }
+    }
+
+    private void Update()
+    {
+        if (!stationary)
+        {
+            if (!interacting)
+            {
+                if (interactingLastFrame)
+                {
+                    navMeshAgent.isStopped = false;
+                    anim.SetBool("walking", true);
+                }
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 5)
+                {
+                    SetNewDestination();
+                }
+            }
+            else
+            {
+                if (!interactingLastFrame)
+                {
+                    navMeshAgent.isStopped = true;
+                    anim.SetBool("walking", false);
+                }
+            }
+            interactingLastFrame = interacting;
+        }
+    }
+
+    private void SetNewDestination()
+    {
+        navMeshAgent.SetDestination(RandomNavSphere(transform.position, moveDistance, -1));
+    }
+
+    private Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
+    {
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
+
+        randomDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randomDirection, out navHit, distance, layermask);
+
+        return navHit.position;
     }
 
     /// <summary> Is the player within range of the NPC </summary>
@@ -57,7 +130,7 @@ public class NPCInteract : Target
     private bool IsPlayerCloseEnough()
     {
         float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
-        return (playerDist < radius);
+        return (playerDist < interactRadius);
     }
 
     /// <summary> Rotate the NPC </summary>
