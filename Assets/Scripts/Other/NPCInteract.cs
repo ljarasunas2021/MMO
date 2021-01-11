@@ -67,7 +67,7 @@ public class NPCInteract : Target
         {
             if (UIManager.instance.canMove)
             {
-                interacting = false;
+                interacting = true;
 
                 StartCoroutine(RotateNPC());
 
