@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using MMO.Player;
 
 ///<summary> Change if the player can rotate when the animation starts playing </summary>
 public class ChangeCanRotate : StateMachineBehaviour

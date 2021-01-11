@@ -2,37 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary> Adds gravity to cc </summary>
-[RequireComponent(typeof(CharacterController))]
-public class Gravity : MonoBehaviour
+namespace MMO.Player
 {
-    // gravity amount
-    public float gravity = 0.015f;
-    // y velocity of cc
-    private float veloY;
-    // cc variable
-    private CharacterController cc;
-
-    /// <summary> Get the CC </summary>
-    private void Start()
+    /// <summary> Adds gravity to cc </summary>
+    [RequireComponent(typeof(CharacterController))]
+    public class Gravity : MonoBehaviour
     {
-        cc = GetComponent<CharacterController>();
-    }
+        // gravity amount
+        public float gravity = 0.015f;
+        // y velocity of cc
+        private float veloY;
+        // cc variable
+        private CharacterController cc;
 
-    /// <summary> Add gravity each frame </summary>
-    private void Update()
-    {
-        AddGravity();
-    }
+        /// <summary> Get the CC </summary>
+        private void Start()
+        {
+            cc = GetComponent<CharacterController>();
+        }
 
-    /// <summary> Add appropriate gravity </summary>
-    private void AddGravity()
-    {
-        if (cc.isGrounded) veloY = 0;
-        else veloY += gravity;
+        /// <summary> Add gravity each frame </summary>
+        private void Update()
+        {
+            AddGravity();
+        }
 
-        cc.Move(new Vector3(0, -veloY, 0));
+        /// <summary> Add appropriate gravity </summary>
+        private void AddGravity()
+        {
+            if (cc.isGrounded) veloY = 0;
+            else veloY += gravity;
 
-        if (cc.isGrounded) veloY = 0;
+            cc.Move(new Vector3(0, -veloY, 0));
+
+            if (cc.isGrounded) veloY = 0;
+        }
     }
 }

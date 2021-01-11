@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MMO.Player;
+using UnityEngine;
 
 ///<summary> Changes the current state parameter of the animator </summary>
 public class ChangeCurrentState : StateMachineBehaviour

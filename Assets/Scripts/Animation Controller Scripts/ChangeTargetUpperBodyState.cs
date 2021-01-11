@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MMO.Player;
+using UnityEngine;
 
 ///<summary> Change the target upper body state on the animtion's enter and/or exit <\summary>
 public class ChangeTargetUpperBodyState : StateMachineBehaviour

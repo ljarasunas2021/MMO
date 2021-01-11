@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MMO.Player;
+using UnityEngine;
 using System.Collections.Generic;
 
 ///<Summary> Controls the speed of the player while playing the locomotion state. </summary>

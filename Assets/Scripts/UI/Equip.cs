@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-/// <summary> UI for equipping </summary>
-public class Equip : MonoBehaviour
+namespace MMO.UI
 {
-    // is an item equipped
-    public bool equipped;
-    // equip button
-    public TextMeshProUGUI buttonText;
-
-    /// <summary> Change equipped automatically </summary>
-    void Start()
+    /// <summary> UI for equipping </summary>
+    public class Equip : MonoBehaviour
     {
-        ChangeEquipped(equipped);
-    }
+        // is an item equipped
+        public bool equipped;
+        // equip button
+        public TextMeshProUGUI buttonText;
 
-    /// <summary> Toggle equipped </summary>
-    public void ChangeEquipped()
-    {
-        equipped = !equipped;
-        buttonText.text = (equipped) ? "Unequip" : "Equip";
-    }
+        /// <summary> Change equipped automatically </summary>
+        void Start()
+        {
+            ChangeEquipped(equipped);
+        }
 
-    /// <summary> Change equipped variable </summary>
-    /// <param name="equipped"> new value of equipped variable </param>
-    public void ChangeEquipped(bool equipped)
-    {
-        this.equipped = equipped;
-        buttonText.text = (equipped) ? "Unequip" : "Equip";
+        /// <summary> Toggle equipped </summary>
+        public void ChangeEquipped()
+        {
+            equipped = !equipped;
+            buttonText.text = (equipped) ? "Unequip" : "Equip";
+        }
+
+        /// <summary> Change equipped variable </summary>
+        /// <param name="equipped"> new value of equipped variable </param>
+        public void ChangeEquipped(bool equipped)
+        {
+            this.equipped = equipped;
+            buttonText.text = (equipped) ? "Unequip" : "Equip";
+        }
     }
 }

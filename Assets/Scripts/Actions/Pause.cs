@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pause : Action1
+namespace MMO.Actions
 {
-
-    public float time = 2;
-
-    public override IEnumerator Execute()
+    public class Pause : Action1
     {
-        yield return new WaitForSeconds(time);
+        public float time = 2;
+
+        public override IEnumerator Execute()
+        {
+            yield return new WaitForSeconds(time);
+        }
     }
 }

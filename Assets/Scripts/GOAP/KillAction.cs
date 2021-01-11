@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SwordGC.AI.Actions
+namespace MMO.GOAP
 {
     /// <summary> A killing action for the GOAP AI. To learn about GOAP AI, visit https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793  </summary>
     public class KillAction : GoapAction
@@ -17,7 +17,7 @@ namespace SwordGC.AI.Actions
         // the amount of time until the AI can shoot
         private int  timeTillCanShoot = 0;
         // the goap agent itself
-        private GoapAgent agent;
+        // private GoapAgent agent;
 
         /// <summary> Contstructor for the kill action </summary>
         /// <param name="agent"> agent that will execute this action </param>

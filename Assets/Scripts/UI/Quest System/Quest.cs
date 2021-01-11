@@ -1,16 +1,19 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+namespace MMO.UI.QuestSystem
 {
-    [Header("References")]
-    [SerializeField] private TextMeshProUGUI titleText = null;
-    [SerializeField] private TextMeshProUGUI descriptionText = null;
-
-    // Initialize quest item with title and description
-    public void Initialize(string title, string description)
+    public class Quest : MonoBehaviour
     {
-        titleText.text = title;
-        descriptionText.text = description;
+        [Header("References")]
+        [SerializeField] private TextMeshProUGUI titleText = null;
+        [SerializeField] private TextMeshProUGUI descriptionText = null;
+
+        // Initialize quest item with title and description
+        public void Initialize(string title, string description)
+        {
+            titleText.text = title;
+            descriptionText.text = description;
+        }
     }
 }

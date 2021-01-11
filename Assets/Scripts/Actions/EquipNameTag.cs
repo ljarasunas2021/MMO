@@ -1,47 +1,51 @@
-﻿using System.Collections;
+﻿using MMO.UI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipNameTag : Action1
+namespace MMO.Actions
 {
-    public Canvas canvas;
-    public Button equipButton, unEquipButton;
-    private Button equipButtonInstant, unEquipButtonInstant;
-    private bool clicked = false;
-    private Equip equip;
-    public GameObject dialogueBox;
-
-    void Start()
+    public class EquipNameTag : Action1
     {
-        equip = FindObjectOfType<Equip>();
-    }
+        public Canvas canvas;
+        public Button equipButton, unEquipButton;
+        private Button equipButtonInstant, unEquipButtonInstant;
+        private bool clicked = false;
+        private Equip equip;
+        public GameObject dialogueBox;
 
-    public override IEnumerator Execute()
-    {
-        dialogueBox.SetActive(false);
-        UIManager.instance.LockCursor(false);
+        void Start()
+        {
+            equip = FindObjectOfType<Equip>();
+        }
 
-        equipButtonInstant = Instantiate(equipButton, canvas.transform);
-        unEquipButtonInstant = Instantiate(unEquipButton, canvas.transform);
+        public override IEnumerator Execute()
+        {
+            dialogueBox.SetActive(false);
+            UIManager.instance.LockCursor(false);
 
-        clicked = false;
+            equipButtonInstant = Instantiate(equipButton, canvas.transform);
+            unEquipButtonInstant = Instantiate(unEquipButton, canvas.transform);
 
-        equipButtonInstant.onClick.AddListener(() => { ButtonClicked(0); });
-        unEquipButtonInstant.onClick.AddListener(() => { ButtonClicked(1); });
+            clicked = false;
 
-        while (!clicked) yield return 0;
+            equipButtonInstant.onClick.AddListener(() => { ButtonClicked(0); });
+            unEquipButtonInstant.onClick.AddListener(() => { ButtonClicked(1); });
 
-        UIManager.instance.LockCursor(true);
-        dialogueBox.SetActive(true);
-    }
+            while (!clicked) yield return 0;
 
-    private void ButtonClicked(int index)
-    {
-        Destroy(equipButtonInstant.gameObject);
-        Destroy(unEquipButtonInstant.gameObject);
-        clicked = true;
+            UIManager.instance.LockCursor(true);
+            dialogueBox.SetActive(true);
+        }
 
-        equip.ChangeEquipped((index == 0) ? true : false);
+        private void ButtonClicked(int index)
+        {
+            Destroy(equipButtonInstant.gameObject);
+            Destroy(unEquipButtonInstant.gameObject);
+            clicked = true;
+
+            equip.ChangeEquipped((index == 0) ? true : false);
+        }
     }
 }

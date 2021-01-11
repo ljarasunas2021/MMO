@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StepForward : Action1
+namespace MMO.Actions
 {
-    public float forward;
-    private CharacterController cc;
-
-    void Start()
+    public class StepForward : Action1
     {
-        cc = GetComponent<CharacterController>();
-    }
+        public float forward;
+        private CharacterController cc;
 
-    public override IEnumerator Execute()
-    {
-        yield return 0;
-        cc.Move(transform.forward * forward);
+        void Start()
+        {
+            cc = GetComponent<CharacterController>();
+        }
+
+        public override IEnumerator Execute()
+        {
+            yield return 0;
+            cc.Move(transform.forward * forward);
+        }
     }
 }

@@ -1,37 +1,42 @@
-﻿using System.Collections;
+﻿using MMO.GOAP;
+using MMO.Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedCapFight : Action1
+namespace MMO.Actions
 {
-    private PlayerHealth playerHealth, enemyHealth;
-    public Transform weaponSpawnPosition;
-    public GameObject weapon;
-    public GameObject dialogueBox;
-
-    public override IEnumerator Execute()
+    public class RedCapFight : Action1
     {
-        enemyHealth = GetComponent<PlayerHealth>();
-        playerHealth = GameObject.Find("Player_0(Clone)").GetComponent<PlayerHealth>();
+        private PlayerHealth playerHealth, enemyHealth;
+        public Transform weaponSpawnPosition;
+        public GameObject weapon;
+        public GameObject dialogueBox;
 
-        dialogueBox.SetActive(false);
-
-        Instantiate(weapon, weaponSpawnPosition.position, Quaternion.identity);
-
-        GetComponent<EnemyAI1>().StartFiring();
-
-        while (enemyHealth.health > 0 && playerHealth.health > 0)
+        public override IEnumerator Execute()
         {
-            yield return 0;
+            enemyHealth = GetComponent<PlayerHealth>();
+            playerHealth = GameObject.Find("Player_0(Clone)").GetComponent<PlayerHealth>();
+
+            dialogueBox.SetActive(false);
+
+            Instantiate(weapon, weaponSpawnPosition.position, Quaternion.identity);
+
+            GetComponent<EnemyAI1>().StartFiring();
+
+            while (enemyHealth.health > 0 && playerHealth.health > 0)
+            {
+                yield return 0;
+            }
+
+            // if (enemyHealth.health <= 0)
+            // {
+
+            // }
+
+            if (playerHealth.health <= 0) playerHealth.health = playerHealth.maxHealth;
+
+            dialogueBox.SetActive(true);
         }
-
-        if (enemyHealth.health <= 0)
-        {
-
-        }
-
-        if (playerHealth.health <= 0) playerHealth.health = playerHealth.maxHealth;
-
-        dialogueBox.SetActive(true);
     }
 }

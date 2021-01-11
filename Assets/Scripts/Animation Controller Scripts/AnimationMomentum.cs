@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MMO.Player;
+using UnityEngine;
 
 ///<summary> Sets the player's speed based on the animation being played. </summary>
 public class AnimationMomentum : StateMachineBehaviour

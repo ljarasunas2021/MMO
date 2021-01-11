@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Mirror;
+using MMO.UI.Map;
+using MMO.UI.Inventory;
+using System.Collections;
 using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 

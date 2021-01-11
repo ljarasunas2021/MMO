@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossGivesWalkie : Action1
+namespace MMO.Actions
 {
-    public GameObject walkie;
-    public Transform position;
-
-    public override IEnumerator Execute()
+    public class BossGivesWalkie : Action1
     {
-        Instantiate(walkie, position.position, Quaternion.identity);
-        yield break;
+        public GameObject walkie;
+        public Transform position;
+
+        public override IEnumerator Execute()
+        {
+            Instantiate(walkie, position.position, Quaternion.identity);
+            yield break;
+        }
     }
 }
