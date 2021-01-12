@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-/// <summary> Singleton which stores every camera </summary>
-public class CameraController : MonoBehaviour
+namespace MMO
 {
-    //singleton
-    public static CameraController instance;
-    //different cameras
-    public GameObject cinematicCam, closeUpCam, lockedCam;
-
-    /// <summary> Create a singleton</summary>
-    private void Start()
+    /// <summary> Singleton which stores every camera </summary>
+    public class CameraController : MonoBehaviour
     {
-        if (instance == null)
+        //singleton
+        public static CameraController instance;
+        //different cameras
+        public GameObject cinematicCam, closeUpCam, lockedCam;
+
+        /// <summary> Create a singleton</summary>
+        private void Start()
         {
-            instance = this;
-        }
-        else
-        {
-            Debug.Log("There is already an instance of the Camera Controller.");
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Debug.Log("There is already an instance of the Camera Controller.");
+            }
         }
     }
 }

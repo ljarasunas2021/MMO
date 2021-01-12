@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-///<summary> Singleton that holds array of all audio files in game </summary>
-public class AudioPrefabsController : MonoBehaviour
+namespace MMO
 {
-    // singleton instance
-    public static AudioPrefabsController instance;
-    // array of audio clips to play
-    public AudioClip[] audioClipPrefabs;
-
-    /// <summary> Create a singleton pattern </summary>
-    private void Start()
+    ///<summary> Singleton that holds array of all audio files in game </summary>
+    public class AudioPrefabsController : MonoBehaviour
     {
-        if (instance == null)
+        // singleton instance
+        public static AudioPrefabsController instance;
+        // array of audio clips to play
+        public AudioClip[] audioClipPrefabs;
+
+        /// <summary> Create a singleton pattern </summary>
+        private void Start()
         {
-            instance = this;
-        }
-        else
-        {
-            Debug.Log("There is already an instance of the Audio Prefabs Controller.");
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Debug.Log("There is already an instance of the Audio Prefabs Controller.");
+            }
         }
     }
 }
