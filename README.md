@@ -30,6 +30,8 @@ The project uses Unity version 2019.4.12f1.
 - Toggle map: M
 - Toggle quests: Q
 
+All controls should be registered by the Input Manager which can be found at `Edit > Project Settings > Input Manager`.
+
 ## Namespaces
 
 Your scripts should be enclosed under the `MMO` namespace.
@@ -59,9 +61,11 @@ At the top of your script.
 
 ## Scripting
 
-### Inventory Manager
+### Inventory Manager (MMO.UI.Inventory)
 
-`InventoryManager.cs` creates an `instance` singleton.
+Manages the inventory.
+
+`InventoryManager.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
 
 Methods and classes:
 
@@ -89,9 +93,11 @@ InventoryManager.instance.EquipSlot(0);
 InventoryItemAndIcon emptyItem = new InventoryItemAndIcon(-1, null);
 ```
 
-### Health Bar
+### Health Bar (MMO.Player)
 
-`HealthBar.cs` creates an `instance` singleton.
+Manages the health bar UI.
+
+`HealthBar.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
 
 Methods:
 
@@ -107,9 +113,11 @@ Usage examples:
 HealthBar.instance.SetHealth(0);
 ```
 
-### Quest System
+### Quest System (MMO.UI.QuestSystem)
 
-`QuestSystem.cs` creates an `instance` singleton.
+Manages player quests.
+
+`QuestSystem.cs` inherits from `NetworkBehaviour` and creates an `instance` singleton.
 
 Properties and methods:
 
@@ -143,9 +151,11 @@ QuestSystem.instance.SetQuestProgress("door-1", 0.6f);
 QuestSystem.instance.ResolveQuest("door-1");
 ```
 
-### Compass
+### Compass (MMO.UI)
 
-`Compass.cs` creates an `instance` singleton.
+Manages the compass UI.
+
+`Compass.cs` inherits from `NetworkBehaviour` and creates an `instance` singleton.
 
 Methods:
 
@@ -156,3 +166,40 @@ public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker);
 // Removes a waypoint and destroys the appropriate GameObjects
 public void RemoveWaypoint(MapMarker mapMarker);
 ```
+
+### Map (MMO.UI.Map)
+
+Handles the UI with the map.
+
+`Map.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Methods:
+
+```cs
+// Enables map and refreshes player's position on marker
+public void Enable();
+
+// Disables map and destroys player's map marker
+public void Disable();
+```
+
+### Input Handler (MMO.Player)
+
+Used to manage all of the player's input.
+
+`InputHandler.cs` inherits from `NetworkBehaviour`.
+
+Usage examples:
+
+```cs
+// Tests for UI input
+private void TestUI()
+{
+    ...
+    if (Input.GetButtonDown("ToggleMap")) uIScript.ToggleMap();
+    if (Input.GetButtonDown("SkipDialogue")) uIScript.CheckForSkipDialogue();
+    if (Input.GetButtonDown("ToggleQuests")) QuestSystem.instance.Active = !QuestSystem.instance.Active;
+}
+```
+
+All inputs should be taken through `InputHandler.cs`.
