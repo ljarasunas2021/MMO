@@ -10,46 +10,46 @@ namespace MMO.Player
     {
         [Header("GameObjects")]
         // player's hips
-        [SerializeField] private GameObject hips;
+        [SerializeField] private GameObject hips = null;
 
         [Header("Locomotion Blend Values")]
         // blend values for locomotion animations
-        [SerializeField] private float idleVal;
-        [SerializeField] private float walkVal;
-        [SerializeField] private float runVal;
+        [SerializeField] private float idleVal = 0;
+        [SerializeField] private float walkVal = 0;
+        [SerializeField] private float runVal = 0;
 
         [Header("Locomotion Blend Value Thresholds")]
         // midpoints for the blend values, so that the appropriate jump animation is played
-        [SerializeField] private float idleToWalkThreshold;
-        [SerializeField] private float walkToRunThreshold;
+        [SerializeField] private float idleToWalkThreshold = 0;
+        [SerializeField] private float walkToRunThreshold = 0;
 
         [Header("Smooth Time Values")]
         // time it takes to turn
-        [SerializeField] private float turnSmoothTime;
+        [SerializeField] private float turnSmoothTime = 0;
         // time it takes to accelerate
-        [SerializeField] private float locomotionAccelerationSmoothTime;
+        [SerializeField] private float locomotionAccelerationSmoothTime = 0;
         // time it takes to decelerate
-        [SerializeField] private float locomotionDecelerationSmoothTime;
+        [SerializeField] private float locomotionDecelerationSmoothTime = 0;
 
         [Header("Mid Air Values")]
         // player's minimum distance from groud for the player to be "in air"
-        [SerializeField] private float minDistFromGroundToBeMidAir;
+        [SerializeField] private float minDistFromGroundToBeMidAir = 0;
         // gravity applied to player
-        [SerializeField] private float gravity;
+        [SerializeField] private float gravity = 0;
 
         [Header("Landing Velocity Y's")]
         // max time in air for a soft landing to executed
-        [SerializeField] private float softLandingMaxTimeInAir;
+        [SerializeField] private float softLandingMaxTimeInAir = 0;
         // max time in air for a roll landing to executed
-        [SerializeField] private float rollLandingMaxTimeInAir;
+        [SerializeField] private float rollLandingMaxTimeInAir = 0;
 
         [Header("Jump Maximum Distances From Ground")]
         // box jump max height
-        [SerializeField] private float maxBoxJumpHeight;
+        [SerializeField] private float maxBoxJumpHeight = 0;
         // walking jump max height
-        [SerializeField] private float maxWalkingJumpHeight;
+        [SerializeField] private float maxWalkingJumpHeight = 0;
         // running jump max height
-        [SerializeField] private float maxRunningJumpHeight;
+        [SerializeField] private float maxRunningJumpHeight = 0;
 
         [Header("Camera Values")]
         // camera's y rotation offset
