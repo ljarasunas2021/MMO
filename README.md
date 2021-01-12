@@ -203,3 +203,158 @@ private void TestUI()
 ```
 
 All inputs should be taken through `InputHandler.cs`.
+
+### Players Controller (MMO)
+
+Stores every player in a singleton.
+
+`PlayersController.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Variables:
+
+```cs
+// List of all players
+public List<GameObject> players;
+```
+
+Usage examples:
+
+```cs
+// Returns a list of all players
+private List<GameObject> GetPlayers()
+{
+    return PlayersController.instance.players;
+}
+```
+
+### UI Manager (MMO)
+
+Manages the UI for the entire game.
+
+`UIManager.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Methods:
+
+```cs
+// Toggles dialogue audio on or off
+public void ToggleDialogue(Dialogue dialogue, NPCInteract nPC);
+
+// Toggles the pause menu on or off
+public void TogglePauseMenu();
+
+// Toggles the map on or off
+public void ToggleMap();
+
+// Locks or unlocks the cursor
+public void LockCursor(bool locked);
+
+// Turns the Inventory on or off
+public void ToggleInventory();
+
+// Checks whether a dialogue can be skipped
+public void CheckForSkipDialogue();
+```
+
+### Layer Mask Controller (MMO)
+
+Static class which contains references to all layers.
+
+Variables:
+
+```cs
+public static LayerMask environment = 10;
+public static LayerMask player = 9;
+public static LayerMask item = 11;
+public static LayerMask playerNonRagdoll = 13;
+```
+
+Usage examples:
+
+```cs
+// Gets the player LayerMask
+private LayerMask playerLayerMask = LayerMaskController.player;
+```
+
+### Item Prefabs Controller (MMO)
+
+Array of item prefabs for commands to pull from.
+
+`ItemPrefabsController.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Variables:
+
+```cs
+// Array of item prefabs
+public GameObject[] itemPrefabs;
+```
+
+Usage examples:
+
+```cs
+// Returns item prefab for item with given index
+private GameObject ItemPrefabAtIndex(int index)
+{
+    return ItemPrefabsController.instance.itemPrefabs[index];
+}
+```
+
+### Effects Prefabs Controller (MMO)
+
+Singleton which stores every effect prefab.
+
+`EffectsPrefabsController.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Variables:
+
+```cs
+// Array of effects
+public GameObject[] effectPrefabs;
+```
+
+Usage examples:
+
+```cs
+// Returns effect prefab for effect with given index
+private GameObject EffectPrefabAtIndex(int index)
+{
+    return EffectsPrefabsController.instance.effectPrefabs[index];
+}
+```
+
+### Audio Prefabs Controller (MMO)
+
+Singleton which holds array of all in-game audio files.
+
+`AudioPrefabsController.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Variables:
+
+```cs
+// Array of playable audio clips
+public AudioClip[] audioClipPrefabs;
+```
+
+Usage examples:
+
+```cs
+// Returns audio clip with given index
+private AudioClip AudioPrefabAtIndex(int index)
+{
+    return AudioPrefabsController.instance.audioClipPrefabs[index];
+}
+```
+
+### Camera Controller (MMO)
+
+Singleton which stores every camera.
+
+`CameraController.cs` inherits from `MonoBehaviour` and creates an `instance` singleton.
+
+Variables:
+
+```cs
+public GameObject cinematicCam;
+public GameObject closeUpCam;
+public GameObject lockedCam;
+```
+
