@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour
+namespace MMO
 {
-    public virtual void Interact() {
-        Debug.Log("Override this");
+    public class Target : MonoBehaviour
+    {
+        public virtual void Interact() {
+            Debug.Log("Override this");
+        }
     }
 }

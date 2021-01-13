@@ -1,4 +1,6 @@
 ﻿using Mirror;
+using MMO.NPC;
+using MMO.Player;
 using MMO.UI.Maps;
 using MMO.UI.Inventory;
 using System.Collections;
