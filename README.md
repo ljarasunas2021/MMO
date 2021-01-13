@@ -40,12 +40,13 @@ Namespaces are used for organization and prevention of scope conflicts.
 
 - MMO
   - Actions
+  - Animation
   - GOAP
   - Player
   - UI
     - Inventory
-    - Map
-    - QuestSystem
+    - Maps
+    - Quests
 
 You may encounter the error message `The type or namespace [x] could not be found.`
 
@@ -113,7 +114,7 @@ Usage examples:
 HealthBar.instance.SetHealth(0);
 ```
 
-### Quest System (MMO.UI.QuestSystem)
+### Quest System (MMO.UI.Quests)
 
 Manages player quests.
 
@@ -167,7 +168,7 @@ public void AddWaypoint(Waypoint waypoint, MapMarker mapMarker);
 public void RemoveWaypoint(MapMarker mapMarker);
 ```
 
-### Map (MMO.UI.Map)
+### Map (MMO.UI.Maps)
 
 Handles the UI with the map.
 
@@ -227,7 +228,7 @@ private List<GameObject> GetPlayers()
 }
 ```
 
-### UI Manager (MMO)
+### UI Manager (MMO.UI)
 
 Manages the UI for the entire game.
 
