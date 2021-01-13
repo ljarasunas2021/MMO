@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MMO.UI.Map
+namespace MMO.UI.Maps
 {
     /// <summary> Holds all of the map markers </summary>
     public class MapMarkers : MonoBehaviour, IPointerClickHandler

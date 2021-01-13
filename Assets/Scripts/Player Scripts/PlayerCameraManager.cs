@@ -1,6 +1,6 @@
 ﻿using Cinemachine;
 using Mirror;
-using MMO.UI.Map;
+using MMO.UI.Maps;
 using UnityEngine;
 
 namespace MMO.Player

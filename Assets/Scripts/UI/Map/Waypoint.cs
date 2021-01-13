@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MMO.UI.Map
+namespace MMO.UI.Maps
 {
     /// <summary> Holds data for a waypoint </summary>
     public class Waypoint : MonoBehaviour

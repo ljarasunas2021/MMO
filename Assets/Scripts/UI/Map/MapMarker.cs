@@ -1,7 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
 
-namespace MMO.UI.Map
+namespace MMO.UI.Maps
 {
     /// <summary> Markers on the map </summary>
     public class MapMarker : MonoBehaviour, IPointerClickHandler

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace MMO.UI.QuestSystem
+namespace MMO.UI.Quests
 {
     public class ProgressQuest : Quest
     {

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace MMO.UI.QuestSystem
+namespace MMO.UI.Quests
 {
     public class Quest : MonoBehaviour
     {

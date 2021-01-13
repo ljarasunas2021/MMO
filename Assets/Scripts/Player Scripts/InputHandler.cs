@@ -1,7 +1,7 @@
 ﻿using Mirror;
 using MMO.UI.Inventory;
-using MMO.UI.QuestSystem;
-using MMO.UI.Map;
+using MMO.UI.Quests;
+using MMO.UI.Maps;
 using UnityEngine;
 
 namespace MMO.Player

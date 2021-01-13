@@ -1,5 +1,5 @@
 ﻿using Mirror;
-using MMO.UI.Map;
+using MMO.UI.Maps;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

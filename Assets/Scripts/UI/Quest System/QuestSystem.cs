@@ -2,7 +2,7 @@
 using Mirror;
 using UnityEngine;
 
-namespace MMO.UI.QuestSystem
+namespace MMO.UI.Quests
 {
     public class QuestSystem : NetworkBehaviour
     {

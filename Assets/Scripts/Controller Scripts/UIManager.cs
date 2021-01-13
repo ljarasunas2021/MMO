@@ -1,12 +1,12 @@
 ﻿using Mirror;
-using MMO.UI.Map;
+using MMO.UI.Maps;
 using MMO.UI.Inventory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MMO
+namespace MMO.UI
 {
     /// <summary> Manages the UI for the entire game</summary>
     public class UIManager : MonoBehaviour

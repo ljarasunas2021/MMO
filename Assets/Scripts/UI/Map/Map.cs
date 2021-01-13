@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MMO.UI.Map
+namespace MMO.UI.Maps
 {
     /// <summary> Handles the UI with the map</summary>
     public class Map : MonoBehaviour
