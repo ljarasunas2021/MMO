@@ -42,6 +42,7 @@ Namespaces are used for organization and prevention of scope conflicts.
   - Actions
   - Animation
   - GOAP
+  - NPC
   - Player
   - UI
     - Inventory
@@ -260,6 +261,8 @@ public void CheckForSkipDialogue();
 
 Static class which contains references to all layers.
 
+`LayerMaskController.cs` is static.
+
 Variables:
 
 ```cs
@@ -359,3 +362,41 @@ public GameObject closeUpCam;
 public GameObject lockedCam;
 ```
 
+### Player Dialogue (MMO.Player)
+
+Holds variables for a player's dialogue.
+
+`PlayerDialogue.cs` inherits from `MonoBehaviour`.
+
+Variables:
+
+```cs
+// Whether the player should have different dialogue options
+public bool options;
+
+// If nno options, this text will be displayed for player
+public string text;
+
+// Amount of time the text is on the screen
+public float time;
+```
+
+### TransformDeepChildExtension (MMO)
+
+Finds a child of a Transform with a certain name.
+
+`TransformDeepChildExtension.cs` is static.
+
+Methods:
+
+```cs
+// Finds a child of a Transform with a certain name
+public static Transform FindDeepChild(this Transform parent, string name);
+```
+
+Usage examples:
+
+```cs
+// Finds Transform of "elem" object within self
+Transform elemTransform = transform.FindDeepChild("elem");
+```
