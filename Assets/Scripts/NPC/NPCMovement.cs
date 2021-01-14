@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace MMO.NPC
 {
     /// <summary> Controls the movement of the NPC </summary>
     public class NPCMovement : MonoBehaviour
     {
+        // attack or idle?
+        public bool attackMode;
         // NPC's speed
         [Range(0, 1)]
         public float speed;
@@ -15,13 +18,18 @@ namespace MMO.NPC
         public float moveRadius = 5;
         // animator component of npc
         private Animator animator;
+        // nevmeshagent component of npc
+        private NavMeshAgent navMeshAgent;
         // actual frames till npc moves
         private int framesTillMove;
+        // player transform
+        private Transform playerTransform;
 
         /// <summary> Init vars </summary>
         void Start()
         {
             animator = GetComponent<Animator>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
             animator.SetBool("walking", false);
             SetFramesToMove();
         }
@@ -29,9 +37,19 @@ namespace MMO.NPC
         /// <summary> Move the NPC if necessary </summary>
         void Update()
         {
-            if (framesTillMove < 0) StartCoroutine(MoveNPC());
+            if (attackMode)
+            {
+                animator.speed = 3;
+                animator.SetBool("walking", true);
+                if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+                else navMeshAgent.SetDestination(playerTransform.position);
+            }
+            else
+            {
+                if (framesTillMove < 0) StartCoroutine(MoveNPC());
 
-            framesTillMove--;
+                framesTillMove--;
+            }
         }
 
         /// <summary> Find the bounds within which the NPC can move</summary>
@@ -57,7 +75,7 @@ namespace MMO.NPC
 
             animator.SetBool("walking", true);
             transform.LookAt(toMove);
-
+            
             float i = 0;
             while (i <= 1)
             {
