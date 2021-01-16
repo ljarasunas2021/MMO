@@ -4,7 +4,7 @@
 - It’s an MMO based around characters who work in a hotel which houses various cryptids and monsters such as the Loch Ness Monster and Mothman.  It consists of quests, puzzles, and dungeons that the player must fight through in order to successfully progress in the game.  Think Club Penguin with a semilinear storyline and just a skosh more violence. The goal is to be promoted, through honest or dishonest means, to the head of the hotel.  The twist is that the game tracks when you make dialogue or other decisions that violate the social contract in some way (stealing, just being blatantly rude, like pseudo-nepotism? idk), and the more of those choices you make, the more health the final boss, the wendigo, has when you fight him in the last level.
 
 *What does the development process look like?*
-- As a class, we do periodic sprints, but at least this year different teams have been going at different speeds and thus at different stages of production (for example, the dialogue team is ahead of the location/systems design team, which is ahead of the assets team).  Therefore, the sprints haven’t really resulted in testable prototypes.  Since you’ll have a more extensive asset base than we had, you’ll want to test and revise rudimentary prototypes as soon and as often as possible.  We suggest putting together and testing the tutorial (redcap encounter).
+- As a class, we do periodic sprints, but at least this year different teams have been going at different speeds and thus at different stages of production (for example, the dialogue team is ahead of the location/systems design team, which is ahead of the assets team).  Therefore, the sprints haven’t really resulted in testable prototypes.  Since you’ll have a more extensive asset base than we had, you’ll want to test and revise rudimentary prototypes as soon and as often as possible.  We suggest putting together and testing the prototpye (`Scenes/lobby` which has all fundamental player gameplay features and a working npc and enemy ai) as well as the tutorial (`Scenes/lobby1` which has example dialogue and quest systems).
 
 
 ## Cloning the project
@@ -28,9 +28,20 @@ The project uses Unity version 2019.4.12f1.
 - Skip dialogue: return
 - Toggle inventory: tab
 - Toggle map: M
+- Draw markers on map and compass: left-click on the map
+- Remove markers on map and compass: left-click on the marker (which is on the map)
+- Move around inventory items: drag-and-drop
 - Toggle quests: Q
+- Pause (client-side): P
+- Interact with target (i.e. talk to npc): left-click on target
+- Attack with left inventory item: left-click
+- Attack with right inventory item: right-click
 
 All controls should be registered by the Input Manager which can be found at `Edit > Project Settings > Input Manager`.
+
+## Networking
+
+This project uses the Mirror Networking Framework. This is a third party replacement for UNet, which Unity has stopped production of for a few years now. Mirror will come in the project, but it must be updated frequently (you can usually update it through the asset store). Be comfortable with the concepts of Mirror, since the majority of the scripts do use networking in some shape or form. The mmo will be run on a server, and any Chadwick student will be able to join the server. That being said, we do not plan to use that large of a server, and therefore certain aspects of the game, such as player movement, are client authoritative rather than server authoritative. 
 
 ## Namespaces
 
@@ -229,6 +240,76 @@ private List<GameObject> GetPlayers()
 }
 ```
 
+### Target (MMO)
+
+Ovveridable class used to allow the player to interact with targets. 
+
+`Target.cs` inherits from `MonoBehavior`.
+
+Method:
+
+```cs
+// Called when player clicks on target
+public virtual void Interact() {
+    Debug.Log("Override this");
+}
+```
+
+Example:
+
+```cs
+/// <summary> NPC interact with the player </summary>
+public override void Interact()
+{
+    if (IsPlayerCloseEnough())
+    {
+        if (UIManager.instance.canMove)
+        {
+            interacting = true;
+
+            StartCoroutine(RotateNPC());
+
+            UIScript.audioSource = GetComponent<AudioSource>();
+            UIScript.ToggleDialogue(dialogue[currentDialogIndex], this);
+
+            if (currentDialogIndex + 1 < dialogue.Length) currentDialogIndex++;
+        }
+    }
+}
+```
+
+### Outline Object (MMO)
+
+Primarily used on target objects to highlight an object when the mouse hovers over the object (used with Outline Script).
+
+`OutlineObject.cs` inherits from `MonoBehaviour`.
+
+Methods:
+
+```cs
+/// <summary> Is the player close enough for it to be outlined </summary>
+/// <returns> whether the player is close enough for the gameobject to be outlined </returns>
+private bool IsPlayerCloseEnough()
+{
+    float playerDist = Vector3.Distance(NetworkClient.connection.identity.transform.position, gameObject.transform.position);
+    return (playerDist < radius);
+}
+
+/// <summary> When the mouse hovers over a gameobject, outline the object </summary>
+void OnMouseOver() {
+    if (IsPlayerCloseEnough()) {
+        outline.enabled = true;
+    } else {
+        outline.enabled = false;
+    }
+}
+
+/// <summary> Disable the outline when the mouse exits the gameobject </summary>
+void OnMouseExit() {
+    outline.enabled = false;
+}
+```
+
 ### UI Manager (MMO.UI)
 
 Manages the UI for the entire game.
@@ -362,6 +443,50 @@ public GameObject closeUpCam;
 public GameObject lockedCam;
 ```
 
+### NPC Interact (MMO.NPC)
+
+Put on an NPC enabling it to interact with the player. 
+
+`NPCInteract` inherits from `Target`.
+
+Methods:
+
+```cs
+/// <summary> Npc interact with the player </summary>
+public override void Interact()
+{
+    if (IsPlayerCloseEnough())
+    {
+        if (UIManager.instance.canMove)
+        {
+            interacting = true;
+
+            StartCoroutine(RotateNPC());
+
+            UIScript.audioSource = GetComponent<AudioSource>();
+            UIScript.ToggleDialogue(dialogue[currentDialogIndex], this);
+
+            if (currentDialogIndex + 1 < dialogue.Length) currentDialogIndex++;
+        }
+    }
+}
+```
+
+### NPC Dialogue (MMO.NPC)
+
+Holds variables for an npc's dialogue. View `Scenes/Lobby1` to get a good example of how an npc's dialogue can be setup. It is essentially a series of npc and player dialogues (player dialogue is discussed in the next section).
+
+`NPCDialogue.cs` inherits from `MonoBehaviour`.
+
+Variables:
+
+```cs
+// the words that will show up in the NPC's textbox when it speaks
+public string text;
+// the audio that plays when the NPC speaks
+public AudioClip audioClip;
+```
+
 ### Player Dialogue (MMO.Player)
 
 Holds variables for a player's dialogue.
@@ -379,6 +504,23 @@ public string text;
 
 // Amount of time the text is on the screen
 public float time;
+```
+
+### Action (MMO)
+
+Overridable class that represents an action that can occur inbetween dialogue.
+
+`Action.cs` inherits from `MonoBehaviour`.
+
+Methods:
+
+```cs
+/// <summary> Execute the action, such that when it finishes, the coroutine finishes as well and the dialogue can continue </summary>
+/// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
+public virtual IEnumerator Execute() {
+    Debug.LogWarning("Overide this execute function");
+    yield break;
+}
 ```
 
 ### TransformDeepChildExtension (MMO)
@@ -400,3 +542,17 @@ Usage examples:
 // Finds Transform of "elem" object within self
 Transform elemTransform = transform.FindDeepChild("elem");
 ```
+
+### Goap Agent (SwordGC.AI.Goap)
+
+GOAP stands for Goal Oriented Action Planning. To learn about GOAP AI, visit https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793, but essentially GOAP is an AI system used to easily create complex AI behaviors through determining the most important goal and the easiest sequence of actions to reach that goal. Again, `Scenes/Lobby` has a good version of a AI that utilizes GOAP through its EnemyAI1 script that derives from GoapAgent. 
+
+`GoapAgent` inherits from `MonoBehavior`.
+
+### Goap Goal (SwordGC.AI.Goap)
+
+A Goal Goal is a goal that an AI tries to accomplish. Again, there is an example of such goal attached to the AI in `Scenes/Lobby` called `KillPlayerGoal`.
+
+### Goap Action (SwordGC.AI.Goap)
+
+A Goal Action is an action that an AI can complete in order to get closer to finishing/finish a goap goal. Again, there is an example of such goal attached to the AI in `Scenes/Lobby` called `KillAction`.
