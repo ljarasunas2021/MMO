@@ -76,7 +76,7 @@ namespace MMO.UI
             }
             else
             {
-                nPC.interacting = false;
+                nPC.SetInteracting(false);
             }
 
             UpdateCanShoot();

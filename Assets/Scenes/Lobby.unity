@@ -641,7 +641,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.1, z: 0}
+  m_Center: {x: 0, y: 2.2, z: 0}
 --- !u!114 &73334522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,9 +676,6 @@ MonoBehaviour:
   - NPCDialogue: {fileID: 73334528}
     playerDialogue: {fileID: 0}
   interactRadius: 5
-  stationary: 0
-  moveDistance: 50
-  interacting: 0
   rotateSpeed: 0.25
 --- !u!95 &73334524
 Animator:
@@ -778,7 +775,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 200
@@ -802,11 +799,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0950be1045e4ec2811c5199b227db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackMode: 1
-  speed: 1
-  minFramesTillMove: 120
-  maxFramesTillMove: 240
-  moveRadius: 100
+  attackMode: 0
+  stationary: 0
+  moveDistance: 30
+  interacting: 0
 --- !u!43 &77891346
 Mesh:
   m_ObjectHideFlags: 0
@@ -7247,11 +7243,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655121798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 115, z: 0}
+  m_LocalPosition: {x: 0, y: 118, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1352626879}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &707163141
 GameObject:
@@ -18255,7 +18251,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 964830.1
+      value: 1250230.8
       objectReference: {fileID: 0}
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -18265,7 +18261,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -942897.4
+      value: -1226271.2
       objectReference: {fileID: 0}
     - target: {fileID: 6490179894973457864, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -33190,9 +33186,8 @@ Transform:
   - {fileID: 1024155391}
   - {fileID: 478454133}
   - {fileID: 1142466589}
-  - {fileID: 655121802}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1353746041
 GameObject:
@@ -36887,7 +36882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 13}
+  m_AnchoredPosition: {x: -2, y: 37}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1877662181
@@ -36936,7 +36931,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877662179}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}

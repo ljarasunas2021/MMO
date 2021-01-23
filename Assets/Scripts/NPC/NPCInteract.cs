@@ -20,19 +20,6 @@ namespace MMO.NPC
         // how close the player must be to the npc to interact with it
         public float interactRadius;
 
-        [Header("Movement")]
-        // Should the npc not move
-        public bool stationary = true;
-
-        // if not stationary, how far should the npc move each time
-        public float moveDistance;
-
-        // is the npc interacting
-        [HideInInspector] public bool interacting = false;
-
-        // interacting last frame
-        private bool interactingLastFrame = false;
-
         // npc's rotation speed
         [Range(0, 1)]
         public float rotateSpeed;
@@ -48,21 +35,19 @@ namespace MMO.NPC
 
         // npc's animator
         private Animator anim;
-        
-        // y velocity of NPC
-        // private float veloY = 0;
+
         // current index for dialogue
         private int currentDialogIndex = 0;
+
+        // Npc movement script
+        private NPCMovement npcMovement;
 
         /// <summary> Init vars </summary>
         void Start()
         {
             UIScript = GameObject.FindObjectOfType<UIManager>();
-            cc = GetComponent<CharacterController>();
-            navMeshAgent = GetComponent<NavMeshAgent>();
             anim = GetComponent<Animator>();
-            SetNewDestination();
-            anim.SetBool("walking", true);
+            npcMovement = GetComponent<NPCMovement>();
         }
 
         /// <summary> Interact with the player </summary>
@@ -72,7 +57,7 @@ namespace MMO.NPC
             {
                 if (UIManager.instance.canMove)
                 {
-                    interacting = true;
+                    SetInteracting(true);
 
                     StartCoroutine(RotateNPC());
 
@@ -84,50 +69,9 @@ namespace MMO.NPC
             }
         }
 
-        private void Update()
+        public void SetInteracting(bool val)
         {
-            if (!stationary)
-            {
-                if (!interacting)
-                {
-                    if (interactingLastFrame)
-                    {
-                        navMeshAgent.isStopped = false;
-                        anim.SetBool("walking", true);
-                    }
-                    if (Vector3.Distance(transform.position, navMeshAgent.destination) < 5)
-                    {
-                        SetNewDestination();
-                    }
-                }
-                else
-                {
-                    if (!interactingLastFrame)
-                    {
-                        navMeshAgent.isStopped = true;
-                        anim.SetBool("walking", false);
-                    }
-                }
-                interactingLastFrame = interacting;
-            }
-        }
-
-        private void SetNewDestination()
-        {
-            navMeshAgent.SetDestination(RandomNavSphere(transform.position, moveDistance, -1));
-        }
-
-        private Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
-        {
-            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
-
-            randomDirection += origin;
-
-            NavMeshHit navHit;
-
-            NavMesh.SamplePosition(randomDirection, out navHit, distance, layermask);
-
-            return navHit.position;
+            npcMovement.interacting = val;
         }
 
         /// <summary> Is the player within range of the NPC </summary>
