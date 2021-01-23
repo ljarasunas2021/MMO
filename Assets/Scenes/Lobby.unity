@@ -2273,7 +2273,7 @@ MonoBehaviour:
     eyesWeight: 1
     clampWeight: 1.5
     lookDistance: 15
-  targetOffset: {x: 0, y: 0, z: 0}
+  targetOffset: {x: 0, y: 1.25, z: 0}
   rotationSpeed: 10
 --- !u!114 &324086272
 MonoBehaviour:
@@ -18412,7 +18412,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 476016.6
+      value: 580098.94
       objectReference: {fileID: 0}
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
@@ -18422,7 +18422,7 @@ PrefabInstance:
     - target: {fileID: 6490179893702506324, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -458362.3
+      value: -557984.2
       objectReference: {fileID: 0}
     - target: {fileID: 6490179894973457864, guid: b9b05c2af6a92498fb8844e6a09c31a2,
         type: 3}
