@@ -320,6 +320,8 @@ namespace MMO
                     PlayerHealth health = hit.collider.GetComponent<PlayerHealth>();
                     if (health != null) health.SubtractHealth(damage);
 
+                    Debug.Log(hit.collider.gameObject.name);
+
                     if (makeHitEffects) CreateHitEffects(hit);
 
                     if (hit.rigidbody) playerWeapon.CmdAddForce(hit.collider.gameObject, ray.direction * power * forceMultiplier);

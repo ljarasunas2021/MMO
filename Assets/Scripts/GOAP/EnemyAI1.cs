@@ -64,17 +64,24 @@ namespace MMO.GOAP
             xPID = new PID(aimP, aimI, aimD);
             yPID = new PID(aimP, aimI, aimD);
             zPID = new PID(aimP, aimI, aimD);
+        }
 
-            if (startAtAwake) StartCoroutine(StartFiring());
+        private void Update()
+        {
+            if (equippedItemGO == null && startAtAwake) StartCoroutine(StartFiring());
         }
 
         /// <summary> Start the enemy's firing </summary>
         /// <returns> an ienumerator since it is a coroutine, only use the ienumerator if you need information about the progress of a coroutine </returns>
         public IEnumerator StartFiring()
         {
+            Debug.Log("START FIRING");
             yield return new WaitForEndOfFrame();
+            Debug.Log("START FIRING 1");
             dataSet.SetData(GoapAction.Effects.PLAYER_DEAD + "0", false);
+            Debug.Log("START FIRING");
             equippedItemGO = Instantiate(ItemPrefabsController.instance.itemPrefabs[weaponIndex], handR.transform);
+            Debug.Log(equippedItemGO.name);
             Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
             weaponScript.shootFromMiddleOfScreen = false;
             weaponScript.raycastStartSpot = equippedItemGO.transform.Find("ShootSpot");

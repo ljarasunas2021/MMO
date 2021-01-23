@@ -46,9 +46,9 @@ namespace MMO.NPC
             }
             else
             {
-                if (framesTillMove < 0) StartCoroutine(MoveNPC());
+                //if (framesTillMove < 0) StartCoroutine(MoveNPC());
 
-                framesTillMove--;
+                //framesTillMove--;
             }
         }
 
