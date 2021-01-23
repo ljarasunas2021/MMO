@@ -28,6 +28,7 @@ namespace MMO.GOAP
             this.agent = agent;
             goal = GoapGoal.Goals.KILL_PLAYER; //+ targetPlayerId;
             preconditions.Add(Effects.PLAYER_DEAD + targetPlayerId, false);
+            preconditions.Add(Effects.AI_DEAD + "0", false);
 
             requiredRange = 1000f;
             cost = 20;

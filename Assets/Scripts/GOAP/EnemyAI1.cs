@@ -148,6 +148,7 @@ namespace MMO.GOAP
         public void EnemyDead()
         {
             dataSet.SetData(GoapAction.Effects.AI_DEAD + "0", true);
+            Destroy(gameObject);
         }
 
         /// <summary> Set GOAP data to display that the player died </summary>
