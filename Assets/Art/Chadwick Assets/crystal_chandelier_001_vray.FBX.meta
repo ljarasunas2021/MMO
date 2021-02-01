@@ -1,0 +1,274 @@
+fileFormatVersion: 2
+guid: 8715dfa9b3eec4ca3b2dea19ed4d0541
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: crystal chandelier 001 big body001
+    100002: crystal chandelier 001 crystals001
+    100004: crystal chandelier 001 crystals002
+    100006: crystal chandelier 001 crystals003
+    100008: crystal chandelier 001 crystals004
+    100010: crystal chandelier 001 crystals005
+    100012: crystal chandelier 001 crystals006
+    100014: crystal chandelier 001 crystals007
+    100016: crystal chandelier 001 crystals008
+    100018: crystal chandelier 001 crystals009
+    100020: crystal chandelier 001 crystals010
+    100022: crystal chandelier 001 crystals011
+    100024: crystal chandelier 001 crystals012
+    100026: crystal chandelier 001 crystals013
+    100028: crystal chandelier 001 crystals014
+    100030: crystal chandelier 001 decor ring001
+    100032: crystal chandelier 001 hanger004
+    100034: crystal chandelier 001 hanger005
+    100036: crystal chandelier 001 hanger006
+    100038: crystal chandelier 001 hanger007
+    100040: crystal chandelier 001 hanger008
+    100042: crystal chandelier 001 hanger009
+    100044: crystal chandelier 001 hanger010
+    100046: crystal chandelier 001 hanger011
+    100048: crystal chandelier 001 hanger012
+    100050: crystal chandelier 001 hanger013
+    100052: crystal chandelier 001 hanger014
+    100054: crystal chandelier 001 hangers001
+    100056: crystal chandelier 001 hangers002
+    100058: crystal chandelier 001 hangers003
+    100060: crystal chandelier 001 LED bulb base
+    100062: crystal chandelier 001 LED bulb plastic
+    100064: crystal chandelier 001 LED bulb plastic glass
+    100066: crystal chandelier 001 lower body001
+    100068: crystal chandelier 001 upper body001
+    100070: //RootNode
+    400000: crystal chandelier 001 big body001
+    400002: crystal chandelier 001 crystals001
+    400004: crystal chandelier 001 crystals002
+    400006: crystal chandelier 001 crystals003
+    400008: crystal chandelier 001 crystals004
+    400010: crystal chandelier 001 crystals005
+    400012: crystal chandelier 001 crystals006
+    400014: crystal chandelier 001 crystals007
+    400016: crystal chandelier 001 crystals008
+    400018: crystal chandelier 001 crystals009
+    400020: crystal chandelier 001 crystals010
+    400022: crystal chandelier 001 crystals011
+    400024: crystal chandelier 001 crystals012
+    400026: crystal chandelier 001 crystals013
+    400028: crystal chandelier 001 crystals014
+    400030: crystal chandelier 001 decor ring001
+    400032: crystal chandelier 001 hanger004
+    400034: crystal chandelier 001 hanger005
+    400036: crystal chandelier 001 hanger006
+    400038: crystal chandelier 001 hanger007
+    400040: crystal chandelier 001 hanger008
+    400042: crystal chandelier 001 hanger009
+    400044: crystal chandelier 001 hanger010
+    400046: crystal chandelier 001 hanger011
+    400048: crystal chandelier 001 hanger012
+    400050: crystal chandelier 001 hanger013
+    400052: crystal chandelier 001 hanger014
+    400054: crystal chandelier 001 hangers001
+    400056: crystal chandelier 001 hangers002
+    400058: crystal chandelier 001 hangers003
+    400060: crystal chandelier 001 LED bulb base
+    400062: crystal chandelier 001 LED bulb plastic
+    400064: crystal chandelier 001 LED bulb plastic glass
+    400066: crystal chandelier 001 lower body001
+    400068: crystal chandelier 001 upper body001
+    400070: //RootNode
+    2100000: crystal chandelier 001 gold
+    2100002: crystal chandelier 001 LED bulb plastic
+    2100004: crystal chandelier 001 LED bulb colorless glass
+    2100006: crystal chandelier 001 LED bulb white glass
+    2100008: crystal chandelier 001 crystal glass
+    2100010: crystal chandelier 001 brass
+    2300000: crystal chandelier 001 big body001
+    2300002: crystal chandelier 001 crystals001
+    2300004: crystal chandelier 001 crystals002
+    2300006: crystal chandelier 001 crystals003
+    2300008: crystal chandelier 001 crystals004
+    2300010: crystal chandelier 001 crystals005
+    2300012: crystal chandelier 001 crystals006
+    2300014: crystal chandelier 001 crystals007
+    2300016: crystal chandelier 001 crystals008
+    2300018: crystal chandelier 001 crystals009
+    2300020: crystal chandelier 001 crystals010
+    2300022: crystal chandelier 001 crystals011
+    2300024: crystal chandelier 001 crystals012
+    2300026: crystal chandelier 001 crystals013
+    2300028: crystal chandelier 001 crystals014
+    2300030: crystal chandelier 001 decor ring001
+    2300032: crystal chandelier 001 hanger004
+    2300034: crystal chandelier 001 hanger005
+    2300036: crystal chandelier 001 hanger006
+    2300038: crystal chandelier 001 hanger007
+    2300040: crystal chandelier 001 hanger008
+    2300042: crystal chandelier 001 hanger009
+    2300044: crystal chandelier 001 hanger010
+    2300046: crystal chandelier 001 hanger011
+    2300048: crystal chandelier 001 hanger012
+    2300050: crystal chandelier 001 hanger013
+    2300052: crystal chandelier 001 hanger014
+    2300054: crystal chandelier 001 hangers001
+    2300056: crystal chandelier 001 hangers002
+    2300058: crystal chandelier 001 hangers003
+    2300060: crystal chandelier 001 LED bulb base
+    2300062: crystal chandelier 001 LED bulb plastic
+    2300064: crystal chandelier 001 LED bulb plastic glass
+    2300066: crystal chandelier 001 lower body001
+    2300068: crystal chandelier 001 upper body001
+    3300000: crystal chandelier 001 big body001
+    3300002: crystal chandelier 001 crystals001
+    3300004: crystal chandelier 001 crystals002
+    3300006: crystal chandelier 001 crystals003
+    3300008: crystal chandelier 001 crystals004
+    3300010: crystal chandelier 001 crystals005
+    3300012: crystal chandelier 001 crystals006
+    3300014: crystal chandelier 001 crystals007
+    3300016: crystal chandelier 001 crystals008
+    3300018: crystal chandelier 001 crystals009
+    3300020: crystal chandelier 001 crystals010
+    3300022: crystal chandelier 001 crystals011
+    3300024: crystal chandelier 001 crystals012
+    3300026: crystal chandelier 001 crystals013
+    3300028: crystal chandelier 001 crystals014
+    3300030: crystal chandelier 001 decor ring001
+    3300032: crystal chandelier 001 hanger004
+    3300034: crystal chandelier 001 hanger005
+    3300036: crystal chandelier 001 hanger006
+    3300038: crystal chandelier 001 hanger007
+    3300040: crystal chandelier 001 hanger008
+    3300042: crystal chandelier 001 hanger009
+    3300044: crystal chandelier 001 hanger010
+    3300046: crystal chandelier 001 hanger011
+    3300048: crystal chandelier 001 hanger012
+    3300050: crystal chandelier 001 hanger013
+    3300052: crystal chandelier 001 hanger014
+    3300054: crystal chandelier 001 hangers001
+    3300056: crystal chandelier 001 hangers002
+    3300058: crystal chandelier 001 hangers003
+    3300060: crystal chandelier 001 LED bulb base
+    3300062: crystal chandelier 001 LED bulb plastic
+    3300064: crystal chandelier 001 LED bulb plastic glass
+    3300066: crystal chandelier 001 lower body001
+    3300068: crystal chandelier 001 upper body001
+    4300000: crystal chandelier 001 decor ring001
+    4300002: crystal chandelier 001 LED bulb plastic
+    4300004: crystal chandelier 001 LED bulb plastic glass
+    4300006: crystal chandelier 001 crystals003
+    4300008: crystal chandelier 001 LED bulb base
+    4300010: crystal chandelier 001 crystals012
+    4300012: crystal chandelier 001 hangers003
+    4300014: crystal chandelier 001 crystals002
+    4300016: crystal chandelier 001 hangers002
+    4300018: crystal chandelier 001 crystals001
+    4300020: crystal chandelier 001 hangers001
+    4300022: crystal chandelier 001 hanger013
+    4300024: crystal chandelier 001 hanger004
+    4300026: crystal chandelier 001 crystals004
+    4300028: crystal chandelier 001 hanger014
+    4300030: crystal chandelier 001 crystals014
+    4300032: crystal chandelier 001 hanger005
+    4300034: crystal chandelier 001 crystals005
+    4300036: crystal chandelier 001 crystals007
+    4300038: crystal chandelier 001 crystals008
+    4300040: crystal chandelier 001 hanger007
+    4300042: crystal chandelier 001 hanger006
+    4300044: crystal chandelier 001 hanger008
+    4300046: crystal chandelier 001 lower body001
+    4300048: crystal chandelier 001 crystals006
+    4300050: crystal chandelier 001 hanger009
+    4300052: crystal chandelier 001 crystals009
+    4300054: crystal chandelier 001 crystals011
+    4300056: crystal chandelier 001 hanger010
+    4300058: crystal chandelier 001 hanger011
+    4300060: crystal chandelier 001 crystals010
+    4300062: crystal chandelier 001 crystals013
+    4300064: crystal chandelier 001 hanger012
+    4300066: crystal chandelier 001 big body001
+    4300068: crystal chandelier 001 upper body001
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

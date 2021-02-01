@@ -1,0 +1,87 @@
+﻿<Properties StartupConfiguration="{CAEB3896-DDD4-15A7-D54A-C105D91C147F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/Map.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="110" Column="14" IsPinned="True" />
+      <File FileName="Assets/Scripts/Player Scripts/Movement.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/ItemPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Actions/BossGivesWalkie.cs" />
+      <File FileName="Assets/Scripts/Actions/EquipNameTag.cs" />
+      <File FileName="Assets/Scripts/Actions/MissionTakeWalkie.cs" />
+      <File FileName="Assets/Scripts/Actions/Pause.cs" />
+      <File FileName="Assets/Scripts/Actions/RedCapFight.cs" />
+      <File FileName="Assets/Scripts/Actions/StepForward.cs" />
+      <File FileName="Assets/Scripts/Actions/WalksAway.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/AnimationMomentum.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCanRotate.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeCurrentState.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeLayerWeight.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/AudioPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/CameraController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/EffectsPrefabsController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/PlayersController.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" />
+      <File FileName="Assets/Scripts/Controller Scripts/LayerMaskController.cs" />
+      <File FileName="Assets/Scripts/GOAP/EnemyAI1.cs" />
+      <File FileName="Assets/Scripts/GOAP/KillAction.cs" />
+      <File FileName="Assets/Scripts/GOAP/KillPlayerGoal.cs" />
+      <File FileName="Assets/Scripts/Other/ExpressionParser.cs" />
+      <File FileName="Assets/Scripts/Other/NPCDialogue.cs" />
+      <File FileName="Assets/Scripts/Other/NPCMovement.cs" />
+      <File FileName="Assets/Scripts/Other/OutlineObject.cs" />
+      <File FileName="Assets/Scripts/Other/PID.cs" />
+      <File FileName="Assets/Scripts/Other/PlayerDialogue.cs" />
+      <File FileName="Assets/Scripts/Other/RigidBodySpawn.cs" />
+      <File FileName="Assets/Scripts/Other/Target.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/BodyParts.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/Gravity.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/HealthBar.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/IKHandling.cs" />
+      <File FileName="Assets/Scripts/UI/InventoryManager.cs" />
+      <File FileName="Assets/Scripts/UI/Map.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerCameraManager.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerHealth.cs" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerWeapon.cs" />
+      <File FileName="Assets/Scripts/UI/Compass.cs" />
+      <File FileName="Assets/Scripts/UI/InventoryPlaceHolder.cs" />
+      <File FileName="Assets/Scripts/UI/MapMarker.cs" />
+      <File FileName="Assets/Scripts/UI/MapMarkers.cs" />
+      <File FileName="Assets/Scripts/Weapon Scripts/Item.cs" />
+      <File FileName="Assets/Scripts/Weapon Scripts/Weapon.cs" />
+      <File FileName="Assets/Thirdparty/GOAP-master 4/GOAP/Core/DataSet.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeTargetUpperBodyState.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/ChangeUpperBodyState.cs" />
+      <File FileName="Assets/Scripts/Animation Controller Scripts/LocomotionMomentum.cs" />
+      <File FileName="Assets/Scripts/Other/TransformDeepChildExtension.cs" />
+      <File FileName="Assets/Thirdparty/Standard Assets/Utility/SimpleActivatorMenu.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MMO" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Player Scripts" expanded="True" />
+                <Node name="UI" expanded="True">
+                  <Node name="Map.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Thirdparty" expanded="True">
+                <Node name="Standard Assets" expanded="True">
+                  <Node name="Utility" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="05e37253-2ab5-4d90-9ca1-5cd82c504b07" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
