@@ -1,0 +1,1465 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
+  m_Name: Storm
+  m_EditorClassIdentifier: 
+  settings:
+  - {fileID: 114305023712309514}
+  - {fileID: 114452821509096434}
+  - {fileID: 114606824959143102}
+  - {fileID: 114190321551757088}
+--- !u!114 &114190321551757088
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  mode:
+    overrideState: 0
+    value: 0
+  color:
+    overrideState: 0
+    value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    overrideState: 0
+    value: {x: 0.5, y: 0.5}
+  intensity:
+    overrideState: 1
+    value: 0.26
+  smoothness:
+    overrideState: 1
+    value: 1
+  roundness:
+    overrideState: 0
+    value: 1
+  rounded:
+    overrideState: 0
+    value: 0
+  mask:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  opacity:
+    overrideState: 0
+    value: 1
+--- !u!114 &114305023712309514
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: 1
+  threshold:
+    overrideState: 1
+    value: 1.1
+  softKnee:
+    overrideState: 1
+    value: 1
+  clamp:
+    overrideState: 0
+    value: 65472
+  diffusion:
+    overrideState: 0
+    value: 7
+  anamorphicRatio:
+    overrideState: 0
+    value: 0
+  color:
+    overrideState: 0
+    value: {r: 1, g: 1, b: 1, a: 1}
+  fastMode:
+    overrideState: 0
+    value: 0
+  dirtTexture:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  dirtIntensity:
+    overrideState: 0
+    value: 0
+--- !u!114 &114452821509096434
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
+  m_Name: ColorGrading
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  gradingMode:
+    overrideState: 1
+    value: 0
+  externalLut:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  tonemapper:
+    overrideState: 0
+    value: 0
+  toneCurveToeStrength:
+    overrideState: 0
+    value: 0
+  toneCurveToeLength:
+    overrideState: 0
+    value: 0.5
+  toneCurveShoulderStrength:
+    overrideState: 0
+    value: 0
+  toneCurveShoulderLength:
+    overrideState: 0
+    value: 0.5
+  toneCurveShoulderAngle:
+    overrideState: 0
+    value: 0
+  toneCurveGamma:
+    overrideState: 0
+    value: 1
+  ldrLut:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 4
+  ldrLutContribution:
+    overrideState: 0
+    value: 1
+  temperature:
+    overrideState: 1
+    value: -49
+  tint:
+    overrideState: 1
+    value: 58
+  colorFilter:
+    overrideState: 0
+    value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    overrideState: 0
+    value: 0
+  saturation:
+    overrideState: 1
+    value: 0.78
+  brightness:
+    overrideState: 0
+    value: 0
+  postExposure:
+    overrideState: 0
+    value: 0
+  contrast:
+    overrideState: 1
+    value: 1.22
+  mixerRedOutRedIn:
+    overrideState: 1
+    value: 1
+  mixerRedOutGreenIn:
+    overrideState: 0
+    value: 0
+  mixerRedOutBlueIn:
+    overrideState: 0
+    value: 0
+  mixerGreenOutRedIn:
+    overrideState: 0
+    value: 0
+  mixerGreenOutGreenIn:
+    overrideState: 0
+    value: 100
+  mixerGreenOutBlueIn:
+    overrideState: 0
+    value: 0
+  mixerBlueOutRedIn:
+    overrideState: 0
+    value: 0
+  mixerBlueOutGreenIn:
+    overrideState: 0
+    value: 0
+  mixerBlueOutBlueIn:
+    overrideState: 0
+    value: 100
+  lift:
+    overrideState: 0
+    value: {x: 1, y: 1, z: 1, w: 0}
+  gamma:
+    overrideState: 0
+    value: {x: 1, y: 1, z: 1, w: 0}
+  gain:
+    overrideState: 0
+    value: {x: 1, y: 1, z: 1, w: 0}
+  masterCurve:
+    overrideState: 1
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.43930635
+          value: 0.43930635
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0
+      m_Range: 1
+      cachedData:
+      - 0
+      - 0.0078125
+      - 0.015625
+      - 0.0234375
+      - 0.03125
+      - 0.0390625
+      - 0.046875
+      - 0.0546875
+      - 0.0625
+      - 0.0703125
+      - 0.078125
+      - 0.0859375
+      - 0.09375
+      - 0.10156249
+      - 0.10937499
+      - 0.11718749
+      - 0.12499999
+      - 0.13281249
+      - 0.14062499
+      - 0.14843749
+      - 0.15624999
+      - 0.16406249
+      - 0.17187499
+      - 0.17968749
+      - 0.18749999
+      - 0.19531249
+      - 0.20312499
+      - 0.21093749
+      - 0.21874999
+      - 0.22656249
+      - 0.23437499
+      - 0.24218749
+      - 0.24999999
+      - 0.25781247
+      - 0.26562497
+      - 0.27343747
+      - 0.28124997
+      - 0.28906247
+      - 0.29687497
+      - 0.30468747
+      - 0.31249997
+      - 0.32031247
+      - 0.32812497
+      - 0.33593747
+      - 0.34374997
+      - 0.35156247
+      - 0.35937497
+      - 0.36718747
+      - 0.37499994
+      - 0.38281244
+      - 0.39062494
+      - 0.39843744
+      - 0.40624994
+      - 0.41406244
+      - 0.42187494
+      - 0.42968744
+      - 0.43749994
+      - 0.4453125
+      - 0.453125
+      - 0.4609375
+      - 0.46875
+      - 0.4765625
+      - 0.484375
+      - 0.4921875
+      - 0.5
+      - 0.5078125
+      - 0.515625
+      - 0.5234375
+      - 0.53125
+      - 0.5390625
+      - 0.546875
+      - 0.5546875
+      - 0.5625
+      - 0.5703125
+      - 0.578125
+      - 0.5859375
+      - 0.59375
+      - 0.6015625
+      - 0.609375
+      - 0.6171875
+      - 0.625
+      - 0.6328125
+      - 0.640625
+      - 0.6484375
+      - 0.65625
+      - 0.6640625
+      - 0.671875
+      - 0.6796875
+      - 0.6875
+      - 0.6953125
+      - 0.703125
+      - 0.7109375
+      - 0.71875
+      - 0.7265625
+      - 0.734375
+      - 0.7421875
+      - 0.75
+      - 0.7578125
+      - 0.765625
+      - 0.7734375
+      - 0.78125
+      - 0.7890625
+      - 0.796875
+      - 0.8046875
+      - 0.8125
+      - 0.8203125
+      - 0.828125
+      - 0.8359375
+      - 0.84375
+      - 0.8515625
+      - 0.859375
+      - 0.8671875
+      - 0.875
+      - 0.8828125
+      - 0.890625
+      - 0.8984375
+      - 0.90625
+      - 0.9140625
+      - 0.921875
+      - 0.9296875
+      - 0.9375
+      - 0.9453125
+      - 0.953125
+      - 0.9609375
+      - 0.96875
+      - 0.9765625
+      - 0.984375
+      - 0.9921875
+  redCurve:
+    overrideState: 1
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.35260117
+          value: 0.5092025
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0
+      m_Range: 1
+      cachedData:
+      - 0
+      - 0.008039731
+      - 0.016520293
+      - 0.02542125
+      - 0.03472216
+      - 0.044402584
+      - 0.05444207
+      - 0.06482019
+      - 0.07551651
+      - 0.08651056
+      - 0.097781934
+      - 0.10931017
+      - 0.121074826
+      - 0.13305548
+      - 0.14523168
+      - 0.15758297
+      - 0.17008892
+      - 0.18272911
+      - 0.19548309
+      - 0.20833038
+      - 0.2212506
+      - 0.23422328
+      - 0.24722795
+      - 0.26024422
+      - 0.27325165
+      - 0.28622976
+      - 0.2991581
+      - 0.31201628
+      - 0.32478386
+      - 0.33744034
+      - 0.34996533
+      - 0.36233836
+      - 0.37453902
+      - 0.38654682
+      - 0.39834136
+      - 0.40990222
+      - 0.42120895
+      - 0.43224102
+      - 0.44297808
+      - 0.45339966
+      - 0.4634854
+      - 0.47321475
+      - 0.48256725
+      - 0.4915226
+      - 0.5000602
+      - 0.5081597
+      - 0.5159252
+      - 0.5235539
+      - 0.53105193
+      - 0.5384225
+      - 0.54566914
+      - 0.55279493
+      - 0.5598033
+      - 0.56669754
+      - 0.5734809
+      - 0.58015674
+      - 0.58672833
+      - 0.59319896
+      - 0.59957194
+      - 0.6058506
+      - 0.6120382
+      - 0.6181381
+      - 0.6241535
+      - 0.63008785
+      - 0.63594437
+      - 0.6417263
+      - 0.6474371
+      - 0.6530799
+      - 0.65865815
+      - 0.66417503
+      - 0.6696339
+      - 0.6750381
+      - 0.68039083
+      - 0.6856955
+      - 0.6909554
+      - 0.6961738
+      - 0.70135397
+      - 0.7064992
+      - 0.71161294
+      - 0.7166983
+      - 0.7217587
+      - 0.72679746
+      - 0.7318178
+      - 0.736823
+      - 0.7418165
+      - 0.7468015
+      - 0.75178134
+      - 0.7567593
+      - 0.76173866
+      - 0.7667228
+      - 0.771715
+      - 0.7767185
+      - 0.7817366
+      - 0.7867727
+      - 0.79183006
+      - 0.79691195
+      - 0.8020216
+      - 0.8071625
+      - 0.8123379
+      - 0.817551
+      - 0.82280517
+      - 0.82810366
+      - 0.83344984
+      - 0.83884704
+      - 0.8442984
+      - 0.84980744
+      - 0.8553773
+      - 0.8610114
+      - 0.8667129
+      - 0.8724852
+      - 0.8783316
+      - 0.8842554
+      - 0.89025986
+      - 0.89634836
+      - 0.9025241
+      - 0.90879047
+      - 0.9151507
+      - 0.9216082
+      - 0.92816615
+      - 0.9348279
+      - 0.94159675
+      - 0.9484761
+      - 0.95546913
+      - 0.9625791
+      - 0.9698094
+      - 0.97716343
+      - 0.9846443
+      - 0.9922554
+  greenCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0
+      m_Range: 1
+      cachedData:
+      - 0
+      - 0.0078125
+      - 0.015625
+      - 0.0234375
+      - 0.03125
+      - 0.0390625
+      - 0.046875
+      - 0.0546875
+      - 0.0625
+      - 0.0703125
+      - 0.078125
+      - 0.0859375
+      - 0.09375
+      - 0.1015625
+      - 0.109375
+      - 0.1171875
+      - 0.125
+      - 0.1328125
+      - 0.140625
+      - 0.1484375
+      - 0.15625
+      - 0.1640625
+      - 0.171875
+      - 0.1796875
+      - 0.1875
+      - 0.1953125
+      - 0.203125
+      - 0.2109375
+      - 0.21875
+      - 0.2265625
+      - 0.234375
+      - 0.2421875
+      - 0.25
+      - 0.2578125
+      - 0.265625
+      - 0.2734375
+      - 0.28125
+      - 0.2890625
+      - 0.296875
+      - 0.3046875
+      - 0.3125
+      - 0.3203125
+      - 0.328125
+      - 0.3359375
+      - 0.34375
+      - 0.3515625
+      - 0.359375
+      - 0.3671875
+      - 0.375
+      - 0.3828125
+      - 0.390625
+      - 0.3984375
+      - 0.40625
+      - 0.4140625
+      - 0.421875
+      - 0.4296875
+      - 0.4375
+      - 0.4453125
+      - 0.453125
+      - 0.4609375
+      - 0.46875
+      - 0.4765625
+      - 0.484375
+      - 0.4921875
+      - 0.5
+      - 0.5078125
+      - 0.515625
+      - 0.5234375
+      - 0.53125
+      - 0.5390625
+      - 0.546875
+      - 0.5546875
+      - 0.5625
+      - 0.5703125
+      - 0.578125
+      - 0.5859375
+      - 0.59375
+      - 0.6015625
+      - 0.609375
+      - 0.6171875
+      - 0.625
+      - 0.6328125
+      - 0.640625
+      - 0.6484375
+      - 0.65625
+      - 0.6640625
+      - 0.671875
+      - 0.6796875
+      - 0.6875
+      - 0.6953125
+      - 0.703125
+      - 0.7109375
+      - 0.71875
+      - 0.7265625
+      - 0.734375
+      - 0.7421875
+      - 0.75
+      - 0.7578125
+      - 0.765625
+      - 0.7734375
+      - 0.78125
+      - 0.7890625
+      - 0.796875
+      - 0.8046875
+      - 0.8125
+      - 0.8203125
+      - 0.828125
+      - 0.8359375
+      - 0.84375
+      - 0.8515625
+      - 0.859375
+      - 0.8671875
+      - 0.875
+      - 0.8828125
+      - 0.890625
+      - 0.8984375
+      - 0.90625
+      - 0.9140625
+      - 0.921875
+      - 0.9296875
+      - 0.9375
+      - 0.9453125
+      - 0.953125
+      - 0.9609375
+      - 0.96875
+      - 0.9765625
+      - 0.984375
+      - 0.9921875
+  blueCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0
+      m_Range: 1
+      cachedData:
+      - 0
+      - 0.0078125
+      - 0.015625
+      - 0.0234375
+      - 0.03125
+      - 0.0390625
+      - 0.046875
+      - 0.0546875
+      - 0.0625
+      - 0.0703125
+      - 0.078125
+      - 0.0859375
+      - 0.09375
+      - 0.1015625
+      - 0.109375
+      - 0.1171875
+      - 0.125
+      - 0.1328125
+      - 0.140625
+      - 0.1484375
+      - 0.15625
+      - 0.1640625
+      - 0.171875
+      - 0.1796875
+      - 0.1875
+      - 0.1953125
+      - 0.203125
+      - 0.2109375
+      - 0.21875
+      - 0.2265625
+      - 0.234375
+      - 0.2421875
+      - 0.25
+      - 0.2578125
+      - 0.265625
+      - 0.2734375
+      - 0.28125
+      - 0.2890625
+      - 0.296875
+      - 0.3046875
+      - 0.3125
+      - 0.3203125
+      - 0.328125
+      - 0.3359375
+      - 0.34375
+      - 0.3515625
+      - 0.359375
+      - 0.3671875
+      - 0.375
+      - 0.3828125
+      - 0.390625
+      - 0.3984375
+      - 0.40625
+      - 0.4140625
+      - 0.421875
+      - 0.4296875
+      - 0.4375
+      - 0.4453125
+      - 0.453125
+      - 0.4609375
+      - 0.46875
+      - 0.4765625
+      - 0.484375
+      - 0.4921875
+      - 0.5
+      - 0.5078125
+      - 0.515625
+      - 0.5234375
+      - 0.53125
+      - 0.5390625
+      - 0.546875
+      - 0.5546875
+      - 0.5625
+      - 0.5703125
+      - 0.578125
+      - 0.5859375
+      - 0.59375
+      - 0.6015625
+      - 0.609375
+      - 0.6171875
+      - 0.625
+      - 0.6328125
+      - 0.640625
+      - 0.6484375
+      - 0.65625
+      - 0.6640625
+      - 0.671875
+      - 0.6796875
+      - 0.6875
+      - 0.6953125
+      - 0.703125
+      - 0.7109375
+      - 0.71875
+      - 0.7265625
+      - 0.734375
+      - 0.7421875
+      - 0.75
+      - 0.7578125
+      - 0.765625
+      - 0.7734375
+      - 0.78125
+      - 0.7890625
+      - 0.796875
+      - 0.8046875
+      - 0.8125
+      - 0.8203125
+      - 0.828125
+      - 0.8359375
+      - 0.84375
+      - 0.8515625
+      - 0.859375
+      - 0.8671875
+      - 0.875
+      - 0.8828125
+      - 0.890625
+      - 0.8984375
+      - 0.90625
+      - 0.9140625
+      - 0.921875
+      - 0.9296875
+      - 0.9375
+      - 0.9453125
+      - 0.953125
+      - 0.9609375
+      - 0.96875
+      - 0.9765625
+      - 0.984375
+      - 0.9921875
+  hueVsHueCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 1
+      m_ZeroValue: 0.5
+      m_Range: 1
+      cachedData:
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+  hueVsSatCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 1
+      m_ZeroValue: 0.5
+      m_Range: 1
+      cachedData:
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+  satVsSatCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0.5
+      m_Range: 1
+      cachedData:
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+  lumVsSatCurve:
+    overrideState: 0
+    value:
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_Loop: 0
+      m_ZeroValue: 0.5
+      m_Range: 1
+      cachedData:
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+      - 0.5
+--- !u!114 &114606824959143102
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  spectralLut:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  intensity:
+    overrideState: 1
+    value: 1
+  fastMode:
+    overrideState: 1
+    value: 0
