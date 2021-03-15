@@ -3,39 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace MMO.Actions
+public class WalksAway : Action1
 {
-    public class WalksAway : Action1
+    public Canvas canvas;
+    public GameObject report;
+    private GameObject reportInstant;
+    public float missionShowTime;
+    public Transform position;
+    public GameObject dialogueBox;
+
+    private NavMeshAgent agent;
+
+    private void Start()
     {
-        public Canvas canvas;
-        public GameObject report;
-        private GameObject reportInstant;
-        public float missionShowTime;
-        public Transform position;
-        public GameObject dialogueBox;
+        agent = GetComponent<NavMeshAgent>();
+    }
 
-        private NavMeshAgent agent;
+    public override IEnumerator Execute()
+    {
+        dialogueBox.SetActive(false);
 
-        private void Start()
-        {
-            agent = GetComponent<NavMeshAgent>();
-        }
+        yield return 0;
 
-        public override IEnumerator Execute()
-        {
-            dialogueBox.SetActive(false);
+        agent.SetDestination(position.position);
 
-            yield return 0;
+        reportInstant = Instantiate(report, canvas.transform);
 
-            agent.SetDestination(position.position);
+        yield return new WaitForSeconds(missionShowTime);
 
-            reportInstant = Instantiate(report, canvas.transform);
+        Destroy(reportInstant);
 
-            yield return new WaitForSeconds(missionShowTime);
-
-            Destroy(reportInstant);
-
-            dialogueBox.SetActive(true);
-        }
+        dialogueBox.SetActive(true);
     }
 }

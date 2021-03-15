@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{837BDC1B-AB8E-30BB-6CE0-28E78CB81E9C}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/PotionUI.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Actions/BossGivesWalkie.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/Other/NPCDialogue.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Other/NPCInteract.cs" Line="34" Column="51" />
+      <File FileName="Assets/Scripts/Controller Scripts/UIManager.cs" Line="175" Column="6" />
+      <File FileName="Assets/Editor/NPCDialogueEditor.cs" Line="88" Column="22" />
+      <File FileName="Assets/Scripts/UI/SkinSwitcher.cs" Line="37" Column="22" />
+      <File FileName="Assets/Scripts/Player Scripts/InputHandler.cs" Line="68" Column="6" />
+      <File FileName="Assets/Scripts/UI/SkinButton.cs" Line="11" Column="65" />
+      <File FileName="Assets/Scripts/Player Scripts/ChangeSkin.cs" Line="25" Column="67" />
+      <File FileName="Assets/Scripts/Other/PickupItem.cs" Line="20" Column="1" />
+      <File FileName="Assets/Scripts/UI/Money.cs" Line="15" Column="25" />
+      <File FileName="Assets/Scripts/Collectables Scripts/Collectable.cs" Line="7" Column="35" />
+      <File FileName="Assets/Scripts/Collectables Scripts/HealthPotion.cs.meta" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerHealth.cs" Line="23" Column="40" />
+      <File FileName="Assets/Scripts/UI/InventoryPlaceHolder.cs" Line="43" Column="31" />
+      <File FileName="Assets/Scripts/UI/PotionUI.cs" Line="46" Column="1" />
+      <File FileName="Assets/Scripts/Weapon Scripts/Item.cs" Line="6" Column="15" />
+      <File FileName="Assets/Scripts/Player Scripts/PlayerEquip.cs" Line="168" Column="68" />
+      <File FileName="Assets/Scripts/UI/InventoryManager.cs" Line="46" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

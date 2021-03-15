@@ -358,17 +358,33 @@ InputManager:
     axis: 1
     joyNum: 0
   - serializedVersion: 3
-    m_Name: ToggleQuests
+    m_Name: SwitchSkin
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: q
+    positiveButton: k
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.0001
     sensitivity: 1000
-    snap: 0
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: HealthPotion
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: h
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.0001
+    sensitivity: 1000
+    snap: 1
     invert: 0
     type: 0
     axis: 1

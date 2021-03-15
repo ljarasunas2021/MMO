@@ -1,13 +1,12 @@
-﻿using MMO;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(Weapon))]
 public class WeaponEditor : Editor
 {
-    // private bool showPluginSupport = false;
+    private bool showPluginSupport = false;
     private bool showCombos = false;
     private bool showGrab = false;
     private bool showGeneral = false;

@@ -68,16 +68,16 @@ namespace SwordGC.AI.Core.Editor.NodeView
 
             // Remove delegate listener if it has previously
             // been assigned.
-            SceneView.duringSceneGui -= OnSceneGUI;
+            SceneView.onSceneGUIDelegate -= OnSceneGUI;
             // Add (or re-add) the delegate.
-            SceneView.duringSceneGui += OnSceneGUI;
+            SceneView.onSceneGUIDelegate += OnSceneGUI;
         }
 
         void OnDestroy()
         {
             // When the window is destroyed, remove the delegate
             // so that it will no longer do any drawing.
-            SceneView.duringSceneGui -= OnSceneGUI;
+            SceneView.onSceneGUIDelegate -= OnSceneGUI;
         }
 
 
