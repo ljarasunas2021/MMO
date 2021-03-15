@@ -62,12 +62,24 @@ namespace MMO.Player
             inventoryManager.SetPlayer(gameObject);
         }
 
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            PickupItem item = hit.gameObject.GetComponent<PickupItem>();
+            if (item != null && item.type == pickupItemType.Coin)
+            {
+                Destroy(hit.gameObject);
+                Money.instance.IncreaseMoney(1);
+            }
+        }
+
         /// <summary> Change the current equipped item </summary>
-        /// <param name="itemIndex"> the index of the new equipped item </param>
+        /// <param name="itemIndex"> the index of the new equipped item </param>        
         private void ChangeItem(int itemIndex)
         {
-            foreach (Transform handChild in handR.transform) {
-                if (!handChild.name.Contains("mixamorig")) {
+            foreach (Transform handChild in handR.transform)
+            {
+                if (!handChild.name.Contains("mixamorig"))
+                {
                     // child of hand isn't finger, meaning it is a weapon
                     Destroy(handChild.gameObject);
                 }
@@ -78,9 +90,15 @@ namespace MMO.Player
             {
                 equippedItemGO = Instantiate(itemPrefabs[itemIndex], handR.transform);
                 Weapon weaponScript = equippedItemGO.GetComponent<Weapon>();
-                equippedItemGO.transform.localPosition = weaponScript.startPos;
-                equippedItemGO.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
-                weaponScript.used = true;
+                Collectable collectableScript = equippedItemGO.GetComponent<Collectable>();
+                if (weaponScript != null)
+                {
+                    equippedItemGO.transform.localPosition = weaponScript.startPos;
+                    equippedItemGO.transform.localRotation = Quaternion.Euler(weaponScript.startRot);
+                }
+
+                if (weaponScript != null)
+                    weaponScript.used = true;
             }
         }
 
@@ -142,11 +160,25 @@ namespace MMO.Player
             RaycastHit hit;
             Ray ray = mainCam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-            if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item)) {
+            if (Physics.Raycast(ray, out hit, maxGrabDistance, 1 << LayerMaskController.item))
+            {
                 Item item = hit.collider.gameObject.GetComponent<Item>();
                 if (item != null)
                 {
-                    inventoryManager.AddInventoryItem(FindItemIndex(item.gameObject), item.icon);
+                    if (item.GetComponent<Weapon>() != null)
+                    {
+                        inventoryManager.AddInventoryItem(FindItemIndex(item.gameObject), item.icon);
+                    }
+                    else
+                    {
+                        PotionTypes potionType = item.gameObject.GetComponent<Collectable>().potionType;
+
+                        if (potionType == PotionTypes.Health)
+                        {
+                            PotionUI.instance.IncreaseHealthPotionText(1);
+                        }
+                    }
+
                     Destroy(item.transform.parent.gameObject);
                 }
             }
@@ -161,6 +193,7 @@ namespace MMO.Player
             CmdChangeEquippedItem(itemIndex);
             EnableWeaponScript(itemIndex);
         }
+
 
         /// <summary> Enable the weapon script on a newly equipped weapon </summary>
         /// <param name="itemIndex"> item index of newly equipped item </param>
@@ -177,31 +210,45 @@ namespace MMO.Player
             else
             {
                 Weapon weapon = equippedItemGO.GetComponent<Weapon>();
-                weapon.enabled = true;
-                weapon.SetUser(gameObject);
-                weapon.SetHotBarIndex(hotBarIndex);
+                if (weapon != null)
+                {
+                    weapon.enabled = true;
+                    weapon.SetUser(gameObject);
+                    weapon.SetHotBarIndex(hotBarIndex);
+                }
 
                 ItemType itemType = ItemType.none;
-                if (weapon.type == WeaponType.Melee) itemType = ItemType.melee;
-                if (weapon.type == WeaponType.Ranged) itemType = ItemType.ranged;
-                inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, itemType));
-
-                if (weapon.type == WeaponType.Ranged)
+                if (weapon != null)
                 {
-                    if (weapon.rangedHold == RangedHoldType.pistol) upperBodyState = (int)PlayerAnimUpperBodyState.pistolHold;
-                    else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)PlayerAnimUpperBodyState.shotgunHold;
-
-                    cameraMode = CameraModes.locked;
-
-                    ikHandling.SwitchLookIK(LookIKTypes.Basic);
+                    if (weapon.type == WeaponType.Melee) itemType = ItemType.melee;
+                    else if (weapon.type == WeaponType.Ranged) itemType = ItemType.ranged;
                 }
                 else
                 {
-                    upperBodyState = (int)PlayerAnimUpperBodyState.swordHold;
+                    itemType = ItemType.collectable;
+                }
 
-                    cameraMode = CameraModes.closeUp;
+                inputHandler.ChangeItemHolding(new ItemHolding(equippedItemGO, itemType));
 
-                    ikHandling.SwitchLookIK(LookIKTypes.Weapon);
+                if (weapon != null)
+                {
+                    if (weapon.type == WeaponType.Ranged)
+                    {
+                        if (weapon.rangedHold == RangedHoldType.pistol) upperBodyState = (int)PlayerAnimUpperBodyState.pistolHold;
+                        else if (weapon.rangedHold == RangedHoldType.shotgun) upperBodyState = (int)PlayerAnimUpperBodyState.shotgunHold;
+
+                        cameraMode = CameraModes.locked;
+
+                        ikHandling.SwitchLookIK(LookIKTypes.Basic);
+                    }
+                    else
+                    {
+                        upperBodyState = (int)PlayerAnimUpperBodyState.swordHold;
+
+                        cameraMode = CameraModes.closeUp;
+
+                        ikHandling.SwitchLookIK(LookIKTypes.Weapon);
+                    }
                 }
             }
 

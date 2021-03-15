@@ -67,6 +67,15 @@ namespace MMO.Player
             TestInteraction();
             TestEquip();
             TestItemHolding();
+            TestUsePotion();
+        }
+
+        private void TestUsePotion()
+        {
+            if (Input.GetButtonDown("HealthPotion"))
+            {
+                PotionUI.instance.UsePotion(PotionTypes.Health);
+            }
         }
 
         /// <summary> Test for movement input </summary>
@@ -91,6 +100,8 @@ namespace MMO.Player
             if (Input.GetButtonDown("SkipDialogue")) uIScript.CheckForSkipDialogue();
 
             if (Input.GetButtonDown("ToggleQuests")) QuestSystem.instance.Active = !QuestSystem.instance.Active;
+
+            if (Input.GetButtonDown("SwitchSkin")) SkinSwitcher.instance.Toggle();
         }
 
         /// <summary> Test for interaction input </summary>

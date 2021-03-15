@@ -24,8 +24,8 @@ namespace MMO.Player
         {
             inputHandler = GetComponent<InputHandler>();
             healthBar = HealthBar.instance;
-            healthBar.Initialize(gameObject, health);
-            maxHealth = health;
+            healthBar.Initialize(gameObject, maxHealth);
+            SubtractHealth(0);
         }
 
         /// <summary> Subtract health from player </summary>
