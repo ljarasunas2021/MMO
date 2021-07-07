@@ -3,18 +3,33 @@ using UnityEngine.SceneManagement;
 
 namespace Mirror
 {
+    /// <summary>
+    /// This component works in conjunction with the NetworkRoomManager to make up the multiplayer room system.
+    /// <para>The RoomPrefab object of the NetworkRoomManager must have this component on it. This component holds basic room player data required for the room to function. Game specific data for room players can be put in other components on the RoomPrefab or in scripts derived from NetworkRoomPlayer.</para>
+    /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("Network/NetworkLobbyPlayer")]
-    [HelpURL("https://vis2k.github.io/Mirror/Components/NetworkLobbyPlayer")]
-    public class NetworkLobbyPlayer : NetworkBehaviour
+    [AddComponentMenu("Network/NetworkRoomPlayer")]
+    [HelpURL("https://mirror-networking.com/docs/Components/NetworkRoomPlayer.html")]
+    public class NetworkRoomPlayer : NetworkBehaviour
     {
-        public bool ShowLobbyGUI = true;
+        /// <summary>
+        /// This flag controls whether the default UI is shown for the room player.
+        /// <para>As this UI is rendered using the old GUI system, it is only recommended for testing purposes.</para>
+        /// </summary>
+        public bool showRoomGUI = true;
 
-        [SyncVar(hook=nameof(ReadyStateChanged))]
-        public bool ReadyToBegin;
+        /// <summary>
+        /// This is a flag that control whether this player is ready for the game to begin.
+        /// <para>When all players are ready to begin, the game will start. This should not be set directly, the SendReadyToBeginMessage function should be called on the client to set it on the server.</para>
+        /// </summary>
+        [SyncVar(hook = nameof(ReadyStateChanged))]
+        public bool readyToBegin;
 
+        /// <summary>
+        /// Current index of the player, e.g. Player1, Player2, etc.
+        /// </summary>
         [SyncVar]
-        public int Index;
+        public int index;
 
         #region Unity Callbacks
 
@@ -23,10 +38,18 @@ namespace Mirror
         /// </summary>
         public void Start()
         {
-            if (NetworkManager.singleton as NetworkLobbyManager)
-                OnClientEnterLobby();
+            if (NetworkManager.singleton is NetworkRoomManager room)
+            {
+                // NetworkRoomPlayer object must be set to DontDestroyOnLoad along with NetworkRoomManager
+                // in server and all clients, otherwise it will be respawned in the game scene which would 
+                // have undesireable effects.
+                if (room.dontDestroyOnLoad)
+                    DontDestroyOnLoad(gameObject);
+
+                OnClientEnterRoom();
+            }
             else
-                Debug.LogError("LobbyPlayer could not find a NetworkLobbyManager. The LobbyPlayer requires a NetworkLobbyManager object to function. Make sure that there is one in the scene.");
+                Debug.LogError("RoomPlayer could not find a NetworkRoomManager. The RoomPlayer requires a NetworkRoomManager object to function. Make sure that there is one in the scene.");
         }
 
         #endregion
@@ -34,13 +57,13 @@ namespace Mirror
         #region Commands
 
         [Command]
-        public void CmdChangeReadyState(bool ReadyState)
+        public void CmdChangeReadyState(bool readyState)
         {
-            ReadyToBegin = ReadyState;
-            NetworkLobbyManager lobby = NetworkManager.singleton as NetworkLobbyManager;
-            if (lobby != null)
+            readyToBegin = readyState;
+            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
+            if (room != null)
             {
-                lobby.ReadyStatusChanged();
+                room.ReadyStatusChanged();
             }
         }
 
@@ -48,49 +71,64 @@ namespace Mirror
 
         #region SyncVar Hooks
 
-        void ReadyStateChanged(bool NewReadyState)
+        void ReadyStateChanged(bool newReadyState)
         {
-            OnClientReady(ReadyToBegin);
+            OnClientReady(newReadyState);
         }
 
         #endregion
 
-        #region Lobby Client Virtuals
+        #region Room Client Virtuals
 
-        public virtual void OnClientEnterLobby() {}
+        /// <summary>
+        /// This is a hook that is invoked on all player objects when entering the room.
+        /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
+        /// </summary>
+        public virtual void OnClientEnterRoom() { }
 
-        public virtual void OnClientExitLobby() {}
+        /// <summary>
+        /// This is a hook that is invoked on all player objects when exiting the room.
+        /// </summary>
+        public virtual void OnClientExitRoom() { }
 
-        public virtual void OnClientReady(bool readyState) {}
+        /// <summary>
+        /// This is a hook that is invoked on clients when a RoomPlayer switches between ready or not ready.
+        /// <para>This function is called when the a client player calls SendReadyToBeginMessage() or SendNotReadyToBeginMessage().</para>
+        /// </summary>
+        /// <param name="readyState">Whether the player is ready or not.</param>
+        public virtual void OnClientReady(bool readyState) { }
 
         #endregion
 
         #region Optional UI
 
+        /// <summary>
+        /// Render a UI for the room.   Override to provide your on UI
+        /// </summary>
         public virtual void OnGUI()
         {
-            if (!ShowLobbyGUI)
+            if (!showRoomGUI)
                 return;
 
-            NetworkLobbyManager lobby = NetworkManager.singleton as NetworkLobbyManager;
-            if (lobby)
+            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
+            if (room)
             {
-                if (!lobby.showLobbyGUI)
+                if (!room.showRoomGUI)
                     return;
 
-                if (SceneManager.GetActiveScene().name != lobby.LobbyScene)
+                if (SceneManager.GetActiveScene().name != room.RoomScene)
                     return;
 
-                GUILayout.BeginArea(new Rect(20f + (Index * 100), 200f, 90f, 130f));
+                GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 90f, 130f));
 
-                GUILayout.Label($"Player [{Index + 1}]");
+                GUILayout.Label($"Player [{index + 1}]");
 
-                if (ReadyToBegin)
+                if (readyToBegin)
                     GUILayout.Label("Ready");
                 else
                     GUILayout.Label("Not Ready");
 
-                if (((isServer && Index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
+                if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
                 {
                     // This button only shows on the Host for all players other than the Host
                     // Host and Players can't remove themselves (stop the client instead)
@@ -104,7 +142,7 @@ namespace Mirror
                 {
                     GUILayout.BeginArea(new Rect(20f, 300f, 120f, 20f));
 
-                    if (ReadyToBegin)
+                    if (readyToBegin)
                     {
                         if (GUILayout.Button("Cancel"))
                             CmdChangeReadyState(false);

@@ -1,61 +1,70 @@
 ﻿using System.Linq;
-using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CharacterController))]
 ///<summary> Script used to control the movement of the player </summary>
-public class Movement : NetworkBehaviour
+public class Movement : MonoBehaviour
 {
     #region Variables
+    [Header("Physics Based Movement")]
+    public bool physicsBasedMovement;
+
+    [Header("GameObjects")]
+    public GameObject ragdoll;
+    public GameObject ragdollHips;
+    public GameObject nonRagdollHips;
+
     [Header("Locomotion Blend Values")]
     // locomotion blend tree value for a ...
     // idle animation
-    public float idleVal;
+    [SerializeField] private float idleVal;
     // walk animation
-    public float walkVal;
+    [SerializeField] private float walkVal;
     // run animation
-    public float runVal;
+    [SerializeField] private float runVal;
 
     [Header("Locomotion Blend Value Thresholds")]
     // locomotion blend tree threshold in between ...
     // idle and walk animation
-    public float idleToWalkThreshold;
+    [SerializeField] private float idleToWalkThreshold;
     // walk and run animation
-    public float walkToRunThreshold;
+    [SerializeField] private float walkToRunThreshold;
 
     [Header("Smooth Time Values")]
     // time that it takes for the ____ value to go from its current value to its target value
     // turning 
-    public float turnSmoothTime;
+    [SerializeField] private float turnSmoothTime;
     // speed (but only used if value is getting large (i.e. accelerating))
-    public float locomotionAccelerationSmoothTime;
+    [SerializeField] private float locomotionAccelerationSmoothTime;
     // locomotion (but only used if value is getting smaller(i.e. decelerating))
-    public float locomotionDecelerationSmoothTime;
+    [SerializeField] private float locomotionDecelerationSmoothTime;
 
     [Header("Mid Air Values")]
     // minimum distance from the ground the player needs to be in order to play the mid air animation
-    public float minDistFromGroundToBeMidAir;
+    [SerializeField] private float minDistFromGroundToBeMidAir;
     // gravity that interacts with the player
-    public float gravity;
-    // hieght of player
-    public float height;
+    [SerializeField] private float physicsGravity;
+    [SerializeField] private float nonphysicsGravity;
 
     [Header("Landing Velocity Y's")]
     // for ___ landing, the velocityY must be less than that value
     // soft
-    public float softLandingMaxVeloY;
+    [SerializeField] private float softLandingMaxTimeInAir;
     // roll
-    public float rollLandingMaxVeloY;
+    [SerializeField] private float rollLandingMaxTimeInAir;
 
     [Header("Jump Maximum Distances From Ground")]
     // max distance from ground before mid air animation plays for ____ animation
     // boxJump
-    public float maxBoxJumpHeight;
+    [SerializeField] private float maxBoxJumpHeight;
     // walking Jump
-    public float maxWalkingJumpHeight;
+    [SerializeField] private float maxWalkingJumpHeight;
     // running Jump
-    public float maxRunningJumpHeight;
+    [SerializeField] private float maxRunningJumpHeight;
+
+    [Header("Camera Values")]
+    public float camRotOffset;
+
 
     // amount that ____ has moved towards its target value 
     // speed
@@ -64,29 +73,42 @@ public class Movement : NetworkBehaviour
     private float locomotionSmoothVelocity;
     // turning
     private float turnSmoothVelocity;
+    private float locomotionDirSmoothVelocity;
 
     // distance raycast will go downwards
     private float maxRaycastDownDist;
     // y component of velocity of player
     private float velocityY;
-    // target y rotation of player
-    private float targetRotation;
     // value thats used as parameter in locomotion blend tree
     private float locomotionBlendVal;
+    // value that used as direction parameter in locomotion blend tree
+    private float locomotionDirection;
     // current anim state - each anim state is assigned its own index and this is that index
-    private States currentState;
+    [HideInInspector] public States currentState;
     // transform of the camera
     private Transform camTransform;
-    // player's character controller
-    private CharacterController characterController;
     // player's animator
     private Animator animator;
-    // player's ragdoll controller
-    private RagdollController ragdollController;
-    // player health script
-    private PlayerHealth playerHealth;
-    // if the player is dead
-    private bool isDead = false;
+    // character controller
+    private CharacterController cc;
+    // current camera mode
+    private CameraModes currentCam;
+    // animator follow script
+    private AnimatorFollow animatorFollow;
+    // difference between non ragdoll and hips in pos
+    private Vector3 nonRagdollToHipsPos;
+    // total time in the air
+    private float timeInAir;
+    // if it is the local player
+    private bool isLocalPlayer;
+    // gravity to be used
+    private float gravity;
+    // target rotation of the player
+    private float targetRotation;
+    // hips gameobject to use
+    private GameObject hips;
+    // manager of the camera for the player
+    private PlayerCameraManager playerCameraManager;
     #endregion
 
     #region Initialize
@@ -94,14 +116,18 @@ public class Movement : NetworkBehaviour
     ///<summary> Initialize variables </summary>
     private void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        characterController.enabled = true;
         animator = GetComponent<Animator>();
-        ragdollController = GetComponent<RagdollController>();
-        playerHealth = GetComponent<PlayerHealth>();
         camTransform = Camera.main.transform;
         currentState = 0;
+        cc = GetComponent<CharacterController>();
+        cc.enabled = true;
         maxRaycastDownDist = new float[] { minDistFromGroundToBeMidAir, maxBoxJumpHeight, maxWalkingJumpHeight, maxRunningJumpHeight }.Max();
+        animatorFollow = ragdoll.GetComponent<AnimatorFollow>();
+        nonRagdollToHipsPos = transform.position - nonRagdollHips.transform.position;
+        isLocalPlayer = transform.root.GetComponent<BodyParts>().IsLocalPlayer();
+        gravity = (physicsBasedMovement) ? physicsGravity : nonphysicsGravity;
+        hips = (physicsBasedMovement) ? ragdollHips : nonRagdollHips;
+        playerCameraManager = transform.parent.GetComponent<PlayerCameraManager>();
     }
     #endregion
 
@@ -109,34 +135,27 @@ public class Movement : NetworkBehaviour
 
     /// <summary> All movement of the player is run through this void </summary>
     /// <param name = "input"> input struct </summary>
-    public void Move(InputStruct input)
+    public void Move()
     {
-        if (!isDead)
-        {
-            // get current state
-            currentState = (States)animator.GetInteger(Parameters.currentState);
+        // get current state
+        currentState = (States)animator.GetInteger(Parameters.currentState);
 
-            // find the input and a normalized input
-            Vector2 inputVector = new Vector2(input.horAxis, input.vertAxis);
-            Vector2 inputDir = inputVector.normalized;
+        // find the input and a normalized input
+        Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 inputDir = inputVector.normalized;
 
-            SetSpeed();
+        SetSpeed();
 
-            SetLocomotionBlendValue(inputVector, input.sprint);
+        SetLocomotionBlendValue(inputVector, Input.GetButton("Sprint"));
 
-            RotatePlayer(inputDir, input.freeRotateCamera, input.camYRot);
+        RotatePlayer(inputDir, Input.GetButton("Free Rotate Camera"), Input.mousePosition);
 
-            CheckForJump(inputVector, input.jump);
+        CheckForJump(inputVector, Input.GetButton("Jump"));
 
-            SetValuesIfMidAir(input.jump);
+        SetValuesIfMidAir(Input.GetButton("Jump"));
 
-            // set the current state to equal the appropriate currentState
-            animator.SetInteger(Parameters.currentState, (int)currentState);
-        }
-        else
-        {
-            SetValuesIfMidAir(input.jump);
-        }
+        // set the current state to equal the appropriate currentState
+        animator.SetInteger(Parameters.currentState, (int)currentState);
     }
 
     /// <summary> Set the correct locomotion blend value </summary>
@@ -145,13 +164,32 @@ public class Movement : NetworkBehaviour
     private void SetLocomotionBlendValue(Vector2 input, bool leftShift)
     {
         if (currentState != States.locomotion) return;
-        // value that the locomotion blend value should be 
-        float targetLocomotionBlendVal = 0;
 
-        // set the target locomotion blend value
-        if (input.x == 0 && input.y == 0) targetLocomotionBlendVal = idleVal;
-        else if (leftShift) targetLocomotionBlendVal = runVal;
-        else targetLocomotionBlendVal = walkVal;
+        float targetLocomotionBlendVal = 0;
+        float targetLocomotionDirection = 0;
+
+        if (UIManager.canMove)
+        {
+            bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+            if (input.y == 0 && input.x == 0) targetLocomotionBlendVal = idleVal;
+            else if (leftShift && ((lockedCameraMode && input.y != 0) || (!lockedCameraMode))) targetLocomotionBlendVal = runVal;
+            else if ((lockedCameraMode && input.y != 0) || (!lockedCameraMode)) targetLocomotionBlendVal = walkVal;
+
+            if (lockedCameraMode)
+            {
+                if (input.x != 0)
+                {
+                    int dir = (input.x < 0) ? -1 : 1;
+                    if (leftShift) targetLocomotionDirection = dir * runVal;
+                    else targetLocomotionDirection = dir * walkVal;
+                }
+
+                if (input.y < 0) targetLocomotionBlendVal = -walkVal;
+            }
+        }
+
+        float locomotionDirSmoothTime = (targetLocomotionDirection - locomotionDirection > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
+        locomotionDirection = Mathf.SmoothDamp(locomotionDirection, targetLocomotionDirection, ref locomotionDirSmoothVelocity, locomotionDirSmoothTime);
 
         // set the locomotion bend value based on the locomotion smooth time - if that was in a phase of acceleration or deceleration
         float locomotionSmoothTime = (targetLocomotionBlendVal - locomotionBlendVal > 0) ? locomotionAccelerationSmoothTime : locomotionDecelerationSmoothTime;
@@ -159,27 +197,39 @@ public class Movement : NetworkBehaviour
 
         // set the locomotion blend parameter
         animator.SetFloat(Parameters.locomotionBlend, locomotionBlendVal);
+        animator.SetFloat(Parameters.locomotionDir, locomotionDirection);
     }
 
     ///<summary> Rotate the player accordingly </summary>
     ///<param name = "inputDir"> normalized input in the update function </param>
     /// <param name = "leftControl"> was left control pressed </param>
-    /// <param name = "camYRot"> what is the y rotation of the player </param>
-    private void RotatePlayer(Vector2 inputDir, bool leftControl, float camYRot)
+    private void RotatePlayer(Vector2 inputDir, bool leftControl, Vector2 mousePos)
     {
-        // if the input doesn't equal zero, player can rotate
-        if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+        if (!UIManager.canMove) return;
+
+        if (currentCam != CameraModes.locked)
         {
-            // find target rotation of player based on camera's transform and rotate towards that angle smoothly
-            if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camYRot;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            // if the input doesn't equal zero, player can rotate
+            if (inputDir != Vector2.zero && animator.GetBool(Parameters.canRotate))
+            {
+                // find target rotation of player based on camera's transform and rotate towards that angle smoothly
+                if (!leftControl) targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.eulerAngles.y - camRotOffset, 0));
         }
     }
 
     ///<summary> Add speed to player </summary>
     private void SetSpeed()
     {
-        characterController.Move(transform.forward * animator.GetFloat(Parameters.currentSpeed) * Time.deltaTime);
+        bool lockedCameraMode = playerCameraManager.ReturnCameraMode() == CameraModes.locked;
+        Transform transformToUse = (lockedCameraMode) ? Camera.main.transform : transform;
+        cc.Move(transformToUse.forward * animator.GetFloat(Parameters.currentSpeedZ) * Time.deltaTime);
+        cc.Move(transformToUse.right * animator.GetFloat(Parameters.currentSpeedX) * Time.deltaTime);
     }
 
     ///<summary> Check if jump should be called </summary>
@@ -187,6 +237,8 @@ public class Movement : NetworkBehaviour
     /// <param name = "space"> was the space bar pressed </param>
     private void CheckForJump(Vector2 input, bool space)
     {
+        if (!UIManager.canMove) return;
+
         /// if space has been pressed jump
         if (space)
         {
@@ -201,59 +253,57 @@ public class Movement : NetworkBehaviour
     /// <param name = "space"> if the player presses space </param>
     private void SetValuesIfMidAir(bool space)
     {
-        // check if hitting anything and if so set current state appropriately
         RaycastHit hit;
-        Ray ray = new Ray(transform.position + 2 * Vector3.up, Vector3.down);
-        Physics.Raycast(ray, out hit, maxRaycastDownDist, LayerMaskController.player);
+        Ray ray = new Ray(hips.transform.position, Vector3.down);
+        Physics.Raycast(ray, out hit, maxRaycastDownDist, 1 << LayerMaskController.environment);
 
-        if (!isDead)
+        if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
         {
-            if (hit.distance < minDistFromGroundToBeMidAir && hit.distance != 0)
+            if (currentState == States.defInAir)
             {
-                if (currentState == States.defInAir)
+                if (physicsBasedMovement)
                 {
-                    if (velocityY > softLandingMaxVeloY) SetCurrentState(States.softLanding);
-                    else if (velocityY > rollLandingMaxVeloY) SetCurrentState(States.fallToRoll);
-                    else SetCurrentState(States.hardLanding);
+                    animatorFollow.ChangeCurrentAnim(animatorFollow.locomotionAnim);
+                    cc.Move(ragdollHips.transform.position + nonRagdollToHipsPos - transform.position);
                 }
+
+                if (timeInAir < softLandingMaxTimeInAir) SetCurrentState(States.softLanding);
+                else if (timeInAir < rollLandingMaxTimeInAir) SetCurrentState(States.fallToRoll);
+                else SetCurrentState(States.hardLanding);
             }
-            else if (currentState != States.defInAir) SetCurrentState(States.defInAir);
+            timeInAir = 0;
         }
-
-        if (velocityY < -0.4 && hit.distance < height && hit.distance != 0)
+        else
         {
-            playerHealth.SubtractHealth(100);
-            ragdollController.CmdBecomeRagdoll();
+            if (currentState != States.defInAir)
+            {
+                if (physicsBasedMovement) animatorFollow.ChangeCurrentAnim(animatorFollow.fallingAnim);
+                SetCurrentState(States.defInAir);
+            }
+            timeInAir += Time.deltaTime;
         }
 
-        if (((hit.distance < height && hit.distance != 0) || (characterController.isGrounded)) && !space) velocityY = 0;
-        else velocityY += Time.deltaTime * gravity;
+        if (cc.isGrounded) velocityY = 0;
+        else velocityY += gravity * Time.deltaTime;
 
-        characterController.Move(Vector3.up * velocityY);
+        cc.Move(Vector3.up * velocityY);
 
-        if (!isDead)
-        {
-            if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        if (cc.isGrounded) velocityY = 0;
 
-            if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
-
-            if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
-        }
+        if (currentState == States.boxJump && (hit.distance > maxBoxJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        else if (currentState == States.walkingJump && (hit.distance > maxWalkingJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
+        else if (currentState == States.runningJump && (hit.distance > maxRunningJumpHeight || hit.distance == 0)) SetCurrentState(States.defInAir);
     }
 
     ///<summary> Set the current and previous state to their corresponding values </summary>
     ///<param name = "stateIndex"> Index of state that the current state should be equal to </param>
-    private void SetCurrentState(States state)
-    {
-        currentState = state;
-    }
+    private void SetCurrentState(States state) { currentState = state; }
     #endregion
 
-    #region SetDead
-    public void SetDead(bool dead)
-    {
-        isDead = dead;
-    }
+    #region SetCurrentCam
+    ///<summary> set the current camera </summary>
+    ///<param name = "currentCam"> current camera </param>
+    public void SetCurrentCam(CameraModes currentCam) { this.currentCam = currentCam; }
     #endregion
 }
 
@@ -268,7 +318,26 @@ public enum States
     hardLanding = 4,
     softLanding = 5,
     fallToRoll = 6,
-    walkingJump = 7
+    walkingJump = 7,
+    getUpFront = 8,
+    getUpFrontMirror = 9,
+    getUpBack = 10,
+    getUpBackMirror = 11,
+    knockedOut = 12
+}
+
+public enum UpperBodyStates
+{
+    none = 0,
+    pistolHold = 1,
+    shotgunHold = 2,
+    swordHold = 3,
+    midInwardSlashRight = 4,
+    midSlashLeft = 5,
+    highToLowInwardSlashRight = 6,
+    lowToHighSlashLeft = 7,
+    highToLowSlashLeft = 8,
+    lowToHighInwardSlashRight = 9
 }
 #endregion
 
@@ -277,8 +346,15 @@ public enum States
 public static class Parameters
 {
     public static string currentState = "CurrentState";
-    public static string currentSpeed = "CurrentSpeed";
+    public static string currentSpeedX = "CurrentSpeedX";
+    public static string currentSpeedZ = "CurrentSpeedZ";
     public static string locomotionBlend = "LocomotionBlend";
     public static string canRotate = "CanRotate";
+    public static string upperBodyState = "UpperBodyState";
+    public static string targetUpperBodyState = "TargetUpperBodyState";
+    public static string locomotionDir = "LocomotionDir";
+    public static string knockedOut = "KnockedOut";
+    public static string leftFoot = "LeftFoot";
+    public static string rightFoot = "RightFoot";
 }
 #endregion
