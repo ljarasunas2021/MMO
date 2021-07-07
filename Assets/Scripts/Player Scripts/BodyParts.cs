@@ -1,8 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
-public class BodyParts : MonoBehaviour
+namespace MMO.Player
 {
-    public GameObject handR, head;
+    /// <summary> Holds variables for player's body parts</summary>
+    public class BodyParts : NetworkBehaviour
+    {
+        // body part gameobjects
+        public GameObject handR;
+        public GameObject head;
+        public GameObject lockedCamFollow;
+    }
 }

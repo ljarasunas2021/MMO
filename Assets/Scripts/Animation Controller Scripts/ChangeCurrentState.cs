@@ -1,33 +1,39 @@
-﻿using UnityEngine;
+﻿using MMO.Player;
+using UnityEngine;
 
-///<summary> Change current state at animation start / end
-public class ChangeCurrentState : StateMachineBehaviour
+namespace MMO.Animation
 {
-    #region Variables
-    [Header("Enter")]
-    // should the variable be changed on state enter
-    public bool onEnter;
-    // value that the current state should change to when entering
-    public int enterValue;
-
-    [Header("Exit")]
-    // should the variable be changed on state exit
-    public bool onExit;
-    // value that the current state should change to when exiting
-    public int exitValue;
-    #endregion
-
-    #region ChangeVariables
-    ///<summary> if on enter will set the integer </summary>
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    ///<summary> Changes the current state parameter of the animator </summary>
+    public class ChangeCurrentState : StateMachineBehaviour
     {
-        if (onEnter) animator.SetInteger(Parameters.currentState, enterValue);
-    }
+        [Header("Enter")]
+        // should the current state be changed when the animator starts playing this animation
+        public bool onEnter;
+        // if onEnter, then this will be the current state's value when the animator starts playing this animation
+        public int enterValue;
 
-    ///<summary> if on exit will set the integer </summary>
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (onExit) animator.SetInteger(Parameters.currentState, exitValue);
+        [Header("Exit")]
+        // should the current state be changed when the animator stops playing this animation
+        public bool onExit;
+        // if onExit, then this will be the current state's value when the animator stops playing this animation
+        public int exitValue;
+
+        ///<summary> When the animation starts playing, if onEnter, this function sets the current state to the enterValue. This function is called automatically by Unity. </summary>
+        /// <param name="animator"> animator on root gameobject </param>
+        /// <param name="stateInfo"> information about the animator state </param>
+        /// <param name="layerIndex"> the layer of this animator state </param>
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            if (onEnter) animator.SetInteger(PlayerAnimParameters.currentState, enterValue);
+        }
+
+        ///<summary> When the animation stops playing, if onExit, this function sets the current state to the exitValue. This function is called automatically by Unity. </summary>
+        /// <param name="animator"> animator on root gameobject </param>
+        /// <param name="stateInfo"> information about the animator state </param>
+        /// <param name="layerIndex"> the layer of this animator state </param>
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            if (onExit) animator.SetInteger(PlayerAnimParameters.currentState, exitValue);
+        }
     }
-    #endregion
 }

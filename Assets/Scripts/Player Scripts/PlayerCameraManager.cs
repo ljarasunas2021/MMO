@@ -1,33 +1,100 @@
 ﻿using Cinemachine;
 using Mirror;
+using MMO.UI.Maps;
 using UnityEngine;
 
-///<summary> Preform all actions related to player and the camera </summary>
-public class PlayerCameraManager : NetworkBehaviour
+namespace MMO.Player
 {
-    #region SetCameraAtStart
-    ///<summary> Set the camera to follow you </summary>
-    public override void OnStartLocalPlayer()
+    ///<summary> Preform all actions related to player and the camera </summary>
+    public class PlayerCameraManager : NetworkBehaviour
     {
-        base.OnStartLocalPlayer();
+        // player gameobject
+        private GameObject head;
+        private GameObject lockedCamFollow;
 
-        if (!isLocalPlayer) return;
+        // current camera
+        private CameraModes currentCam;
+        // camera controller script
+        private CameraController cameraController;
+        // cinemchine free look cameras
+        private CinemachineFreeLook cinematicFreeLook, closeUpFreeLook, lockedFreeLook;
+        // movement script of player
+        private Movement movement;
+        // body parts script of player
+        private BodyParts bodyParts;
 
-        GameObject head = GetComponent<BodyParts>().head;
+        /// <summary> Init vars </summary>
+        public override void OnStartLocalPlayer()
+        {
+            base.OnStartLocalPlayer();
 
-        CameraController cameraController = Camera.main.GetComponent<CameraController>();
+            if (!isLocalPlayer) return;
 
-        CinemachineFreeLook cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
-        cinematicFreeLook.Follow = head.transform;
-        cinematicFreeLook.LookAt = head.transform;
+            bodyParts = GetComponent<BodyParts>();
+            head = bodyParts.head;
+            cameraController = Camera.main.GetComponent<CameraController>();
+            movement = GetComponent<Movement>();
+            lockedCamFollow = bodyParts.lockedCamFollow;
 
-        CinemachineFreeLook closeUpFreeLook = cameraController.closeUpCam.GetComponent<CinemachineFreeLook>();
-        closeUpFreeLook.Follow = head.transform;
-        closeUpFreeLook.LookAt = head.transform;
+            cinematicFreeLook = cameraController.cinematicCam.GetComponent<CinemachineFreeLook>();
+            cinematicFreeLook.Follow = head.transform;
+            cinematicFreeLook.LookAt = head.transform;
 
-        CinemachineFreeLook lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
-        lockedFreeLook.Follow = head.transform;
-        lockedFreeLook.LookAt = head.transform;
+            closeUpFreeLook = cameraController.closeUpCam.GetComponent<CinemachineFreeLook>();
+            closeUpFreeLook.Follow = head.transform;
+            closeUpFreeLook.LookAt = head.transform;
+
+            lockedFreeLook = cameraController.lockedCam.GetComponent<CinemachineFreeLook>();
+            lockedFreeLook.Follow = lockedCamFollow.transform;
+            lockedFreeLook.LookAt = lockedCamFollow.transform;
+
+            GameObject.FindObjectOfType<MMO.UI.Compass>().player = gameObject;
+            GameObject.FindObjectOfType<Map>().player = gameObject;
+
+            ChangeCam(CameraModes.cinematic);
+        }
+
+        /// <summary> Change the current camera </summary>
+        /// <param name="mode"> the new current camera mode </param>
+        public void ChangeCam(CameraModes mode)
+        {
+            if (mode != currentCam)
+            {
+                if (mode == CameraModes.cinematic)
+                {
+                    cinematicFreeLook.Priority = 1;
+                    closeUpFreeLook.Priority = 0;
+                    lockedFreeLook.Priority = 0;
+                }
+                else if (mode == CameraModes.closeUp)
+                {
+                    cinematicFreeLook.Priority = 0;
+                    closeUpFreeLook.Priority = 1;
+                    lockedFreeLook.Priority = 0;
+                }
+                else if (mode == CameraModes.locked)
+                {
+                    cinematicFreeLook.Priority = 0;
+                    closeUpFreeLook.Priority = 0;
+                    lockedFreeLook.Priority = 1;
+                }
+
+                currentCam = mode;
+
+                movement.SetCurrentCam(currentCam);
+            }
+        }
+
+        /// <summary> Return current camera mode </summary>
+        /// <returns> current camera mode </returns>
+        public CameraModes ReturnCameraMode() { return currentCam; }
     }
-    #endregion
+
+    /// <summary> 3 different camera modes </summary>
+    public enum CameraModes
+    {
+        cinematic,
+        closeUp,
+        locked,
+    }
 }

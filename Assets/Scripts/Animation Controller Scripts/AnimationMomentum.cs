@@ -1,60 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MMO.Player;
 using UnityEngine;
 
-///<summary> Set speed according to animation being played </summary>
-public class AnimationMomentum : StateMachineBehaviour
+namespace MMO.Animation
 {
-    #region Variables
-    [Header("TargetSpeed")]
-    // use predefined speed
-    public bool useSetSpeed;
-    // predefined speed - speed animation will move at
-    public float speed;
-    // use previous speed times this multiplier
-    public float previousSpeedMultiplier;
-
-    [Header("Momentum")]
-    // use momentum meaning that previous speed will carry to your current speed
-    public bool useMomentum;
-    // time it will take to accelerate, decelerate
-    public float accelerationSmoothTime, decelerationSmoothTime;
-
-    // velocity that the momentum uses
-    private float smoothVelocity;
-    // target speed while anim is playing
-    private float targetSpeed;
-    #endregion
-
-    #region SetSpeed
-    /// <summary> Set the target speed </summary>
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    ///<summary> Sets the player's speed based on the animation being played. </summary>
+    public class AnimationMomentum : StateMachineBehaviour
     {
-        base.OnStateEnter(animator, stateInfo, layerIndex);
+        [Header("TargetSpeed")]
+        // should the player's speed be set to a constant 
+        public bool useSetSpeed;
+        // if useSetSpeed, the player's speed will be this constant
+        public float speed;
+        // if !useSetSpeed, the player's speed will be set to the player's current speed times this multiplier
+        public float previousSpeedMultiplier;
 
-        if (useSetSpeed) targetSpeed = speed;
-        else targetSpeed = animator.GetFloat(Parameters.currentSpeed) * previousSpeedMultiplier;
+        [Header("Momentum")]
+        // smoothly change the speed of the player
+        public bool useMomentum;
+        // if useMomentum, the time it will take to accelerate, decelerate
+        public float accelerationSmoothTime, decelerationSmoothTime;
 
-        if (!useMomentum) animator.SetFloat(Parameters.currentSpeed, speed);
-    }
+        // velocity variable that the momentum uses
+        private float smoothVelocity;
+        // the target speed that the player will interpolate towards
+        private float targetSpeed;
 
-    /// <summary> If use momentum slerp between current and target speed </summary>
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        base.OnStateUpdate(animator, stateInfo, layerIndex);
-
-        if (useMomentum)
+        /// <summary> When this animation starts playing, this function sets the target speed and sets the player's speed if the player isn't using momentum. This function is called automatically by Unity. </summary>
+        /// <param name="animator"> animator on root gameobject </param>
+        /// <param name="stateInfo"> information about the animator state </param>
+        /// <param name="layerIndex"> the layer of this animator state </param>
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            float currentSpeed = animator.GetFloat(Parameters.currentSpeed);
-            if (speed - currentSpeed > 0)
+            base.OnStateEnter(animator, stateInfo, layerIndex);
+
+            if (useSetSpeed) targetSpeed = speed;
+            else targetSpeed = animator.GetFloat(PlayerAnimParameters.currentSpeedZ) * previousSpeedMultiplier;
+
+            if (!useMomentum) animator.SetFloat(PlayerAnimParameters.currentSpeedZ, targetSpeed);
+        }
+
+        /// <summary> If useMomentum, interpolate between the current and target speed. This function is called automatically by Unity. </summary>
+        /// <param name="animator"> animator on root gameobject </param>
+        /// <param name="stateInfo"> information about the animator state </param>
+        /// <param name="layerIndex"> the layer of this animator state </param>
+        public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+            if (useMomentum)
             {
-                animator.SetFloat(Parameters.currentSpeed, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, accelerationSmoothTime));
-            }
-            else
-            {
-                animator.SetFloat(Parameters.currentSpeed, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, decelerationSmoothTime));
+                float currentSpeed = animator.GetFloat(PlayerAnimParameters.currentSpeedZ);
+                if (speed - currentSpeed > 0)
+                {
+                    animator.SetFloat(PlayerAnimParameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, accelerationSmoothTime));
+                }
+                else
+                {
+                    animator.SetFloat(PlayerAnimParameters.currentSpeedZ, Mathf.SmoothDamp(currentSpeed, targetSpeed, ref smoothVelocity, decelerationSmoothTime));
+                }
             }
         }
     }
-    #endregion
 }
