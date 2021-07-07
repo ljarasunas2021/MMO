@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 // IGNORE SCRIPT - WILL BE WORKED OUT IN FUTURE AND HAS NO EFFECT ON GAME CURRENTLY
-// WILL BE USED TO MAKE SURE LEGS ARE NOT FLOATING OFF GROUND AND HAVE SAME ROTATION AS GROUND
+// WILL BE USED TO MAKE SURE LEGS ARE NOT FLOATING OFF GROUND AND HAVE SAME ROTATION AS GROUND (i.e. INVERSE KINEMATICS)
 
 public class FootIK : MonoBehaviour
 {
@@ -85,7 +85,7 @@ public class FootIK : MonoBehaviour
     {
         RaycastHit feetOutHit;
 
-        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, LayerMaskController.environment))
+        if (Physics.Raycast(fromSkyPosition, Vector3.down, out feetOutHit, raycastDownDistance, 1 << LayerMaskController.environment))
         {
             feetIKPositions = fromSkyPosition;
             feetIKPositions.y = feetOutHit.point.y + ankleHeight;

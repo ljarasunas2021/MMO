@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_8;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_OSX;PLATFORM_STANDALONE;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;MIRROR;MIRROR_1726_OR_NEWER;MIRROR_3_0_OR_NEWER;MIRROR_3_12_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_8;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_OSX;PLATFORM_STANDALONE;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_SPATIALTRACKING;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;MIRROR;MIRROR_1726_OR_NEWER;MIRROR_3_0_OR_NEWER;MIRROR_3_12_OR_NEWER;MIRROR_4_0_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -57,42 +57,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BombFragment.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BulletHole.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\BulletHolePool.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Easy Camera Shake\Demo\VibrationDemo.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Easy Camera Shake\Vibration.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Explosion.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Health.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Projectile.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\FirstPersonCharacter.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\FirstPersonHeadBob.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Sample\MouseRotator.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\SlowMotion.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\Spawner.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
-     <Compile Include="Assets\Art\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\MasterScripts\HashIDs_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\MasterScripts\PlayerMovement_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\AnimFollow_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\Limb_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\RagdollControl_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\ReplaceJoints_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\RagdollScripts\ResizeProfiles_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_PositionFeet_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Properties_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Setup_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_ShootRays_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\SimpleFootIKScripts_AF\SimpleFootIK_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BallTest_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BoxHitByBullet_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
+     <Compile Include="Assets\Imports\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BombFragment.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHole.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\BulletHolePool.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Easy Camera Shake\Demo\VibrationDemo.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Easy Camera Shake\Vibration.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Explosion.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Health.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\FirstPersonCharacter.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\FirstPersonHeadBob.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Sample\MouseRotator.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\SlowMotion.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
+     <Compile Include="Assets\Imports\Easy Weapons\Scripts\WeaponSystem.cs" />
+     <Compile Include="Assets\Imports\QuickOutline\Scripts\Outline.cs" />
+     <Compile Include="Assets\OutlineObject.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\AnimationMomentum.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCanRotate.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeCurrentState.cs" />
+     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeKnockedOut.cs" />
+     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeLayerWeight.cs" />
+     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeTargetUpperBodyState.cs" />
+     <Compile Include="Assets\Scripts\Animation Controller Scripts\ChangeUpperBodyState.cs" />
      <Compile Include="Assets\Scripts\Animation Controller Scripts\LocomotionMomentum.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\AudioPrefabsController.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\BulletHoleController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\CanvasManager.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\EffectsPrefabsController.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\ItemPrefabsController.cs" />
      <Compile Include="Assets\Scripts\Controller Scripts\LayerMaskController.cs" />
+     <Compile Include="Assets\Scripts\Controller Scripts\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Other\NPCMovement.cs" />
+     <Compile Include="Assets\Scripts\Other\RigidBodySpawn.cs" />
+     <Compile Include="Assets\Scripts\Other\Target.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\AnimatorFollow.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\AnimLimb.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\BodyParts.cs" />
-     <Compile Include="Assets\Scripts\Player Scripts\CanvasManager.cs" />
-     <Compile Include="Assets\Scripts\Player Scripts\CrossHair.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\FootIK.cs" />
-     <Compile Include="Assets\Scripts\Player Scripts\GrabItem.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\InputHandler.cs" />
-     <Compile Include="Assets\Scripts\Player Scripts\InventoryManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Interact.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\InventoryManager2.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\InventoryPlaceHolder.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerCameraManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerEquip.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerWallTraversal.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerWeapon.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\RagdollControl.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\RagdollController.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\RagdollLimb.cs" />
+     <Compile Include="Assets\Scripts\Weapon Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
      <None Include="Assets\Packages\unity3d.txt" />
      <None Include="Assets\Packages\Mirror\Readme.txt" />
      <None Include="Assets\Packages\Mirror\License.txt" />
+     <None Include="Assets\Imports\QuickOutline\Resources\Shaders\OutlineFill.shader" />
+     <None Include="Assets\Imports\QuickOutline\Resources\Shaders\OutlineMask.shader" />
  <Reference Include="Cinemachine">
  <HintPath>/Users/lukas/version-control/mmo/Mmo/MMO/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
@@ -709,6 +752,8 @@
   <ItemGroup>
     <ProjectReference Include="Mirror.Weaver.csproj">
       <Project>{8B085A34-8C33-313A-4A0B-03A6E2E5B3FC}</Project>      <Name>Mirror.Weaver</Name>    </ProjectReference>
+    <ProjectReference Include="Mirror.Authenticators.csproj">
+      <Project>{31810D59-79B1-A21E-F819-925CDD2C1221}</Project>      <Name>Mirror.Authenticators</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
       <Project>{79CD47D1-A64F-D513-20C4-689CE71507E1}</Project>      <Name>Mirror.Components</Name>    </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">

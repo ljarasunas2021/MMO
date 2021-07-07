@@ -1,8 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
-public class BodyParts : MonoBehaviour
+///<summary> Contains references to important body parts </summary>
+public class BodyParts : NetworkBehaviour
 {
-    public GameObject handR, head;
+    //Gameobject reference to the 
+    // handR
+    public GameObject handR;
+    // head
+    public GameObject head;
+    // locked Camera Empty Gameobject (used for positioning the locked cam)
+    public GameObject lockedCamFollow;
+
+    public bool IsLocalPlayer() { return isLocalPlayer; }
 }
